@@ -5,7 +5,7 @@ class Solution:
         :rtype: int
         """
         dirstack = []
-        maxLength = 0
+        maxlength = 0
         if input == "":
             return 0
         fields = input.split('\n')
@@ -32,9 +32,9 @@ class Solution:
                         break
                 fullpath = self.composeFullpath(dirstack, fn)
                 print(fullpath)
-                if len(fullpath) > maxLength:
-                    maxLength = len(fullpath)
-        return maxLength
+                if len(fullpath) > maxlength:
+                    maxlength = len(fullpath)
+        return maxlength
 
     def levelName(self, input):
         level = 0
