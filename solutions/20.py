@@ -8,21 +8,15 @@ class Solution(object):
         for c in [s[i] for i in range(len(s))]:
             if c == '(' or c == '{' or c == '[':
                 stack.append(c)
-            elif c == ')':
-                if not stack:
-                    if stack.pop() != '(':
-                        return False
+            elif c in [")", "}", "]"]:
+                if c == ')':
+                    cmatch = '('
+                elif c == '}':
+                    cmatch = '{'
                 else:
-                    return False
-            elif c == '}':
+                    cmatch = ']'
                 if not stack:
-                    if stack.pop() != '{':
-                        return False
-                else:
-                    return False
-            elif c == ']':
-                if not stack:
-                    if stack.pop() != '[':
+                    if stack.pop() != cmatch:
                         return False
                 else:
                     return False
