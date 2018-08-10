@@ -15,7 +15,8 @@ class Solution:
             elif len(lists) == 2:
                 return self.merge2Lists(lists[0], lists[1])
             else:
-                mid = len(lists) // 2
+                # cast to integer, discard decimal points.
+                mid = int(len(lists) / 2)
                 return self.merge2Lists(self.mergeKLists(lists[0:mid]), self.mergeKLists(lists[mid:len(lists)]))
         else:
             return None
