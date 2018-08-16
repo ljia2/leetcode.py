@@ -1,32 +1,12 @@
-class Solution:
-    def generateParenthesis(self, n):
-        """
-        :type n: int
-        :rtype: List[str]
-        """
-        if n == 1:
-            return ["()"]
-        else:
-            rs_list = []
-            for m in range(1, n):
-                left_list = self.generateParenthesis(m)
-                right_list = self.generateParenthesis(n-m-1)
-                for lrs in left_list:
-                    for rrs in right_list:
-                        rs_list.append("("+lrs+")"+rrs)
-            return rs_list
-
-
-## backtrack solution
+## backtrack solution ????
 class Solution2(object):
-    def generateParenthesis(self, N):
+    def generateParenthesis(self, n):
         ans = []
-
         def backtrack(S = '', left = 0, right = 0):
-            if len(S) == 2 * N:
+            if len(S) == 2 * n:
                 ans.append(S)
                 return
-            if left < N:
+            if left < n:
                 backtrack(S+'(', left+1, right)
             if right < left:
                 backtrack(S+')', left, right+1)
