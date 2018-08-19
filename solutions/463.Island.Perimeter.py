@@ -44,9 +44,11 @@ class Solution:
             p += self.dfs(grid, r, c+1)
         return p
 
+
 def main():
     s = Solution()
     print(s.islandPerimeter([[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]))
+
 
 if __name__ == "__main__":
     main()
