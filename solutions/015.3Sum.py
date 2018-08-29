@@ -29,12 +29,12 @@ class Solution:
                         right -= 1
                 elif sum > 0:
                     right -= 1
-                    #while right > mid and nums[right] == nums[right+1]:
-                    #    right -= 1
+                    while right > mid and nums[right] == nums[right+1]:
+                        right -= 1
                 elif sum < 0:
                     mid += 1
-                    #while mid < right and nums[mid] == nums[mid-1]:
-                    #    mid += 1
+                    while mid < right and nums[mid] == nums[mid-1]:
+                        mid += 1
         return solutions
 
 
