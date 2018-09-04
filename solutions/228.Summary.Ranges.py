@@ -20,3 +20,4 @@ class Solution:
                     results.append((nums[start], nums[end]))
                     break
             return list(map(lambda x: str(x[0]) + "->" + str(x[1]) if x[0] < x[1] else str(x[0]), results))
+        
