@@ -8,7 +8,7 @@ class Solution:
             return 0
         else:
             # use this array to store a tuple (max_profit by selling at day i, lowest_price before i)
-            mplp = []
+            mplp = [0] * len(prices)
             for i in range(len(prices)):
                 if i == 0:
                     mplp.append((0, max(prices)))
