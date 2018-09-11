@@ -45,7 +45,6 @@ class Solution:
                 for c in range(1, col+1, 1):
                     dp[r][c] = dp[r][c-1] + dp[r-1][c] - dp[r-1][c-1] + (1 if matrix[r-1][c-1] == "1" else 0)
 
-
             max_area = 0
             for r1 in range(1, row+1, 1):
                 for c1 in range(1, col+1, 1):
