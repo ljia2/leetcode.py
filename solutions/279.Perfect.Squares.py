@@ -1,4 +1,5 @@
-import timeit
+import math
+
 
 class Solution:
     def numSquares(self, n):
@@ -27,6 +28,8 @@ class Solution:
 
         dp[i] = min{dp[i-j] + 1 | j is perfect sqaure less than i}
 
+        TO MUCH REPEAT COMPUTATION!!!
+
         """
 
         if not n:
@@ -42,5 +45,43 @@ class Solution:
             return dp[n]
 
 
-s = Solution()
-print(s.numSquares(6616))
+class DPSolution:
+    def numSquares(self, n):
+        """
+        Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
+
+        Example 1:
+
+        Input: n = 12
+        Output: 3
+        Explanation: 12 = 4 + 4 + 4.
+        Example 2:
+
+        Input: n = 13
+        Output: 2
+        Explanation: 13 = 4 + 9.
+
+        :type n: int
+        :rtype: int
+
+        dp stores the least number of perfect square numbers
+
+        dp[i] stores the least number of perfect square numbers summing to i
+
+        """
+        dp = [n] * (n + 1)
+        dp[0] = 0
+        for i in range(n+1):
+            if i*i <= n:
+                dp[i] = 1
+
+        for i in range(n+1):
+            for j in range(1, i+1, 1):
+                if i + j * j <= n:
+                    dp[i + j * j] = min(dp[i + j * j], dp[i] + 1)
+        return dp[n]
+
+
+
+s = DPSolution()
+print(s.numSquares(12))
