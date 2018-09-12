@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-import solutions.utils.TreeNode as t
+from solutions.utils.TreeNode import TreeNode
 
 class Solution:
     def generateTrees(self, n):
@@ -36,3 +36,38 @@ class Solution:
         :type n: int
         :rtype: List[TreeNode]
         """
+
+        if n <= 0:
+            return []
+        elif n == 1:
+            return [TreeNode(1)]
+        else:
+            results = []
+            for r in range(1, n+1, 1):
+                left_trees = self.generateBSTrees(1, r-1)
+                right_trees = self.generateBSTrees(r+1, n)
+
+                for lt in left_trees:
+                    for rt in right_trees:
+                        root = TreeNode(r)
+                        root.left, root.right = lt, rt
+                        results.append(root)
+
+            return results
+
+    def generateBSTrees(self, start, end):
+        if start > end:
+            return [None]
+        elif start == end:
+            return [TreeNode(start)]
+        else:
+            results = []
+            for r in range(start, end+1, 1):
+                left_trees = self.generateBSTrees(start, r-1)
+                right_trees = self.generateBSTrees(r+1, end)
+                for lt in left_trees:
+                    for rt in right_trees:
+                        root = TreeNode(r)
+                        root.left, root.right = lt, rt
+                        results.append(root)
+            return results
