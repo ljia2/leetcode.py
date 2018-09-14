@@ -4,7 +4,7 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-import solutions.utils.TreeNode as t
+import utils.TreeNode as t
 
 class BSTIterator(object):
     def __init__(self, root):

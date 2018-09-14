@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-from solutions.utils.TreeNode import TreeNode
+from utils.TreeNode import TreeNode
 
 class Solution:
     def generateTrees(self, n):

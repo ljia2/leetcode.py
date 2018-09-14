@@ -4,7 +4,7 @@
 #         self.val = x
 #         self.next = None
 
-import solutions.utils.ListNode as l
+import utils.ListNode as l
 
 class Solution:
     def insertionSortList(self, head):

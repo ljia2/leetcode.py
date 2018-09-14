@@ -1,4 +1,4 @@
-from solutions.utils.ListNode import ListNode
+from utils.ListNode import ListNode
 
 from queue import PriorityQueue
 
@@ -101,7 +101,6 @@ def main():
     s = Solution()
     results = s.mergeKLists([input1, input2, input3])
     print(results)
-
 
     s2 = Solution2()
     results = s2.mergeKLists([input1,input2,input3])

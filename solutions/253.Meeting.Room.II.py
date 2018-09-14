@@ -1,7 +1,7 @@
 import operator
 from heapq import heappop, heappush
 
-import solutions.utils.Interval as Interval
+import utils.Interval as Interval
 
 
 class Solution:
@@ -34,7 +34,7 @@ class Solution:
 
 def main():
     s = Solution()
-    input = [Interval.Interval(0, 30), Interval.Interval(15,20), Interval.Interval(5,10)]
+    input = [Interval.Interval(0, 30), Interval.Interval(15, 20), Interval.Interval(5, 10)]
     print(s.minMeetingRooms(input))
 
 
