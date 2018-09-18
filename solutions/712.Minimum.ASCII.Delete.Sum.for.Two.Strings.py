@@ -1,4 +1,4 @@
-class Solution:
+class DPSolution:
     def minimumDeleteSum(self, s1, s2):
         """
         Given two strings s1, s2, find the lowest ASCII sum of deleted characters to make two strings equal.
@@ -40,13 +40,7 @@ class Solution:
         for i in range(1, len(s1)+1):
             for j in range(1, len(s2) + 1):
                 if s1[i-1] == s2[j-1]:
-                    # when s1[i-1] matches s2[j-1], we need to check the s1[i-2] and s2[j-1] (or s1[i-1] vs s1[j-2])
-                    if i >= 2 and s1[i-2] == s2[j-1]:
-                        min_dp[i][j] = min(min_dp[i-1][j-1], min_dp[i-1][j] + ord(s1[i-1]))
-                    elif j >= 2 and s1[i-1] == s2[j-2]:
-                        min_dp[i][j] = min(min_dp[i-1][j-1], min_dp[i][j-1] + ord(s2[j-1]))
-                    else:
-                        min_dp[i][j] = min_dp[i-1][j-1]
+                    min_dp[i][j] = min_dp[i-1][j-1]
                 else:
                     min_dp[i][j] = min(min(min_dp[i-1][j-1] + ord(s1[i-1]) + ord(s2[j-1]), min_dp[i-1][j] + ord(s1[i-1])), min_dp[i][j-1] + ord(s2[j-1]))
 
