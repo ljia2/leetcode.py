@@ -21,6 +21,10 @@ class Solution:
 
         dp[i] denotes the largest product of i
 
+        for two number, j * (i-j)
+        for multiple number, j * dp[i-j]
+        where 1 <= j < i
+
         dp[i] = max { j * dp[i-j], j * (i-j) | where 1 <= j < i}
 
         dp[0] = 1
