@@ -46,40 +46,32 @@ class Solution:
         elif not root.left and not root.right:
             return root.val
         else:
-            if root.left:
-                lsum, mlsum = self.traversePathSum(root.left)
-            else:
-                lsum, mlsum = 0, -2**31
+            max_sum_path = [0]
+            max_sum = self.dfs(root, max_sum_path)
+            return max(max_sum, max_sum_path[0])
 
-            if root.right:
-                rsum, mrsum = self.traversePathSum(root.right)
-            else:
-                rsum, mrsum = 0, -2**31
-
-            msum = max([root.val, root.val + lsum, root.val + rsum, root.val + lsum + rsum])
-            return max([mlsum, mrsum, msum])
-
-    def traversePathSum(self, node):
+    def dfs(self, node, max_sum_path):
         """"
         :param node:
         :return: sum ending with node, max_sum within substree of node
         """
-
         if not node.left and not node.right:
-            return node.val, node.val
+            max_sum_path[0] = max(node.val, max_sum_path[0])
+            return node.val
         else:
             if node.left:
-                lsum, mlsum = self.traversePathSum(node.left)
+                lsum = self.dfs(node.left, max_sum_path)
             else:
-                lsum, mlsum = 0, -2**31
+                lsum = 0
 
             if node.right:
-                rsum, mrsum = self.traversePathSum(node.right)
+                rsum = self.dfs(node.right, max_sum_path)
             else:
-                rsum, mrsum = 0, -2**31
+                rsum = 0
 
-            msum = max([node.val, node.val + lsum, node.val + rsum, node.val + lsum + rsum])
-            return max([node.val, node.val + lsum, node.val + rsum]), max([mlsum, mrsum, msum])
+            node_sum = max([node.val, node.val + lsum, node.val + rsum, node.val + lsum + rsum])
+            max_sum_path[0] = max(node_sum, max_sum_path[0])
+            return node_sum
 
 
 

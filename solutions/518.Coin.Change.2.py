@@ -123,14 +123,12 @@ class BestSolution(object):
         for i in range(1, len(coins) + 1):
             for j in range(1, amount+1):
                 if j >= coins[i-1]:
-                    # only use i-1 types of coins  + use i types of coins but amount minus coins[i-1]
+                    # 1) only use the first i-1 types of coins for amount j and 2) use the first i types of coins but amount j - coins[i-1]
                     comb_count[i][j] = comb_count[i-1][j] + comb_count[i][j-coins[i-1]]
                 else:
                     comb_count[i][j] = comb_count[i-1][j]
 
         return comb_count[len(coins)][amount]
-
-
 
 
 s = BestSolution()
