@@ -30,7 +30,7 @@ class Solution: # TLE
                     break
         return results
 
-class LinearSolution:
+class SolutionII:
     def nextGreaterElements(self, nums):
         """
         Given a circular array (the next element of the last element is the first element of the array),
@@ -74,7 +74,8 @@ class LinearSolution:
             m_stack.append(i % len(nums))
         return results
 
-class LinearSolution:
+
+class BestSolution:
     def nextGreaterElements(self, nums):
         """
         Given a circular array (the next element of the last element is the first element of the array),
