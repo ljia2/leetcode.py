@@ -74,17 +74,11 @@ class SolutionIII:
 
         when calculate the subarray sum, we need to the prefixsum trick:
 
-
         to find the subarray summing to k, i.e. prefix_sum[j] - prefix_sum[i] == k where j > i
 
-
         1. use hashtable to store the prefix sum of nums[:i] as key and indices list as value
-
-
-        2. scan the array by calcalting prefix_sum of nums[:i], s and use k+s as key to query hashtable to ensure there exits j > i with the key
+        2. scan the array by calcaulting prefix_sum of nums[:i], s and use k+s as key to query hashtable to ensure there exits j > i with the key
         moreover, we need to check whether s == k or not.
-
-
         """
 
         prefix_sum = dict()
@@ -137,7 +131,7 @@ class SolutionIII:
 
 
         for each j of prefix_sum:
-            <i, j> where prefix_sum[i] + k = prefix[j] where i < j
+            <i, j> where prefix_sum[i] + k = prefix_sum[j] where i < j
 
 
         """
@@ -149,7 +143,7 @@ class SolutionIII:
             prefix_sum.append(psum)
 
         count = 0
-        # key: prefix_sum; value: # of key before j
+        # key: prefix_sum; value: the frequency of key before j (i.e. # of subarraies summing to key before j)
         prefix_dict = dict()
         # use to track the subarray starting with the first element summing to k
         prefix_dict[0] = 1
