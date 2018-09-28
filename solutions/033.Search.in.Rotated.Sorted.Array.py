@@ -22,6 +22,8 @@ class Solution:
         :type nums: List[int]
         :type target: int
         :rtype: int
+
+        T: O(logn): Recursive
         """
 
         if not nums:
@@ -29,7 +31,7 @@ class Solution:
         else:
             return self.binarySearch(nums, target, 0, len(nums))
 
-    def binarySearch(self, nums, target, start, end):
+    def RecursiveBinarySearch(self, nums, target, start, end): # start: inclusive index and end: exclusive index
         if start == end - 1:
             if target == nums[start]:
                 return start
@@ -47,6 +49,23 @@ class Solution:
                     return self.binarySearch(nums, target, mid, end)
                 else:
                     return self.binarySearch(nums, target, start, mid)
+    # binarySearch where T = O(logn) and S = O(1)
+    def binarySearch(self, nums, target, start, end): # start: inclusive index and end: exclusive index
+        while start < end:
+            mid = (end + start) // 2
+            if target == nums[mid]:
+                return mid
+            elif nums[start] <= nums[mid]:
+                if nums[start] <= target < nums[mid]:
+                    end = mid
+                else:
+                    start = mid + 1
+            else:
+                if nums[mid] < target <= nums[end-1]:
+                    start = mid + 1
+                else:
+                    end = mid
+        return -1
 
 s = Solution()
 print(s.search([4,5,6,7,0,1,2], 0))
