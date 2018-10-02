@@ -27,11 +27,15 @@ class Solution:
           5     4       <---
         :type root: TreeNode
         :rtype: List[int]
+
+        BFS + (node, level) in queue.
+
         """
         if not root:
             return []
         else:
             view = []
+            # mimic queue to execute BFS
             q = [(0, root)]
             while q:
                 l, node = q.pop(0)
@@ -46,6 +50,7 @@ class Solution:
                 if node.right:
                     q.append((l+1, node.right))
             return view
+
 
 s = Solution()
 root = TreeNode(1)
