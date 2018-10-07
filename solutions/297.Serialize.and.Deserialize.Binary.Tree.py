@@ -9,7 +9,9 @@ from utils.TreeNode import TreeNode
 #         self.right = None
 
 class Codec:
-
+    def __init__(self):
+        self.p = re.compile(r"^\[([0-9]+)\,([0-9]+)\,([0-9]+)\](.*?)$")
+        
     def serialize(self, root):
         """Encodes a tree to a single string.
 
@@ -30,8 +32,8 @@ class Codec:
         """
         if not data:
             return None
-        p = re.compile(r"^\[([0-9]+)\,([0-9]+)\,([0-9]+)\](.*?)$")
-        v, l, r, code = p.search(data).groups()
+
+        v, l, r, code = self.p.search(data).groups()
         voffset, loffset, roffset = int(v), int(l), int(r)
         root = TreeNode(code[:voffset])
         if loffset > 0:
