@@ -125,7 +125,7 @@ class BFSSolution:
 
 
 
-class BiBFSSolution:
+class BiBFSSolution: # FASTER
     def findLadders(self, beginWord, endWord, wordList):
         """
 
