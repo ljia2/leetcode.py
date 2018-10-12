@@ -107,7 +107,7 @@ class LFUCache:
             odict.pop(key)
             if not odict:
                 self.freq2recency.pop(ofreq)
-                # if the key is the only existing with minimum frequency, update minimue frequency 
+                # if the key is the only existing with minimum frequency, update minimue frequency
                 if self.minFreq == ofreq:
                     self.minFreq = nfreq
 
