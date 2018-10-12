@@ -30,7 +30,7 @@ class Solution: # Time Limit Exceeded O(n^2)
             stores the second last index of subsequence ending at nums[i]; 
             can be used to backtrace the longest subsequence
             """
-            last_index = [-1] * len(nums) #
+            last_index = [-1] * len(nums)
 
             max_len[0] = 1
             for i in range(1, len(nums)):
