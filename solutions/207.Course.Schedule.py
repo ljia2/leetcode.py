@@ -66,7 +66,6 @@ from collections import defaultdict
 #         return False
 
 
-
 class TopologicalSortingSolution:
     def canFinish(self, numCourses, prerequisites):
         """
