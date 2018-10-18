@@ -42,14 +42,12 @@ class DPSolution:
             dp = [[0] * len(padding_nums) for i in range(len(padding_nums))]
             # iterate over sequence length of l
             for l in range(1, len(nums)+1, 1):
-                # start the first ballon to the last ballon that can form a length of l
+                # start the first balloon to the last balloon that can form a length of l
                 for i in range(1, len(nums)-l+2, 1):
                     j = i + l - 1
                     for k in range(i, j+1, 1):
                         dp[i][j] = max(dp[i][j], dp[i][k-1] + padding_nums[i-1]*padding_nums[k]*padding_nums[j+1] + dp[k+1][j])
             return dp[1][len(nums)]
-
-
 
 s = DPSolution()
 print(s.maxCoins([2,3,7,9,1,8,2]))
