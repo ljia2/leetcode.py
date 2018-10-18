@@ -24,13 +24,12 @@ class DPSolution:
 
         Note that n <= 500 implies O(n^3)
 
-        dp[i][j] denotes the max sum by bursting ballons from i to j (inclusive)
+        dp[i][j] denotes the max sum by bursting balloons from i to j
 
-        if
-
+        transition functions:
         dp[i][j] = max{dp[i][k-1] + nums[i-1]*nums[k]*nums[j+1] + dp[k+1][j] | i <= k <= j}
 
-        answer = dp[1][n]
+        results is dp[1][n]
         """
         if not nums:
             return 0
@@ -39,8 +38,11 @@ class DPSolution:
             padding_nums = [1]
             padding_nums.extend(nums)
             padding_nums.append(1)
+
+            # dp is (n + 2) * (n + 2)
             dp = [[0] * len(padding_nums) for i in range(len(padding_nums))]
-            # iterate over sequence length of l
+
+            # iterate over subsequence balloons with the length of l
             for l in range(1, len(nums)+1, 1):
                 # start the first balloon to the last balloon that can form a length of l
                 for i in range(1, len(nums)-l+2, 1):
