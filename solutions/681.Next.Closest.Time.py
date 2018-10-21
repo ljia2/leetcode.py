@@ -29,11 +29,7 @@ class BruteForceSolution:
         T: O(24*60)
 
         """
-        digits = set()
-        for d in time:
-            if d == ':':
-                continue
-            digits.add(d)
+        digits = set(time)
         hour = int(time[:time.index(":")])
         min = int(time[time.index(":")+1:])
 
@@ -41,23 +37,12 @@ class BruteForceSolution:
             min = (min + 1) % 60
             if min == 0:
                 hour = (hour + 1) % 24
-            # make hour and minute valid
-            h_str = "0" + str(hour) if hour < 10 else str(hour)
-            m_str = "0" + str(min) if min < 10 else str(min)
-            if self.digitCheck(digits, h_str, m_str):
-                next_time = h_str + ":" + m_str
+            # convert to valid time format.
+            new_time = "%02d:%02d" % (hour, min)
+            # python use <= compare whether a set is a subset of another set
+            if set(new_time) <= digits:
                 break
-        return next_time
-
-    def digitCheck(self, digits, h_str, m_str):
-        for d in h_str:
-            if d not in digits:
-                return False
-        for d in m_str:
-            if d not in digits:
-                return False
-        return True
-
+        return new_time
 
 def main():
     s = BruteForceSolution()
