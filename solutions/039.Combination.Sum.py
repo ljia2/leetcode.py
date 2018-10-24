@@ -107,8 +107,9 @@ class DFSSolution(object):
             for i in range(s, len(candidates)):
                 if candidates[i] > target:
                     break
-                # considering the combination that using candidates[i], update target = target - candidates[i]
-                # since duplication is allowed, we set tart unchanged.
+                # considering the combination only using candidates[i:];
+                # if use candidates[i], update target = target - candidates[i]
+                # since duplication is allowed, we set start unchanged.
                 combination.append(candidates[i])
                 self.dfs(candidates, target - candidates[i], i, combination, ans)
                 combination.pop()
