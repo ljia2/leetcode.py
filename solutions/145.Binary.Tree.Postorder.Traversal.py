@@ -29,12 +29,18 @@ class Solution:
 
         How about use stack to push (root, root.right and root.left)
 
+
+        T: O(n)
+        S: O(n)
+
         """
 
         if not root:
             return []
 
+        # intialize the stack with root
         stack = [root.val] + ([root.right] if root.right else []) + ([root.left] if root.left else [])
+
         ans = []
         while stack:
             node = stack.pop()
