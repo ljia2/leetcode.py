@@ -16,7 +16,10 @@ class DPSolution:
         :type nums: List[int]
         :rtype: int
 
-        max_sum[i] stores the subarray (must consective) from the first i elements and must use the i element
+        Hint: when calculating the maximum /minimum / frequency / count, should use dynamtic programming.
+
+
+        max_sum[i] stores the subarray (must consecutive) from the first i elements and must use the i element
 
         Transition:
 
