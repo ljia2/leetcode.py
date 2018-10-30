@@ -1,4 +1,4 @@
-class Solution:
+class DPSolution:
     def numDecodings(self, s):
         """
 
@@ -24,50 +24,43 @@ class Solution:
         :type s: str
         :rtype: int
 
-        dp[j] = dp[i][j-2] * (1 if s[j-2:j] is a valid code else 0) + dp[j-1] * (1 if s[j-1:j] is a valid code else 0)
+        hint: counting ways means we need to use dynamtic programming method
+
+        ways[i] denotes the decoding ways by using the first i chars
 
         """
 
         if not s:
             return 0
-        else:
-            sl = len(s) + 1
-            dp = [0] * sl
-            # base case initialization
-            for j in range(1, sl, 1):
-                if j == 1:
-                    code1 = int(s[j-1:j])
-                    if code1 > 0:
-                        dp[j] = 1
-                    else:
-                        dp[j] = 0
-                elif j == 2:
-                    code1 = int(s[j-1:j])
-                    code2 = int(s[j-2:j])
-                    if 10 <= code2 <= 26 and code1 > 0:
-                        dp[j] = 1 + dp[j-1]
-                    elif code1 > 0:
-                        dp[j] = dp[j-1]
-                    elif 10 <= code2 <= 26:
-                        dp[j] = 1
-                    else:
-                        dp[j] = 0
-                else:
-                    code1 = int(s[j-1:j])
-                    code2 = int(s[j-2:j])
-                    if 10 <= code2 <= 26 and code1 > 0:
-                        dp[j] = dp[j-2] + dp[j-1]
-                    elif code1 > 0:
-                        dp[j] = dp[j-1]
-                    elif 10 <= code2 <= 26:
-                        dp[j] = dp[j-2]
-                    else:
-                        dp[j] = 0
-            return dp[len(s)]
 
-s = Solution()
+        ways = [0] * (len(s) + 1)
+        # base case initialization, there is only 1 way of decoding empty string (without using any chars)
+        ways[0] = 1
+
+        for i in range(1, len(s)+1):
+            if i == 1:
+                code1 = int(s[i-1:i])
+                if code1 > 0:
+                    ways[i] = ways[i-1]
+                else:
+                    ways[i] = 0
+            else:
+                code1 = int(s[i-1:i])
+                code2 = int(s[i-2:i])
+                if code1 > 0 and 10 <= code2 <= 26:
+                    ways[i] = ways[i-1] + ways[i-2]
+                elif code1 > 0:
+                    ways[i] = ways[i-1]
+                elif 10 <= code2 <= 26:
+                    ways[i] = ways[i-2]
+                else:
+                    ways[i] = 0
+        return ways[len(s)]
+
+
+s = DPSolution()
 print(s.numDecodings("226"))
 print(s.numDecodings("236"))
 print(s.numDecodings("0"))
-print(s.numDecodings("102"))
+print(s.numDecodings("12"))
 
