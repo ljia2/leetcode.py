@@ -1,7 +1,6 @@
-class Solution:
+class DPSolution:
     def minSwap(self, A, B):
         """
-
         We have two integer sequences A and B of the same non-zero length.
 
         We are allowed to swap elements A[i] and B[i].
@@ -29,4 +28,41 @@ class Solution:
         :type A: List[int]
         :type B: List[int]
         :rtype: int
+
+        swap[i] denotes the min swaps (to make A and B strictively increasing) with swapping A[i] and B[i]
+
+        keep[i] denotes the min swaps (to make A and B strictively increasing) without swapping A[i] and B[i]
+
+        Transition:
+
+        1) A[i] > A[i-1] and B[i] > B[i-1]
+            keep[i] = keep[i-1] # without swapping i
+            swap[i] = swap[i-1] + 1 # swap both i-1 and i
+
+        2) B[i] > A[i-1] and A[i] > B[i-1]
+            keep[i] = min(keep[i], swap[i-1]) # swapping i-1 to guarantee strictly increasing
+            swap[i] = min(swap[i], keep[i-1] + 1) # keeping i-1 and swapping i to gurantee stictly increase
+
+        Note that case 1) and case 2) must either happens or both happens.
+
+        If none of cases happens, there is not solutions.
+
+
         """
+        # initialize swap and keep arraies
+        swap = [len(A)+1] * len(A)
+        keep = [len(A)+1] * len(B)
+        # base case: swap A[0] and B[0] needs 1 swap; keep A[0] and B[0] needs 0 swap
+        swap[0] = 1
+        keep[0] = 0
+
+        for i in range(1, len(A)):
+            if A[i] > A[i-1] and B[i] > B[i-1]:
+                keep[i] = keep[i-1]
+                swap[i] = swap[i-1] + 1
+
+            if B[i] > A[i-1] and A[i] > B[i-1]:
+                keep[i] = min(keep[i], swap[i-1])
+                swap[i] = min(swap[i], keep[i-1] + 1)
+
+        return min(swap[-1], keep[-1])
