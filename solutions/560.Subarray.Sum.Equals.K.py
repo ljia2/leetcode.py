@@ -25,8 +25,6 @@ class Solution: # Brute Force
                     count += 1
         return count
 
-
-
 class SolutionII: # Brute Force without repeated computation
     def subarraySum(self, nums, k):
         """
@@ -105,7 +103,7 @@ class SolutionIII:
         return count
 
 
-class SolutionIII:
+class SolutionIV:
     def subarraySum(self, nums, k):
         """
 
