@@ -1,5 +1,4 @@
-## backtrack solution ????
-class Solution2(object):
+class BackTrackSolution:
     def generateParenthesis(self, n):
         ans = []
         def backtrack(S = '', left = 0, right = 0):
@@ -15,7 +14,7 @@ class Solution2(object):
         return ans
 
 def main():
-    s = Solution2()
+    s = BackTrackSolution()
     results = s.generateParenthesis(4)
     print(results)
 

@@ -1,3 +1,4 @@
+from collections import defaultdict
 class DFSSolution:
     def calcEquation(self, equations, values, queries):
         """
@@ -31,41 +32,36 @@ class DFSSolution:
 
         """
 
-        graph = dict()
+        graph = defaultdict(list)
         for index in range(len(equations)):
             a, b = equations[index][0], equations[index][1]
             w = values[index]
+            graph[a].append[(b, w)]
+            graph[b].append((a, 1.0/w))
 
-            if a not in graph.keys():
-                graph[a] = [(b, w)]
-            else:
-                graph[a].append((b, w))
 
-            if b not in graph.keys():
-                graph[b] = [(a, 1.0/w)]
-            else:
-                graph[b].append((a, 1.0/w))
-
-        results = []
+        ans = []
         for q in queries:
             src, dst = q
             if src not in graph.keys() or dst not in graph.keys():
-                results.append(-1.0)
+                ans.append(-1.0)
             elif src == dst:
-                results.append(1.0)
+                ans.append(1.0)
             else:
                 explored = set()
-                results.append(self.dfs(graph, src, dst, explored))
-        return results
+                ans.append(self.dfs(graph, src, dst, explored))
+        return ans
 
     def dfs(self, graph, src, dst, explored):
         if src == dst:
             return 1.0
+
         # avoid cycle
         explored.add(src)
         for (node, w) in graph[src]:
             if node in explored:
                 continue
+
             if node == dst:
                 return w
             else:
@@ -106,4 +102,37 @@ class UnionFindSolution:
         :rtype: List[float]
 
         """
+        def find(x):
+            while x != parents[x][0]:
+                px, pv = parents(parents[x][0])
+                parents[x] = (px, parents[x][1] * pv)
+            return parents[x]
 
+        def divide(x, y):
+            rx, vx = find(x)
+            ry, vy = find(y)
+            if rx != ry: return -1.0
+            return vx / vy
+
+        parents = {}
+        for (x, y), v in zip(equations, values):
+            if x not in parents and y not in parents:
+                # x = y * v
+                parents[x] = (y, v)
+                parents[y] = (y, 1.0)
+            elif x not in parents:
+                # x = y * v
+                parents[x] = (y, v)
+            elif y not in parents:
+                # y = x * 1 / v
+                parents[y] = (x, 1.0 / v)
+            else:
+                # x = rx * vx
+                rx, vx = find(x)
+                # y = ry * vy
+                ry, vy = find(y)
+                # x = y * v -> rx = x / vx = y * v / vx => rv * (vy * v / vx)
+                parents[rx] = (ry, v / vx * vy)
+
+        ans = [divide(x, y) if x in parents and y in parents else -1 for x, y in queries]
+        return ans
