@@ -3,7 +3,7 @@
 Segment tree could be implemented using either an array or a tree.
 For an array implementation, if the element at index i is not a leaf, its left and right child are stored at index 2i and 2i + 1 respectively.
 """
-class NumArray:
+class SegmentTreeNumArray:
 
     def __init__(self, nums):
         """
@@ -79,7 +79,70 @@ class NumArray:
 
 
 # Your NumArray object will be instantiated and called as such:
-obj = NumArray([7,2,7,2,0])
+# obj =SegmentTreeNumArray([7,2,7,2,0])
+# print(obj.sumRange(0, 2))
+# print(obj.update(1, 2))
+# print(obj.sumRange(0, 2))
+
+
+
+# Solution 2 by Binary Tree
+"""
+Segment tree could be implemented using either an array or a tree.
+"""
+class BinarySearchTreeNumArray:
+
+    def __init__(self, nums):
+        """
+        :type nums: List[int]
+        """
+        # initialize a binary search tree with n+1 space where tree[n] stores the pre-sum of the first n elements
+        self.nums = nums
+        self.tree = [0] * (len(nums) + 1)
+        self.buildTree(nums)
+
+    def update(self, i, val):
+        """
+        :type i: int
+        :type val: int
+        :rtype: void
+        """
+
+        ti = i + 1
+        delta = val - self.nums[i]
+        self.nums[i] = val
+        while ti < len(self.tree):
+            self.tree[ti] += delta
+            ti += ti & -ti
+
+    def query(self, i):
+        ti = i + 1
+        s = 0
+        while ti > 0:
+            s += self.tree[ti]
+            ti -= ti & -ti
+        return s
+
+    def sumRange(self, i, j):
+        """
+        :type i: int
+        :type j: int
+        :rtype: int
+        """
+        sumi = self.query(i-1)
+        sumj = self.query(j)
+        return sumj - sumi
+
+    def buildTree(self, nums):
+        for i in range(len(nums)):
+            ti = i + 1
+            while ti < len(self.tree):
+                self.tree[ti] += nums[i]
+                ti += ti & -ti
+
+
+# Your NumArray object will be instantiated and called as such:
+obj = BinarySearchTreeNumArray([7,2,7,2,0])
 print(obj.sumRange(0, 2))
-print(obj.update(1, 2))
+print(obj.update(1, 4))
 print(obj.sumRange(0, 2))
