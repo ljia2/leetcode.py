@@ -34,7 +34,7 @@ class Solution:
         else:
             median = C[K-1]
 
-        C[K-2 = min(A[m1-1], B[m2-1])
+        C[K-2] = min(A[m1-1], B[m2-1])
 
 
         C[K-1] = max(A[m1-1], B[m2-1]) # c1 for code below
@@ -45,7 +45,6 @@ class Solution:
         Therefore, we only need A[m1-1], A[m1], B[m2-1], B[m2] to calculate the median
 
         given m1, binary search on A while A[m1] < B[m2-1] until A[m1] >= B[m2-1]
-
 
         """
 
