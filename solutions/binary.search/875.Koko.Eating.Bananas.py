@@ -55,12 +55,15 @@ class Solution:
     def finish_hour(self, piles, speed):
         hour = 0
         for p in piles:
-            if p < speed:
-                hour += 1
-            elif p % speed == 0:
-                hour += p // speed
-            else:
-                hour += p // speed + 1
+            #if p < speed:
+            #    hour += 1
+            #elif p % speed == 0:
+            #    hour += p // speed
+            #else:
+            #    hour += p // speed + 1
+
+            # celing of division
+            hour += (p + speed - 1) // speed
         return hour
 
 s = Solution()

@@ -10,6 +10,7 @@ class BinarySearch:
                 l = m + 1          # new range [m+1, r)
         return l               # or not found
 
+
     # find first index i: A[i] > val
     def upper_bound(A, val, l, r):
         while l < r:
