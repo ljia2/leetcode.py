@@ -54,7 +54,6 @@ class UnionFindSolution: # TLE
 
         parents = [i for i in range(rownum * colnum)]
         sizes = [1] * rownum * colnum
-
         dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         for r in range(rownum):
             for c in range(colnum):
@@ -82,20 +81,15 @@ class UnionFindSolution: # TLE
             if grid[r][c] == 0:
                 ans.append(0)
                 continue
+            # adding an edge to final_grid
             final_grid[r][c] = 1
-            # initialize parents and sizes and call the union find again.
-            parents = [i for i in range(rownum * colnum)]
-            sizes = [1] * rownum * colnum
-            for r in range(rownum):
-                for c in range(colnum):
-                    if final_grid[r][c] == 0:
-                        continue
-                    for (r_delta, c_delta) in dirs:
-                        newr = r + r_delta
-                        newc = c + c_delta
-                        if newr < 0 or newr >= rownum or newc < 0 or newc >= colnum or final_grid[newr][newc] == 0:
-                            continue
-                        self.union(parents, sizes, r*colnum + c, newr * colnum + newc)
+            for (r_delta, c_delta) in dirs:
+                newr = r + r_delta
+                newc = c + c_delta
+                if newr < 0 or newr >= rownum or newc < 0 or newc >= colnum or final_grid[newr][newc] == 0:
+                    continue
+                self.union(parents, sizes, r*colnum + c, newr * colnum + newc)
+
             # all connected bricks must in the same components as those bricks connecting roof.
             new_bricks = 0
             components = set()
@@ -105,6 +99,7 @@ class UnionFindSolution: # TLE
                     if pc not in components:
                         components.add(pc)
                         new_bricks += sizes[pc]
+
             # excluding the removed brick
             falling_bricks = new_bricks - bricks - 1
             ans.append(falling_bricks if falling_bricks > 0 else 0)
@@ -130,4 +125,4 @@ class UnionFindSolution: # TLE
         return
 
 s = UnionFindSolution()
-print(s.hitBricks([[1,1,1],[0,1,0],[0,0,0]], [[0,2],[2,0],[0,1],[1,2]]))
+print(s.hitBricks([[1,0,0,0],[1,1,1,0]], [[1, 0]]))
