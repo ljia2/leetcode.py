@@ -8,6 +8,17 @@
 class Solution:
     def splitBST(self, root, V):
         """
+        Given a Binary Search Tree (BST) with root node root, and a target value V,
+        split the tree into two subtrees where one subtree has nodes that are all smaller or equal to the target value,
+        while the other subtree has all nodes that are greater than the target value.
+        It's not necessarily the case that the tree contains a node with value V.
+
+        Additionally, most of the structure of the original tree should remain.
+        Formally, for any child C with parent P in the original tree, if they are both in the same subtree after the split,
+        then node C should still have the parent P.
+
+        You should output the root TreeNode of both subtrees after splitting, in any order.
+
         Input: root = [4,2,6,1,3,5,7], V = 2
         Output: [[2,1],[4,3,6,null,null,5,7]]
         Explanation:
@@ -36,5 +47,30 @@ class Solution:
         :type root: TreeNode
         :type V: int
         :rtype: List[TreeNode]
+
+        recursive!
+        
         """
+        if not root:
+            return [None, None]
+        # elif not root.left and not root.right:
+        #     if root.val <= V:
+        #         return [root, None]
+        #     else:
+        #         return [None, root]
+        else:
+
+            lltree, lrtree = self.splitBST(root.left, V)
+            rltree, rrtree = self.splitBST(root.right, V)
+
+            if root.val <= V:
+                # ltree must be None
+                root.left = lltree
+                root.right = rltree
+                return [root, rrtree]
+            else:
+                # rltree must be None
+                root.left = lrtree
+                root.right = rrtree
+                return [lltree, root]
 
