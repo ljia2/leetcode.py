@@ -20,10 +20,15 @@
 # The number of calls to MyCalendar.book per test case will be at most 1000.
 # In calls to MyCalendar.book(start, end), start and end are integers in the range [0, 10^9].
 
+
+# is_overlap(s1, e1, s2, e2) = max(s1, s2) < min(e1, e2)
+
+import bisect
+
 class MyCalendar:
-
     def __init__(self):
-
+        # use bisect to query/insert into list
+        self.calendar = [(0,0), (float('inf'), float('inf'))]
 
     def book(self, start, end):
         """
@@ -31,6 +36,12 @@ class MyCalendar:
         :type end: int
         :rtype: bool
         """
+        slot = bisect.bisect_left(self.calendar, (start, end))
+        if self.calendar[slot-1][1] <= start and self.calendar[slot][0] >= end:
+            bisect.insort_left(self.calendar, (start, end))
+            return True
+        return False
+
 
 
 
