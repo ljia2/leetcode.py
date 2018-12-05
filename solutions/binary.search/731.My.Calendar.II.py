@@ -36,8 +36,8 @@ import bisect
 class MyCalendarTwo:
 
     def __init__(self):
-        self.booking = [(0, 0), (float("inf"), float("inf"))]
-        self.double_booking = [(0, 0), (float("inf"), float("inf"))]
+        self.bookings = [(0, 0), (float("inf"), float("inf"))]
+        self.overlaps = [(0, 0), (float("inf"), float("inf"))]
 
     def book(self, start, end):
         """
@@ -46,37 +46,18 @@ class MyCalendarTwo:
         :rtype: bool
         """
         # return the index of insert (start, end)
-        dblot = bisect.bisect_left(self.double_booking, (start, end))
-        s1, e1 = self.double_booking[dblot-1]
-        s2, e2 = self.double_booking[dblot]
+        dblot = bisect.bisect_left(self.overlaps, (start, end))
+        s1, e1 = self.overlaps[dblot-1]
+        s2, e2 = self.overlaps[dblot]
         if self._is_overlap(s1, e1, start, end) or self._is_overlap(s2, e2, start, end):
             return False
         else:
-            # Locate the insertion point for self.events in (start, end) to maintain sorted order.
-            blot = bisect.bisect_left(self.booking, (start, end))
-            s1, e1 = self.booking[blot-1]
-            s2, e2 = self.booking[blot]
-
-            if self._is_overlap(s1, e1, start, end) or self._is_overlap(s2, e2, start, end):
-                # insert all generated double booking intervals into double booking (expansion from two directions)
-                i = blot-1
-                while i > -1:
-                    s, e = self.booking[i]
-                    if self._is_overlap(s, e, start, end):
-                        bisect.insort_left(self.double_booking, (max(s, start), min(e, end)))
-                        i -= 1
-                    else:
-                        break
-
-                while blot < len(self.booking):
-                    s, e = self.booking[blot]
-                    if self._is_overlap(s, e, start, end):
-                        bisect.insort_left(self.double_booking, (max(s, start), min(e, end)))
-                        blot += 1
-                    else:
-                        break
-            # update the booking list.
-            bisect.insort_left(self.booking, (start, end))
+            # iterate all bookings to updat overlaps.
+            for booking in self.bookings:
+                s, e = booking
+                if self._is_overlap(s, e, start, end):
+                    bisect.insort_left(self.overlaps, (max(s, start), min(e, end)))
+            self.bookings.append((start, end))
             return True
 
     def _is_overlap(self, s1, e1, s2, e2):
