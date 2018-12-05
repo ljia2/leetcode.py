@@ -20,42 +20,39 @@
 # The total number of calls to queryRange in a single test case is at most 5000.
 # The total number of calls to removeRange in a single test case is at most 1000.
 
-
-# Typical use tree of segment
-
 import bisect
 
 class RangeModule:
-
     def __init__(self):
-        self.intervals = [(-float("inf"), -float("inf")), (float("inf"), float("inf"))]
+        # interval must be ordered and adjacent intervals.
+        self.intervals = []
 
     def addRange(self, left, right):
         """
         :type left: int
         :type right: int
         :rtype: void
-        """
-        newIntervals = set()
-        removedIntervals = []
-        for interval in self.intervals:
-            if interval[1] < left:
-                continue
-            if interval[0] > right:
-                break
-            if max(interval[0], left) >= min(interval[1], right):
-                newIntervals.add((left, right))
-            else:
-                newIntervals.add((min(left, interval[0]), max(right, interval[1])))
-                removedIntervals.append(interval)
 
-        if not newIntervals:
-            bisect.insort_left(self.intervals, (left, right))
-        else:
-            for interval in removedIntervals:
-                self.intervals.pop(bisect.bisect_left(self.intervals, interval))
-            for interval in newIntervals:
-                bisect.insort_left(self.intervals, interval)
+        # add range might merge interval
+
+        """
+        new_intervals = []
+        inserted = False
+        for interval in self.intervals:
+            if interval[0] > right and not inserted:
+                bisect.insort_left(new_intervals, (left, right))
+                inserted = True
+
+            if interval[1] < left or interval[0] > right:
+                bisect.insort_left(new_intervals, interval)
+            else:
+                # interval overlaps (left, right), update left and right
+                left = min(left, interval[0])
+                right = max(right, interval[1])
+
+        if not inserted:
+            bisect.insort_left(new_intervals, (left, right))
+        self.intervals = new_intervals
         return
 
     def queryRange(self, left, right):
@@ -64,49 +61,40 @@ class RangeModule:
         :type right: int
         :rtype: bool
         """
-        for interval in self.intervals:
-            if interval[0] >= right:
-                break
-            if interval[0] <= left and right <= interval[1]:
+        index = bisect.bisect_left(self.intervals, (left, right))
+        if index > 0:
+            interval = self.intervals[index-1]
+            if interval[0]<= left and right <= interval[1]:
+                return True
+        if index < len(self.intervals):
+            interval = self.intervals[index]
+            if interval[0]<= left and right <= interval[1]:
                 return True
         return False
+
 
     def removeRange(self, left, right):
         """
         :type left: int
         :type right: int
         :rtype: void
-        """
-        newIntervals = []
-        removedIntervals = []
-        for interval in self.intervals:
-            if interval[0] >= right:
-                break
-            # if not overlap
-            if max(interval[0], left) >= min(interval[1], right):
-                continue
-            if interval[0] <= left and right <= interval[1]:
-                newIntervals.append((interval[0], left))
-                newIntervals.append((right, interval[1]))
-                removedIntervals.append(interval)
-            elif interval[0] <= left and interval[1] < right:
-                newIntervals.append((interval[0], left))
-                removedIntervals.append(interval)
-            elif interval[0] >= left and interval[1] <= right:
-                removedIntervals.append(interval)
-            elif interval[0] >= left and interval[1] > right:
-                newIntervals.append((right, interval[1]))
-                removedIntervals.append(interval)
 
-        for interval in removedIntervals:
-            self.intervals.pop(bisect.bisect_left(self.intervals, interval))
-        for interval in newIntervals:
-            bisect.insort_left(self.intervals, interval)
+        # remove range does not cause merging of interval, but might generates two disjoint intervals when overlapping.
+
+        """
+        new_intervals = []
+        for interval in self.intervals:
+            if interval[0] >= right or interval[1] <= left:
+                bisect.insort_left(new_intervals, interval)
+                continue
+            if interval[0] < left:
+                bisect.insort_left(new_intervals, (interval[0], left))
+            if interval[1] > right:
+                bisect.insort_left(new_intervals, (right, interval[1]))
+        self.intervals = new_intervals
         return
 
 
-
-# Your RangeModule object will be instantiated and called as such:
 obj = RangeModule()
 obj.addRange(6, 8)
 obj.removeRange(7, 8)
@@ -117,3 +105,9 @@ obj.addRange(1, 8)
 print(obj.queryRange(2, 4))
 print(obj.queryRange(2, 9))
 print(obj.queryRange(4, 6))
+
+obj.addRange(10, 20)
+obj.removeRange(14, 16)
+print(obj.queryRange(10, 14))
+print(obj.queryRange(13, 15))
+print(obj.queryRange(16, 17))
