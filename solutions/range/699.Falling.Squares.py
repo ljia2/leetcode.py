@@ -235,7 +235,8 @@ class HuaHuaSolution:
         max_height = -1
         for position in positions:
             start, width = position
-            end = start + width - 1
+            end = start + width
+            # (start, end) half open interval
 
             if not squares:
                 squares.append((start, end))
@@ -246,24 +247,24 @@ class HuaHuaSolution:
                 nsquare2height = dict()
 
                 # get the first range insert with position
-                index = bisect.bisect_right(squares, (start, end))
+                index = bisect.bisect_left(squares, (start, end))
                 if index > 0:
-                    if squares[index-1][1] >= start:
+                    if squares[index-1][1] > start:
                         index -= 1
 
-                # iterating over squares overlaping with position
+                # iterating over squares overlapping with position
                 baseHeight = 0
-                while index < len(squares) and squares[index][0] <= end:
+                while index < len(squares) and squares[index][0] < end:
                     s, e = squares[index]
                     h = square2height[(s, e)]
                     if s < start:
                         # a new square is generated.
-                        bisect.insort_left(nsquares, (s, start-1))
-                        nsquare2height[(s, start-1)] = square2height[(s, e)]
+                        bisect.insort_left(nsquares, (s, start))
+                        nsquare2height[(s, start)] = square2height[(s, e)]
                     if e > end:
                         # a new square is generated.
-                        bisect.insort_left(nsquares, (end+1, e))
-                        nsquare2height[(end+1, e)] = square2height[(s, e)]
+                        bisect.insort_left(nsquares, (end, e))
+                        nsquare2height[(end, e)] = square2height[(s, e)]
                     baseHeight = max(baseHeight, h)
                     index += 1
 
@@ -273,7 +274,7 @@ class HuaHuaSolution:
 
                 # adding non-overlapping squares into nsquares
                 for square in squares:
-                    if square[1] < start or square[0] > end:
+                    if square[1] <= start or square[0] >= end:
                         bisect.insort_left(nsquares, square)
                         nsquare2height[square] = square2height[square]
 
