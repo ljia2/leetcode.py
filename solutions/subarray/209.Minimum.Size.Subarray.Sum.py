@@ -1,4 +1,4 @@
-class Solution: # Two Pointers solution
+class SolutionI: # Two Pointers solution
     def minSubArrayLen(self, s, nums):
         """
         Given an array of n positive integers and a positive integer s,
@@ -15,12 +15,15 @@ class Solution: # Two Pointers solution
         :type s: int
         :type nums: List[int]
         :rtype: int
+
+        give an array of positive numbers, we can use two pointers, because presume is increasing stickly.
+
         """
 
         if not nums or sum(nums) < s:
             return 0
 
-        i = j = 0
+        i = -1
         j = 0
         psum1 = 0
         psum2 = nums[0]
@@ -28,19 +31,23 @@ class Solution: # Two Pointers solution
         while i < len(nums) and j < len(nums):
             ssum = psum2 - psum1
             if ssum < s:
-                psum2 += nums[j]
                 j += 1
+                if j < len(nums):
+                    psum2 += nums[j]
             else:
                 length = j - i
-                if min_length < length:
+                if min_length > length:
                     min_length = length
-                psum1 += nums[i]
+
                 i += 1
+                if i < len(nums):
+                    psum1 += nums[i]
+        return min_length
 
 
-
-
-
+s = SolutionI()
+print(s.minSubArrayLen(11, [1, 2, 3, 4, 5]))
+print(s.minSubArrayLen(7, [2,3,1,2,4,3]))
 ######################################
 
 import bisect
@@ -91,5 +98,5 @@ class SolutionII:
         return min_length
 
 s = SolutionII()
-#print(s.minSubArrayLen(11, [1, 2, 3, 4, 5]))
+print(s.minSubArrayLen(11, [1, 2, 3, 4, 5]))
 print(s.minSubArrayLen(7, [2,3,1,2,4,3]))
