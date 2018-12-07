@@ -5,7 +5,7 @@ class GreedySolution:
         """
 
         Given a char array representing tasks CPU need to do. It contains capital letters A to Z where different letters
-        represent different tasks.Tasks could be done without original order.
+        represent different tasks. Tasks could be done without original order.
         Each task could be done in one interval. For each interval, CPU could finish one task or just be idle.
 
         However, there is a non-negative cooling interval n that means between two same tasks,
@@ -29,7 +29,6 @@ class GreedySolution:
 
 
         10000 of tasks hints for at most O(nlogn)
-
 
         这道题让我们安排CPU的任务，规定在两个相同任务之间至少隔n个时间点。说实话，刚开始博主并没有完全理解题目的意思，
         后来看了大神们的解法才悟出个道理来。下面这种解法参考了大神fatalme的帖子，由于题目中规定了两个相同任务之间至少隔n个时间点，
@@ -109,7 +108,5 @@ class GreedySolution:
         index = len(taskfreq) - 1
         while index > -1 and taskfreq[index] == max_freq:
             index -= 1
-        # there are 26 - index task with highest frequency
-
         least_slots = (max_freq - 1) * (n + 1) + 26 - index
         return max(least_slots, len(tasks))
