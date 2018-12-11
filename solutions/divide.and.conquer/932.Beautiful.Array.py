@@ -20,6 +20,22 @@ class DCSolution:
 
         1 <= N <= 1000
 
+        1000 hints O(n^2)
+
         :type N: int
         :rtype: List[int]
         """
+
+        if N == 1:
+            return [1]
+        else:
+            k = (N + 1) // 2
+            base = self.beautifulArray(k)
+            odd = [2*i - 1 for i in base]
+            even = [2*i for i in base]
+            res = odd + even
+            return list(filter(lambda x: x<=N, res))
+
+s = DCSolution()
+print(s.beautifulArray(5))
+print(s.beautifulArray(6))
