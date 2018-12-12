@@ -34,7 +34,7 @@ class Solution:
 
         if(S[i-1] == 'D')
            dp[i][j] = dp[i-1][j] + dp[i-1][j+1] + ... + dp[i-1][i-1]
-           
+
         So, why start with j, not j + 1, since the sequence is decreasing to j?
         Thought Experiment: In the sequence with length of i-1, the largest number in this sequence should be i-1.
         However, when we are dealing with length i and end with j, the previous sequence has already another j and we should also add i to the sequence.
