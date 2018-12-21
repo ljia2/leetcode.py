@@ -1,6 +1,6 @@
 import string
 
-class BFSSolution:
+class BFSSolution: # TLE
     def ladderLength(self, beginWord, endWord, wordList):
         """
 
@@ -51,29 +51,28 @@ class BFSSolution:
             return 0
 
         wordDict = set(wordList)
-        if beginWord in wordDict:
-            wordDict.remove(beginWord) # remove beginWord since queue is initialize with beginWord
         step = 0
         queue = [beginWord]
+        visited = set()
+        visited.add(beginWord)
         while queue:
-            step += 1
-            next_level = []
-            while queue:
+            size = len(queue)
+            while size > 0:
                 w = queue.pop(0)
+                size -= 1
+                if w == endWord:
+                    # the length is the expansion step + 1
+                    return step + 1
                 for i in range(len(w)):
-                    c = w[i]
                     for t in string.ascii_lowercase:
-                        if t == c:
+                        if t == w[i]:
                             continue
                         new_w = w[:i] + t + w[i+1:]
-                        if new_w not in wordDict:
+                        if new_w not in wordDict or new_w in visited:
                             continue
-                        if new_w == endWord:
-                            return step + 1
-                        # BFS, if a word is removed from dict, which is one step aways from beginWord. Further steps should avoid to use them.
-                        wordDict.remove(new_w)
-                        next_level.append(new_w)
-            queue.extend(next_level)
+                        visited.add(new_w)
+                        queue.append(new_w)
+            step += 1
         return 0
 
 class BiBFSSolution: # Best Solution
@@ -127,39 +126,41 @@ class BiBFSSolution: # Best Solution
             return 0
 
         step = 0
-        wordDict1 = set(wordList)
-        wordDict2 = set(wordList)
-        queue1 = [beginWord]
-        queue2 = [endWord]
+        wordDict = set(wordList)
 
-        if beginWord in wordDict1:
-            wordDict1.remove(beginWord)
-        if endWord in wordDict2:
-            wordDict2.remove(endWord)
+        queue1 = [beginWord]
+        visited1 = set()
+        visited1.add(beginWord)
+
+        queue2 = [endWord]
+        visited2 = set()
+        visited2.add(endWord)
 
         while queue1 and queue2:
-            qs, qb, wdict = (queue2, queue1, wordDict2) if len(queue1) > len(queue2) else (queue1, queue2, wordDict1)
-            # step records how many times of expansions from either side
-            step += 1
-            # expand the smaller queue
-            next_level = []
-            # iterate all the words from qs (they are the same distance from beginword)
-            while qs:
+            if len(queue1) > len(queue2):
+                qs, qb, visiteds = queue2, queue1, visited2
+            else:
+                qs, qb, visiteds = queue1, queue2, visited1
+
+            # expansion from the smaller queue
+            size = len(qs)
+            while size > 0:
                 w = qs.pop(0)
+                size -= 1
+                # when a word in qs appear in qb, two side bfs expansion.
+                if w in qb:
+                    return step + 1
+
                 for i in range(len(w)):
-                    c = w[i]
-                    for t in string.ascii_lowercase:
-                        if t == c:
+                    for c in string.ascii_lowercase:
+                        if c == w[i]:
                             continue
-                        new_w = w[:i] + t + w[i+1:]
-                        if new_w not in wdict:
+                        new_w = w[:i] + c + w[i+1:]
+                        if new_w not in wordDict or new_w in visiteds:
                             continue
-                        if new_w in qb:
-                            return step + 1
-                        # BFS, if a word is removed from dict, which is one step aways from beginWord. Further steps should avoid to use them.
-                        wdict.remove(new_w)
-                        next_level.append(new_w)
-            qs.extend(next_level)
+                        visiteds.add(new_w)
+                        qs.append(new_w)
+            step += 1
         return 0
 
 s = BiBFSSolution()

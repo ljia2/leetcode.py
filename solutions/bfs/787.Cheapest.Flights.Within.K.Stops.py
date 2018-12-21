@@ -1,91 +1,91 @@
 from collections import defaultdict
 
-class DFSSolution:
-    def findCheapestPrice(self, n, flights, src, dst, K):
-        """
-        There are n cities connected by m flights. Each fight starts from city u and arrives at v with a price w.
-
-        Now given all the cities and flights, together with starting city src and the destination dst,
-        your task is to find the cheapest price from src to dst with up to k stops. If there is no such route, output -1.
-
-        Example 1:
-        Input:
-        n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
-        src = 0, dst = 2, k = 1
-        Output: 200
-        Explanation:
-        The graph looks like this:
-
-
-        The cheapest price from city 0 to city 2 with at most 1 stop costs 200, as marked red in the picture.
-        Example 2:
-        Input:
-        n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
-        src = 0, dst = 2, k = 0
-        Output: 500
-        Explanation:
-        The graph looks like this:
-
-
-        The cheapest price from city 0 to city 2 with at most 0 stop costs 500, as marked blue in the picture.
-        Note:
-
-        The number of nodes n will be in range [1, 100], with nodes labeled from 0 to n - 1.
-        The size of flights will be in range [0, n * (n - 1) / 2].
-        The format of each flight will be (src, dst, price).
-        The price of each flight will be in the range [1, 10000].
-        k is in the range of [0, n - 1].
-        There will not be any duplicated flights or self cycles.
-
-        :type n: int
-        :type flights: List[List[int]]
-        :type src: int
-        :type dst: int
-        :type K: int
-        :rtype: int
-
-        Typical DFS search to find the cheapest airlines with at most K stops
-        Pruning by cost vs best answer so far
-
-        T: (n^k+1) #
-        S: (n^k+1)
-
-        """
-
-        graph = defaultdict(set)
-        for flight in flights:
-            s, d, v = flight
-            graph[s].add((d, v))
-
-        visited = dict()
-        for i in range(n):
-            visited[i] = 0
-        visited[src] = 1
-
-        ans = [2**31] # INT_MAX
-
-        self.dfs(src, dst, graph, K + 1, 0, visited, ans)
-        return -1 if ans[0] == 2**31 else ans[0]
-
-    def dfs(self, src, dst, graph, level, cost, visited, ans):
-        if src == dst:
-            if ans[0] > cost:
-                ans[0] = cost
-            return
-
-        if level == 0:
-            return
-
-        dv = graph[src]
-        for d, v in dv:
-            if visited[d] == 1: continue
-            # pruning by the current price
-            if cost + v >= ans[0]: continue
-            # Typical graph dfs to avoid cycle visits.
-            visited[d] = 1
-            self.dfs(d, dst, graph, level - 1, cost + v, visited, ans)
-            visited[d] = 0
-        return
+# class DFSSolution:
+#     def findCheapestPrice(self, n, flights, src, dst, K):
+#         """
+#         There are n cities connected by m flights. Each fight starts from city u and arrives at v with a price w.
+#
+#         Now given all the cities and flights, together with starting city src and the destination dst,
+#         your task is to find the cheapest price from src to dst with up to k stops. If there is no such route, output -1.
+#
+#         Example 1:
+#         Input:
+#         n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
+#         src = 0, dst = 2, k = 1
+#         Output: 200
+#         Explanation:
+#         The graph looks like this:
+#
+#
+#         The cheapest price from city 0 to city 2 with at most 1 stop costs 200, as marked red in the picture.
+#         Example 2:
+#         Input:
+#         n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
+#         src = 0, dst = 2, k = 0
+#         Output: 500
+#         Explanation:
+#         The graph looks like this:
+#
+#
+#         The cheapest price from city 0 to city 2 with at most 0 stop costs 500, as marked blue in the picture.
+#         Note:
+#
+#         The number of nodes n will be in range [1, 100], with nodes labeled from 0 to n - 1.
+#         The size of flights will be in range [0, n * (n - 1) / 2].
+#         The format of each flight will be (src, dst, price).
+#         The price of each flight will be in the range [1, 10000].
+#         k is in the range of [0, n - 1].
+#         There will not be any duplicated flights or self cycles.
+#
+#         :type n: int
+#         :type flights: List[List[int]]
+#         :type src: int
+#         :type dst: int
+#         :type K: int
+#         :rtype: int
+#
+#         Typical DFS search to find the cheapest airlines with at most K stops
+#         Pruning by cost vs best answer so far
+#
+#         T: (n^k+1) #
+#         S: (n^k+1)
+#
+#         """
+#
+#         graph = defaultdict(set)
+#         for flight in flights:
+#             s, d, v = flight
+#             graph[s].add((d, v))
+#
+#         visited = dict()
+#         for i in range(n):
+#             visited[i] = 0
+#         visited[src] = 1
+#
+#         ans = [2**31] # INT_MAX
+#
+#         self.dfs(src, dst, graph, K + 1, 0, visited, ans)
+#         return -1 if ans[0] == 2**31 else ans[0]
+#
+#     def dfs(self, src, dst, graph, level, cost, visited, ans):
+#         if src == dst:
+#             if ans[0] > cost:
+#                 ans[0] = cost
+#             return
+#
+#         if level == 0:
+#             return
+#
+#         dv = graph[src]
+#         for d, v in dv:
+#             if visited[d] == 1: continue
+#             # pruning by the current price
+#             if cost + v >= ans[0]: continue
+#             # Typical graph dfs to avoid cycle visits.
+#             visited[d] = 1
+#             self.dfs(d, dst, graph, level - 1, cost + v, visited, ans)
+#             visited[d] = 0
+#         return
 
 
 class BFSSolution:
@@ -148,31 +148,30 @@ class BFSSolution:
             visited[i] = False
 
         ans = [2**31]
-        self.bfs(src, dst, graph, K, visited, ans)
-        return -1 if ans[0] ==2**31 else ans[0]
+        self.bfs(src, dst, graph, K, ans)
+        return -1 if ans[0] == 2**31 else ans[0]
 
-    def bfs(self, src, dst, graph, maxStep, visited, ans):
+    def bfs(self, src, dst, graph, maxStep, ans):
         if src not in graph.keys():
             return
 
         step = 0
+        q = [src]
+        visited = set()
         visited.add(src)
-
-        q = [(d, v) for d, v in graph[src]]
         while q:
             size = len(q)
             while size > 0:
-                size -= 1
                 d, total_cost = q.pop(0)
+                size -= 1
                 if d == dst:
                     ans[0] = min(ans[0], total_cost)
-
-                visited.add(d)
                 for dd, cost in graph[d]:
                     # important pruning
                     if total_cost + cost > ans[0]:
                         continue
                     q.append((dd, total_cost + cost))
+                    visited.add(dd)
 
             step += 1
             # ensure at most expanding steps of K.
