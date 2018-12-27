@@ -141,3 +141,4 @@ class TopologicalSortingSolution:
 
 s = TopologicalSortingSolution()
 print(s.canFinish(3, [[1, 0], [2, 1]]))
+
