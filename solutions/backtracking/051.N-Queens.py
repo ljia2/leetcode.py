@@ -25,7 +25,8 @@ class Solution:
 
         Since it requires all solutions, clearly backtracking / DFS should be the answer.
 
-        given a board of n * n, there are 2*n - 1 diags from left top to right bottom and another 2*n - 1 diags from right top to left bottom.
+        given a board of n * n, there are 2*n - 1 diags from left top to right bottom
+        and another 2*n - 1 diags from right top to left bottom.
 
         use two arraies, diag1 and diag2 to represent these two sets
 

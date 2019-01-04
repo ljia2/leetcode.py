@@ -22,9 +22,7 @@ class DFSSolution:
         :type S: str
         :rtype: List[str]
 
-
         TYPICAL SOLUTION FOR PERMUTATION!!!!
-
 
         hint: given a small S, Time complexity is O(2^S).
 

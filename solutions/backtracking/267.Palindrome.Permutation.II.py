@@ -19,7 +19,7 @@ class Solution:
         Idea:
         1) calculate char frequency and if only 0/1 odd frequency char, remove one of that char to get a list of duplicated chars
         2) generate all unique permutations of that half list.
-        3) combine the that char (if exists) with permtuations to generate all Palindromes.
+        3) combine the that char (if exists) with permutations to generate all Palindromes.
 
         """
         if not s:
@@ -42,8 +42,8 @@ class Solution:
 
         used = [False] * len(chars)
         permutation = []
-        permutations= []
-        self.dfs(chars, 0, len(chars), used, permutation,permutations)
+        permutations = []
+        self.dfs(chars, 0, len(chars), used, permutation, permutations)
 
         results = []
         for p in permutations:
