@@ -59,7 +59,7 @@ class Solution:
             ans_tail = ans_tail.next
             carry = numsum // 10
             nl2 = nl2.next
-
+        # do not forget the ultimate carry !!!! 
         if carry == 1:
             ans_tail.next = ListNode(1)
 
