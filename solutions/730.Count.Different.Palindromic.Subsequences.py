@@ -89,7 +89,7 @@ class Solution:
 
                     if l < r:
                         ways[i][j] = 2 * ways[i+1][j-1] - ways[l+1][r-1]
-                    elif l ==r :
+                    elif l == r :
                         ways[i][j] = 2 * ways[i+1][j-1] + 1
                     else:
                         ways[i][j] = 2 * ways[i+1][j-1] + 2

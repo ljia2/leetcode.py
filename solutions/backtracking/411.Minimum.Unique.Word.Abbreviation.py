@@ -36,6 +36,8 @@ class Solution:
 
         abbr_set = set()
         for w in dictionary:
+            if len(w) != len(target):
+                continue
             abbrs = self.generate_abbr(w)
             for abbr in abbrs:
                 abbr_set.add(abbr)

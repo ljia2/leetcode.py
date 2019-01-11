@@ -49,7 +49,7 @@ class DPSolution:
 
 
         """
-        # initialize swap and keep arraies
+        # initialize swap and keep arrays
         swap = [len(A)+1] * len(A)
         keep = [len(A)+1] * len(B)
         # base case: swap A[0] and B[0] needs 1 swap; keep A[0] and B[0] needs 0 swap
