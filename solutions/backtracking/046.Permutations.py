@@ -21,10 +21,12 @@ class Solution:
 
     def dfs(self, nums, level, target_level, used, permutation, ans):
         if level == target_level:
-            # note that append a copy of permutation
+            # Note: append a copy of permutation
             ans.append(permutation.copy())
             return
         else:
+            # PERMUTATION: always iterate over all numbers
+            # COMBINATION: always start an number
             for i in range(len(nums)):
                 if used[i]:
                     continue
@@ -32,7 +34,7 @@ class Solution:
                 used[i] = True
                 permutation.append(nums[i])
                 self.dfs(nums, level+1, target_level, used, permutation, ans)
-                # change back permutation for backtracking 
+                # change back permutation for backtracking
                 permutation.pop()
                 used[i] = False
 

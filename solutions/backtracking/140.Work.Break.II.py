@@ -1,4 +1,4 @@
-class Solution(object):
+class DPSolution(object):
     def wordBreak(self, s, wordDict):
         """
 
@@ -87,7 +87,7 @@ class Solution(object):
 
 
 def main():
-    s = Solution()
+    s = DPSolution()
     results = s.wordBreak("catsanddog", ["cat", "cats", "and", "sand", "dog"])
     print(results)
     results = s.wordBreak("pineapplepenapple", ["apple", "pen", "applepen", "pine", "pineapple"])

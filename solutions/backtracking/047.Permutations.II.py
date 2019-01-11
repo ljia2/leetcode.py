@@ -32,7 +32,8 @@ class Solution:
             ans.append(permutation.copy())
             return
         else:
-            # there are duplicated numbers, if a number has already handled on level, we do not need handle the same number at the same level.
+            # there are duplicated numbers, if a number has already handled on level,
+            # we do not need handle the same number at the same level.
             handled = set()
             for i in range(len(nums)):
                 if used[i]:
