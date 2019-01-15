@@ -26,15 +26,14 @@ class Solution:
         # output all 3-item tuples (a, b, c) summed to 0; the left as a and mid as b and right as c where a<=b<=c
         ans = []
         for left in range(len(nums)-2):
-            # skip the duplicated entries and start the last of the duplications.
             if left > 0 and nums[left] == nums[left-1]:
                 continue
 
             # two pointers of left + 1 and the last one.
             mid, right = left+1, len(nums)-1
             while mid < right:
-                sum = nums[left] + nums[mid] + nums[right]
-                if sum == 0:
+                ssum = nums[left] + nums[mid] + nums[right]
+                if ssum == 0:
                     ans.append([nums[left], nums[mid], nums[right]])
 
                     # after a qualified tuple, need to change b and c at the same time
@@ -45,12 +44,12 @@ class Solution:
                     while right > mid and nums[right] == nums[right+1]:
                         right -= 1
 
-                elif sum > 0:
+                elif ssum > 0:
                     right -= 1
                     while right > mid and nums[right] == nums[right+1]:
                         right -= 1
 
-                elif sum < 0:
+                elif ssum < 0:
                     mid += 1
                     while mid < right and nums[mid] == nums[mid-1]:
                         mid += 1
