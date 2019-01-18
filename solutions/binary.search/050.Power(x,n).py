@@ -22,10 +22,5 @@ class Solution:
             else:
                 return (1.0 / x) * half * half
 
-def main():
-    s = Solution()
-    print(s.myPow(34.00515, -3))
-
-
-if __name__ == "__main__":
-    main()
+s = Solution()
+print(s.myPow(34.00515, -3))
