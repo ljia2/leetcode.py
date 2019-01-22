@@ -11,7 +11,7 @@ class BinarySearch:
         return l               # or not found
 
 
-    # find first index i: A[i] > val
+    # find first index i: A[i] > val, similar to bisect_right
     def upper_bound(A, val, l, r):
         while l < r:
             m = (l + r) // 2
@@ -21,7 +21,7 @@ class BinarySearch:
                 l = m + 1
         return l
 
-    # find first index i A[i] >= x
+    # find first index i A[i] >= x, similar bisect_left
     def lower_bound(A, val, l, r):
         while l < r:
             m = l + (r - l) // 2
