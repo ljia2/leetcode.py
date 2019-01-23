@@ -30,16 +30,16 @@ class Solution:
 
         if not cost or len(cost) < 2:
             return 0
-        else:
-            min_cost = [0] * (len(cost) + 1)
-            min_cost[0] = cost[0]
-            min_cost[1] = cost[1]
-            for i in range(2, len(cost) + 1, 1):
-               if i < len(cost):
-                   min_cost[i] = min(min_cost[i-2] + cost[i], min_cost[i-1] + cost[i])
-               else:
-                   min_cost[i] = min(min_cost[i-2], min_cost[i-1])
-            return min_cost[len(cost)]
+        
+        min_cost = [0] * (len(cost) + 1)
+        min_cost[0] = cost[0]
+        min_cost[1] = cost[1]
+        for i in range(2, len(cost) + 1, 1):
+           if i < len(cost):
+               min_cost[i] = min(min_cost[i-2] + cost[i], min_cost[i-1] + cost[i])
+           else:
+               min_cost[i] = min(min_cost[i-2], min_cost[i-1])
+        return min_cost[len(cost)]
 
 s = Solution()
 print(s.minCostClimbingStairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]))

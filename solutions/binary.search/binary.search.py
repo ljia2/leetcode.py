@@ -1,4 +1,5 @@
 class BinarySearch:
+    # find the value satifying f.
     def binary_search(l, r):
         while l < r:
             m = l + (r - l) // 2

@@ -1,7 +1,7 @@
 from heapq import heappop, heappush
 import bisect
 
-class Solution:
+class Solution: # MLE
     def smallestDistancePair(self, nums, k):
         """
         Given an integer array, return the k-th smallest distance among all the pairs.

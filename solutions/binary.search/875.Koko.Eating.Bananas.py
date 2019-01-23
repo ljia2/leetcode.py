@@ -42,7 +42,7 @@ class Solution:
         """
         l = 1
         r = sum(piles)
-
+        # l and r are searching integer space.
         while l < r:
             m = (l + r) // 2
             # to find the minimum m that satisfy: self.finish_hour(piles, m) <= H

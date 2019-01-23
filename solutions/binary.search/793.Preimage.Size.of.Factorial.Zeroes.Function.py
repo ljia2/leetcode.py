@@ -51,6 +51,7 @@ class Solution:
 
         l = 0
         r = 5 * (K + 1)
+        # again l and r are searching integer space.
         while l < r:
             mid = (l + r) // 2
             if self.countZero(mid) >= K:
@@ -65,6 +66,7 @@ class Solution:
             return 5
         l = 0
         r = 5 * (K + 1)
+        # again l and r are searching integer space.
         while l < r:
             mid = (l + r) // 2
             if self.countZero(mid) > K:

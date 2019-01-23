@@ -47,6 +47,7 @@ class Solution:
         r = 10 ** 14
         mod = 10 ** 9 + 7
         lcm = A * B // self.gcd(A, B)
+        # l and r are searching integer space
         # find the smallest number (lower bound) where mid // A + mid // B - mid // lcm = N, similar to bisect_left
         while l < r:
             mid = (l + r) // 2

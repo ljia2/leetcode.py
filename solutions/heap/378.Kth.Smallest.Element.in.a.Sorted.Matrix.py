@@ -1,3 +1,4 @@
+from heapq import heappush, heappop
 class Solution:
     def kthSmallest(self, matrix, k):
         """
@@ -28,30 +29,19 @@ class Solution:
         """
         if not matrix or not matrix[0] or k <= 0:
             return None
-        n = len(matrix)
-        l = matrix[0][0]
-        r = matrix[n-1][n-1]
-
-        while l < r:
-            m = (l + r) // 2
-
-            total = 0
-            for row in matrix:
-                if row[-1] < m:
-                    total += n
-                else:
-                    for c in row:
-                        if c > m:
-                            break
-                        total += 1
-            # find smallest m that is the kth smallest element.
-            if total >= k:
-                r = m
-            else:
-                l = m + 1
-
-        # when l == r exits
-        return l
+        hp = []
+        for c in range(len(matrix[0])):
+            heappush(hp, (matrix[0][c], 0, c))
+        ans = None
+        while k > 0:
+            v, r, c = heappop(hp)
+            k -= 1
+            if k == 0:
+                ans = v
+                break
+            if r + 1 < len(matrix):
+                heappush(hp, (matrix[r+1][c], r+1, c))
+        return ans
 
 s = Solution()
 print(s.kthSmallest([[1,5,9],[10,11,13],[12,13,15]], 8))
