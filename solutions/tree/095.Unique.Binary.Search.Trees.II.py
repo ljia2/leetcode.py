@@ -1,11 +1,10 @@
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
-from utils.TreeNode import TreeNode
 
 class Solution:
     def generateTrees(self, n):
@@ -41,21 +40,22 @@ class Solution:
             return []
         elif n == 1:
             return [TreeNode(1)]
-        else:
-            results = []
-            for r in range(1, n+1, 1):
-                left_trees = self.generateBSTrees(1, r-1)
-                right_trees = self.generateBSTrees(r+1, n)
 
-                for lt in left_trees:
-                    for rt in right_trees:
-                        root = TreeNode(r)
-                        root.left, root.right = lt, rt
-                        results.append(root)
+        results = []
+        for r in range(1, n+1, 1):
+            left_trees = self.dfs(1, r-1)
+            right_trees = self.dfs(r+1, n)
+
+            for lt in left_trees:
+                for rt in right_trees:
+                    root = TreeNode(r)
+                    root.left, root.right = lt, rt
+                    results.append(root)
 
             return results
 
-    def generateBSTrees(self, start, end):
+    #return the list of subtrees.
+    def dfs(self, start, end):
         if start > end:
             return [None]
         elif start == end:
@@ -63,8 +63,8 @@ class Solution:
         else:
             results = []
             for r in range(start, end+1, 1):
-                left_trees = self.generateBSTrees(start, r-1)
-                right_trees = self.generateBSTrees(r+1, end)
+                left_trees = self.dfs(start, r-1)
+                right_trees = self.dfs(r+1, end)
                 for lt in left_trees:
                     for rt in right_trees:
                         root = TreeNode(r)

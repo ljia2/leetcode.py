@@ -25,7 +25,7 @@ class Solution:
 
         dp[0] = 1, dp[1] = 1, dp[2] = 2,
 
-        iterate with BST rootted by 1, 2, 3.
+        iterate with BST rooted by 1, 2, 3.
         For BST with root 1, left tree has 0 node and right tree has 2 nodes.
         For BST with root 2, left tree has 1 nodes and right tree has 1 node.
         For BST with root 3, left tree has 2 nodes and right tree has 0 node.

@@ -56,6 +56,7 @@ class DFSSolution:
         # find the last index
         if windex == len(word) - 1:
             return True
+
         visited[row][col] = True
         res = self.dfs(board, row-1, col, visited, windex+1, word) \
               or self.dfs(board, row+1, col, visited, windex+1, word) \

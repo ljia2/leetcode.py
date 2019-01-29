@@ -26,52 +26,7 @@ class Solution:
         :type root: TreeNode
         :rtype: List[int]
 
-        BFS + (node, level) in queue.
-
-        """
-        if not root:
-            return []
-
-        view = []
-        # mimic queue to execute BFS
-        q = [(0, root)]
-        while q:
-            l, node = q.pop(0)
-            if not q:
-                view.append(node.val)
-            else:
-                nl, nn = q[0]
-                if l < nl:
-                    view.append(node.val)
-            if node.left:
-                q.append((l+1, node.left))
-            if node.right:
-                q.append((l+1, node.right))
-        return view
-
-
-class TreeBFSSolution:
-    def rightSideView(self, root):
-        """
-
-        Given a binary tree, imagine yourself standing on the right side of it,
-        return the values of the nodes you can see ordered from top to bottom.
-
-        Example:
-
-        Input: [1,2,3,null,5,null,4]
-        Output: [1, 3, 4]
-        Explanation:
-
-           1            <---
-         /   \
-        2     3         <---
-         \     \
-          5     4       <---
-        :type root: TreeNode
-        :rtype: List[int]
-
-        BFS + (node, level) in queue.
+        Tree BFS via queue.
 
         """
         if not root:
@@ -85,14 +40,17 @@ class TreeBFSSolution:
             while size > 0:
                 l, node = q.pop(0)
                 size -= 1
+
+                # a right node is encountered.
                 if size == 0:
                     view.append(node.val)
 
                 if node.left:
-                    q.append((l+1, node.left))
+                    q.append(node.left)
                 if node.right:
-                    q.append((l+1, node.right))
+                    q.append(node.right)
         return view
+
 
 s = Solution()
 root = TreeNode(1)

@@ -38,8 +38,8 @@ class Solution:
         if root is None:
             return 0
         ans = [2**31]
-        lmax, _ = self.traverTree(root.left, ans)
-        _, rmin = self.traverTree(root.right, ans)
+        lmax, _ = self.dfs(root.left, ans)
+        _, rmin = self.dfs(root.right, ans)
 
         if lmax and rmin:
             newdiff = min(abs(lmax - root.val), abs(rmin - root.val))
@@ -52,12 +52,12 @@ class Solution:
 
         return min(newdiff, ans[0])
 
-    def traverTree(self, root, ans):
+    def dfs(self, root, ans):
         if root is None:
             return None, None
 
-        lmax, lmin = self.traverTree(root.left, ans)
-        rmax, rmin = self.traverTree(root.right, ans)
+        lmax, lmin = self.dfs(root.left, ans)
+        rmax, rmin = self.dfs(root.right, ans)
 
         if lmax and rmin:
             newdiff = min(abs(lmax - root.val), abs(rmin - root.val))
