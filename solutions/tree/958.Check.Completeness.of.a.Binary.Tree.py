@@ -5,7 +5,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
-class Solution:
+class DFSSolution:
     def isCompleteTree(self, root):
         """
         Given a binary tree, determine if it is a complete binary tree.
@@ -23,9 +23,6 @@ class Solution:
 
 
         Example 2:
-
-
-
         Input: [1,2,3,4,5,null,7]
         Output: false
         Explanation: The node with value 7 isn't as far left as possible.
@@ -51,7 +48,27 @@ class Solution:
         isComplete = (lf and rc and ll == rl) or (lc and rf and ll == rl + 1)
         return isfull, isComplete, max(ll, rl)
 
-s = Solution()
+
+import collections
+class BFSSolution:
+    def isCompleteTree(self, root):
+        if not root: return True
+        q = collections.deque([root])
+        missing = False
+        while q:
+            size = len(q)
+            while size > 0:
+                size -= 1
+                node = q.popleft()
+                if node:
+                    if missing: return False
+                    q.append(node.left)
+                    q.append(node.right)
+                else:
+                    missing = True
+        return True
+
+s = DFSSolution()
 root = TreeNode(1)
 root.left = TreeNode(2)
 root.left.left = TreeNode(4)
