@@ -33,7 +33,6 @@ class Solution:
         Input: K = 3, N = 14
         Output: 4
 
-
         Note:
 
         1 <= K <= 100

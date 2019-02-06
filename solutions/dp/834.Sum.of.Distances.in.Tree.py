@@ -1,4 +1,7 @@
-from collections import defaultdict
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.children = dict()
 
 class Solution:
     def sumOfDistancesInTree(self, N, edges):
@@ -30,7 +33,5 @@ class Solution:
 
         1 <= N <= 10000 hints either O(n) or O(nlogn).
 
-        How about converting tree to undirected graph ? 
-
-
+        How about dfs(root) return the distance of all nodes to root, and then calculate the pair distance of nodes?
         """
