@@ -21,7 +21,6 @@ class Solution:
         :type triangle: List[List[int]]
         :rtype: int
 
-
         iterate i from row 1 to row n:
             dp [len(traiangle[i-1]) + 2] stores the min path sum to the left/right shoulder
         """

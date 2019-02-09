@@ -1,77 +1,77 @@
-class DPSolution: # TLE
-    def maximalSquare(self, matrix):
-        """
-        Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
-
-        Example:
-
-        Input:
-
-        1 0 1 0 0
-        1 0 1 1 1
-        1 1 1 1 1
-        1 0 0 1 0
-
-        Output: 4
-
-        :type matrix: List[List[str]]
-        :rtype: int
-
-
-        ssum[i][j] is the # of 1 within the rectangle from (0, 0) to (i, j).
-
-
-        for each (x, y) and a length l to calculate whether square_area is filled with 1.
-
-        area = ssum[x][y] - ssum[x-l][c] - ssum[x][y-l] + ssum[r-l][c-l]
-
-        check if area == l * l?
-
-        O(n^3)
-        """
-        if not matrix or not matrix[0]:
-            return 0
-
-        ssum = [[0] * len(matrix[0]) for r in matrix]
-        for r in range(len(matrix)):
-            for c in range(len(matrix[0])):
-                if r == 0 and c == 0:
-                    ssum[r][c] = int(matrix[r][c])
-                elif r == 0 and c > 0:
-                    ssum[r][c] = ssum[r][c-1] + int(matrix[r][c])
-                elif r > 0 and c == 0:
-                    ssum[r][c] = ssum[r-1][c] + int(matrix[r][c])
-                else:
-                    ssum[r][c] = ssum[r-1][c] + ssum[r][c-1] - ssum[r-1][c-1] + int(matrix[r][c])
-
-
-        ans = 0
-        # iterate over each cell using as the right bottom corner.
-        for r in range(len(matrix)):
-            for c in range(len(matrix[0])):
-                if r == 0 or c == 0:
-                    if matrix[r][c] == "1":
-                        if ans < int(matrix[r][c]):
-                            ans = 1
-                elif matrix[r][c] == "1":
-                    ul = min(r+1, c+1)
-                    for l in range(1, ul+1):
-                        target = l * l
-
-                        #tl = (r - l, c - l)
-                        #bl = (r, c -l)
-                        #tr = (r-l, c)
-                        #br = (r, c)
-
-                        tlsum = ssum[r-l][c-l] if r - l >= 0 and c - l >= 0 else 0
-                        blsum = ssum[r][c-l] if c - l >= 0 else 0
-                        trsum = ssum[r-l][c] if r -l >= 0 else 0
-                        brsum = ssum[r][c]
-                        square_sum = brsum - blsum - trsum + tlsum
-                        if square_sum == target:
-                            if ans < target:
-                                ans = target
-        return ans
+# class DPSolution: # TLE
+#     def maximalSquare(self, matrix):
+#         """
+#         Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+#
+#         Example:
+#
+#         Input:
+#
+#         1 0 1 0 0
+#         1 0 1 1 1
+#         1 1 1 1 1
+#         1 0 0 1 0
+#
+#         Output: 4
+#
+#         :type matrix: List[List[str]]
+#         :rtype: int
+#
+#
+#         ssum[i][j] is the # of 1 within the rectangle from (0, 0) to (i, j).
+#
+#
+#         for each (x, y) and a length l to calculate whether square_area is filled with 1.
+#
+#         area = ssum[x][y] - ssum[x-l][c] - ssum[x][y-l] + ssum[r-l][c-l]
+#
+#         check if area == l * l?
+#
+#         O(n^3)
+#         """
+#         if not matrix or not matrix[0]:
+#             return 0
+#
+#         ssum = [[0] * len(matrix[0]) for r in matrix]
+#         for r in range(len(matrix)):
+#             for c in range(len(matrix[0])):
+#                 if r == 0 and c == 0:
+#                     ssum[r][c] = int(matrix[r][c])
+#                 elif r == 0 and c > 0:
+#                     ssum[r][c] = ssum[r][c-1] + int(matrix[r][c])
+#                 elif r > 0 and c == 0:
+#                     ssum[r][c] = ssum[r-1][c] + int(matrix[r][c])
+#                 else:
+#                     ssum[r][c] = ssum[r-1][c] + ssum[r][c-1] - ssum[r-1][c-1] + int(matrix[r][c])
+#
+#
+#         ans = 0
+#         # iterate over each cell using as the right bottom corner.
+#         for r in range(len(matrix)):
+#             for c in range(len(matrix[0])):
+#                 if r == 0 or c == 0:
+#                     if matrix[r][c] == "1":
+#                         if ans < int(matrix[r][c]):
+#                             ans = 1
+#                 elif matrix[r][c] == "1":
+#                     ul = min(r+1, c+1)
+#                     for l in range(1, ul+1):
+#                         target = l * l
+#
+#                         #tl = (r - l, c - l)
+#                         #bl = (r, c -l)
+#                         #tr = (r-l, c)
+#                         #br = (r, c)
+#
+#                         tlsum = ssum[r-l][c-l] if r - l >= 0 and c - l >= 0 else 0
+#                         blsum = ssum[r][c-l] if c - l >= 0 else 0
+#                         trsum = ssum[r-l][c] if r -l >= 0 else 0
+#                         brsum = ssum[r][c]
+#                         square_sum = brsum - blsum - trsum + tlsum
+#                         if square_sum == target:
+#                             if ans < target:
+#                                 ans = target
+#         return ans
 
 class DPSolutionII:
     def maximalSquare(self, matrix):

@@ -1,10 +1,12 @@
 from collections import deque
 
+
 class Solution:
     def maxSlidingWindow(self, nums, k):
         """
         Given an array nums, there is a sliding window of size k which is moving from the very left of the array to the very right.
-        You can only see the k numbers in the window. Each time the sliding window moves right by one position. Return the max sliding window.
+        You can only see the k numbers in the window. Each time the sliding window moves right by one position.
+        Return the max sliding window.
 
         Example:
 
@@ -56,7 +58,6 @@ class Solution:
             deq.append(i)
 
         # Here we will have deque with index of maximum element for the first subsequence of length k.
-
         # Now we will traverse from k to the end of array and do 4 things
         # 1. Appending left most indexed value to the result
         # 2. Checking if left most is still in the range of k (so it only allows valid sub sequence)

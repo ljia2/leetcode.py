@@ -27,9 +27,6 @@ class Solution:
         :rtype: List[List[int]]
 
         Swape line algorithm
-
-
-
         """
 
         events = []

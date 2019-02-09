@@ -1,5 +1,5 @@
 class BestSolution:
-    def minWindow(self, s , t):
+    def minWindow(self, s, t):
         """
         Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
 
@@ -32,7 +32,7 @@ class BestSolution:
         right = 0
 
         for i, c in enumerate(s):
-            # given the left bounary i,  moving right bounary until form a valid substring
+            # given the left bounary i,  moving right boundary until form a valid substring
             while not self.valid(dt, ds) and right < len(s):
                 ds[s[right]] = ds.get(s[right], 0) + 1
                 right += 1

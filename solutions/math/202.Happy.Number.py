@@ -26,6 +26,7 @@ class Solution:
             explored = [n]
             next_num = self.next_num(n)
             while next_num != 1 and next_num not in explored:
+                print(next_num)
                 explored.append(next_num)
                 next_num = self.next_num(next_num)
             return next_num == 1

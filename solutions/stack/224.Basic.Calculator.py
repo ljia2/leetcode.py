@@ -1,4 +1,4 @@
-class Solution:
+4   class Solution:
     def calculate(self, s):
         """
         :type s: str

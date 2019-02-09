@@ -46,7 +46,7 @@ class Solution:
         :type t: str
         :rtype: int
 
-        dp[i][j] = stores the number of unique substrings in s[:i] equal to t[:j]
+         dp[i][j] = stores the number of unique substrings in s[:i] equal to t[:j]
          1) if i < j: dp[i][j] = 0
          2) if s[i-1] == t[j-1]:
                 dp[i][j] = dp[i-1][j-1] (the results of s[:i-1] vs t[:j-1] give match) + dp[i-1][j] (the results of s[:i-1] with t[j], not using the match)
