@@ -1,7 +1,8 @@
 class Solution:
     def minDistance(self, word1, word2):
         """
-        Given two words word1 and word2, find the minimum number of steps required to make word1 and word2 the same, where in each step you can delete one character in either string.
+        Given two words word1 and word2, find the minimum number of steps required to make word1 and word2 the same,
+        where in each step you can delete one character in either string.
 
         Example 1:
         Input: "sea", "eat"
@@ -15,7 +16,7 @@ class Solution:
         :type word2: str
         :rtype: int
         """
-
+        # initialize the 2-d array
         min_del = [[0] * (len(word2) + 1) for i in range(len(word1) + 1)]
         # base cases:
         for i in range(1, len(word1)+1):

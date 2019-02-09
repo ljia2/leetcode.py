@@ -87,7 +87,7 @@ class LinearSolution: # Linear Time
         Can you do better than O(n^2)
 
         Scaning from rear to the begining:
-        if nums[j] < nums[j+1]: ng{j] = nums[j+1]
+        if nums[j] < nums[j+1]: ng[j] = nums[j+1]
         otherwise:
            found = false
            next = ng[j+1]
