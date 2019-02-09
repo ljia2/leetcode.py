@@ -29,8 +29,7 @@ class Solution:
         for i in range(max(r-1, 0), min(r+2, len(board))):
             for j in range(max(c-1, 0), min(c+2, len(board[0]))):
                     if i == r and j == c:
-                        continue
-
+                        continue2
                     if board[i][j] <= 0:
                         dead_cnt += 1
                     elif board[i][j] >= 0:

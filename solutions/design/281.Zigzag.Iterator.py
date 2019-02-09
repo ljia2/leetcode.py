@@ -44,7 +44,7 @@ class KZigzagIterator(object):
         :type lists: List[List[Int]
         :type K
         """
-        self.K = len(list)
+        self.K = len(lists)
         self.list_index = [0] * self.K
         self.next_list_index = 0
         self.lists = lists

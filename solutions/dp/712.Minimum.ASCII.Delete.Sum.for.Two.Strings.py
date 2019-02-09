@@ -46,6 +46,6 @@ class DPSolution:
 
         return min_dp[-1][-1]
 
-s = Solution()
+s = DPSolution()
 print(s.minimumDeleteSum("delete", "leet"))
 #print(s.minimumDeleteSum("sea", "eat"))

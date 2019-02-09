@@ -31,6 +31,7 @@ class Solution:
         cfreq = dict()
         for c in s:
             cfreq[c] = cfreq.get(c, 0) + 1
+
         odd_count = 0
         for c in cfreq.keys():
             if cfreq[c] % 2 == 1:

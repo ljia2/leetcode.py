@@ -1,8 +1,11 @@
 import operator
 from heapq import heappop, heappush
 
-import utils.Interval as Interval
-
+# Definition for an interval.
+class Interval:
+    def __init__(self, s=0, e=0):
+        self.start = s
+        self.end = e
 
 class Solution:
     def minMeetingRooms(self, intervals):
@@ -32,11 +35,6 @@ class Solution:
         return room_cnt
 
 
-def main():
-    s = Solution()
-    input = [Interval.Interval(0, 30), Interval.Interval(15, 20), Interval.Interval(5, 10)]
-    print(s.minMeetingRooms(input))
-
-
-if __name__ == "__main__":
-    main()
+s = Solution()
+input = [Interval(0, 30), Interval(15, 20), Interval(5, 10)]
+print(s.minMeetingRooms(input))
