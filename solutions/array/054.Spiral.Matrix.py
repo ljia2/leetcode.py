@@ -1,5 +1,3 @@
-import numpy as np
-
 class Solution:
     def spiralOrder(self, matrix):
         """
@@ -9,29 +7,31 @@ class Solution:
         if matrix is None or len(matrix) == 0 or len(matrix[0]) == 0:
             return []
 
-        max_row = len(matrix)
-        max_col = len(matrix[0])
+        srow = scol = 0
+        erow = len(matrix) - 1
+        ecol = len(matrix[0]) - 1
+        ans = []
+        while srow <= erow and scol <= ecol:
+            # from left to right
+            for c in range(scol, ecol+1):
+                ans.append(matrix[srow][c])
+            srow += 1
+            # from top to bottom
+            for r in range(srow, erow+1):
+                ans.append(matrix[r][ecol])
+            ecol -= 1
+            if srow <= erow:
+                # from right to left
+                for c in range(ecol, scol-1, -1):
+                    ans.append(matrix[erow][c])
+                erow -= 1
+            if scol <= ecol:
+                # from bottom to top
+                for r in range(erow, srow-1, -1):
+                    ans.append(matrix[r][scol])
+            scol += 1
 
-        results = []
-        for c in range(0, max_col):
-            results.append(matrix[0][c])
-
-        if max_row > 1:
-            for r in range(1, max_row):
-                results.append(matrix[r][max_col-1])
-
-        if max_row > 1 and max_col > 1:
-            for c in range(max_col-2, -1, -1):
-                results.append(matrix[max_row-1][c])
-
-        if max_row > 2 and max_col > 1:
-            for r in range(max_row-2, 0, -1):
-                results.append(matrix[r][0])
-
-        if max_row > 2 and max_col > 2:
-            return results + self.spiralOrder(np.array(matrix)[1:max_row-1,1:max_col-1].tolist())
-        else:
-            return results
+        return ans
 
 
 def main():

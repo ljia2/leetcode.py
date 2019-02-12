@@ -40,6 +40,11 @@ class Solution:
 
         :type matrix: List[List[int]]
         :rtype: void Do not return anything, modify matrix in-place instead.
+
+        just whenever encourter a zero, mark row and column None. (instead of 0 to aviod looping).
+        since each entry only visits once (actually twice).
+
+        reset None to 0 for the second pass.
         """
         if not matrix or not matrix[0]:
             return
