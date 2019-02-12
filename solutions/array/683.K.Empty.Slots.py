@@ -4,7 +4,8 @@ class Solution:
         There is a garden with N slots. In each slot, there is a flower. The N flowers will bloom one by one in N days.
         In each day, there will be exactly one flower blooming and it will be in the status of blooming since then.
 
-        Given an array flowers consists of number from 1 to N. Each number in the array represents the place where the flower will open in that day.
+        Given an array flowers consists of number from 1 to N.
+        Each number in the array represents the place where the flower will open in that day.
 
         For example, flowers[i] = x means that the unique flower that blooms at day i will be at position x, where i
         and x will be in the range from 1 to N.
@@ -28,9 +29,8 @@ class Solution:
           c) otherwise we have a window satisfy the condition; return earliest_results.
 
         """
-
+        # mapping from day i to flower fb_day[i]
         fb_day = [0] * len(flowers)
-
         for i in range(len(flowers)):
             fb_day[flowers[i]-1] = i + 1
 
@@ -38,19 +38,22 @@ class Solution:
         start = 0
         while start < len(fb_day)-k-1:
             max_day = max(fb_day[start], fb_day[start+k+1])
+            # check the blooming day between flower start and flower start+k+1
             l_start = start + 1
             while l_start < start + k + 1:
                 if fb_day[l_start] > max_day:
                     l_start += 1
                 else:
                     break
+
             # check whether find a valid window of k
             if l_start == start + k + 1:
                 if earliest_results < 0 or earliest_results > max_day:
                     earliest_results = max_day
+                # reset the start.
                 start = start + k + 1
-            else: # restart the sliding window at the position l_start
-
+            else:
+                # restart the sliding window at the position l_start
                 start = l_start
         return earliest_results
 

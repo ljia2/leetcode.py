@@ -16,7 +16,8 @@ class Solution:
 
         convert nums to set.
 
-        iterate over each number n that n - 1 not in set. Then expansion from n + 1 until n + k not in set, update length k with max_length.
+        iterate over each number n that n - 1 not in set.
+        Then expansion from n + 1 until n + k not in set, update length k with max_length.
 
         """
         if nums is None or len(nums) == 0:

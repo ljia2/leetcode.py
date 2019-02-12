@@ -15,6 +15,8 @@ class Solution:
         Note: Length of the array will not exceed 10,000 => O(n)
         :type nums: List[int]
         :rtype: int
+
+        similar to LC128.
         """
 
         if not nums:

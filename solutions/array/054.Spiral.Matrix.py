@@ -6,7 +6,6 @@ class Solution:
         """
         if matrix is None or len(matrix) == 0 or len(matrix[0]) == 0:
             return []
-
         srow = scol = 0
         erow = len(matrix) - 1
         ecol = len(matrix[0]) - 1
@@ -30,7 +29,6 @@ class Solution:
                 for r in range(erow, srow-1, -1):
                     ans.append(matrix[r][scol])
             scol += 1
-
         return ans
 
 

@@ -1,3 +1,5 @@
+import collections
+
 class Solution:
     def shortestWordDistance(self, words, word1, word2):
         """
@@ -21,13 +23,10 @@ class Solution:
         :type word2: str
         :rtype: int
         """
-        word_pos = dict()
+        word_pos = collections.defaultdict(list)
         for i in range(len(words)):
             if words[i] == word1 or words[i] == word2:
-                if words[i] in word_pos.keys():
-                    word_pos[words[i]].append(i)
-                else:
-                    word_pos[words[i]] = [i]
+                word_pos[words[i]].append(i)
 
         shortest = len(words)
         if word1 == word2:
