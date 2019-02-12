@@ -1,4 +1,4 @@
-from heapq import heappush, heappop, heapify
+from heapq import heappush, heapify
 
 class Solution:
     def getSkyline(self, buildings):

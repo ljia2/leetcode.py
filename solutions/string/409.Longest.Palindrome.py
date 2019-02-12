@@ -1,3 +1,5 @@
+import collections
+
 class Solution:
     def longestPalindrome(self, s):
         """
@@ -24,9 +26,7 @@ class Solution:
         if not s:
             return 0
 
-        cfreq = dict()
-        for c in s:
-            cfreq[c] = cfreq.get(c, 0) + 1
+        cfreq = collections.Counter(s)
         return self.calcLongestPalindromeLength(cfreq)
 
     def calcLongestPalindromeLength(self, cfreq):
