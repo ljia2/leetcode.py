@@ -44,10 +44,8 @@ class Solution(object):
 
         kdigits = []
         while K > 0:
-            d = int(K / 10)
-            if d > 0:
-                kdigits.append(d)
-            K = K / 10
+            kdigits.append(K % 10)
+            K = int(K / 10)
         kdigits.reverse()
 
         if not A:
@@ -81,5 +79,6 @@ class Solution(object):
         ans.reverse()
         return ans
 
-
+s = Solution()
+print(s.addToArrayForm([1, 2, 0, 0], 34))
 
