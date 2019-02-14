@@ -57,9 +57,11 @@ class Solution(object):
         deck.sort()
         ans = collections.deque()
         while deck:
+            # reverse the operation; take the last card and put on the top
             if ans:
                 lcard = ans.pop()
                 ans.appendleft(lcard)
+            # take a max card from deck and put on the top.
             card = deck.pop()
             ans.appendleft(card)
         return list(ans)
