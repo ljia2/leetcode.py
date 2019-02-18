@@ -21,7 +21,7 @@ class Solution:
 
         use dp an array of size n + 1
 
-        dp[i] denotes the number of unique BSTs with i numbers. note that dp[0] should be initilized with 1
+        dp[i] denotes the number of unique BSTs with i numbers. note that dp[0] should be initialized with 1
 
         dp[0] = 1, dp[1] = 1, dp[2] = 2,
 
@@ -36,17 +36,17 @@ class Solution:
             return 0
         elif n == 1:
             return 1
-        else:
-            # declare dp array of size n + 1
-            dp = [0] * (n + 1)
-            # initiaize for the simple cases
-            dp[0] = 1
-            dp[1] = 1
-            # start the dynamic programming iteration.
-            for i in range(2, n+1, 1):
-                for r in range(1, i+1, 1):
-                    dp[i] += dp[r-1]*dp[i-r]
-            return dp[-1]
+
+        # declare dp array of size n + 1
+        dp = [0] * (n + 1)
+        # initialize for the base cases
+        dp[0] = 1
+        dp[1] = 1
+        # start the dynamic programming iteration.
+        for i in range(2, n+1, 1):
+            for r in range(1, i+1, 1):
+                dp[i] += dp[r-1]*dp[i-r]
+        return dp[-1]
 
 s = Solution()
 print(s.numTrees(3))

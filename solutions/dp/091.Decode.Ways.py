@@ -8,10 +8,10 @@ class DPSolution:
         'B' -> 2
         ...
         'Z' -> 26
+
         Given a non-empty string containing only digits, determine the total number of ways to decode it.
 
         Example 1:
-
         Input: "12"
         Output: 2
         Explanation: It could be decoded as "AB" (1 2) or "L" (12).
@@ -24,8 +24,7 @@ class DPSolution:
         :type s: str
         :rtype: int
 
-        hint: counting ways means we need to use dynamtic programming method
-
+        hint: counting ways means we need to use dynamic programming method
         ways[i] denotes the decoding ways by using the first i chars
 
         """
@@ -34,19 +33,18 @@ class DPSolution:
             return 0
 
         ways = [0] * (len(s) + 1)
-        # base case initialization, there is only 1 way of decoding empty string (without using any chars)
+        # base cases: there is only 1 way to decode empty string
         ways[0] = 1
-
-        for i in range(1, len(s)+1):
+        for i in range(1, len(s) + 1):
             if i == 1:
-                code1 = int(s[i-1:i])
+                code1 = int(s[i-1])
                 if code1 > 0:
-                    ways[i] = ways[i-1]
+                    ways[i] = 1
                 else:
                     ways[i] = 0
             else:
-                code1 = int(s[i-1:i])
                 code2 = int(s[i-2:i])
+                code1 = int(s[i-1])
                 if code1 > 0 and 10 <= code2 <= 26:
                     ways[i] = ways[i-1] + ways[i-2]
                 elif code1 > 0:
@@ -55,7 +53,7 @@ class DPSolution:
                     ways[i] = ways[i-2]
                 else:
                     ways[i] = 0
-        return ways[len(s)]
+        return ways[-1]
 
 
 s = DPSolution()

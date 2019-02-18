@@ -25,7 +25,7 @@ class Solution:
         s = "aa"
         p = "a*"
         Output: true
-        Explanation: '*' means zero or more of the precedeng element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
+        Explanation: '*' means zero or more of the preceding element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
         Example 3:
 
         Input:
@@ -52,12 +52,13 @@ class Solution:
         :rtype: bool
 
         Idea:
+        dynamtic programming for two strings:
 
-        2-d boolean array dp = [[false] * (len(p) + 1) for s in range(len(s) + 1)]
+        2-d boolean array dp = [[false] * (len(p) + 1) for s in range(len(s) + 1)] where dp[i][j] indicate whether s[:i+1] in s matches p[:j+1].
+        For example dp[1][1] indicate if s[0] matches p[0]
 
-        where dp[i][j] indicate whether s[:i] in s matches p[:j]. For example dp[1][1] indicate wether s[0] match p[0]
-
-        initialize dp[0][0] = true
+        initialize base cases:
+        dp[0][0] = true, because two empty prefix substrings from s and p matches.
 
         1) if p[j] == s[i] or p[j] == '.' : dp[i+1][j+1] = dp[i][j] # "aa" vs "aa" or "aa" vs "a."
         2) if p[j] == "*" and p[j-1] != s[i]:
@@ -71,29 +72,36 @@ class Solution:
 
         if s is None or p is None:
             return False
-        else:
-            sl = len(s)
-            pl = len(p)
-            dp = [[False] * (pl + 1) for i in range(sl + 1)]
 
-            dp[0][0] = True
+        sl = len(s)
+        pl = len(p)
+        dp = [[False] * (pl + 1) for i in range(sl + 1)]
 
-            # preprocessing: in case "aab" vs c*d*aab
-            for i in range(len(p)):
-                if i > 0 and p[i] == "*" and dp[0][i-1]:
-                    dp[0][i+1] = True
+        # Initialization.
+        # because two empty prefix substrings from s and p matches.
+        dp[0][0] = True
+        # preprocessing: in case "aab" vs c*d*aab
+        for i in range(len(p)):
+            if i > 0 and p[i] == "*" and dp[0][i-1]:
+                dp[0][i+1] = True
 
-            for i in range(sl):
-                for j in range(pl):
-                    if p[j] == s[i] or p[j] == '.':
-                        dp[i+1][j+1] = dp[i][j]
+        for i in range(sl):
+            for j in range(pl):
+                # update dp[i+1][j+1]
 
-                    if p[j] == "*" and p[j-1] != s[i]:
-                        dp[i+1][j+1] = dp[i+1][j-1]
+                # "aa" match "a."
+                if p[j] == s[i] or p[j] == '.':
+                    dp[i+1][j+1] = dp[i][j]
 
-                    if p[j] == "*" and (p[j-1] == s[i] or p[i-1] == '.'):
-                        dp[i+1][j+1] = dp[i+1][j] or dp[i][j+1] or dp[i+1][j-1]
-            return dp[sl][pl]
+                # "a" matches "ab*"
+                if p[j] == "*" and p[j-1] != s[i]:
+                    dp[i+1][j+1] = dp[i+1][j-1]
+
+                # a matches a* or a matches .* or a match aa*
+                if p[j] == "*" and (p[j-1] == s[i] or p[i-1] == '.'):
+                    dp[i+1][j+1] = dp[i+1][j] or dp[i][j+1] or dp[i+1][j-1]
+
+        return dp[sl][pl]
 
 s = Solution()
-print(s.isMatch("", ".*"))
+print(s.isMatch("aab", "c*d*aab"))
