@@ -90,23 +90,26 @@ class DFSSolution(object):
         :type candidates: List[int]
         :type target: int
         :rtype: List[List[int]]
+
+        use DFS to generate combination whose sum == target.
+
         """
         ans = []
-        combination = []
         candidates.sort()
-        self.dfs(candidates, target, 0, combination, ans)
+        self.dfs(candidates, target, 0, [], ans)
         return ans
 
-    def dfs(self, candidates, target, s, combination, ans):
+    def dfs(self, candidates, target, start, combination, ans):
         if target == 0:
             # hint, we must append a deep copy of combination, otherwise combination will change.
             ans.append(combination.copy())
             return
         else:
             # only considering the numbers starting at s
-            for i in range(s, len(candidates)):
+            for i in range(start, len(candidates)):
                 if candidates[i] > target:
                     break
+
                 # considering the combination only using candidates[i:];
                 # if use candidates[i], update target = target - candidates[i]
                 # since duplication is allowed, we set start unchanged.
