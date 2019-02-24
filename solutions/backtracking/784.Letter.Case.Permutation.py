@@ -27,7 +27,6 @@ class DFSSolution:
         hint: given a small S, Time complexity is O(2^S).
 
         a binary tree rooted with S.
-
         for each char in S.
         if it is a number, then proceed the next char
         else (binary):
@@ -42,8 +41,10 @@ class DFSSolution:
         # exit of recursive dfs, when reaching the length of S.
         if start == len(S):
             return ans.append(S)
+
         # dfs without change s[start], no matter S[start] is number or alpha.
         self.dfs(start + 1, S, ans)
+
         # dfs with changing S[start]
         if S[start].isalpha():
             S = self.toggle(start, S)

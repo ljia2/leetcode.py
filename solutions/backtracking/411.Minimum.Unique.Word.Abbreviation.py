@@ -1,4 +1,5 @@
 from heapq import heappush, heappop
+
 class Solution:
     def minAbbreviation(self, target, dictionary):
         """
