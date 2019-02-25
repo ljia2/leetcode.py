@@ -1,5 +1,5 @@
 import heapq
-
+import collections
 
 class Solution:
     def topKFrequent(self, words, k):
@@ -35,9 +35,7 @@ class Solution:
 
         """
 
-        wf = dict()
-        for w in words:
-            wf[w] = wf.get(w, 0) + 1
+        wf = collections.Counter(words)
         # note that when two words are frequency same, output by alphabetical order (ascending);
         # therefore use negative frequency, because when frequency ties, use words alphabetical order
         hp = [(-f, w) for (w, f) in wf.items()]

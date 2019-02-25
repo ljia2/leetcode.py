@@ -1,4 +1,4 @@
-class TireNode:
+class TrieNode:
     def __init__(self):
         self.dic = dict()
         self.word = None
@@ -49,12 +49,12 @@ class Solution(object):
 
     # Imfortant! How to Build TireTree!!!
     def buildTireTree(self, words):
-        root = TireNode()
+        root = TrieNode()
         for word in words:
             p = root
             for c in word:
                 if c not in p.dic.keys():
-                    p.dic[c] = TireNode()
+                    p.dic[c] = TrieNode()
                 p = p.dic[c]
             p.word = word
         return root

@@ -1,4 +1,5 @@
 from collections import defaultdict
+
 class Solution:
     def wordSquares(self, words):
         """
@@ -82,6 +83,7 @@ class Solution:
             for i in range(1, len(w)+1):
                 suffix = w[:i]
                 suffix_dict[suffix].add(w)
+
         suffix_dict[""] = set(words)
         word_length = len(words[0])
         ans = []
@@ -104,6 +106,8 @@ class Solution:
             self.dfs(level+1, target_level, suffix_dict, word_square, ans)
             word_square.pop()
         return
+
+
 
 
 s = Solution()

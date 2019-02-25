@@ -1,10 +1,9 @@
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+#Definition for singly-linked list.
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
-import utils.ListNode as l
 
 class Solution:
     def insertionSortList(self, head):
@@ -49,17 +48,17 @@ class Solution:
 def main():
     s = Solution()
     # [-1,5,3,4,0]
-    input = l.ListNode(-1)
-    input.next = l.ListNode(5)
-    input.next.next = l.ListNode(3)
-    input.next.next.next = l.ListNode(4)
-    input.next.next.next.next = l.ListNode(0)
+    input = ListNode(-1)
+    input.next = ListNode(5)
+    input.next.next = ListNode(3)
+    input.next.next.next = ListNode(4)
+    input.next.next.next.next = ListNode(0)
     print(s.insertionSortList(input))
 
-    input1 = l.ListNode(4)
-    input1.next = l.ListNode(0)
-    input1.next.next = l.ListNode(1)
-    input1.next.next.next = l.ListNode(3)
+    input1 = ListNode(4)
+    input1.next = ListNode(0)
+    input1.next.next = ListNode(1)
+    input1.next.next.next = ListNode(3)
     print(s.insertionSortList(input1))
 
 
