@@ -70,12 +70,11 @@ class Solution:
             # try put number i at pos
             if n % pos != 0 and pos % n != 0:
                 continue
-            #permutation[start_pos] = n
+
             used[n] = True
             # try to fill the position next to start_pos
             self.dfs(N, index - 1, permutation, used, ans)
             used[n] = False
-            #permutation[start_pos] = None
         return
 
 s = Solution()

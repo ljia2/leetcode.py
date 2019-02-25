@@ -1,4 +1,9 @@
-class Solution(object): # TLE
+class TireNode:
+    def __init__(self):
+        self.dic = dict()
+        self.word = None
+
+class Solution(object):
     def findWords(self, board, words):
         """
         Given a 2D board and a list of words from the dictionary, find all words in the board.
@@ -25,50 +30,60 @@ class Solution(object): # TLE
         :type words: List[str]
         :rtype: List[str]
 
+        Tire tree use index words
+
         for each word,
             dfs on board with early pruning.
+
 
         """
         if not board or not board[0] or not words:
             return []
-
+        root = self.buildTireTree(words)
         ans = []
-        wdict = set(words)
-        for word in wdict:
-            for r in range(len(board)):
-                for c in range(len(board[0])):
-                    self.dfs(board, word, 0, r, c, set(), ans)
-                    if ans and ans[-1] == word:
-                        break
-                if ans and ans[-1] == word:
-                    break
+        used = [[False for _ in range(len(board[0]))] for _ in range(len(board))]
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                self.dfs(board, r, c, root, used, ans)
         return ans
 
-    def dfs(self, board, word, level, r, c, used, ans):
-        if level >= len(word) or board[r][c] != word[level]:
-            return
-        # use (r,c) at level
-        used.add((r,c))
+    # Imfortant! How to Build TireTree!!!
+    def buildTireTree(self, words):
+        root = TireNode()
+        for word in words:
+            p = root
+            for c in word:
+                if c not in p.dic.keys():
+                    p.dic[c] = TireNode()
+                p = p.dic[c]
+            p.word = word
+        return root
 
-        if level + 1 == len(word):
-            ans.append(word)
+    def dfs(self, board, r, c, node, used, ans):
+        # out of bound
+        if r < 0 or c < 0 or r >= len(board) or c >= len(board[0]):
             return
+        # (r,c) location has been visited.
+        if used[r][c]:
+            return
+        chr = board[r][c]
+        if chr not in node.dic.keys():
+            return
+        node = node.dic[chr]
 
+        # find a word matching.
+        if node.word:
+            ans.append(node.word)
+            # avoid duplication
+            node.word = None
+        # keep search guided by Trie
+        # (r,c) at level
+        used[r][c] = True
         dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
         for dr, dc in dirs:
             nr, nc = r+dr, c+dc
-
-            if nr < 0 or nc < 0 or nr >= len(board) or nc >= len(board[0]):
-                continue
-            if (nr, nc) in used:
-                continue
-
-            self.dfs(board, word, level+1, nr, nc, used, ans)
-
-            if ans and ans[-1] == word:
-                break
-        used.remove((r,c))
-
+            self.dfs(board, nr, nc, node, used, ans)
+        used[r][c] = False
         return
 
 s = Solution()
