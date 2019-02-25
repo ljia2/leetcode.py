@@ -22,9 +22,7 @@ class DFSSolution:
         :type s: str
         :rtype: List[str]
 
-        Note: return all possible results, a hint for DFS algorithm.
-
-
+        Note: return all possible results, a hint for backtracking via DFS algorithm.
 
         """
         if not s:

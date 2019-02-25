@@ -1,5 +1,6 @@
 import string
 from collections import defaultdict
+
 class BFSSolution:
     def findLadders(self, beginWord, endWord, wordList):
         """
@@ -80,6 +81,7 @@ class BFSSolution:
                         if c == word[i]:
                             continue
                         new_word = word[:i] + c + word[i+1:]
+
                         # if new_word has been used before
                         if new_word in steps.keys():
                             # new_word has been used by some other path before.

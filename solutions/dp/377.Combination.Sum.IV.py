@@ -33,32 +33,38 @@ class Solution(object):
         :rtype: int
 
         Based on the example, it is not combination, it is permutation!!!!
-        allow duplication and dfs is not feasible.
+        allow duplication and pure dfs is not feasible.
 
-        
+        Moreover, the count problem can be used by dynamtic programming.
+
+        dp[k] stores the # of possible combinations summing up to k.
+        So we know that target is the sum of numbers in the array.
+        Imagine we only need one more number to reach target, this number can be any one in the array, right?
+        So the # of combinations of target, comb[target] = sum(comb[target - nums[i]]), where 0 <= i < nums.length, and target >= nums[i].
+
+        In the example given, we can actually find the # of combinations of 4 with the # of combinations of 3(4 - 1), 2(4- 2) and 1(4 - 3).
+        As a result, comb[4] = comb[4-1] + comb[4-2] + comb[4-3] = comb[3] + comb[2] + comb[1].
+
+        Then think about the base case. Since if the target is 0, there is only one way to get zero, which is using 0, we can set comb[0] = 1.
+
+        very similar to coin change problem? LC322
+
         """
 
         if not nums or target <= 0:
             return 0
 
-        ans = [0]
-        self.dfs(nums, target, set(), ans)
-        return ans[0]
+        dp = [0] * (target + 1)
+        dp[0] = 1
+        for s in range(1, target+1):
+            for num in nums:
+                if num > s:
+                    continue
+                dp[s] += dp[s - num]
+        return dp[target]
 
-    def dfs(self, nums, target, used, ans):
-        if target == 0:
-            ans[0] += 1
-            return
-        if target < 0:
-            return
 
-        for i in range(len(nums)):
-            if nums[i] in used:
-                continue
-            used.add(nums[i])
-            for j in range(1, target//nums[i] + 1):
-                self.dfs(nums, target - nums[i]*j, used, ans)
-            used.remove(nums[i])
-        return
+
+
 s = Solution()
 print(s.combinationSum4([1, 2, 3], 4))
