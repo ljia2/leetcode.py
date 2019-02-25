@@ -50,9 +50,7 @@ class BFSSolution:
 
         if endWord not in wordList or not wordList:
             return []
-
         wordDict = set(wordList)
-
         # during the expansion, records a word's parents.
         parents = defaultdict(list)
 
@@ -71,15 +69,18 @@ class BFSSolution:
             while size > 0:
                 word = queue.pop(0)
                 step = steps[word]
+                size -= 1
 
                 if word == endWord:
                     found = True
                     break
 
                 for i in range(len(word)):
-                    for c in string.ascii_lowercase:
-                        if c == word[i]:
+                    # mutate the char at index i of word
+                    for c in range(1, 27):
+                        if chr(c) == word[i]:
                             continue
+                        # find the first char != word[i]
                         new_word = word[:i] + c + word[i+1:]
 
                         # if new_word has been used before

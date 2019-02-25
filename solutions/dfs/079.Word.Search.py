@@ -32,36 +32,43 @@ class DFSSolution:
         """
         if not board or not board[0] or not word:
             return False
-        rnum = len(board)
-        cnum = len(board[0])
 
-        visited = [[False] * cnum for i in range(rnum)]
-
-        for r in range(rnum):
-            for c in range(cnum):
-                if self.dfs(board, r, c, visited, 0, word):
-                    return True
+        visited = [[False] * len(board[0]) for _ in range(len(board))]
+        ans = [False]
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                self.dfs(board, word, 0, r, c, visited, ans)
+                if ans[0]:
+                    return ans[0]
         return False
 
-    def dfs(self, board, row, col, visited, windex, word):
+    def dfs(self, board, word, level, r, c, visited, ans):
         # out of bound
-        if row < 0 or col < 0 or row == len(board) or col == len(board[0]):
-            return False
-        # avoid visited cell
-        if visited[row][col]:
-            return False
-        # do not match
-        if board[row][col] != word[windex]:
-            return False
-        # find the last index
-        if windex == len(word) - 1:
-            return True
+        if r < 0 or c < 0 or r >= len(board) or c >= len(board[0]):
+            return
 
-        visited[row][col] = True
-        res = self.dfs(board, row-1, col, visited, windex+1, word) \
-              or self.dfs(board, row+1, col, visited, windex+1, word) \
-              or self.dfs(board, row, col-1, visited, windex+1, word) \
-              or self.dfs(board, row, col+1, visited, windex+1, word)
-        visited[row][col] = False
-        return res
+        # avoid visited cell
+        if visited[r][c]:
+            return
+        # exceed word length
+        if level >= len(word):
+            return
+
+        # do not match
+        if board[r][c] != word[level]:
+            return
+
+        # find the last index
+        if level == len(word) - 1:
+            ans[0] = True
+            return
+
+        # start the standard dfs search.
+        visited[r][c] = True
+        for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+            self.dfs(board, word, level + 1, r + dr, c + dc, visited, ans)
+            if ans[0]:
+                return
+        visited[r][c] = False
+        return
 
