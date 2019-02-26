@@ -35,43 +35,52 @@ class DFSSolution:
             return
 
         for r in range(row):
-            self.dfs(board, r, 0, 'F')
-            self.dfs(board, r, col-1, 'F')
+            if board[r][0] == 'O':
+                self.dfs(board, r, 0, 'F')
+            if board[r][col-1] == 'O':
+                self.dfs(board, r, col-1, 'F')
 
         for c in range(col):
-            self.dfs(board, 0, c, 'F')
-            self.dfs(board, row-1, c, 'F')
-
-        for r in range(1, row-1):
-            for c in range(1, col-1):
-                if board[r][c] == 'O':
-                    self.dfs(board, r, c, 'X')
+            if board[0][c] == 'O':
+                self.dfs(board, 0, c, 'F')
+            if board[row-1][c] == 'O':
+                self.dfs(board, row-1, c, 'F')
 
         for r in range(0, row):
             for c in range(0, col):
                 if board[r][c] == 'F':
                     board[r][c] = 'O'
+                elif board[r][c] == 'O':
+                    self.dfs(board, r, c, 'X')
         return
 
     def dfs(self, board, r, c, target):
-        if not self.inbound(board, r, c):
+        if r < 0 or c < 0 or r >= len(board) or c >= len(board[0]):
             return
-        elif board[r][c] == 'X' or board[r][c] == 'F':
+        if board[r][c] == 'X' or board[r][c] == 'F':
             return
-        else:
-            board[r][c] = target
-            self.dfs(board, r+1, c, target)
-            self.dfs(board, r-1, c, target)
-            self.dfs(board, r, c+1, target)
-            self.dfs(board, r, c-1, target)
-            return
-
-    # check whether (r, c) within the bound.
-    def inbound(self, board, r, c):
-        return -1 < r < len(board) and -1 < c < len(board[0])
+        # mark with visited by setting to target
+        board[r][c] = target
+        dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        for dr, dc in dirs:
+            nr, nc = r + dr, c + dc
+            self.dfs(board, nr, nc, target)
+        return
 
 s = DFSSolution()
-#board = [["O","X","X","O","X"],["X","O","O","X","O"],["X","O","X","O","X"],["O","X","O","O","O"],["X","X","O","X","O"]]
-board = [["X","O","X","X"],["O","X","O","X"],["X","O","X","O"],["O","X","O","X"],["X","O","X","O"],["O","X","O","X"]]
+board = [["O","X","X","O","X"],
+         ["X","O","O","X","O"],
+         ["X","O","X","O","X"],
+         ["O","X","O","O","O"],
+         ["X","X","O","X","O"]]
+s.solve(board)
+print(board)
+
+board = [["X","O","X","X"],
+         ["O","X","O","X"],
+         ["X","O","X","O"],
+         ["O","X","O","X"],
+         ["X","O","X","O"],
+         ["O","X","O","X"]]
 s.solve(board)
 print(board)

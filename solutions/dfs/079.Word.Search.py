@@ -50,6 +50,7 @@ class DFSSolution:
         # avoid visited cell
         if visited[r][c]:
             return
+
         # exceed word length
         if level >= len(word):
             return

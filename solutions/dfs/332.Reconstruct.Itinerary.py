@@ -1,4 +1,6 @@
-from heapq import heappush, heappop
+import collections
+import copy
+
 class Solution:
     def findItinerary(self, tickets):
         """
@@ -39,34 +41,41 @@ class Solution:
             return []
         # sorting the destinations by lexical ordering
         tickets.sort(key=lambda x:x[1])
+
         graph = self.build_graph(tickets)
-        return self.dfs(graph, "JFK", len(tickets)+1)[0]
+
+        ans = []
+        self.dfs(graph, "JFK", len(tickets)+1, ["JFK"], ans)
+        return ans[0]
 
     def build_graph(self, tickets):
-        g = dict()
-        for t in tickets:
-            s, d = t
-            if s in g.keys():
-                g[s].append(d)
-            else:
-                g[s] = [d]
+        g = collections.defaultdict(list)
+        for s, d in tickets:
+            g[s].append(d)
         return g
 
-    def dfs(self, graph, start, total_length):
-        if start in graph.keys():
-            num_dest = len(graph[start])
-            for i in range(num_dest):
-                # remove the edge from start to destinations[i] to avoid loop
-                d = graph[start].pop(i)
-                results = self.dfs(graph, d, total_length-1)
-                for res in results:
-                    if len(res) == total_length - 1:
-                        return [[start] + res]
-                # Note that add the edge back for dfs for destinations[i+1] for backtrack !!!!!!
-                graph[start].insert(i, d)
-        return [[start]]
+    def dfs(self, graph, station, target, itinerary, ans):
+        if len(itinerary) == target:
+            ans.append(copy.copy(itinerary))
+            return
 
+        num_dest = len(graph[station])
+        for i in range(num_dest):
+            # remove the edge from start to destinations[i] to avoid loop
+            d = graph[station].pop(i)
+            itinerary.append(d)
+            self.dfs(graph, d, target, itinerary, ans)
+            # early ending
+            if ans:
+                return
+            # Note that add the edge back for dfs for destinations[i+1] for backtrack !!!!!!
+            itinerary.pop()
+            graph[station].insert(i, d)
 
+        return
+
+############
+from heapq import heappush, heappop
 class BestSolution:
     def findItinerary(self, tickets):
         """
@@ -137,6 +146,8 @@ class BestSolution:
             self.dfs(heappop(graph[start]), results, graph)
         results.insert(0, start)
 
-
+s = Solution()
+print(s.findItinerary([["MUC","LHR"],["JFK","MUC"],["SFO","SJC"],["LHR","SFO"]]))
+print(s.findItinerary([["EZE","AXA"],["TIA","ANU"],["ANU","JFK"],["JFK","ANU"],["ANU","EZE"],["TIA","ANU"],["AXA","TIA"],["TIA","JFK"],["ANU","TIA"],["JFK","TIA"]]))
 s = BestSolution()
 print(s.findItinerary([["EZE","AXA"],["TIA","ANU"],["ANU","JFK"],["JFK","ANU"],["ANU","EZE"],["TIA","ANU"],["AXA","TIA"],["TIA","JFK"],["ANU","TIA"],["JFK","TIA"]]))

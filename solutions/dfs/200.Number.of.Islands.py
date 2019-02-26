@@ -46,26 +46,24 @@ class DFSSolution:
         :param c:
         :return:
 
+        Depth First Search
+        Flip current lands in grid to water to prevent their contributions to future island counting
+        Then DFS Top, Down, L, R.
         """
-        if not self.inbound(grid, r, c):
+        if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]):
             return
-        elif grid[r][c] == '0':
+
+        if grid[r][c] == "0":
             return
-        else:
-            # Depth First Search
-            # Flip current lands in grid to water to prevent their contributions to future island counting
-            # Then DFS Top, Down, L, R.
 
-            # flip the land to water to mark the already visited
-            grid[r][c] = '0'
-            # dfs in four directions
-            self.dfs(grid, r-1, c)
-            self.dfs(grid, r+1, c)
-            self.dfs(grid, r, c-1)
-            self.dfs(grid, r, c+1)
+        # mark (r,c) as visited
+        grid[r][c] = "0"
 
-    def inbound(self, grid, r, c):
-        return -1 < r < len(grid) and -1 < c < len(grid[0])
+        dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        for dr, dc in dirs:
+            nr, nc = r + dr, c + dc
+            self.dfs(grid, nr, nc)
+        return
 
 s = DFSSolution()
 print(s.numIslands([['0', '1', '1', '0'], ['0', '0', '1', '0'], ['1', '0', '1', '0'], ['0', '1', '1', '0']]))

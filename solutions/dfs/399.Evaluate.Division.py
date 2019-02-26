@@ -65,7 +65,7 @@ class DFSSolution:
         explored.add(src)
         for (node, w) in graph[src]:
             if node in explored:
-                continue3
+                continue
             if node == dst:
                 return w
             else:
