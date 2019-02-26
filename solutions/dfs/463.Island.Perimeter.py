@@ -1,48 +1,64 @@
 class Solution:
     def islandPerimeter(self, grid):
         """
+        You are given a map in form of a two-dimensional integer grid where 1 represents land and 0 represents water.
+
+        Grid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water,
+        and there is exactly one island (i.e., one or more connected land cells).
+
+        The island doesn't have "lakes" (water inside that isn't connected to the water around the island). One cell is a square with side length 1. The grid is rectangular, width and height don't exceed 100. Determine the perimeter of the island.
+
+
+
+        Example:
+
+        Input:
+        [[0,1,0,0],
+         [1,1,1,0],
+         [0,1,0,0],
+         [1,1,0,0]]
+
+        Output: 16
+
+        Explanation: The perimeter is the 16 yellow stripes in the image below:
+
+
         :type grid: List[List[int]]
         :rtype: int
         """
         if grid is None or len(grid) == 0 or len(grid[0]) == 0:
             return 0
-        perimeter = 0
+        ans = [0]
         for r in range(len(grid)):
             for c in range(len(grid[0])):
                 if grid[r][c] <= 0:
                     continue
-                else:
-                    perimeter += self.dfs(grid, r, c)
-        return perimeter
+                self.dfs(grid, r, c, ans)
+        return ans[0]
 
-    def updatePerimeter(self, grid, r, c):
-        rn = len(grid)
-        cn = len(grid[0])
-        p = 0
+    def updatePerimeter(self, grid, r, c, ans):
         if r == 0 or grid[r-1][c] == 0:
-            p += 1
+            ans[0] += 1
         if c == 0 or grid[r][c-1] == 0:
-            p += 1
-        if r == rn-1 or grid[r+1][c] == 0:
-            p += 1
-        if c == cn-1 or grid[r][c+1] == 0:
-            p += 1
-        return p
+            ans[0] += 1
+        if r == len(grid)-1 or grid[r+1][c] == 0:
+            ans[0] += 1
+        if c == len(grid[0])-1 or grid[r][c+1] == 0:
+            ans[0] += 1
+        return
 
-    def dfs(self, grid, r, c):
-        rn = len(grid)
-        cn = len(grid[0])
-        p = self.updatePerimeter(grid, r, c)
+    def dfs(self, grid, r, c, ans):
+        if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]):
+            return
+        if grid[r][c] != 1:
+            return
+        # encounter a land at (r, c); mark (r,c) as visited by -1,
+        # can not by 0 to avoid double counting perimeter
         grid[r][c] = -1
-        if r > 0 and grid[r-1][c] == 1:
-            p += self.dfs(grid, r-1, c)
-        if r < rn - 1 and grid[r+1][c] == 1:
-            p += self.dfs(grid, r+1, c)
-        if c > 0 and grid[r][c-1] == 1:
-            p += self.dfs(grid, r, c-1)
-        if c < cn - 1 and grid[r][c+1] == 1:
-            p += self.dfs(grid, r, c+1)
-        return p
+        self.updatePerimeter(grid, r, c, ans)
+        for nr, nc in [(r, c+1), (r, c-1), (r+1, c), (r-1, c)]:
+            self.dfs(grid, nr, nc, ans)
+        return
 
 
 def main():
