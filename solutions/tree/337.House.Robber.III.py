@@ -44,7 +44,7 @@ class Solution:
         :rtype: int
 
         Very Typical Solution of Tree. Recursive call returns a set of different answers
-        
+
         """
         if root is None:
             return 0

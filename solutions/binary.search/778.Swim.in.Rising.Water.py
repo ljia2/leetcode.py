@@ -56,35 +56,43 @@ class Solution:
         r = len(grid)**2-1
         while l < r:
             t = (l + r) // 2
-
-            visited = set()
-            visited.add((0, 0))
-            if self.dfs(grid, t, 0, 0, visited):
+            # try to dfs from (0, 0) to (N, N)
+            visited = [[False] * len(grid[0]) for _ in range(len(grid))]
+            ans = [False]
+            self.dfs(grid, t, 0, 0, visited, ans)
+            # if connected, shrink r = t
+            if ans[0]:
                 r = t
             else:
                 l = t + 1
         return l
 
-    def dfs(self, grid, t, r, c, visited):
-        if r == c == len(grid) - 1:
-            return True
-        visited.add((r, c))
-        dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-        for dr, dc in dirs:
-            nr, nc = r + dr, c + dc
-            if nr < 0 or nc < 0 or nr >= len(grid) or nc >= len(grid[0]):
-                continue
-            if (nr, nc) in visited:
-                continue
-            # from a square to another 4-directionally adjacent square if and only if
-            # the elevation of both squares individually are at most t
-            # when grid[r][c] <= t and grid[nr][nc] <= t, person can swim pass.
-            if grid[r][c] > t or grid[nr][nc] > t:
-                continue
-            ans = self.dfs(grid, t, nr, nc, visited)
-            if ans:
-                return True
-        return False
+    def dfs(self, grid, t, r, c, visited, ans):
+        # out of boundary
+        if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]):
+            return
+
+        if visited[r][c]:
+            return
+
+        # from a square to another 4-directionally adjacent square if and only if
+        # the elevation of both squares individually are at most t
+        # when grid[r][c] <= t and grid[nr][nc] <= t, person can swim pass.
+        if grid[r][c] > t:
+            return
+
+        # reaching the (N, N)
+        if r == len(grid) - 1 and c == len(grid[0]) - 1:
+            ans[0] = True
+            return
+
+        # mark (r, c) visited.
+        visited[r][c] = True
+        for nr, nc in [(r, c+1), (r, c-1), (r+1, c), (r-1, c)]:
+            self.dfs(grid, t, nr, nc, visited, ans)
+            if ans[0]:
+                return
+        return
 
 s = Solution()
 print(s.swimInWater([[0,1,2,3,4],[24,23,22,21,5],[12,13,14,15,16],[11,17,18,19,20],[10,9,8,7,6]]))
