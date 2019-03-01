@@ -35,7 +35,7 @@ class Solution(object):
         if level == target:
             ans.append(copy.copy(subset))
             return
-        # record whether a nubmer is handled already on the leve.
+        # record whether a number is handled already on the level.
         handled = set()
         for i in range(start, len(nums)):
             if nums[i] in handled:

@@ -55,5 +55,6 @@ class DFSSolution:
         #return S[:start] + (S[start].lower() if S[start].isupper() else S[start].upper()) + S[start+1:]
         return S[:start] + chr(ord(S[start]) ^ (1 << 5)) + S[start+1:]
 
+
 s = DFSSolution()
 print(s.letterCasePermutation("1a1b"))

@@ -27,4 +27,7 @@ class Solution(object):
         :type num: str
         :type target: int
         :rtype: List[str]
+
+        return all possibles, it hints for backtracking solutions.
+
         """

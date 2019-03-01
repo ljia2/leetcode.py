@@ -10,12 +10,14 @@ class Solution:
         find an abbreviation of this target string with the smallest possible length
         such that it does not conflict with abbreviations of the strings in the dictionary.
 
-        Each number or letter in the abbreviation is considered length = 1. For example, the abbreviation "a32bc" has length = 4.
+        Each number or letter in the abbreviation is considered length = 1.
+        For example, the abbreviation "a32bc" has length = 4.
 
         Note:
 
         In the case of multiple answers as shown in the second example below, you may return any one of them.
-        Assume length of target string = m, and dictionary size = n. You may assume that m ≤ 21, n ≤ 1000, and log2(n) + m ≤ 20.
+        Assume length of target string = m, and dictionary size = n.
+        You may assume that m ≤ 21, n ≤ 1000, and log2(n) + m ≤ 20.
 
         Examples:
 
@@ -66,8 +68,11 @@ class Solution:
             ans.append(abbr)
             return
 
+        # abbreviate the char at pos
         self.dfs(word, pos+1, count+1, cur_abbr, ans)
+        # not abbreviate the char at pos; update the current abbreviation
         new_cur_abbr = (cur_abbr + str(count) + word[pos]) if count > 0 else (cur_abbr + word[pos])
+        # reset count = 0 and keep search the remaining.
         self.dfs(word, pos+1, 0, new_cur_abbr, ans)
         return
 

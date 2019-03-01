@@ -56,6 +56,7 @@ class Solution:
 
         if m <= len(visited.keys()) <= n:
             ans[0] += 1
+            return
 
         if len(visited.keys()) > n:
             return

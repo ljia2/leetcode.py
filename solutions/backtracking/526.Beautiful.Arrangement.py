@@ -45,15 +45,12 @@ class Solution:
         if N <= 2:
             return N
 
-        used = dict()
-        for i in range(1, N+1):
-            used[i] = False
-
+        used = [False] * (N + 1)
         ans = [0]
-        permutation = [None] * N
-        self.dfs(N, N-1, permutation, used, ans)
+        self.dfs(N, N-1, [], used, ans)
         return ans[0]
 
+    # backtracking/dfs to generate all permutation that satisfying the two rules.
     def dfs(self, N, index, permutation, used, ans):
         # EXIT: all positions have been filed.
         if index == -1:
@@ -66,13 +63,14 @@ class Solution:
         for n in range(1, N+1):
             if used[n]:
                 continue
+
             pos = index + 1
             # try put number i at pos
             if n % pos != 0 and pos % n != 0:
                 continue
 
-            used[n] = True
             # try to fill the position next to start_pos
+            used[n] = True
             self.dfs(N, index - 1, permutation, used, ans)
             used[n] = False
         return

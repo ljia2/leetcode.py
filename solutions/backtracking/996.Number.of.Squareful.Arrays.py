@@ -51,17 +51,19 @@ class Solution(object):
             return
 
         handled = set()
-        for i in range(len(A)):
-            num = A[i]
+        for i, num in enumerate(A):
+            # the num at position i has been used in the previous level
             if i in used:
                 continue
-
+            # the num has been considered in this level
+            # avoid double count permutations of same nums at different level.
             if num in handled:
                 continue
 
             if perm and not self.perfect_square(perm, num):
                 continue
 
+            # num is added to handled to ensure it is considered in this level
             handled.add(num)
 
             used.add(i)

@@ -1,3 +1,5 @@
+import collections
+
 class Solution:
     def generatePalindromes(self, s):
         """
@@ -24,9 +26,11 @@ class Solution:
         """
         if not s:
             return []
+
         cfreq = dict()
         for c in s:
             cfreq[c] = cfreq.get(c, 0) + 1
+
         odd_count = 0
         odd_char = None
         chars = []
@@ -39,7 +43,8 @@ class Solution:
                     return []
             else:
                 chars += [c] * (cfreq[c] // 2)
-
+        # chars contain all char with even frequency
+        # now we generate all unique permutations
         used = [False] * len(chars)
         permutation = []
         permutations = []
@@ -55,20 +60,21 @@ class Solution:
         if level == target_level:
             permutations.append(permutation.copy())
             return
-        else:
-            handled = set()
-            for i in range(len(chars)):
-                if used[i]:
-                    continue
-                if chars[i] in handled:
-                    continue
-                used[i] = True
-                handled.add(chars[i])
-                permutation.append(chars[i])
-                self.dfs(chars, level+1, target_level, used, permutation, permutations)
-                permutation.pop()
-                used[i] = False
-            return
+
+        handled = set()
+        for i in range(len(chars)):
+            if used[i]:
+                continue
+            if chars[i] in handled:
+                continue
+
+            handled.add(chars[i])
+            used[i] = True
+            permutation.append(chars[i])
+            self.dfs(chars, level+1, target_level, used, permutation, permutations)
+            permutation.pop()
+            used[i] = False
+        return
 
 s = Solution()
 print(s.generatePalindromes("aabacbabbcc"))

@@ -1,13 +1,13 @@
 class Solution:
     def splitIntoFibonacci(self, S):
         """
-        Given a string S of digits, such as S = "123456579", we can split it into a Fibonacci-like sequence [123, 456, 579].
+        Given a string S of digits, such as S = "123456579",
+        we can split it into a Fibonacci-like sequence [123, 456, 579].
 
         Formally, a Fibonacci-like sequence is a list F of non-negative integers such that:
 
         0 <= F[i] <= 2^31 - 1, (that is, each integer fits a 32-bit signed integer type);
-        F.length >= 3;
-        and F[i] + F[i+1] = F[i+2] for all 0 <= i < F.length - 2.
+        F.length >= 3; and F[i] + F[i+1] = F[i+2] for all 0 <= i < F.length - 2.
         Also, note that when splitting the string into pieces, each piece must not have extra leading zeroes,
         except if the piece is the number 0 itself.
 
@@ -43,10 +43,16 @@ class Solution:
 
         :type S: str
         :rtype: List[int]
+
+        1 <= S.length <= 200 hints O(n^3)
+
+        given s[:i], s[i:j], backtracking/dfs on s[j:] to generate fibnonacci sequence
+
         """
 
         if not S or len(S) <= 2:
             return []
+
         ans = []
         prenums = []
         for i in range(1, len(S)-2):
@@ -72,15 +78,16 @@ class Solution:
         num3 = num1 + num2
         if num3 > 2**31 - 1:
             return
-
-        i = S.find(str(num3))
-        if i != 0:
+        # S does not contain num3 at the beginning
+        if S.find(str(num3)) != 0:
             return
-        else:
-            prenums.append(num3)
-            self.dfs(num2, num3, S[len(str(num3)):], prenums, ans)
-            prenums.pop()
-            return
+        # add num3 to prenums
+        prenums.append(num3)
+        # keep bfs on S[len(str(num3)):]
+        self.dfs(num2, num3, S[len(str(num3)):], prenums, ans)
+        # pop num3 for backtracking.
+        prenums.pop()
+        return
 
 s = Solution()
 print(s.splitIntoFibonacci("11235813"))
