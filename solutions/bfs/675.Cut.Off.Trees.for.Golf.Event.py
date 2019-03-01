@@ -87,7 +87,7 @@ class Solution(object):
         return ans
 
     def minStep(self, forest, startr, startc, tree):
-        # start from the last cuting location.
+        # start from the last cutting location.
         q = [(startr, startc)]
         visited = [[False for _ in range(len(forest[0]))] for _ in range(len(forest))]
         visited[startr][startc] = True

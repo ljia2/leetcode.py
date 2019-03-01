@@ -1,8 +1,6 @@
 class Solution:
     def slidingPuzzle(self, board):
         """
-
-
         On a 2x3 board, there are 5 tiles represented by the integers 1 through 5, and an empty square represented by 0.
 
         A move consists of choosing 0 and a 4-directionally adjacent number and swapping it.
@@ -43,25 +41,22 @@ class Solution:
         :type board: List[List[int]]
         :rtype: int
 
-        clearly, bfs is the solution. The state is the board state. How to represent the state?
-        we can use an string to repsent the state, b[0:3] + b[1:3]....
+        given the board and ask for shortest moves, bfs is the solution.
+        The state is the board state. How to represent the state?
+        we can use an string to represent the state, b[0:3] + b[1:3]
         """
         rows = len(board) # 2
         cols = len(board[0]) # 3
 
         start = ""
         goal = ""
-        incr = 0
         for r in range(rows):
             for c in range(cols):
-                incr += 1
                 start += str(board[r][c])
                 goal += str((r * cols + c + 1) % (rows * cols))
 
         if start == goal:
             return 0
-
-        dirs = [[0, 1], [1, 0], [-1, 0], [0, -1]]
 
         qe = [start]
         visited = set()
@@ -80,17 +75,18 @@ class Solution:
                 r = zindex // cols
                 c = zindex % cols
 
-                for dir in dirs:
-                    nr = r + dir[0]
-                    nc = c + dir[1]
+                for nr, nc in [(r, c-1), (r, c+1), (r-1, c), (r+1, c)]:
                     if nr < 0 or nr >= rows or nc < 0 or nc >= cols:
                         continue
-                    nstate = list(state)
+                    # generate the new state.
                     nindex = nr * cols + nc
+                    nstate = list(state)
                     nstate[nindex], nstate[zindex] = nstate[zindex], nstate[nindex]
                     nstate = "".join(nstate)
+
                     if nstate in visited:
                         continue
+
                     qe.append(nstate)
                     visited.add(nstate)
             steps += 1

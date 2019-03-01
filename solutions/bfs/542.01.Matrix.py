@@ -46,12 +46,14 @@ class Solution(object):
 
         m, n = len(matrix), len(matrix[0])
         ans = [[float("inf")] * n for _ in range(m)]
+        # initialize queue with all 0s.
         q = []
         for r in range(m):
             for c in range(n):
                 if matrix[r][c] == 0:
                     ans[r][c] = 0
                     q.append((r, c))
+        # bfs over the matrix
         while q:
             size = len(q)
             while size > 0:

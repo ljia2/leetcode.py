@@ -50,7 +50,7 @@ class Solution:
         Specifically, use bfs to start expanding an unexplored node and record steps.
 
         steps % 2 == 0, checking whether new nodes appears in set1
-        step2 % 2 == 1, checking whether new nodes appears in set9.
+        step2 % 2 == 1, checking whether new nodes appears in set0.
 
         If so, return False
 
@@ -58,50 +58,52 @@ class Solution:
 
         """
 
-        if not graph or len(graph) <=2:
+        if not graph or len(graph) <= 2:
             return True
-
 
         visited = set()
         for node in range(len(graph)):
             if node in visited:
                 continue
-            qe = [node]
-            set0 = set()
-            set0.add(node)
-            set1 = set()
-            steps = 0
-            while qe:
-                size = len(qe)
-                while size > 0:
-                    n = qe.pop(0)
-                    size -= 1
+            if not self.bfs(graph, node, visited):
+                return False
+        return True
+
+    def bfs(self, graph, node, visited):
+        qe = [node]
+        set0 = set()
+        set0.add(node)
+        set1 = set()
+        steps = 0
+        while qe:
+            size = len(qe)
+            while size > 0:
+                n = qe.pop(0)
+                size -= 1
+                if steps % 2 == 0:
+                    if n in set1:
+                        return False
+                else:
+                    if n in set0:
+                        return False
+
+                for nn in graph[n]:
                     if steps % 2 == 0:
-                        if n in set1:
-                            return False
+                        if nn in set1:
+                            continue
                     else:
-                        if n in set0:
-                            return False
+                        if nn in set0:
+                            continue
 
-                    for nn in graph[n]:
-                        if steps % 2 == 0:
-                            if nn in set1:
-                                continue
-                        else:
-                            if nn in set0:
-                                continue
-
-                        qe.append(nn)
-                        if steps % 2 == 0:
-                            set1.add(nn)
-                        else:
-                            set0.add(nn)
-                steps += 1
-            visited.union(set0)
-            visited.union(set1)
+                    qe.append(nn)
+                    if steps % 2 == 0:
+                        set1.add(nn)
+                    else:
+                        set0.add(nn)
+            steps += 1
+        visited.union(set0)
+        visited.union(set1)
         return True
 
 s = Solution()
 print(s.isBipartite([[1,2,3], [0,2], [0,1,3], [0,2]]))
-
-

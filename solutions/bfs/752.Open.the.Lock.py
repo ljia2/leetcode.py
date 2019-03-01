@@ -49,7 +49,9 @@ class Solution(object):
         :type target: str
         :rtype: int
 
-        typical usage of bfs on lock
+        typical usage of bfs or bibfs on lock
+
+        if the graph is given and calcuate the shortest path, bibfs is prefered.
 
         TLE on BFS
         OK for BiBFS
@@ -59,7 +61,6 @@ class Solution(object):
         if not target:
             return 0
         start = "0000"
-        #return self.bfs(start, target, deadends)
         return self.bibfs(start, target, deadends)
 
     def bibfs(self, start, target, deadends):

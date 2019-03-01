@@ -1,3 +1,7 @@
+"""
+It uses a lot of questions regarding the shortest path.
+"""
+
 class BFS:
     def bfs(self, graph, start):
         # queue
