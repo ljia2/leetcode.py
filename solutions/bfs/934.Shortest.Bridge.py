@@ -55,17 +55,18 @@ class Solution:
                     visited.add((r, c))
 
         moves = 0
-        dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
         while qe:
             size = len(qe)
             while size > 0:
                 r, c = qe.pop(0)
                 size -= 1
+
+                # have you encounrtered the second island.
                 if A[r][c] == -2:
                     # use moves - 1 to denote how many 0 is flipped.
                     return moves - 1
-                for dir in dirs:
-                    nr, nc = r + dir[0], c + dir[1]
+
+                for nr, nc in [(r+1, c), (r-1, c), (r, c+1), (r, c-1)]:
                     if nr < 0 or nc < 0 or nr >= rcount or nc >= ccount or A[nr][nc] == -1:
                         continue
                     if (nr, nc) in visited:
@@ -75,15 +76,12 @@ class Solution:
             moves += 1
         return -1
 
-
     def dfs(self, A, r, c, island):
         if r < 0 or c < 0 or r >= len(A) or c >= len(A[0]) or A[r][c] <= 0:
             return
         # flip to negative island to mark island index and visited
         A[r][c] = -island
-        dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-        for dir in dirs:
-            nr, nc = r + dir[0], c + dir[1]
+        for nr, nc in [(r+1, c), (r-1, c), (r, c+1), (r, c-1)]:
             self.dfs(A, nr, nc, island)
         return
 

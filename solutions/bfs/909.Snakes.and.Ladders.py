@@ -1,16 +1,17 @@
-from math import ceil
 class Solution:
     def snakesAndLadders(self, board):
         """
-        On an N x N board, the numbers from 1 to N*N are written boustrophedonically starting from the bottom left of the board, and alternating direction each row.  For example, for a 6 x 6 board, the numbers are written as follows:
+        On an N x N board, the numbers from 1 to N*N are written boustrophedonically starting from the bottom left of the board,
+        and alternating direction each row.  For example, for a 6 x 6 board, the numbers are written as follows:
 
-
-        You start on square 1 of the board (which is always in the last row and first column).  Each move, starting from square x, consists of the following:
-
-        You choose a destination square S with number x+1, x+2, x+3, x+4, x+5, or x+6, provided this number is <= N*N.
+        You start on square 1 of the board (which is always in the last row and first column).
+        Each move, starting from square x, consists of the following:
+        1) You choose a destination square S with number x+1, x+2, x+3, x+4, x+5, or x+6, provided this number is <= N*N.
         (This choice simulates the result of a standard 6-sided die roll: ie., there are always at most 6 destinations.)
-        If S has a snake or ladder, you move to the destination of that snake or ladder.  Otherwise, you move to S.
-        A board square on row r and column c has a "snake or ladder" if board[r][c] != -1.  The destination of that snake or ladder is board[r][c].
+        2) If S has a snake or ladder, you move to the destination of that snake or ladder.  Otherwise, you move to S.
+
+        A board square on row r and column c has a "snake or ladder" if board[r][c] != -1.
+        The destination of that snake or ladder is board[r][c].
 
         Note that you only take a snake or ladder at most once per move:
         if the destination to a snake or ladder is the start of another snake or ladder, you do not continue moving.
@@ -36,8 +37,8 @@ class Solution:
         You then decide to move to square 14, and must take the ladder to square 35.
         You then decide to move to square 36, ending the game.
         It can be shown that you need at least 4 moves to reach the N*N-th square, so the answer is 4.
-        Note:
 
+        Note:
         2 <= board.length = board[0].length <= 20
         board[i][j] is between 1 and N*N or is equal to -1.
         The board square with number 1 has no snake or ladder.
@@ -45,6 +46,10 @@ class Solution:
 
         :type board: List[List[int]]
         :rtype: int
+
+        the least moves hint the dfs over board.
+
+
         """
         N = len(board)
         qe = [1]
@@ -67,6 +72,7 @@ class Solution:
                     newsnum = snum + delta
                     if newsnum > N * N:
                         continue
+
                     # if there is a ladder, then use it.
                     r, c = self.square2rowcol(N, newsnum)
                     if board[r][c] != -1:
@@ -74,6 +80,7 @@ class Solution:
 
                     if newsnum in visited:
                         continue
+
                     qe.append(newsnum)
                     visited.add(newsnum)
 

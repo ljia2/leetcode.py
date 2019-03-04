@@ -78,16 +78,20 @@ class Solution:
                     # early pruning for out of boundary and wall
                     if nr < 0 or nr >= row_num or nc < 0 or nc >= col_num or grid[nr][nc] == '#':
                         continue
+
                     # early pruning for blocked by lock
                     if 'A' <= grid[nr][nc] <= 'Z':
                         key = grid[nr][nc].lower()
+
                         # bitwise & operation to determine whether key is picked already or not.
                         # if the key is not collected.
                         if collected_keys & (1 << (ord(key) - ord('a'))) == 0:
                             continue
+
                     # early pruning for visited cell
                     if (nr, nc, collected_keys) in visited:
                         continue
+
                     if 'a' <= grid[nr][nc] <= 'z':
                         qe.append((nr, nc, collected_keys | (1 << (ord(grid[nr][nc]) - ord('a')))))
                         visited.add((nr, nc, collected_keys | (1 << (ord(grid[nr][nc]) - ord('a')))))

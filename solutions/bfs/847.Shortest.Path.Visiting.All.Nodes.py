@@ -6,7 +6,6 @@ class Solution:
         Return the length of the shortest path that visits every node. You may start and stop at any node,
         you may revisit nodes multiple times, and you may reuse edges.
 
-
         Example 1:
         Input: [[1,2,3],[0],[0],[0]]
         Output: 4
@@ -16,8 +15,6 @@ class Solution:
         Input: [[1],[0,2,4],[1,3,4],[2],[1,2]]
         Output: 4
         Explanation: One possible path is [0,1,4,2,3]
-
-
         Note:
 
         1 <= graph.length <= 12
@@ -27,15 +24,18 @@ class Solution:
 
         Again shortest moves via bfs with revisit node (states is (r, c, nodes visisted already))
         see Leetcode 864
+
         """
-        # binary representation of indicating all nodes are visited.
+        # binary representation of a state of which nodes visited.
         ans = (1 << len(graph)) - 1
-        # typical template for bfs
+
+        # typical template for bfs; initil
         qe = []
         visited = set()
         for i in range(len(graph)):
             qe.append((i, 1 << i))
             visited.add((i, 1 << i))
+
         moves = 0
         while qe:
             size = len(qe)

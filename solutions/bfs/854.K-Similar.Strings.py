@@ -29,6 +29,12 @@ class Solution:
         :type A: str
         :type B: str
         :rtype: int
+
+        start from A, keep swaping two chars at one step.
+        bfs from A to reach B where
+        1) use the swapped word as the state of visited
+        2) and early pruning on matched chars (only expand on unmatched char).
+
         """
         if A == B:
             return 0
@@ -55,11 +61,13 @@ class Solution:
         return -1
 
     def swap_words(self, word, B):
+        # skip the matched chars
         for i in range(len(word)):
             if word[i] == B[i]:
                 continue
             start = i
             break
+
         swords = set()
         for j in range(start+1, len(word)):
             # skip non-necessary swap

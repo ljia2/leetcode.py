@@ -8,7 +8,7 @@ class BFS:
         q = []
         # the state of visiting
         # 1) node only (when can not revisit nodes);
-        # 2) node and other information (when can revisit node) see 847 and 86
+        # 2) node and other information (when can revisit node) see LC847 and LC864
         seen = dict()
         # start is the start state
         q.append(start)

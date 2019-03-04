@@ -1,10 +1,13 @@
 from collections import defaultdict
+
+
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
+
 
 class Solution:
     def distanceK(self, root, target, K):
@@ -40,6 +43,7 @@ class Solution:
         first, convert directed tree to undirected graph.
         second, conduct bfs starting from target
         """
+
         graph = defaultdict(list)
         self.dfs(root, graph)
 

@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 class BFSSolution:
     def numBusesToDestination(self, routes, S, T):
         """
@@ -29,16 +30,15 @@ class BFSSolution:
         :type T: int
         :rtype: int
 
-        Note that, this quesiton asks how many buses.
-
-        This solutions is use buses as the node. stops for each bus (node) for auxiliary information.
+        Note that, this question asks how many buses.
+        To build the graph, we should use buses as the node. stops for each bus (node) for auxiliary information.
         bus nodes are connected if they share a stop.
 
         BFS on the bus graph. Whenever expand on the graph. we need collect all stops to determine whether reaching T.
-
         """
         if S == T:
             return 0
+
         # build the graph of stop -> [buses]
         stop2buses = defaultdict(list)
         for i in range(len(routes)):
@@ -61,7 +61,9 @@ class BFSSolution:
                 for bus in stop2buses[stop]:
                     if used_buses[bus] == 1:
                         continue
+
                     used_buses[bus] = 1
+                    # put all stops of that bus into queue.
                     for stop in routes[bus]:
                         qe.append(stop)
 
@@ -69,6 +71,5 @@ class BFSSolution:
         return -1
 
 
-
-s = SolutionII()
+s = BFSSolution()
 print(s.numBusesToDestination([[1, 2, 7], [3, 6, 7]], 1, 6))
