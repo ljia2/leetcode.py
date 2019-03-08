@@ -1,5 +1,6 @@
 import bisect
 
+
 class Solution:
     def kthSmallestPrimeFraction(self, A, K):
         """
@@ -31,35 +32,43 @@ class Solution:
         :rtype: List[int]
 
 
-       Remarks:
+        Remarks:
 
         The kth smallest fraction is known to be in the range [0, 1], so we initialize the search space with this range (i.e., l = 0 and r = 1).
 
-        We need the pair (p, q) to record the maximum fraction in the matrix that is no greater than each candidate solution. This is necessary because on the one hand, the candidate solution itself cannot tell us what the numerator and denominator of the fraction are (remember the candidate solution is just a floating-point number); on the other hand, even if we can get the numerator and denominator of the candidate solution, these values may not be contained in the input array (remember all the fractions must be formed by pair of integers from the input array). This is different from the case when the matrix elements are integers, where at the end of the binary search, the candidate solution must be equal to the kth smallest element in the matrix.
+        We need the pair (p, q) to record the maximum fraction in the matrix that is no greater than each candidate solution.
+        This is necessary because on the one hand, the candidate solution itself cannot tell us what the numerator and denominator of the fraction are
+        (remember the candidate solution is just a floating-point number); on the other hand, even if we can get the numerator and denominator of the candidate solution,
+        these values may not be contained in the input array (remember all the fractions must be formed by pair of integers from the input array).
+        This is different from the case when the matrix elements are integers, where at the end of the binary search, the candidate solution must be equal to the kth smallest element in the matrix.
 
-        The above solution only works when there are no duplicate fractions in the matrix (which is indeed the case for prime fractions). Otherwise, we need two counts, cnt_le and cnt_lt, to account for duplicates, similar to what we did in the ZigzagSearch solution below.
+        The above solution only works when there are no duplicate fractions in the matrix (which is indeed the case for prime fractions).
+        Otherwise, we need two counts, cnt_le and cnt_lt, to account for duplicates, similar to what we did in the ZigzagSearch solution below.
 
-        The time complexity is computed as follows: the binary search loop will terminate when the count of elements no greater than a candidate solution reaches K. This is guaranteed to happen when the size of the search range [l, r] becomes smaller than the smallest absolute distance between any pair of fractions in the matrix, which is >= 1/MAX^2. Since each iteration will reduce the search range by half, the binary search loop will terminate after at most log(MAX^2) steps. Each iteration is done in linear time, therefore the total time complexity is O(n * log(MAX^2)), which is equivalent to O(n * log(MAX)).
-
-
+        The time complexity is computed as follows: the binary search loop will terminate when the count of elements no greater than a candidate solution reaches K.
+        This is guaranteed to happen when the size of the search range [l, r] becomes smaller than the smallest absolute distance between any pair of fractions in the matrix, which is >= 1/MAX^2.
+        Since each iteration will reduce the search range by half, the binary search loop will terminate after at most log(MAX^2) steps. Each iteration is done in linear time,
+        therefore the total time complexity is O(n * log(MAX^2)), which is equivalent to O(n * log(MAX)).
         """
         l = 0
         r = 1
+
         # NOTE THAT l and r are searching floating space and they never meet !!!!!
         while True:
             m = (l + r) / 2
-            lt, ans = self.count(A, m)
-            if lt == K:
+            # record p and q that such that maximum p/q < m.
+            ans = [0, 1]
+            count = self.count(A, m, ans)
+            if count == K:
                 return ans
-
-            if lt > K:
+            elif count > K:
                 r = m
-            elif lt < K:
+            elif count < K:
                 l = m
 
-    def count(self, A, r):
+    # find the count of p/q < r and ans records the maximum p/q.
+    def count(self, A, r, ans):
         cnt = 0
-        ans = [0, 1]
         for i, a in enumerate(A):
             # want to find all b s.t. a/b < r and a < b => b > a/r
             # j is the first index of b s.t. a/b < r
@@ -70,7 +79,7 @@ class Solution:
                 if ans[0]/ans[1] < A[i] / A[j]:
                     ans[0] = A[i]
                     ans[1] = A[j]
-        return cnt, ans
+        return cnt
 
 s = Solution()
 #print(s.kthSmallestPrimeFraction([1, 2, 3, 5], 3))

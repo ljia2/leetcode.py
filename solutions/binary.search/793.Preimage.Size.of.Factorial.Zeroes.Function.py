@@ -54,7 +54,8 @@ class Solution:
         # again l and r are searching integer space.
         while l < r:
             mid = (l + r) // 2
-            if self.countZero(mid) >= K:
+            count = self.countZero(mid)
+            if count >= K:
                 r = mid
             else:
                 l = mid + 1
@@ -81,6 +82,7 @@ class Solution:
             ans += x // 5
             x //= 5
         return ans
+
 
 s = Solution()
 print(s.preimageSizeFZF(28246))

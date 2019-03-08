@@ -23,7 +23,7 @@ class Solution:
         :type target: int
         :rtype: int
 
-        T: O(logn): Recursive
+        T: O(logn): Typical usage of binary search to find a number.
         """
 
         if not nums:
@@ -31,27 +31,9 @@ class Solution:
         else:
             return self.binarySearch(nums, target, 0, len(nums))
 
-    # def RecursiveBinarySearch(self, nums, target, start, end): # start: inclusive index and end: exclusive index
-    #     if start == end - 1:
-    #         if target == nums[start]:
-    #             return start
-    #         else:
-    #             return -1
-    #     else:
-    #         mid = (start + end) // 2 # Note the mid index for binary search
-    #         if nums[start] <= nums[mid-1]:
-    #             if nums[start] <= target <= nums[mid-1]:
-    #                 return self.binarySearch(nums, target, start, mid)
-    #             else:
-    #                 return self.binarySearch(nums, target, mid, end)
-    #         else:
-    #             if nums[mid] <= target <= nums[end-1]:
-    #                 return self.binarySearch(nums, target, mid, end)
-    #             else:
-    #                 return self.binarySearch(nums, target, start, mid)
-
     # binarySearch where T = O(logn) and S = O(1)
-    def binarySearch(self, nums, target, start, end): # start: inclusive index and end: exclusive index
+    # start: inclusive index and end: exclusive index
+    def binarySearch(self, nums, target, start, end):
         while start < end:
             mid = (end + start) // 2
             if target == nums[mid]:

@@ -24,12 +24,11 @@ class Solution:
         :rtype: int
 
         binary search within [1, x)
-
         """
 
         if x <= 1:
             return x
-
+        # find the minimum l that l * l > x, thus (l - 1) * (l - 1) <= x.
         l = 1
         r = x
         while l < r:

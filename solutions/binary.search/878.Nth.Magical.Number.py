@@ -41,6 +41,7 @@ class Solution:
             Upper bound is N * min(A, B), I just set right = 10 ^ 14.
 
         4. binary search, find the smallest x that x / A + x / B - x / lcm = N
+
         """
 
         l = 2

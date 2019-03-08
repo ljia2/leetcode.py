@@ -1,4 +1,6 @@
 import bisect
+
+
 class Solution:
     def countRangeSum(self, nums, lower, upper):
         """

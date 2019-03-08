@@ -35,16 +35,13 @@ class Solution:
             median = C[K-1]
 
         C[K-2] = min(A[m1-1], B[m2-1])
-
-
         C[K-1] = max(A[m1-1], B[m2-1]) # c1 for code below
         C[K] = min(A[m1], B[m2]) # c2 for code below
-
         C[K+1] = max(A[m1], B[m2])
 
         Therefore, we only need A[m1-1], A[m1], B[m2-1], B[m2] to calculate the median
 
-        given m1, binary search on A while A[m1] < B[m2-1] until A[m1] >= B[m2-1]
+        given m1, binary search on A to find the first m1 s.t. A[m1] >= B[m2-1]
 
         """
 
@@ -55,24 +52,34 @@ class Solution:
 
         k = (n1 + n2 + 1) // 2
 
+        # find the first m1 such at nums1[m1] >= nums2[m2-1]
         l = 0
         r = n1
         while l < r:
             m1 = (l + r) // 2
             m2 = k - m1
-            # try to find nums[m1] >= nums2[m2-1]
-            if nums1[m1] < nums2[m2-1]:
-                l = m1 + 1
-            else:
+            if nums1[m1] >= nums2[m2-1]:
                 r = m1
+            else:
+                l = m1 + 1
 
         m1, m2 = l, k - l
-        c1 = max(-2**31 if m1 <= 0 else nums1[m1-1], -2**31 if m2 <= 0 else nums2[m2-1])
+        if m1 <= 0:
+            c1 = nums2[m2-1]
+        elif m2 <= 0:
+            c1 = nums1[m1]
+        else:
+            c1 = max(nums1[m1-1], nums2[m2-1])
 
         if (n1 + n2) % 2 == 1:
             return c1
 
-        c2 = min(2**31-1 if m1 >= n1 else nums1[m1], 2**31-1 if m2 >= n2 else nums2[m2])
+        if m1 >= n1:
+            c2 = nums2[m2]
+        elif m2 >= n2:
+            c2 = nums1[m1]
+        else:
+            c2 = min(nums1[m1], nums2[m2])
 
         return (c1 + c2) * 0.5
 

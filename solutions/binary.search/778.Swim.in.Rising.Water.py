@@ -52,6 +52,7 @@ class Solution:
 
         O(N^2*log(Max(grid))
         """
+        # find the minimum l s.t. dfs return true
         l = grid[0][0]
         r = len(grid)**2-1
         while l < r:
@@ -60,11 +61,13 @@ class Solution:
             visited = [[False] * len(grid[0]) for _ in range(len(grid))]
             ans = [False]
             self.dfs(grid, t, 0, 0, visited, ans)
+
             # if connected, shrink r = t
             if ans[0]:
                 r = t
             else:
                 l = t + 1
+
         return l
 
     def dfs(self, grid, t, r, c, visited, ans):

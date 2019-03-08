@@ -1,4 +1,6 @@
 import bisect
+
+
 class Solution:
     def smallestDistancePair(self, nums, k):
         """
@@ -64,6 +66,7 @@ class Solution:
             j = bisect.bisect_right(nums, nums[i] + m)
             # j is first index nums[j] > nums[i] + m
             if j > 1:
+                # from i
                 ans += j - 1 - i
         return ans
 

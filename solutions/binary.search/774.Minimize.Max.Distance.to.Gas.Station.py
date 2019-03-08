@@ -46,24 +46,24 @@ class Solution:
         O(NlogM), where N is station length and M is st[N - 1] - st[0]
         """
 
-        # sort the station by their postions, because they may not be sorted in asecending order.
+        # sort the station by their positions, because they may not be sorted in ascending order.
         stations.sort()
-        # set the search space
+        # set the search space over minimum distance
+        # find the minimum distance of two adjacent stations with K stations.
         l = 0
         r = stations[-1] - stations[0]
         # when the true value is in the range of 1e-6
-        while r - l >= 0.000001:
+        while r - l >= math.pow(10, -6):
             m = (l + r) / 2
-
-            # find # of more stations to ensure the adjacent stations' distance is at most m.
+            # given the minimum distance m, how many new stations are needed.
             cnt = self.count(stations, m)
-
             if K >= cnt:
                 r = m
             else:
                 l = m
         return (l + r) / 2
 
+    # Given minD, find the number of new station.
     def count(self, stations, minD):
         cnt = 0
         for i in range(len(stations)-1):
@@ -72,7 +72,7 @@ class Solution:
             if d > minD:
                 # d = 3.2 minD = 1 we need 3
                 # d = 3.0 minD = 1 we need 2
-                cnt += int(math.ceil(d/minD - 1))
+                cnt += int(math.ceil(d*1.0/minD)) - 1
         return cnt
 
 s = Solution()
