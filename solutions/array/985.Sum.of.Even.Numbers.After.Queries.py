@@ -35,30 +35,27 @@ class Solution(object):
         :rtype: List[int]
         """
         even_sum = 0
-        even_pos = set()
         for i, a in enumerate(A):
             if self.is_even(a):
                 even_sum += a
-                even_pos.add(i)
 
         ans = []
         for q in queries:
             val, index = q
-            if index in even_pos:
+            if self.is_even(A[index]):
                 if self.is_even(val):
                     even_sum += val
                     ans.append(even_sum)
                 else:
                     even_sum -= A[index]
-                    even_pos.remove(index)
                     ans.append(even_sum)
             else:
-                if self.is_odd(val):
+                if self.is_even(val):
+                    ans.append(even_sum)
+                else:
                     even_sum += A[index] + val
                     ans.append(even_sum)
-                    even_pos.add(index)
-                else:
-                    ans.append(even_sum)
+            # update the A value.
             A[index] += val
         return ans
 
@@ -67,6 +64,7 @@ class Solution(object):
 
     def is_odd(self, a):
         return abs(a) % 2 == 1
+
 
 s = Solution()
 print(s.sumEvenAfterQueries([1,2,3,4], [[1,0],[-3,1],[-4,0],[2,3]]))

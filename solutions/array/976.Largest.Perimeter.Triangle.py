@@ -45,9 +45,11 @@ class Solution(object):
             return 0
 
         A.sort()
+        # find the first end s.t. A[end-2] + A[end-1] > A[end]
         end = len(A) - 1
         while end > 1 and A[end-2] + A[end-1] <= A[end]:
             end -= 1
+
         if end >= 2:
             return sum(A[end-2:end+1])
         else:

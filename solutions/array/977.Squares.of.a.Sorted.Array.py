@@ -44,7 +44,7 @@ class Solution(object):
             zidx = bisect.bisect_right(A, 0)
             lans = self.sortedSquares(A[:zidx])
             rans = self.sortedSquares(A[zidx:])
-
+            # merge two squared arrays.
             l = r = 0
             while l < len(lans) and r < len(rans):
                 if lans[l] < rans[r]:
@@ -53,7 +53,7 @@ class Solution(object):
                 else:
                     ans.append(rans[r])
                     r += 1
-
+            # do not forget the remaining (either) array
             if l < len(lans):
                 ans += lans[l:]
             elif r < len(rans):

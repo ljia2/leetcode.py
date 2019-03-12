@@ -1,4 +1,9 @@
+
+
 class BinarySearch:
+    def f(self, m): lambda m: m
+    def g(self, m): lambda m: m
+
     # find the value satisfying f.
     def binary_search(l, r):
         while l < r:
@@ -13,7 +18,6 @@ class BinarySearch:
                 l = m + 1          # new range [m+1, r)
         return l               # or not found
 
-\
     # find first index i: A[i] > val, similar to bisect_right
     def upper_bound(A, val, l, r):
         while l < r:

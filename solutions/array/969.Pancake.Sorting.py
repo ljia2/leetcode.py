@@ -41,7 +41,6 @@ class Solution(object):
 
         but it is not shortest swaps.
 
-
         """
 
         maxidx, maxnum = self.max_misplace(A)

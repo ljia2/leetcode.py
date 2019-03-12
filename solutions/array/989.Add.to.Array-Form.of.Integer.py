@@ -1,7 +1,8 @@
 class Solution(object):
     def addToArrayForm(self, A, K):
         """
-        For a non-negative integer X, the array-form of X is an array of its digits in left to right order.  For example, if X = 1231, then the array form is [1,2,3,1].
+        For a non-negative integer X, the array-form of X is an array of its digits in left to right order.
+        For example, if X = 1231, then the array form is [1,2,3,1].
 
         Given the array-form A of a non-negative integer X, return the array-form of the integer X+K.
 
@@ -74,6 +75,8 @@ class Solution(object):
                 carry = nd // 10
                 ans.append(nd % 10)
                 k -= 1
+
+        # do not forget the carry after existing while loop
         if carry > 0:
             ans.append(carry)
         ans.reverse()
