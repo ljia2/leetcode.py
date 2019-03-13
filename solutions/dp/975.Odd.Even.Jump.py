@@ -1,3 +1,5 @@
+import bisect
+
 class Solution(object):
     def oddEvenJumps(self, A):
         """
@@ -67,4 +69,65 @@ class Solution(object):
 
         :type A: List[int]
         :rtype: int
+
+        1 <= A.length <= 20000 hints O(n) or O(nlogn) algorithm.
+
+        count problem can be solved by DP.
+
+        scan the array from tail to beginning.
+        for index i:
+        dp[i][0]: whether i is a good index by reaching end starting by a even jump.
+        dp[i][1]: whether i is a good index by reaching end starting by a odd jump.
+
+        use a binary tree gindexes to store good indexes and
+        bisect A[i] on gindexes to find the closet index and then update accordingly.
         """
+
+        if not A:
+            return 0
+        # initialize dp array
+        # dp_even[i] is True if the index i is a good index via even jumps.
+        dp_even = [False] * len(A)
+        # dp_odd[i] is True if the index i is a good index via odd jumps.
+        dp_odd = [False] * len(A)
+
+        # base case initialization
+        dp_even[len(A)-1] = True
+        dp_odd[len(A)-1] = True
+
+        # store the processed indexes.
+        # we use the tuple for bisect.
+        # processed1 is used to find the odd jump position.
+        processed1 = [(A[-1], len(A)-1)]
+        # processed2 is used to find the even jump position.
+        processed2 = [(A[-1], -(len(A)-1))]
+
+        for i in range(len(A)-2, -1, -1):
+            # odd jump to the smallest (and closest) number >= A[i].
+            # tails[j] is qualified jump for odd jump.
+            j = bisect.bisect_left(processed1, (A[i], i))
+            if j < len(processed1):
+                dp_odd[i] = dp_even[processed1[j][1]]
+
+            # even jump to the largest and closest number <= A[i]
+            # find the largest number <= A[i] but with the smallest index
+            j = bisect.bisect_right(processed2, (A[i], i))
+            if j > 0:
+                # it is possible that processed[j][0] == A[i] but processed[j][1] > i.
+                dp_even[i] = dp_odd[-processed2[j-1][1]]
+
+            # put (A[i], i) into processed arrays.
+            bisect.insort_left(processed1, (A[i], i))
+            bisect.insort_left(processed2, (A[i], -i))
+
+        # good index always starting with an odd jump.
+        ans = 0
+        for i in range(len(A)):
+            ans += 1 if dp_odd[i] else 0
+        return ans
+
+s = Solution()
+# print(s.oddEvenJumps([10,13,12,14,15]))
+# print(s.oddEvenJumps([2,3,1,1,4]))
+#print(s.oddEvenJumps([5,1,3,4,2]))
+print(s.oddEvenJumps([1,2,3,2,1,4,4,5]))
