@@ -4,6 +4,7 @@ class Interval(object):
         self.start = s
         self.end = e
 
+
 class Solution(object):
     def intervalIntersection(self, A, B):
         """

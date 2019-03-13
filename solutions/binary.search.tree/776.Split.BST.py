@@ -1,9 +1,9 @@
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 class Solution:
     def splitBST(self, root, V):
@@ -49,28 +49,24 @@ class Solution:
         :rtype: List[TreeNode]
 
         recursive!
+
+        return a tuuple of ltree of root smaller or equal to V, rtree of root bigger to V
         
         """
         if not root:
             return [None, None]
-        # elif not root.left and not root.right:
-        #     if root.val <= V:
-        #         return [root, None]
-        #     else:
-        #         return [None, root]
+
+        lltree, lrtree = self.splitBST(root.left, V)
+        rltree, rrtree = self.splitBST(root.right, V)
+
+        if root.val <= V:
+            # lrtree must be None
+            root.left = lltree
+            root.right = rltree
+            return [root, rrtree]
         else:
-
-            lltree, lrtree = self.splitBST(root.left, V)
-            rltree, rrtree = self.splitBST(root.right, V)
-
-            if root.val <= V:
-                # ltree must be None
-                root.left = lltree
-                root.right = rltree
-                return [root, rrtree]
-            else:
-                # rltree must be None
-                root.left = lrtree
-                root.right = rrtree
-                return [lltree, root]
+            # rltree must be None
+            root.left = lrtree
+            root.right = rrtree
+            return [lltree, root]
 

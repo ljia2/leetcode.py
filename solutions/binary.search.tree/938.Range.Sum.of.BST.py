@@ -27,6 +27,9 @@ class Solution:
         :type L: int
         :type R: int
         :rtype: int
+
+        typical recursive (dfs) over binary search tree.
+
         """
         if root is None:
             return 0

@@ -54,6 +54,7 @@ class Solution(object):
             maxidx, maxnum = self.max_misplace(A)
         return ans
 
+
     def max_misplace(self, A):
         for num in range(len(A), 1, -1):
             if A[num-1] == num:

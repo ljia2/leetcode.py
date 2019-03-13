@@ -1,8 +1,9 @@
 
 
 class BinarySearch:
-    def f(self, m): lambda m: m
-    def g(self, m): lambda m: m
+    def f(self, m): return True
+
+    def g(self, m): return True
 
     # find the value satisfying f.
     def binary_search(l, r):

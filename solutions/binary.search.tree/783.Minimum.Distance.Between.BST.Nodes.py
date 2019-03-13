@@ -37,20 +37,10 @@ class Solution:
 
         if root is None:
             return 0
+
         ans = [2**31]
-        lmax, _ = self.dfs(root.left, ans)
-        _, rmin = self.dfs(root.right, ans)
-
-        if lmax and rmin:
-            newdiff = min(abs(lmax - root.val), abs(rmin - root.val))
-        elif lmax:
-            newdiff = abs(lmax - root.val)
-        elif rmin:
-            newdiff = abs(rmin - root.val)
-        else:
-            newdiff = 2**31
-
-        return min(newdiff, ans[0])
+        self.dfs(root, ans)
+        return ans[0]
 
     def dfs(self, root, ans):
         if root is None:
@@ -67,6 +57,7 @@ class Solution:
             newdiff = abs(rmin - root.val)
         else:
             newdiff = 2**31
+
         if ans[0] > newdiff:
             ans[0] = newdiff
 

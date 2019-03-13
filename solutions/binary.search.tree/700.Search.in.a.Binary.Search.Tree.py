@@ -27,9 +27,11 @@ class Solution:
               2
              / \
             1   3
-        In the example above, if we want to search the value 5, since there is no node with value 5, we should return NULL.
+        In the example above, if we want to search the value 5,
+        since there is no node with value 5, we should return NULL.
 
-        Note that an empty tree is represented by NULL, therefore you would see the expected output (serialized tree format) as [], not null.
+        Note that an empty tree is represented by NULL,
+        therefore you would see the expected output (serialized tree format) as [], not null.
 
         :type root: TreeNode
         :type val: int
@@ -46,9 +48,9 @@ class Solution:
         if root.val == val:
             ans[0] = root
             return
-        elif root.val > val:
+
+        if root.val > val:
             self.dfs(root.left, val, ans)
-            return
         elif root.val < val:
             self.dfs(root.right, val, ans)
-            return
+        return
