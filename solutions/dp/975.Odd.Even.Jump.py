@@ -81,6 +81,11 @@ class Solution(object):
 
         use a binary tree gindexes to store good indexes and
         bisect A[i] on gindexes to find the closet index and then update accordingly.
+
+
+        Trick !!!!! How to efficient use bisect:
+         1) use tuple (A[i], i) to bisect_left to find the smallest and closest number >= A[i]
+         2) use tuple (A[i], -i) to bisect_right to find the largest and closest number <= A[i]
         """
 
         if not A:
