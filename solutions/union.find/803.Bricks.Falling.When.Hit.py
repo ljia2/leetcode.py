@@ -39,6 +39,7 @@ class UnionFindSolution: # TLE
 
 
         reverse the order of falling and start from the ultimate graph and keep adding edges
+
         keep track of the number components containing the bricks connecting to the roof
 
         """

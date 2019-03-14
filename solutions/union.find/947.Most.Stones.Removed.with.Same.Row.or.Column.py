@@ -28,7 +28,7 @@ class Solution:
         :type stones: List[List[int]]
         :rtype: int
 
-        for each stone, it has a virual edge with another store sharing the same column/row
+        for each stone, it has a virtual edge with another store sharing the same column/row
         """
 
         if not stones or len(stones) == 1:

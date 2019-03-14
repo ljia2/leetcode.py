@@ -9,8 +9,6 @@ class Solution:
         There is an edge between A[i] and A[j] if and only if A[i] and A[j] share a common factor greater than 1.
         Return the size of the largest connected component in the graph.
 
-
-
         Example 1:
 
         Input: [4,6,15,35]

@@ -1,5 +1,3 @@
-from collections import Counter
-
 class UnionFindSolution:
     def areSentencesSimilarTwo(self, words1, words2, pairs):
         """
@@ -66,6 +64,7 @@ class UnionFindSolution:
         for w in words1:
             pw = self.find(w, parents)
             pwlist1.append(pw)
+
         pwlist2 = []
         for w in words2:
             pw = self.find(w, parents)

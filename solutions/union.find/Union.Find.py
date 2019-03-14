@@ -1,3 +1,6 @@
+"""
+It is normally used to find the connected components in the graph or detect circle in the graph.
+"""
 class UnionFindSet:
     def __init__(self, n):
         self._parents = [i for i in range(n + 1)]
@@ -11,13 +14,14 @@ class UnionFindSet:
 
     def union(self, u, v):
         pu, pv = self.find(u), self.find(v)
-        if pu == pv: return False
+        if pu == pv:
+            return False
 
-        if self._ranks[pu] < self._ranks[pv]:
-            self._parents[pu] = pv
-        elif self._ranks[pu] > self._ranks[pv]:
-            self._parents[pv] = pu
-        else:
-            self._parents[pv] = pu
-            self._ranks[pu] += 1
+        # merge small into big.
+        if self._ranks[pu] > self._ranks[pv]:
+            pu, pv = pv, pu
+
+        self._parents[pu] = pv
+        self._size[pv] += self._size[pu]
+
         return True

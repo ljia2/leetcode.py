@@ -48,41 +48,49 @@ class UnionFindSolution: # TLE
         :type positions: List[List[int]]
         :rtype: List[int]
         """
+
         size = m * n
-        lands = [0] * size
+        # whether a cell is land
+        lands = [[0] * n for _ in range(m)]
+        # initialization
+        # all cells are their own parents
         parents = [i for i in range(size)]
-        ranks = [1] * size
+        # all cells have the same size of 1.
+        sizes = [1] * size
+
         ans = []
-        directions = [[0, -1], [0, 1], [-1, 0], [1, 0]]
+        # tracking the count the connected components.
         count = 0
         for p in positions:
             r, c = p
             i = r * n + c
-            lands[i] = 1
+            lands[r][c] = 1
+            # a new land
             count += 1
-            for dir in directions:
-                rr = r + dir[0]
-                cc = c + dir[1]
+            # search four directions to ensure it is a new island
+            for rr, cc in [(r-1, c), (r+1, c), (r, c-1), (r, c+1)]:
                 ii = rr * n + cc
+
                 # out of bound
-                if rr < 0 or rr > m - 1 or cc < 0 or cc > n - 1 or lands[ii] == 0:
+                if rr < 0 or rr > m - 1 or cc < 0 or cc > n - 1 or lands[rr][cc] == 0:
                     continue
 
-                    # there is an edge between i and ni
+                # There is an new edge between ii (existing land) and i (new land).
                 pi = self.find(parents, i)
                 pii = self.find(parents, ii)
-
+                # these two lands already sharing the same parent.
                 if pi == pii:
                     continue
 
-                # whenever there is a union of two components, the total nubmer of connected compontents minusing 1
-                if pii != pi:
-                    # union two islands by ranks, thus island number minus 1
-                    if ranks[pi] > ranks[pii]:
-                        pi, pii = pii, pi
-                    parents[pi] = pii
-                    ranks[pii] += ranks[pi]
-                    count -= 1
+                # union two islands by ranks
+                if sizes[pi] > sizes[pii]:
+                    pi, pii = pii, pi
+                parents[pi] = pii
+                sizes[pii] += sizes[pi]
+
+                # the new edge merges two components and the total number of connected components minus 1
+                count -= 1
+
             ans.append(count)
         return ans
 
@@ -91,4 +99,3 @@ class UnionFindSolution: # TLE
             parents[s] = parents[parents[s]]
             s = parents[s]
         return s
-

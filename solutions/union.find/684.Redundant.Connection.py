@@ -117,6 +117,7 @@ class UnionFindSolution:
             4 - 3
 
         Note:
+
         The size of the input 2D-array will be between 3 and 1000.
         Every integer represented in the 2D-array will be between 1 and N, where N is the size of the input array.
 
@@ -132,7 +133,7 @@ class UnionFindSolution:
         initially, all nodes pointing to themselves and all nodes have the same rank of 1.
 
         given a edge,
-        1) if two nodes are pointint to the same parent, return that edge as the unique Redundant edge.
+        1) if two nodes are pointing to the same parent, return that edge as the unique Redundant edge.
         2) Otherwise, find their parent (path compression in find) and union by ranks.
 
 

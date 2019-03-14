@@ -29,6 +29,9 @@ class UnionFindSolution:
         parents = [i for i in range(n)]
         ranks = [1] * n
 
+        # for each edge, try to union s, d.
+        # if s and d is already connected by sharing the parent.
+        # then there is a circle.
         for e in edges:
             s, d = e
             ps = self.find(parents, s)
@@ -43,10 +46,11 @@ class UnionFindSolution:
             parents[ps] = pd
             ranks[pd] += ranks[ps]
 
+        # all nodes having a single parent
         ans = set()
         for i in range(len(parents)):
             ans.add(self.find(parents, parents[i]))
-        return True if len(ans) == 1 else False
+        return len(ans) == 1
 
     def find(self, parents, s):
         while s != parents[s]:

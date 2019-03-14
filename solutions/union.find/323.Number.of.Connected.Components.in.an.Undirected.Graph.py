@@ -38,21 +38,25 @@ class Solution:
 
         for e in edges:
             s, d = e
-            ps = self.find(parents, s)
-            pd = self.find(parents, d)
-
-            if ps == pd:
-                continue
-
-            if ranks[ps] > ranks[pd]:
-                ps, pd = pd, ps
-            parents[ps] = pd
-            ranks[pd] += ranks[ps]
+            self.union(parents, ranks, s, d)
 
         ans = set()
         for i in range(len(parents)):
             ans.add(self.find(parents, parents[i]))
         return len(ans)
+
+    def union(self, parents, ranks, s, d):
+        ps = self.find(parents, s)
+        pd = self.find(parents, d)
+
+        if ps == pd:
+            return
+
+        if ranks[ps] > ranks[pd]:
+            ps, pd = pd, ps
+        parents[ps] = pd
+        ranks[pd] += ranks[ps]
+        return
 
     def find(self, parents, s):
         while s != parents[s]:
