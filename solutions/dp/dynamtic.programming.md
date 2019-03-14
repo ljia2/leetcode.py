@@ -67,6 +67,7 @@
         dp[i][1] is the minSwaps(A[0->i]) without swapping A[i] and B[i]
         
 * LC 790: Domino nd Tromino Tiling
+
         dp[i][0] is ways to tile i cols
         dp[i][1] is ways to tile i cols + 1 for 1st row
         dp[i][2] is ways to tile i cols + 1 for 2nd row
@@ -82,6 +83,7 @@
 * dp[i] depends on all smaller problems (dp[0], dp[1], ..., dp[i-1])
 * Time O(n^2) and Space O(n)
 * Template
+
         dp = [0] * n
         for i = 1 to n:
             for j = 1 to i-1:
@@ -91,7 +93,7 @@
 * LC 139 Wordbreak
 
         dp[i] wordbreak(A[0->i])
-        dp[i] = any (dp[0->k] and word(A[k+1->i]))
+        dp[i] = any k s.t. (dp[0->k] and word(A[k+1->i]))
         
 * LC 818: Race Car:
         dp[i][0] is min steps to reach i facing right
@@ -121,6 +123,7 @@
 * dp[i][j] is (opt) solution of subproblem A[i->j], a subarray of input, each subproblem depends O(n) smaller problems
 * Time O(n^3) and Space O(n^2)
 * Template
+
         dp = [[0] * m for _ in range(n)]
         for l = 1 to n # subproblem size
             for i = 1 to n - l + 1 # subproblem start
@@ -130,10 +133,13 @@
         return dp[1][m]
         
 * LC 312 Burst Ballons
+
         dp[i][j] = burstBallon(A[i->j])
-        dp[i][j] - max(dp[i][k-1] + dp[k+1][j] + C(k)
+        
+        dp[i][j] = max(dp[i][k-1] + dp[k+1][j] + C(k))
         
 * LC 664: strange printer
+
         dp[i][j] = min steps to print A[i->j]
         dp[i][j] = min(dp[i][k] + dp[k][j])
 
@@ -143,6 +149,7 @@
 * dp[i][j] is sol of A[0->i][0->j], each subproblem depends on O(1) subproblem
 * Time O(mn) and Spance O(mn) -> O(m)
 * Template:
+
         dp = [[0] * m for _ in range(n)]
         for i = 1 to n:
             for j = 1 to m:
@@ -150,12 +157,13 @@
 
 
 * LC 62
-   dp[i][j] is ways from A[0][0] to A[i][j]
-   dp[i][j] = dp[i][j-1] + dp[i-1][j]
+
+       dp[i][j] is ways from A[0][0] to A[i][j]
+       dp[i][j] = dp[i][j-1] + dp[i-1][j]
    
 * LC 64 Minmum Path Sum (similar to LC 62)
 
-### 2.2
+### Case 2.2
 * Input O(mn)
 * dp[k][i][j] sol of A[0->i][0->j] after k steps, each subproblem depends on O(1) subproblems
 * Time O(kmn) and Spance O(kmn) -> O(mn)
