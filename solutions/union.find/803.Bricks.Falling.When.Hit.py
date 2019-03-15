@@ -1,3 +1,5 @@
+import copy
+
 class UnionFindSolution: # TLE
     def hitBricks(self, grid, hits):
         """
@@ -48,7 +50,7 @@ class UnionFindSolution: # TLE
         colnum = len(grid[0])
 
         # calculate the ultimate grid without removed bricks if exists.
-        final_grid = [row.copy() for row in grid]
+        final_grid = copy.copy(grid)
         for hit in hits:
             r, c = hit
             final_grid[r][c] = 0
@@ -60,12 +62,12 @@ class UnionFindSolution: # TLE
             for c in range(colnum):
                 if final_grid[r][c] == 0:
                     continue
-                for (r_delta, c_delta) in dirs:
-                    newr = r + r_delta
-                    newc = c + c_delta
+
+                for newr, newc in [(r-1, c), (r+1, c), (r, c-1), (r, c+1)]:
                     if newr < 0 or newr >= rownum or newc < 0 or newc >= colnum or final_grid[newr][newc] == 0:
                         continue
                     self.union(parents, sizes, r*colnum + c, newr * colnum + newc)
+
         # all connected bricks must in the same components as those bricks connecting roof.
         bricks = 0
         components = set()
@@ -84,9 +86,7 @@ class UnionFindSolution: # TLE
                 continue
             # adding an edge to final_grid
             final_grid[r][c] = 1
-            for (r_delta, c_delta) in dirs:
-                newr = r + r_delta
-                newc = c + c_delta
+            for newr, newc in [(r-1, c), (r+1, c), (r, c-1), (r, c+1)]:
                 if newr < 0 or newr >= rownum or newc < 0 or newc >= colnum or final_grid[newr][newc] == 0:
                     continue
                 self.union(parents, sizes, r*colnum + c, newr * colnum + newc)

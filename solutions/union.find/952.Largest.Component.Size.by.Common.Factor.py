@@ -31,7 +31,7 @@ class Solution:
 
         A.length <= 20000 hints O(n) or O(nlogn)
 
-        Union all numbers with their factors. given a number W, there are at most sqrt(W) factors.
+        Union all numbers with their factors > 1. given a number W, there are at most sqrt(W) factors.
 
         Time: O(n*sqrt(W))
 

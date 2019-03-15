@@ -1,7 +1,8 @@
 class Solution:
     def removeStones(self, stones):
         """
-        On a 2D plane, we place stones at some integer coordinate points.  Each coordinate point may have at most one stone.
+        On a 2D plane, we place stones at some integer coordinate points.
+        Each coordinate point may have at most one stone.
 
         Now, a move consists of removing a stone that shares a column or row with another stone on the grid.
 
@@ -11,6 +12,7 @@ class Solution:
 
         Input: stones = [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]
         Output: 5
+
         Example 2:
 
         Input: stones = [[0,0],[0,2],[1,1],[2,0],[2,2]]
@@ -29,6 +31,10 @@ class Solution:
         :rtype: int
 
         for each stone, it has a virtual edge with another store sharing the same column/row
+
+        then a graph is built.
+
+        the problem is converted to find the sum of (size - 1) of all connected components.
         """
 
         if not stones or len(stones) == 1:
@@ -47,6 +53,7 @@ class Solution:
         for i in range(len(stones)):
             pi = self.find(parents, i)
             if pi not in visited:
+                # given a component of 3 stones, there are 2 moves (i.e. one stone has to be left).
                 moves += sizes[pi] - 1
                 visited.add(pi)
         return moves

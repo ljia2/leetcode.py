@@ -35,6 +35,7 @@ class UnionFindSolution:
         if len(A) == 1:
             return 1
 
+        # use dictionary to represent parents and ranks.
         parents = {w:w for w in A}
         ranks = {w:1 for w in A}
 
