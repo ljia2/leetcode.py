@@ -17,8 +17,13 @@ class Solution:
 
         :type nums: List[int]
         :rtype: List[List[int]]
+
+
+        1) for each number c, find it complement target (0 - c).
+        2) sort the numbers and use start (a) and end (b) (two pointers) to find the three numbers, s.t. a + b + c = 0
+
         """
-        if nums is None or not nums or len(nums) < 3:
+        if not nums or len(nums) < 3:
             return []
 
         # in-place sorting by ascending order
@@ -35,7 +40,6 @@ class Solution:
                 ssum = nums[left] + nums[mid] + nums[right]
                 if ssum == 0:
                     ans.append([nums[left], nums[mid], nums[right]])
-
                     # after a qualified tuple, need to change b and c at the same time
                     mid += 1
                     while mid < right and nums[mid] == nums[mid-1]:
@@ -45,11 +49,13 @@ class Solution:
                         right -= 1
 
                 elif ssum > 0:
+                    # need to move right to left to shrink sum.
                     right -= 1
                     while right > mid and nums[right] == nums[right+1]:
                         right -= 1
 
                 elif ssum < 0:
+                    # need to move mid to right to increase sum.
                     mid += 1
                     while mid < right and nums[mid] == nums[mid-1]:
                         mid += 1

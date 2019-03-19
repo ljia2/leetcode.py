@@ -33,6 +33,9 @@ class Solution(object):
         :type A: List[Interval]
         :type B: List[Interval]
         :rtype: List[Interval]
+
+
+        merge two linked list; use a and b to refer the heads of two linked list.
         """
 
         if not A or not B:
@@ -47,9 +50,11 @@ class Solution(object):
             if self.overlap(A[a], B[b]):
                 ans.append(Interval(max(A[a].start, B[b].start), min(A[a].end, B[b].end)))
                 if A[a].end < B[b].end:
+                    # replace the first linklist of B.
                     B[b] = Interval(A[a].end+1, B[b].end)
                     a += 1
                 elif A[a].end > B[b].end:
+                    # replace the first linklist of B.
                     A[a] = Interval(B[b].end+1, A[a].end)
                     b += 1
                 else:

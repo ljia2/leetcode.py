@@ -19,6 +19,12 @@ class Solution:
 
         :type height: List[int]
         :rtype: int
+
+
+        use two pointers start and end moving towards to each other.
+
+        calculate the bucket that can hold waters to find the maximum volume.
+
         """
 
         if height is None or not height:
@@ -34,7 +40,7 @@ class Solution:
             area = min(max_left, max_right) * (right - left)
             if max_area < area:
                 max_area = area
-            # update the smaller pointer
+            # update the smaller pointer, to find the next higher alternative.
             if max_left < max_right:
                 while left < len(height) and height[left] <= max_left:
                     left += 1

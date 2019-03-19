@@ -21,11 +21,12 @@ class Solution:
             mid, right = left + 1, len(nums)-1
             while mid < right:
                 sum = nums[left] + nums[mid] + nums[right]
-                diff = nums[left] + nums[mid] + nums[right] - target
 
+                diff = nums[left] + nums[mid] + nums[right] - target
                 if min_diff < 0 or abs(diff) < min_diff:
                     min_diff = abs(diff)
                     result = sum
+
                 if diff == 0:
                     mid += 1
                     while mid < right and nums[mid] == nums[mid-1]:

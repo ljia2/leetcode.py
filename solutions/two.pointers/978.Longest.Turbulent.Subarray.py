@@ -27,7 +27,7 @@ class Solution(object):
         :type A: List[int]
         :rtype: int
 
-        two pointers, start and end
+        two pointers, start and end.
         """
 
         if len(A) <= 1:
@@ -42,15 +42,11 @@ class Solution(object):
 
             # special case: A[end-1] < A[end] or A[end-1] > A[end] only
             if end < len(A) and end == start + 1 and A[end] != A[start]:
-                if max_size < 2:
-                    max_size = 2
-
+                max_size = max(max_size, 2)
             # A[end-1] < A[end] > A[end+1] or A[end-1] > A[end] < A[end+1]
             elif end > start + 1:
-                mlen = end - start + 1
-                if max_size < mlen:
-                    max_size = mlen
-
+                max_size = max(max_size, end - start + 1)
+            # reset the start
             start = end
         return max_size
 

@@ -45,7 +45,8 @@ import collections
 class BetterSolution:
     def lengthOfLongestSubstringTwoDistinct(self, s):
         """
-        Given a string s , find the length of the longest substring t  that contains at most 2 distinct characters.
+        Given a string s , find the length of the longest substring t
+        that contains at most 2 distinct characters.
 
         Example 1:
         Input: "eceba"
@@ -60,16 +61,23 @@ class BetterSolution:
         :type s: str
         :rtype: int
 
+        an idea of typical sliding window.
+        a window of two pointer from start to end.
+        keep expanding the window by moving end to right as long as there are at most two chars between start and end.
+        there are three elements in the window, keep shrinking start until there are two unique elements in the window.
+
+
 
         """
         if not s:
             return 0
 
         counters = collections.Counter()
+
         start = end = 0
         max_len = -1
         char_count = 0
-        for end in range(len(s)):
+        while end < len(s):
             if counters[s[end]] == 0:
                 char_count += 1
             counters[s[end]] += 1

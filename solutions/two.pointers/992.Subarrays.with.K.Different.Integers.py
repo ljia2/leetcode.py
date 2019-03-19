@@ -1,9 +1,11 @@
 import collections
+
 class Solution(object):
     def subarraysWithKDistinct(self, A, K):
         """
         Given an array A of positive integers,
-        call a (contiguous, not necessarily distinct) subarray of A good if the number of different integers in that subarray is exactly K.
+        call a (contiguous, not necessarily distinct) subarray of A good
+        if the number of different integers in that subarray is exactly K.
 
         (For example, [1,2,3,1,2] has 3 different integers: 1, 2, and 3.)
 
@@ -12,7 +14,8 @@ class Solution(object):
         Example 1:
         Input: A = [1,2,1,2,3], K = 2
         Output: 7
-        Explanation: Subarrays formed with exactly 2 different integers: [1,2], [2,1], [1,2], [2,3], [1,2,1], [2,1,2], [1,2,1,2].
+        Explanation: Subarrays formed with exactly 2 different integers:
+        [1,2], [2,1], [1,2], [2,3], [1,2,1], [2,1,2], [1,2,1,2].
 
         Example 2:
         Input: A = [1,2,1,3,4], K = 3
@@ -46,7 +49,7 @@ class Solution(object):
         O(N)
 
         How to define a function to find the # of subarray at most K integer?
-        1) Find the maximum subarray l with K integers, then there are (l + 1) * l / 2 subarraies at most K intergers.
+        1) Find the maximum subarray l with K integers, then there are (l + 1) * l / 2 subarrays at most K integers.
 
 
         """
@@ -82,6 +85,6 @@ class Solution(object):
         return res
 
 s = Solution()
-#print(s.subarraysWithKDistinct([1,2,1,2,3], 2))
-#print(s.subarraysWithKDistinct([1,2,1,3,4], 3))
+print(s.subarraysWithKDistinct([1,2,1,2,3], 2))
+print(s.subarraysWithKDistinct([1,2,1,3,4], 3))
 print(s.subarraysWithKDistinct([2,1,1,1,2], 1))

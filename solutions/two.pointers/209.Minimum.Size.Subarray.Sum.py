@@ -2,7 +2,8 @@ class SolutionI: # Two Pointers solution
     def minSubArrayLen(self, s, nums):
         """
         Given an array of n positive integers and a positive integer s,
-        find the minimal length of a contiguous subarray of which the sum ≥ s. If there isn't one, return 0 instead.
+        find the minimal length of a contiguous subarray of which the sum ≥ s.
+        If there isn't one, return 0 instead.
 
         Example:
 
@@ -16,7 +17,7 @@ class SolutionI: # Two Pointers solution
         :type nums: List[int]
         :rtype: int
 
-        give an array of positive numbers, we can use two pointers, because presume is increasing stickly.
+        give an array of positive numbers, we can use two pointers, because presume is strictly increasing.
 
         """
 
