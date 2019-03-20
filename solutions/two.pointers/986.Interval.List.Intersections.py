@@ -50,11 +50,11 @@ class Solution(object):
             if self.overlap(A[a], B[b]):
                 ans.append(Interval(max(A[a].start, B[b].start), min(A[a].end, B[b].end)))
                 if A[a].end < B[b].end:
-                    # replace the first linklist of B.
+                    # replace the first interval of B.
                     B[b] = Interval(A[a].end+1, B[b].end)
                     a += 1
                 elif A[a].end > B[b].end:
-                    # replace the first linklist of B.
+                    # replace the first interval of B.
                     A[a] = Interval(B[b].end+1, A[a].end)
                     b += 1
                 else:
@@ -69,6 +69,7 @@ class Solution(object):
 
     def overlap(self, a, b):
         return max(a.start, b.start) <= min(a.end, b.end)
+
 
 s = Solution()
 A = [Interval(0, 2), Interval(5, 10), Interval(13, 23), Interval(24, 25)]

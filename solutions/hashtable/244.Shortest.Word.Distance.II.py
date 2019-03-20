@@ -1,3 +1,5 @@
+import collections
+
 class WordDistance:
 
     def __init__(self, words):
@@ -19,13 +21,9 @@ class WordDistance:
         Unlimited/Multiple times implies Precompution and store with Hashtable where k = word pair and v = shortest path
         """
         self.size = len(words)
-        self.word_pos = dict()
-        for i in range(len(words)):
-            word = words[i]
-            if word in self.word_pos.keys():
-                self.word_pos[word].append(i)
-            else:
-                self.word_pos[word] = [i]
+        self.word_pos = collections.defaultdict(list)
+        for i, word in enumerate(words):
+            self.word_pos[word].append(i)
 
     def shortest(self, word1, word2):
         """

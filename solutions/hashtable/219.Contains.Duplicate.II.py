@@ -2,7 +2,8 @@ class Solution:
     def containsNearbyDuplicate(self, nums, k):
         """
 
-        Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j]
+        Given an array of integers and an integer k,
+        find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j]
         and the absolute difference between i and j is at most k.
 
         Example 1:
@@ -21,6 +22,7 @@ class Solution:
         :type nums: List[int]
         :type k: int
         :rtype: bool
+
         """
 
         if not nums or k < 1:

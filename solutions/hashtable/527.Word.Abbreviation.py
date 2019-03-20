@@ -1,4 +1,5 @@
 from collections import defaultdict
+
 class Solution:
     def wordsAbbreviation(self, dict):
         """

@@ -33,10 +33,10 @@ class Solution(object):
         if len(A) <= 1:
             return len(A)
 
-        start = end = 0
+        start, end = 0, 1
         max_size = 1
         while end < len(A):
-            end = start + 1
+            # keep expanding end to longest Turbulent subarray.
             while end + 1 < len(A) and ((A[end-1] < A[end] and A[end] > A[end+1]) or (A[end-1] > A[end] and A[end] < A[end+1])):
                 end += 1
 
@@ -46,8 +46,10 @@ class Solution(object):
             # A[end-1] < A[end] > A[end+1] or A[end-1] > A[end] < A[end+1]
             elif end > start + 1:
                 max_size = max(max_size, end - start + 1)
-            # reset the start
+
+            # reset the start and end.
             start = end
+            end = start + 1
         return max_size
 
 s = Solution()

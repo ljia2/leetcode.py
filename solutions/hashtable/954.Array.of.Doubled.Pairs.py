@@ -1,10 +1,12 @@
 import bisect
 import collections
 
+
 class Solution(object):
     def canReorderDoubled(self, A):
         """
-        Given an array of integers A with even length, return true if and only if it is possible to reorder it such that A[2 * i + 1] = 2 * A[2 * i] for every 0 <= i < len(A) / 2.
+        Given an array of integers A with even length,
+        return true if and only if it is possible to reorder it such that A[2 * i + 1] = 2 * A[2 * i] for every 0 <= i < len(A) / 2.
 
         Example 1:
 
@@ -113,11 +115,7 @@ class BetterSolution(object):
         :type A: List[int]
         :rtype: bool
 
-        rearrange array to ensure the odd position value is 2 * even position value.
 
-        split into positive and negative.
-        for positive, start with smallest v and see whether 2*v in positive or not.
-        for negative, start with biggest v and see whether 2*v in negative or not.
         """
         c = collections.Counter(A)
         for x in sorted(c, key=abs):

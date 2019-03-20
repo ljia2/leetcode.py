@@ -52,7 +52,6 @@ class Solution(object):
         And there will be a loop.
 
         1 <= N <= 10^9 hints some trick to avoid linear.
-
         """
         visited = dict()
         while N:

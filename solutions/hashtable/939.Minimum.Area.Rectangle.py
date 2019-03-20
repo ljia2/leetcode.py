@@ -1,4 +1,6 @@
 import collections
+
+
 class Solution(object):
     def minAreaRect(self, points):
         """
@@ -43,6 +45,7 @@ class Solution(object):
                     hlines[(xx, yy)].append(x-xx) if x > xx else hlines[(x, y)].append(xx - x)
 
         minArea = 10**32
+
         spoints = set(map(lambda x: (x[0], x[1]), points))
         ps = set(vlines.keys()).intersection(set(hlines.keys()))
         for p in ps:

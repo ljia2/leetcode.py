@@ -29,17 +29,18 @@ class BestSolution:
 
         res = ""
         max_length = 2 ** 31
-        right = 0
+        j = 0
 
         for i, c in enumerate(s):
-            # given the left bounary i,  moving right boundary until form a valid substring
-            while not self.valid(dt, ds) and right < len(s):
-                ds[s[right]] = ds.get(s[right], 0) + 1
-                right += 1
+            # given the left boundary i,  moving right boundary until form a valid substring
+            while not self.valid(dt, ds) and j < len(s):
+                ds[s[j]] = ds.get(s[j], 0) + 1
+                j += 1
 
-            if self.valid(dt, ds) and max_length > right - i:
-                max_length = right - i
-                res = s[i : right]
+            if self.valid(dt, ds) and max_length > j - i:
+                max_length = j - i
+                res = s[i:j]
+
             # retreat the left boundary i of sliding window to right
             ds[c] -= 1
         return res

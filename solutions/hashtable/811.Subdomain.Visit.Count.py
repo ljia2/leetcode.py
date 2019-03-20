@@ -34,6 +34,7 @@ class Solution(object):
         Each address will have either 1 or 2 "." characters.
         The input count in any count-paired domain will not exceed 10000.
         The answer output can be returned in any order.
+
         :type cpdomains: List[str]
         :rtype: List[str]
         """
@@ -46,9 +47,10 @@ class Solution(object):
             tokens = domain.split(".")
             subdomain = ""
             for i in range(len(tokens)-1, -1, -1):
-                subdomain = tokens[i] + "." + subdomain if i < len(tokens)-1 else tokens[i]
+                subdomain = (tokens[i] + "." + subdomain) if i < len(tokens)-1 else tokens[i]
                 dc[subdomain] = dc.get(subdomain, 0) + int(count)
         return [str(v) + " " + k for k, v in dc.items()]
+
 
 s = Solution()
 print(s.subdomainVisits(["900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"]))
