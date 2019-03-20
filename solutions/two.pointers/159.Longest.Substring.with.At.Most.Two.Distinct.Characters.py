@@ -66,8 +66,7 @@ class BetterSolution:
         keep expanding the window by moving end to right as long as there are at most two chars between start and end.
         there are three elements in the window, keep shrinking start until there are two unique elements in the window.
 
-
-
+        similar to LC713
         """
         if not s:
             return 0

@@ -1,4 +1,4 @@
-from heapq import heappush, heappop, heapify, nsmallest, nlargest
+from heapq import heappush, heappop
 
 # class Solution: # TLE
 #     def smallestRange(self, nums):
@@ -86,6 +86,8 @@ class BestSolution:
 
         Very similar to minimum sliding window, however, we use priority heap for moving pointers of number lists.
 
+        use n pointers to indicate the n element (one from each list) consisting a window.
+
         """
 
         if not nums:
@@ -96,6 +98,7 @@ class BestSolution:
         result = []
         sliding_window = []
         maxv = -1
+        # put smallest number from each list into the "window" and track the maximum number in the "window"
         for n in range(len(next)):
             heappush(sliding_window, (nums[n][next[n]], n))
             if nums[n][next[n]] > maxv:
@@ -103,6 +106,7 @@ class BestSolution:
 
         while True:
             minv, mini = heappop(sliding_window)
+
             if shortest > maxv - minv + 1 or (shortest == maxv - minv + 1 and result[0] > minv):
                 shortest = maxv - minv + 1
                 result = [minv, maxv]

@@ -37,7 +37,7 @@ class Solution:
         :type target: int
         :rtype: int
 
-        Three sum problem variation: two pointer, given a solution (x, y, z), calcualte frequency hash and use combination to count.
+        Three sum problem variation: two pointer, given a solution (x, y, z), calculate frequency hash and use combination to count.
         then move pointers until a new different solution is encoutered.
         """
         modnum = int(10**9 + 7)
@@ -56,9 +56,11 @@ class Solution:
                 numsum = A[i] + A[j] + A[k]
                 if numsum == target:
                     ans += self.count([A[i], A[j], A[k]], numfreq)
+
                     j += 1
                     while j < len(A) and A[j] == A[j-1]:
                         j += 1
+
                     k -= 1
                     while k > -1 and A[k] == A[k+1]:
                         k -= 1
@@ -85,6 +87,7 @@ class Solution:
             if gf == lf:
                 ans *= 1
             else:
+                # calculate combination lf out of gf.
                 ans *= math.factorial(gf) / (math.factorial(lf) * math.factorial(gf - lf))
 
         return ans

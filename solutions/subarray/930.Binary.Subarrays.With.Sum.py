@@ -25,7 +25,8 @@ class Solution:
         :rtype: int
 
         subarrys => presum $Time: O(N), Space: O(N)$
-        store previous sum and the times of this sum, because sum[i, j] = sum[0, j] - sum[0, i - 1], this is a very very important idea!!!!
+        store previous sum and the times of this sum,
+        because sum[i, j] = sum[0, j] - sum[0, i - 1], this is a very very important idea!!!!
 
         """
         if not A or S < 0:

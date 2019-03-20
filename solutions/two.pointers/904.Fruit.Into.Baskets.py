@@ -48,12 +48,19 @@ class Solution:
         0 <= tree[i] < tree.length
         :type tree: List[int]
         :rtype: int
+
+
+        two pointer solution
+
+        LC 1004.
+
         """
         s = e = 0
         ans = -1
         baskets = set()
         baskets.add(tree[s])
         while e < len(tree):
+            # keep adding fruit into basket.
             if tree[e] in baskets or len(baskets) < 2:
                 e += 1
                 # a new fruit can be added into basket.

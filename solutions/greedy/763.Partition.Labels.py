@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 class Solution:
     def partitionLabels(self, S):
         """

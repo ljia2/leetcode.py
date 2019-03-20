@@ -62,6 +62,7 @@ class Solution:
         For the first "A": (6-3) * (3-(-1))"
         For the second "A": (9-6) * (6-3)"
         For the third "A": (N-9) * (9-6)"
+
         Complexity:
         One pass, time complexity O(N).
         Space complexity O(1).

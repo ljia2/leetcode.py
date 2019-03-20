@@ -34,11 +34,13 @@ class TwoPointerSolution:
          *    (2, 6)
          * (5, 2, 6)
          */
+
+         LC159
         """
         if k == 0 or not nums:
             return 0
 
-        start = end = 0
+        start = 0
         prod = 1
         ans = 0
         for end in range(len(nums)):

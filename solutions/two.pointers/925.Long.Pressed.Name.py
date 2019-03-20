@@ -8,8 +8,6 @@ class Solution:
         Return True if it is possible that it was your friends name,
         with some characters (possibly none) being long pressed.
 
-
-
         Example 1:
 
         Input: name = "alex", typed = "aaleex"
