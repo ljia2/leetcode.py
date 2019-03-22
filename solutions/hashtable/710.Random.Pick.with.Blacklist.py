@@ -49,24 +49,28 @@ class Solution:
         :type N: int
         :type blacklist: List[int]
         """
-        self.nums = []
+        self.N = N
+        self.nummap = dict()
+        v = 0
         for i in range(N):
-            if i not in blacklist:
-                self.nums.append(i)
-        self.size = len(self.nums)
+            while v in blacklist:
+                v += 1
+            self.nummap[i] = v % N
+            v += 1
+
 
     def pick(self):
         """
         :rtype: int
         """
-        if self.size == 1:
-            return self.nums[0]
+        if len(self.nummap) == 1:
+            return self.nummap[0]
         else:
             # randint: uniform integer x from a <= x <= b
-            return self.nums[randint(0, self.size-1)]
+            return self.nummap[randint(0, self.N-1)]
 
 # Your Solution object will be instantiated and called as such:
-obj = Solution(3, [1])
+obj = Solution(2, [])
 print(obj.pick())
 print(obj.pick())
 print(obj.pick())

@@ -6,14 +6,20 @@ class Solution:
 
     For a given query word, the spell checker handles two categories of spelling mistakes:
 
-    Capitalization: If the query matches a word in the wordlist (case-insensitive), then the query word is returned with the same case as the case in the wordlist.
+    Capitalization: If the query matches a word in the wordlist (case-insensitive),
+    then the query word is returned with the same case as the case in the wordlist.
+
     Example: wordlist = ["yellow"], query = "YellOw": correct = "yellow"
     Example: wordlist = ["Yellow"], query = "yellow": correct = "Yellow"
     Example: wordlist = ["yellow"], query = "yellow": correct = "yellow"
-    Vowel Errors: If after replacing the vowels ('a', 'e', 'i', 'o', 'u') of the query word with any vowel individually, it matches a word in the wordlist (case-insensitive), then the query word is returned with the same case as the match in the wordlist.
+
+    Vowel Errors: If after replacing the vowels ('a', 'e', 'i', 'o', 'u') of the query word with any vowel individually,
+    it matches a word in the wordlist (case-insensitive), then the query word is returned with the same case as the match in the wordlist.
+
     Example: wordlist = ["YellOw"], query = "yollow": correct = "YellOw"
     Example: wordlist = ["YellOw"], query = "yeellow": correct = "" (no match)
     Example: wordlist = ["YellOw"], query = "yllw": correct = "" (no match)
+
     In addition, the spell checker operates under the following precedence rules:
 
     When the query exactly matches a word in the wordlist (case-sensitive), you should return the same word back.
@@ -35,20 +41,21 @@ class Solution:
     1 <= queries.length <= 5000
     1 <= wordlist[i].length <= 7
     1 <= queries[i].length <= 7
+
     All strings in wordlist and queries consist only of english letters.
     """
 
     def spellchecker(self, wordlist: 'List[str]', queries: 'List[str]') -> 'List[str]':
         if not wordlist or not queries:
             return []
-
+        # original dictionary
         d1 = set(wordlist)
-
+        # dictionary case-insensitive
         d2 = defaultdict(list)
         for word in wordlist:
             w = word.lower()
             d2[w].append(word)
-
+        # dictionary masking vowels.
         d3 = defaultdict(list)
         for word in wordlist:
             w = self.maskVowels(word)
