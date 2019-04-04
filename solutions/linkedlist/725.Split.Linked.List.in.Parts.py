@@ -49,14 +49,20 @@ class Solution:
         if not root:
             return [None] * k
 
+        # find the length l (= steps + 1)
+        # therefore l is initialized to 1.
         l = 1
         runner = root
         while runner.next:
             runner = runner.next
             l += 1
 
-        div = l // k
-        mod = l % k
+
+        # for example l = 11, k = 3,
+        # d, v = divmod(l, k) = 3, 2
+        # there are two list,  d - v (1) lists have have d (3) nodes and v (2) lists have d + 1 (4) nodes.
+
+        div, mod = divmod(l, k)
 
         ans = []
         runner = root
@@ -86,6 +92,7 @@ class Solution:
                 else:
                     runner = runner.next
                     local_l += 1
+
         # add the last one
         ans.append(root)
 
