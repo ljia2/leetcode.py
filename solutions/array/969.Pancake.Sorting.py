@@ -35,8 +35,8 @@ class Solution(object):
         :rtype: List[int]
 
         1) find the index i of the maximum misplaced number a
-        2) flip i+1 numbers to make a to A[0]
-        3) flip a numbers to make a to A[a-1]
+        2) flip i+1 numbers to make it to A[0]
+        3) flip a numbers to make the number a to A[a-1]
         4) repeat until A is sorted.
 
         but it is not shortest swaps.

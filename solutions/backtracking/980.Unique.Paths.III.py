@@ -41,7 +41,7 @@ class Solution(object):
         :type grid: List[List[int]]
         :rtype: int
 
-        return all pathes hints backtracking
+        return all paths hints backtracking
 
         speciality: walking over non-obstacle exact once -> the path length is fixed.
         use this condition for early pruning.
@@ -64,7 +64,8 @@ class Solution(object):
                 elif grid[r][c] == 2:
                     end = [r, c]
         ans = [0]
-        self.dfs(grid, start, end, visited, 0, target_length, ans)
+        # path_length is initialize with 1 to count for the start point.
+        self.dfs(grid, start, end, visited, 1, target_length, ans)
         return ans[0]
 
 
@@ -77,7 +78,7 @@ class Solution(object):
             return
 
         if start == end:
-            if path_length == target_length - 1:
+            if path_length == target_length:
                 ans[0] += 1
             return
 

@@ -66,5 +66,6 @@ class Solution(object):
             ans.appendleft(card)
         return list(ans)
 
+
 s = Solution()
 print(s.deckRevealedIncreasing([17,13,11,2,3,5,7]))

@@ -5,7 +5,8 @@ class Solution:
         that is constructed by these N numbers successfully
         if one of the following is true for the ith position (1 <= i <= N) in this array:
 
-        The number at the ith position is divisible by i. i is divisible by the number at the ith position.
+        The number at the ith position is divisible by i.
+        i is divisible by the number at the ith position.
 
         Now given N, how many beautiful arrangements can you construct?
 
@@ -74,6 +75,7 @@ class Solution:
             self.dfs(N, index - 1, permutation, used, ans)
             used[n] = False
         return
+
 
 s = Solution()
 print(s.countArrangement(15))

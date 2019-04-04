@@ -42,8 +42,11 @@ class Solution:
         elif step + 1 == n:
             return head.next
         else:
+            # second points to the node before the removed node.
+            # adjust its next to remove the n node from the end.
             second.next = second.next.next
             return head
+
 
 s = Solution()
 head = ListNode(1)
@@ -52,5 +55,5 @@ head.next.next = ListNode(3)
 head.next.next.next = ListNode(4)
 head.next.next.next.next = ListNode(5)
 
-#print(s.removeNthFromEnd(head, 6))
+print(s.removeNthFromEnd(head, 6))
 print(s.removeNthFromEnd(head, 2))

@@ -21,10 +21,11 @@ class Solution:
         """
         if nums is None or len(nums) == 0:
             return []
-
+        # output[i] is the product of nums[:i]
         output = [1] * len(nums)
         for i in range(1, len(nums)):
             output[i] = output[i-1] * nums[i-1]
+
         # output[i] now store the left product of nums[:i]
         right_prod = nums[len(nums)-1]
         for i in range(len(nums)-2, -1, -1):
@@ -33,10 +34,5 @@ class Solution:
         return output
 
 
-def main():
-    s = Solution()
-    print(s.productExceptSelf([1,2,3,4]))
-
-
-if __name__ == "__main__":
-    main()
+s = Solution()
+print(s.productExceptSelf([1,2,3,4]))

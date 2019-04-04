@@ -59,14 +59,11 @@ class Solution(object):
             if a != b:
                 num2pos[b].append((i, 1))
 
-        ans = -1
+        ans = len(A) + 1
         for k, v in num2pos.items():
             if len(v) != len(A):
                 continue
-            if ans < 0:
-                ans = sum(map(lambda x:x[1], v))
-            else:
-                ans = min(ans, sum(map(lambda x:x[1], v)))
+            ans = min(ans, sum(map(lambda x:x[1], v)))
         return ans
 
 s = Solution()

@@ -1,6 +1,9 @@
 class Solution:
     def permute(self, nums):
         """
+
+        Given a collection of unique numbers, return all possible permutations.
+
         :type nums: List[int]
         :rtype: List[List[int]]
 
@@ -26,7 +29,7 @@ class Solution:
             return
         else:
             # PERMUTATION: always iterate over all numbers
-            # COMBINATION: always start an number
+            # COMBINATION: always start an number afterwards
             for i in range(len(nums)):
                 if used[i]:
                     continue

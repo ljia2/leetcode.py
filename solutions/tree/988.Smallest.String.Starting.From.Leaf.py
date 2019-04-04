@@ -72,6 +72,7 @@ class Solution:
             ans[0] = path if path < ans[0] else ans[0]
         return
 
+
 s = Solution()
 root = TreeNode(3)
 root.left = TreeNode(9)

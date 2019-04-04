@@ -27,6 +27,7 @@ class Solution:
             end = start
             while end < len(nums)-1 and nums[end + 1] == nums[end] + 1:
                 end += 1
+
             if end < len(nums) - 1:
                 # a new range is found
                 results.append((nums[start], nums[end]))

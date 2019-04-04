@@ -22,7 +22,7 @@ class Solution:
         """
         if nums is None or len(nums) == 0:
             return 0
-        max_len = 0
+        ans = 0
         num_set = set(nums)
         for num in nums:
             # always find the start of a sequence
@@ -33,7 +33,6 @@ class Solution:
                 while current_num + 1 in num_set:
                     length += 1
                     current_num += 1
-
-                if length > max_len:
-                    max_len = length
-        return max_len
+                # update the answer
+                ans = max(ans, length)
+        return ans

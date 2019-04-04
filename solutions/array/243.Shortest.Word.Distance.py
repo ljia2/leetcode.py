@@ -127,8 +127,10 @@ class BestSolution:
 
         Input: word1 = “coding”, word2 = “practice”
         Output: 3
+
         Input: word1 = "makes", word2 = "coding"
         Output: 1
+
         Note:
         You may assume that word1 does not equal to word2, and word1 and word2 are both in the list.
 
@@ -142,14 +144,16 @@ class BestSolution:
         T: O(n)
         S: O(1)
 
-        Open Question: Fidn the shortest word distance among k words. There are two possible solutions:
+        Open Question: Find the shortest word distance among k words. There are two possible solutions:
         1) LC76: minimum sliding window
         2) Given K words's sorted positions, then K pointers problem (see Solution3).
            We can use priority queue to pop the least index among K words.
 
         """
-        w1Index = -1 # recent index of word1
-        w2Index = -1 # recent index of word2
+        # recent index of word1
+        w1Index = -1
+        # recent index of word2
+        w2Index = -1
         shortest = len(words)
         for i in range(len(words)):
             if words[i] != word1 and words[i] != word2:

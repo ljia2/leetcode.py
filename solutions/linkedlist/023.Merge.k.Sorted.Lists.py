@@ -8,7 +8,6 @@ class ListNode:
         self.val < node.val
 
 
-
 # class Solution:
 #     def mergeKLists(self, lists):
 #         """
@@ -107,47 +106,46 @@ class Solution2:
         use priority queue
 
         """
-        head = ListNode(None)
         # curr points the node to insert its next value.
+        head = None
         curr = head
         pq = []
         for i in range(len(lists)):
-            node_curr = list[i]
-            if node_curr: # node is not None
+            node_curr = lists[i]
+            # node is not None
+            if node_curr:
                 # tuple of (priority, node index);
                 heappush(pq, (node_curr.val, i))
 
         while pq:
             # pop index of least value node from pq
-            min_index = heappop(pq)[1]
-            # update curr.next points to that least-valued node
-            curr.next = lists[min_index]
-            # set curr forward to that least-valued node
-            curr = lists[min_index]
+            _, min_index = heappop(pq)
+            if not head:
+                head = lists[min_index]
+                curr = head
+            else:
+                # update curr.next points to that least-valued node
+                curr.next = lists[min_index]
+                curr = curr.next
+
             if lists[min_index].next:
                 heappush(pq, (lists[min_index].next.val, min_index))
                 # move the point of min_index forward
                 lists[min_index] = lists[min_index].next
-        return head.next
+        return head
 
 
-def main():
+input1 = ListNode(1)
+input1.next = ListNode(4)
+input1.next.next = ListNode(5)
 
-    input1 = ListNode(1)
-    input1.next = ListNode(4)
-    input1.next.next = ListNode(5)
+input2 = ListNode(1)
+input2.next = ListNode(3)
+input2.next.next = ListNode(4)
 
-    input2 = ListNode(1)
-    input2.next = ListNode(3)
-    input2.next.next = ListNode(4)
+input3 = ListNode(2)
+input3.next = ListNode(6)
 
-    input3 = ListNode(2)
-    input3.next = ListNode(6)
-
-    s = Solution2()
-    results = s.mergeKLists([input1, input2, input3])
-    print(results)
-
-
-if __name__ == '__main__':
-    main()
+s = Solution2()
+results = s.mergeKLists([input1, input2, input3])
+print(results)

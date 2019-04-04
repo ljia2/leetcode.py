@@ -70,7 +70,8 @@ class Solution:
 
         # abbreviate the char at pos
         self.dfs(word, pos+1, count+1, cur_abbr, ans)
-        # not abbreviate the char at pos; update the current abbreviation
+        # not abbreviate the char at pos;
+        # update the current abbreviation
         new_cur_abbr = (cur_abbr + str(count) + word[pos]) if count > 0 else (cur_abbr + word[pos])
         # reset count = 0 and keep search the remaining.
         self.dfs(word, pos+1, 0, new_cur_abbr, ans)

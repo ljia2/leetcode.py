@@ -1,5 +1,3 @@
-import collections
-
 class Solution:
     def generatePalindromes(self, s):
         """

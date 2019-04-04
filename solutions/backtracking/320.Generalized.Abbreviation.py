@@ -35,7 +35,6 @@ class Solution:
 
         # Skip current position (abbreviate by count + 1), and increment count
         self.dfs(word, pos + 1, cur_abbr, count + 1, ans)
-
         # Include current position, and zero-out count
         new_cur_abbr = cur_abbr + (str(count) if count > 0 else '') + word[pos]
         self.dfs(word, pos + 1, new_cur_abbr, 0, ans)

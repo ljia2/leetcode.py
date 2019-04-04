@@ -38,6 +38,7 @@ class Solution:
         A simple improvement uses O(m + n) space, but still not the best solution.
         Could you devise a constant space solution?
 
+
         :type matrix: List[List[int]]
         :rtype: void Do not return anything, modify matrix in-place instead.
 
@@ -54,13 +55,15 @@ class Solution:
         for r in range(row_num):
             for c in range(col_num):
                 if matrix[r][c] == 0:
+                    # flip the column to None
                     for i in range(row_num):
                         if i != r and matrix[i][c] != 0:
                             matrix[i][c] = None
+                    # flip the row to None
                     for i in range(col_num):
                         if i != c and matrix[r][i] != 0:
                             matrix[r][i] = None
-
+        # flip None to 0
         for r in range(row_num):
             for c in range(col_num):
                 if not matrix[r][c]:

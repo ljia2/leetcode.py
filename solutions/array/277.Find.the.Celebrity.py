@@ -4,6 +4,7 @@
 # @return a boolean, whether a knows b
 def knows(a, b):
     pass
+
 # class Solution(object):
 #     def findCelebrity(self, n):
 #         """
@@ -90,6 +91,7 @@ class BestSolution(object):
         Speedup: is b knows a, b must not be a celebrity.
 
         Everytime, there is a person added into non-celebrity.
+
         T: O(n)
         S: O(n)
 

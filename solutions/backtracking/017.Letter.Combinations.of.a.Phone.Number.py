@@ -43,7 +43,7 @@
 #             return []
 
 
-class Solution:
+class DFSSolution:
     def __init__(self):
         self.digit2chars = {"0": "", "1": "", "2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
 
@@ -76,12 +76,13 @@ class Solution:
                 ans.append(c)
             return
 
-        else:
-            self.dfs(digits[1:], ans)
-            for c in self.digit2chars[digits[0]]:
-                for rs in ans:
-                    ans.append(c + rs)
-            return
+        self.dfs(digits[1:], ans)
+        for c in self.digit2chars[digits[0]]:
+            for rs in ans:
+                # put c in front of results. The answer is generated from rear to front.
+                ans.append(c + rs)
+        return
 
-s = Solution()
+
+s = DFSSolution()
 print(s.letterCombinations("223"))

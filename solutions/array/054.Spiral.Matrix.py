@@ -34,18 +34,18 @@ class Solution:
 
 
 s = Solution()
-input1 = [[1, 2, 3 ],
-          [4, 5, 6 ],
-          [7, 8, 9 ]]
-print(s.spiralOrder(input1))
-input2 = [[1, 2, 3, 4],
-          [5, 6, 7, 8],
-          [9,10,11,12]]
-print(s.spiralOrder(input2))
-input3 = [[5, 4, 2, 1]]
-print(s.spiralOrder(input3))
-input4 = [[5], [4], [3], [2]]
-print(s.spiralOrder(input4))
-input5 = [[1, 2,  3,  4],
-          [9, 10, 11, 12]]
-print(s.spiralOrder(input5))
+
+print(s.spiralOrder([[1, 2, 3 ],
+                     [4, 5, 6 ],
+                     [7, 8, 9 ]]))
+
+print(s.spiralOrder([[1, 2, 3, 4],
+                     [5, 6, 7, 8],
+                     [9,10,11,12]]))
+
+print(s.spiralOrder([[5, 4, 2, 1]]))
+
+print(s.spiralOrder([[5], [4], [3], [2]]))
+
+print(s.spiralOrder([[1, 2,  3,  4],
+                     [9, 10, 11, 12]]))

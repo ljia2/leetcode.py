@@ -35,12 +35,14 @@ class Solution(object):
         if level == target:
             ans.append(copy.copy(subset))
             return
+
         # record whether a number is handled already on the level.
         handled = set()
         for i in range(start, len(nums)):
             if nums[i] in handled:
                 continue
             handled.add(nums[i])
+
             subset.append(nums[i])
             self.dfs(nums, level + 1, target, i+1, subset, ans)
             subset.pop()

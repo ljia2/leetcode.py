@@ -31,7 +31,7 @@ class Solution(object):
 
 
         # an application of permutation
-        1) the permutation has to be unique.
+        1) the permutation has to be unique and there are duplications. using handled set to ensure the permutation is unique.
         2) every adjacent elements whose sum is perfect square.
 
         Therefore, we need to early pruning based on these rules.
@@ -71,6 +71,7 @@ class Solution(object):
             self.dfs(A, level + 1, used, perm, ans)
             perm.pop()
             used.remove(i)
+
         return
 
     def perfect_square(self, perm, num):

@@ -49,6 +49,7 @@ class Solution(object):
             cur = max(cur, a) - 1
         return res
 
+
 s = Solution()
 print(s.maxScoreSightseeingPair([8,1,5,2,6]))
 

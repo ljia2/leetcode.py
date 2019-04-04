@@ -64,16 +64,19 @@ class Solution:
         for dir in dirs:
             # try step of 1
             new_r, new_c = r + dir[0], c + dir[1]
+            # out of boundary
             if new_r < 0 or new_r > 2 or new_c < 0 or new_c > 2:
                 continue
 
             if (new_r, new_c) in visited.keys():
                 # try step of 2
                 new_r, new_c = new_r + dir[0], new_c + dir[1]
+                # out of boundary
                 if new_r < 0 or new_r > 2 or new_c < 0 or new_c > 2:
                     continue
                 if (new_r, new_c) in visited.keys():
                     continue
+
                 visited[(new_r, new_c)] = True
                 self.dfs(new_r, new_c, visited, m, n, ans)
                 del visited[(new_r, new_c)]

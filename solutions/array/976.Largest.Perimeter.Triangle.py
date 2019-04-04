@@ -32,14 +32,7 @@ class Solution(object):
         :type A: List[int]
         :rtype: int
 
-        sort A
-
-        find the biggest A[i] s.t. A[i] < A[i-1] + A[i-2].
-
-        then s = 0, m = e - 1 e = len(A) - 1
-
-        move s and m to ensure A[s] + A[m] > A[e]
-
+        sort A and find the biggest A[i] s.t. A[i] < A[i-1] + A[i-2].
         """
         if not A or len(A) < 3:
             return 0

@@ -1,3 +1,5 @@
+import copy
+
 class Solution:
     def solveNQueens(self, n):
         """
@@ -50,12 +52,14 @@ class Solution:
     def dfs(self, cols, diag1, diag2, r, n, sol, ans):
         if r == n:
             #### NOTE THAT backtracking must use a copy of solution!!!!!!!
-            ans.append(sol.copy())
+
+            ans.append(copy.copy(sol))
             return
 
         for c in range(n):
             if not self.available(n, r, c, cols, diag1, diag2):
                 continue
+
             sol.append(c)
             cols[c] = False
             diag1[r + c] = False

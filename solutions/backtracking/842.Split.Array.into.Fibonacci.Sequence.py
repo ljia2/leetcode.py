@@ -54,6 +54,10 @@ class Solution:
             return []
 
         ans = []
+        self.dfs(S, [], ans)
+        return ans
+
+        ans = []
         prenums = []
         for i in range(1, len(S)-2):
             for j in range(i+1, len(S)-1):
@@ -61,9 +65,11 @@ class Solution:
                 num2 = int(S[i:j])
                 if num1 > 2**31 - 1 or num2 > 2**31 - 1:
                     continue
+
                 prenums.append(num1)
                 prenums.append(num2)
                 self.dfs(num1, num2, S[j:], prenums, ans)
+                # branch pruning. if one branch has found fib seq, return true to upper call
                 if ans:
                     return ans
                 prenums.pop()
