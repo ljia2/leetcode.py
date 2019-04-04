@@ -36,6 +36,8 @@ class Solution:
         :type head: Node
         :rtype: Node
 
+        Tree-like linked list.
+
         DFS + left pointing to parent.
 
         """
