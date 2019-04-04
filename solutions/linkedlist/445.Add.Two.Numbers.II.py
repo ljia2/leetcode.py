@@ -77,6 +77,7 @@ class Solution:
             succ = newsucc
         return prev
 
+
 l1 = ListNode(7)
 l1.next = ListNode(2)
 l1.next.next = ListNode(4)

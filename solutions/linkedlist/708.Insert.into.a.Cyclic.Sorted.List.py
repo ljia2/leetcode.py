@@ -71,6 +71,7 @@ class Solution:
             head.next = node
         return head
 
+
 n1 = Node(3, None)
 n2 = Node(3, None)
 n3 = Node(3, None)
