@@ -1,5 +1,6 @@
 import math
 
+
 class Solution(object):
     def numSquarefulPerms(self, A):
         """
@@ -55,6 +56,7 @@ class Solution(object):
             # the num at position i has been used in the previous level
             if i in used:
                 continue
+
             # the num has been considered in this level
             # avoid double count permutations of same nums at different level.
             if num in handled:
@@ -63,7 +65,7 @@ class Solution(object):
             if perm and not self.perfect_square(perm, num):
                 continue
 
-            # num is added to handled to ensure it is considered in this level
+            # num is added to handled to ensure it is considered ONCE in this level
             handled.add(num)
 
             used.add(i)
