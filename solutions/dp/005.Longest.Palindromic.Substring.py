@@ -80,33 +80,37 @@ class DPSolution:
         if not s:
             return ""
 
+        n = len(s)
         # declare the 2-d DP array
-        dp = [[False] * (len(s) + 1) for _ in range((len(s) + 1))]
+        dp = [[False] * n for _ in range(n)]
 
         # base case initialization of substring length of 1 and 2
-        for i in range(1, len(s)+1):
+        for i in range(0, n):
             dp[i][i] = True
             # if the ith char is the same as the i+1 char
-            if i < len(s) and s[i-1] == s[i]:
+            if 0 < i < n and s[i-1] == s[i]:
                 dp[i][i+1] = True
 
         # for DP expansion from i,j to i-1, j+1, we iterate over length l of substring
         # length of substring from 3 to len(s) inclusive
-        for l in range(3, len(s)+1, 1):
+        for l in range(3, n+1, 1):
             # start of substring at i
-            for i in range(1, (len(s) + 1) - l + 1, 1):
+            for i in range(0, n - l + 1):
                 # j is the end point of substring of length l
                 j = l + i - 1
-                if s[i-1] == s[j-1]:
+                if s[i] == s[j]:
                     dp[i][j] = dp[i+1][j-1] and True
 
-        longest = ""
-        for i in range(1, len(s)+1):
-            for j in range(i, len(s)+1):
+        maxl = -1
+        ans = None
+        for i in range(n):
+            for j in range(i, n):
                 if dp[i][j]:
-                    if len(longest) < j - i + 1:
-                        longest = s[i-1:j]
-        return longest
+                    if maxl < j - i + 1:
+                        ans = s[i:j+1]
+                        maxl = j - i + 1
+        return ans
+
 
 s = DPSolution()
 print(s.longestPalindrome("abcba"))

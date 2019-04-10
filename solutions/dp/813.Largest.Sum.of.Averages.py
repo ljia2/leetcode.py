@@ -1,6 +1,3 @@
-import numpy as np
-
-
 class Solution(object):
     def largestSumOfAverages(self, A, K):
         """

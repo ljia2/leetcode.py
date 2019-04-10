@@ -48,5 +48,6 @@ class Solution(object):
                     mp[i][j] = min(mp[i][j], mp[i-1][nj] + A[i][j])
         return min(mp[m-1])
 
+
 s = Solution()
 print(s.minFallingPathSum([[1,2,3],[4,5,6],[7,8,9]]))

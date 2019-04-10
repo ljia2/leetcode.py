@@ -34,6 +34,9 @@ class DPSolution(object):
         :type root: TreeNode
         :rtype: int
 
+        :param root:
+        :return:
+
         Intuition
 
         Let's try to cover every node, starting from the top of the tree and working down.
@@ -55,8 +58,7 @@ class DPSolution(object):
         To cover a strict subtree, the children of this node must be in state 1.
         To cover a normal subtree without placing a camera here, the children of this node must be in states 1 or 2, and at least one of those children must be in state 2.
         To cover the subtree when placing a camera here, the children can be in any state.
-        :param root:
-        :return:
+
         """
         def dfs(node):
             # given a tree, return a tuple of three values:
@@ -72,8 +74,14 @@ class DPSolution(object):
             R = dfs(node.right)
 
             # transitions
+            # 1) cover all nodes below root but not root;
             dp0 = L[1] + R[1]
+            # 2) cover all nodes below and including root but no camera;
+            # there is an camera on either left/right subtrees or on both subtrees
             dp1 = min(L[2] + min(R[1:]), R[2] + min(L[1:]))
+            # 3) cover all ndoes below and including root but a camera; there maybe no camera on both substrees,
+            # a camera on either left/right subtree
+            # or two cameras on both subtrees.
             dp2 = 1 + min(L) + min(R)
 
             return dp0, dp1, dp2

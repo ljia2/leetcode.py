@@ -120,7 +120,8 @@
 
 ### Case 1.4
 * Input O(n)
-* dp[i][j] is (opt) solution of subproblem A[i->j], a subarray of input, each subproblem depends O(n) smaller problems
+* dp[i][j] is (opt) solution of subproblem A[i->j], a subarray of input, 
+  each subproblem depends O(n) smaller problems
 * Time O(n^3) and Space O(n^2)
 * Template
 

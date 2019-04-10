@@ -64,6 +64,7 @@ class Solution(object):
             dp[n][2] = dp[n-2][0] + dp[n-1][1]
         return dp[n][0] % (10**9+7)
 
+
 s = Solution()
 print(s.numTilings(4))
 

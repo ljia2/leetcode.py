@@ -243,10 +243,12 @@ class SolutionII(object):
         # use such a dictionary to store the smallest index of each unique processed number
         num2index = dict()
         num2index[A[n-1]] = n-1
+
         # the list of processed numbers.
         processed = [A[n-1]]
-
+        # iterate from ending to beginning
         for i in range(len(A)-2, -1, -1):
+
             # odd jump to the smallest (and closest) number >= A[i].
             # tails[j] is qualified jump for odd jump.
             j = bisect.bisect_left(processed, A[i])
@@ -269,6 +271,7 @@ class SolutionII(object):
         for i in range(n):
             ans += 1 if dp_odd[i] else 0
         return ans
+
 
 s = Solution()
 print(s.oddEvenJumps([10,13,12,14,15]))

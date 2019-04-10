@@ -40,8 +40,8 @@ class Solution(object):
         return minimum hints DP,
         1 <= A.length <= 100 hints at most O(n^3)
 
-        convert the problem to maximum subsequence:
-            dp[j] is the longest subsequence ending with the jth char in any word.
+        convert the problem to maximum subsequence in lexicographic order:
+            dp[j] is the longest lexicographically ordered subsequence ending with the jth char in any word.
 
         for j in range(len(A)):
             for i in range(j):
@@ -61,6 +61,7 @@ class Solution(object):
                 if all(A[k][i] <= A[k][j] for k in range(m)):
                     dp[j] = max(dp[j], dp[i]+1)
         return n - max(dp)
+
 
 s = Solution()
 print(s.minDeletionSize(["babca","bbazb"]))

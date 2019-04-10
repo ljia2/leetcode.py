@@ -30,9 +30,10 @@ class Solution:
         :type S: str
         :rtype: int
 
-        dp[i][j] represents the number of permutation of number 0, 1, ... , i, satisfying DI-rule S.substr(0, i), and ending with digit j
+        dp[i][j] represents the number of permutation of number 0, 1, ... , i,
+        satisfying DI-rule S.substr(0, i) and ending with digit j
 
-        if(S[i-1] == 'D')
+        if S[i-1] == 'D':
            dp[i][j] = dp[i-1][j] + dp[i-1][j+1] + ... + dp[i-1][i-1]
 
         So, why start with j, not j + 1, since the sequence is decreasing to j?
@@ -74,6 +75,7 @@ class Solution:
         for k in range(N):
             ans += dp[N-1][k]
         return ans % mod
+
 
 s = Solution()
 print(s.numPermsDISequence("DID"))

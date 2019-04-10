@@ -1,5 +1,6 @@
 import bisect
 
+
 class Solution(object):
     def mincostTickets(self, days, costs):
         """
@@ -63,14 +64,15 @@ class Solution(object):
         for d in range(1, len(days)):
             tcosts[d][0] = min(tcosts[d-1][0], min(tcosts[d-1][1], tcosts[d-1][2])) + costs[0]
 
-            td = days[d] - 7
             # bisect on days.
+            td = days[d] - 7
             tdi = bisect.bisect_right(days, td)
             if tdi > 0:
                 tcosts[d][1] = min(tcosts[tdi-1][0], min(tcosts[tdi-1][1], tcosts[tdi-1][2])) + costs[1]
             else:
                 tcosts[d][1] = costs[1]
 
+            # bisect on days.
             td = days[d] - 30
             tdi = bisect.bisect_right(days, td)
             if tdi > 0:
@@ -79,6 +81,7 @@ class Solution(object):
                 tcosts[d][2] = costs[2]
 
         return min(tcosts[len(days)-1][0], min(tcosts[len(days)-1][1], tcosts[len(days)-1][2]))
+
 
 s = Solution()
 print(s.mincostTickets([1,2,3,4,5,6,7,8,9,10,30,31], [2,7,15]))

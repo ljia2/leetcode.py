@@ -32,8 +32,6 @@ class Solution:
         c = len(grid[0])
         msum = [[0] * (c + 1) for _ in range(r + 1)]
 
-
-
         for i in range(1, r+1):
             for j in range(1, c+1):
                 if i == 1 and j == 1:

@@ -3,6 +3,7 @@ class TreeNode:
         self.val = x
         self.children = dict()
 
+
 class Solution:
     def sumOfDistancesInTree(self, N, edges):
         """
@@ -35,3 +36,5 @@ class Solution:
 
         How about dfs(root) return the distance of all nodes to root, and then calculate the pair distance of nodes?
         """
+
+        

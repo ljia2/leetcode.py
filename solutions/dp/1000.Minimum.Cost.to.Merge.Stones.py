@@ -288,6 +288,7 @@ class DPSolutionIII(object):
         for i in range(n):
             sums[i+1] = sums[i] + stones[i]
 
+        # initialize the maximum costs
         dp = [[1e9] * n for _ in range(n)]
         for i in range(n):
             dp[i][i] = 0
@@ -298,8 +299,10 @@ class DPSolutionIII(object):
             for i in range(n - l + 1):
                 # end A[j]
                 j = i + l - 1
+
                 # iterate over the split into 1 pile and k-1 piles.
-                # only there are (# stones - 1) % (K - 1) == 0 in the left can be merged into 1 pile.
+                # only there are (j - i) % (K - 1) == 0 in the left can be merged into 1 pile.
+                # j = i + p * (K-1) <=> (j - i) % (K - 1) == 0
                 for m in range(i, j, K-1):
                     dp[i][j] = min(dp[i][j], dp[i][m] + dp[m+1][j])
                 if (j - i) % (K - 1) == 0:

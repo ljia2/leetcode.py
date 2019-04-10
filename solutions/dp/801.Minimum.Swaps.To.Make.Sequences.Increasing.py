@@ -29,9 +29,9 @@ class DPSolution:
         :type B: List[int]
         :rtype: int
 
-        swap[i] denotes the min swaps (to make A and B strictively increasing) with swapping A[i] and B[i]
+        swap[i] denotes the min swaps (to make A and B strictly increasing) with swapping A[i] and B[i]
 
-        keep[i] denotes the min swaps (to make A and B strictively increasing) without swapping A[i] and B[i]
+        keep[i] denotes the min swaps (to make A and B strictly increasing) without swapping A[i] and B[i]
 
         Transition:
 
@@ -41,12 +41,11 @@ class DPSolution:
 
         2) B[i] > A[i-1] and A[i] > B[i-1]
             keep[i] = min(keep[i], swap[i-1]) # swapping i-1 to guarantee strictly increasing
-            swap[i] = min(swap[i], keep[i-1] + 1) # keeping i-1 and swapping i to gurantee stictly increase
+            swap[i] = min(swap[i], keep[i-1] + 1) # keeping i-1 and swapping i to guarantee strictly increase
 
         Note that case 1) and case 2) must either happens or both happens.
 
         If none of cases happens, there is not solutions.
-
 
         """
         # initialize swap and keep arrays
