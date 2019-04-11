@@ -8,7 +8,9 @@ class Solution:
 
         If S[i] == 'D', then P[i] > P[i+1], and;
         If S[i] == 'I', then P[i] < P[i+1].
-        How many valid permutations are there?  Since the answer may be large, return your answer modulo 10^9 + 7.
+        How many valid permutations are there?
+
+        Since the answer may be large, return your answer modulo 10^9 + 7.
 
         Example 1:
 
@@ -30,18 +32,24 @@ class Solution:
         :type S: str
         :rtype: int
 
-        dp[i][j] represents the number of permutation of number 0, 1, ... , i,
-        satisfying DI-rule S.substr(0, i) and ending with digit j
+        dp[i][j] represents the number of permutations :
+            1) of number 0, 1, ... , i satisfying DI-rule S.substr(0, i)
+            2) and ending with number j
 
         if S[i-1] == 'D':
            dp[i][j] = dp[i-1][j] + dp[i-1][j+1] + ... + dp[i-1][i-1]
 
         So, why start with j, not j + 1, since the sequence is decreasing to j?
         Thought Experiment: In the sequence with length of i-1, the largest number in this sequence should be i-1.
-        However, when we are dealing with length i and end with j, the previous sequence has already another j and we should also add i to the sequence.
+        However, when we are dealing with length i and end with j, the previous sequence has already another j
+        and we should also add i to the sequence.
+
         What we can do is, add one to all those numbers greater than or equal to j.
-        This operation will make the largest number to be i without breaking the sequence property, also, it will free the j so that we can use it at the end of the sequence.
+
+        This operation will make the largest number to be i without breaking the sequence property,
+        also, it will free the j so that we can use it at the end of the sequence.
         By this thought experiment, we can easily get the result of X.
+
         For example, if the sequence is {3,4,1,2,5} and we want to expand it to be of length 6 and end with 3.
         We first make it to be {3->4,4->5,1,2,5->6}, and then, add 3 to the end of the sequence.
 
@@ -63,7 +71,8 @@ class Solution:
             for j in range(i+1):
                 # ending with number j
                 if S[i-1] == 'D':
-                    # if j in the last position i, one of j, j+1, .. i-1 must be in second last position
+                    # if j in the last position, one of j+1, ...., i,
+                    # (i.e. j, j+1, .. i-1) must be in second last position
                     for k in range(j, i):
                         dp[i][j] += dp[i-1][k]
                 elif S[i-1] == 'I':

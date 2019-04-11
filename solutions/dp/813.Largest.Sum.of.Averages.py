@@ -44,18 +44,20 @@ class Solution(object):
 
         if not A or K <= 0:
             raise Exception("Empty A or Non-Positive K!")
+        n = len(A)
+        maxAvg = [[0 for _ in range(n+1)] for _ in range(K+1)]
 
-        maxAvg = [[0 for _ in range(len(A)+1)] for _ in range(K+1)]
-        for a in range(1, len(A)+1):
+        for a in range(1, n+1):
             maxAvg[1][a] = sum(A[0:a]) / a
 
         for k in range(2, K+1):
-            for i in range(2, len(A)+1):
+            for i in range(2, n+1):
                 if i < k:
                     continue
                 for j in range(k-1, i):
                     maxAvg[k][i] = max(maxAvg[k][i], maxAvg[k-1][j] + sum(A[j:i])/(i-j))
-        return maxAvg[K][len(A)]
+        return maxAvg[K][n]
+
 
 s = Solution()
 print(s.largestSumOfAverages([9,1,2,3,9], 3))
