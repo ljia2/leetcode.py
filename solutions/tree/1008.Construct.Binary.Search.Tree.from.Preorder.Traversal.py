@@ -47,5 +47,6 @@ class Solution(object):
         ans.left, ans.right = ltree, rtree
         return ans
 
+
 s = Solution()
 print(s.bstFromPreorder([8,5,1,7,10,12]))
