@@ -71,5 +71,5 @@ class Solution(object):
             self.dfs(root.left, root.val, level + 1, node_dict)
         if root.right:
             self.dfs(root.right, root.val, level + 1, node_dict)
-        return 
+        return
 
