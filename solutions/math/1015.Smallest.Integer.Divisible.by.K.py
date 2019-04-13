@@ -1,7 +1,8 @@
 class Solution(object):
     def smallestRepunitDivByK(self, K):
         """
-        Given a positive integer K, you need find the smallest positive integer N such that N is divisible by K, and N only contains the digit 1.
+        Given a positive integer K, you need find the smallest positive integer N such that N is divisible by K,
+        and N only contains the digit 1.
 
         Return the length of N.  If there is no such N, return -1.
 
@@ -56,13 +57,16 @@ class Solution(object):
         111111 % 6 = 3
 
         """
-        if K % 10 not in {1, 3, 7, 9}: return -1
+        if K % 10 not in {1, 3, 7, 9}:
+            return -1
 
         mod, mod_set = 0, set()
         for length in range(1, K + 1):
             mod = (10 * mod + 1) % K
-            if mod == 0: return length
-            if mod in mod_set: return -1
+            if mod == 0:
+                return length
+            if mod in mod_set:
+                return -1
             mod_set.add(mod)
         return -1
 

@@ -64,6 +64,7 @@ class Solution(object):
             ans = str(r) + ans
         return ans
 
+
 s = Solution()
 print(s.baseNeg2(6))
 print(s.baseNeg2(8))
