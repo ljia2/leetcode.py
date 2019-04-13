@@ -50,6 +50,5 @@ class Solution(object):
         return X ^ N
 
 
-
 s = Solution()
 print(s.bitwiseComplement(10))
