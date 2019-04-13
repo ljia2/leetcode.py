@@ -1,9 +1,12 @@
+import collections
+
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
+
 
 class DFSSolution:
     def isCompleteTree(self, root):
@@ -32,7 +35,7 @@ class DFSSolution:
         The tree will have between 1 and 100 nodes.
         :type root: TreeNode
         :rtype: bool
-        dfs(root) return (full tree, complete tree, hight of the tree).
+        dfs(root) return (full tree, complete tree, height of the tree).
         """
         _, ans, _ = self.dfs(root, 0)
         return ans
@@ -49,19 +52,21 @@ class DFSSolution:
         return isfull, isComplete, max(ll, rl)
 
 
-import collections
 class BFSSolution:
     def isCompleteTree(self, root):
-        if not root: return True
+        if not root:
+            return True
+
         q = collections.deque([root])
         missing = False
         while q:
             size = len(q)
             while size > 0:
-                size -= 1
                 node = q.popleft()
+                size -= 1
                 if node:
-                    if missing: return False
+                    if missing:
+                        return False
                     q.append(node.left)
                     q.append(node.right)
                 else:

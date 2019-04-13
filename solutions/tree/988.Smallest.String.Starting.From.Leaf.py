@@ -5,6 +5,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
+
 class Solution:
     """
     Given the root of a binary tree, each node has a value from 0 to 25 representing the letters 'a' to 'z':
@@ -54,6 +55,7 @@ class Solution:
             # update the answer so far
             self.minStr(root, path, ans)
             return
+
         curr_path = chr(ord('a') + root.val) + path
         if root.left:
             self.dfs(root.left, curr_path, ans)

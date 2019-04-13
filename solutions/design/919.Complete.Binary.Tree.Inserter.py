@@ -29,14 +29,13 @@ Every value of a given or inserted node is between 0 and 5000.
 
 构建树的时候使用层次遍历，也就是BFS把所有的节点放入到tree里。插入的时候直接计算出新节点的父亲节点。获取root就是数组中的第0个节点。
 """
-import math
-
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
+
 
 class CBTInserter:
 

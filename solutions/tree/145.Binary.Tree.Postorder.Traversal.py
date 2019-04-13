@@ -26,10 +26,15 @@ class Solution:
         :type root: TreeNode
         :rtype: List[int]
 
+
+        Typical usage of stack to dfs!!!!
+
         How about use stack to push (root, root.right and root.left)
 
         T: O(n)
         S: O(n)
+
+        LC 173.
 
         """
 
@@ -37,22 +42,25 @@ class Solution:
             return []
 
         # initialize the stack with root
-        stack = [root.val] + ([root.right] if root.right else []) + ([root.left] if root.left else [])
-
+        stack = [root]
         ans = []
         while stack:
             node = stack.pop()
-            if isinstance(node, TreeNode):
-                stack.append(node.val)
-                if node.left and node.right:
-                    stack.append(node.right)
-                    stack.append(node.left)
-                elif node.left:
-                    stack.append(node.left)
-                elif node.right:
-                    stack.append(node.right)
+            # if it is a leaf node, record its value
+            if not node.left and not node.right:
+                ans.append(node.val)
             else:
-                ans.append(node)
+                # else push stack: a leaf node valued as root.val, root.right and root.left in order.
+                stack.append(TreeNode(node.val))
+                if node.right:
+                    stack.append(node.right)
+                if node.left:
+                    stack.append(node.left)
+
         return ans
 
-
+root = TreeNode(1)
+root.right = TreeNode(2)
+root.right.left = TreeNode(3)
+s = Solution()
+print(s.postorderTraversal(root))

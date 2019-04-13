@@ -35,6 +35,9 @@ class Solution:
 
         :type root: TreeNode
         :rtype: int
+
+        Typical dfs over tree but return tuple results!!!!!
+
         """
 
         if not root:

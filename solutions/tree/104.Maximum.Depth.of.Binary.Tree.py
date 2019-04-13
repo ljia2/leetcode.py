@@ -26,6 +26,9 @@ class Solution(object):
         return its depth = 3.
         :type root: TreeNode
         :rtype: int
+
+        see LC865
+
         """
         if not root:
             return 0

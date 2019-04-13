@@ -43,7 +43,7 @@ class Solution:
         :type root: TreeNode
         :rtype: int
 
-        Very Typical Solution of Tree. Recursive call returns a set of different answers
+        Very Typical Solution of Tree. Recursive call returns a tuple of different answers
 
         """
         if root is None:

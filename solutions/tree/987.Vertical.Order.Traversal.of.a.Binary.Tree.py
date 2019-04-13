@@ -1,11 +1,13 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
 from heapq import heappop, heappush
+
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
 
 class Solution:
     """
@@ -56,8 +58,11 @@ class Solution:
     def verticalTraversal(self, root: 'TreeNode') -> 'List[List[int]]':
         if not root:
             return []
+        # use dfs to record each node's coordinates and value.
         nodehp = []
         self.dfs(root, nodehp, 0, 0)
+
+        # iterate the heap to print vertical lines.
         ans = []
         while nodehp:
             cur_line = []

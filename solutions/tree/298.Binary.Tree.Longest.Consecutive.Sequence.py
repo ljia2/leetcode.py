@@ -45,6 +45,9 @@ class Solution(object):
         Explanation: Longest consecutive sequence path is 2-3, not 3-2-1, so return 2.
         :type root: TreeNode
         :rtype: int
+
+        Typical dfs over tree.
+
         """
 
         if not root:

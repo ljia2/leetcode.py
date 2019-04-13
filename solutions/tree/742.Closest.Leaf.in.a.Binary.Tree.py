@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):
@@ -5,7 +7,6 @@ class TreeNode:
         self.left = None
         self.right = None
 
-from collections import defaultdict
 
 class Solution:
     def findClosestLeaf(self, root, k):
@@ -72,6 +73,7 @@ class Solution:
         leaf = set()
         graph = defaultdict(list)
         self.dfs(root, graph, leaf)
+
         # bfs starting from k
         q = [k]
         visited = set()

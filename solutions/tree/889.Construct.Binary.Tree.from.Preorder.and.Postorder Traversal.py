@@ -31,18 +31,18 @@ class Solution:
         root = TreeNode(pre[0])
         if len(pre) == 1 and len(post) == 1:
             return root
+
+        if pre[1] == post[-2]:
+            lpre, lpost = pre[1:], post[:len(post)-1]
+            ltree = self.constructFromPrePost(lpre, lpost)
+            root.left = ltree
         else:
-            if pre[1] == post[-2]:
-                lpre, lpost = pre[1:], post[:len(post)-1]
-                ltree = self.constructFromPrePost(lpre, lpost)
-                root.left = ltree
-            else:
-                lpre = pre[1:pre.index(post[-2])]
-                lpost = post[:post.index(pre[1]) + 1]
-                rpre = pre[pre.index(post[-2]):]
-                rpost = post[post.index(pre[1])+1:-1]
-                ltree = self.constructFromPrePost(lpre, lpost)
-                rtree = self.constructFromPrePost(rpre, rpost)
-                root.left, root.right = ltree, rtree
-            return root
+            lpre = pre[1:pre.index(post[-2])]
+            lpost = post[:post.index(pre[1]) + 1]
+            rpre = pre[pre.index(post[-2]):]
+            rpost = post[post.index(pre[1])+1:-1]
+            ltree = self.constructFromPrePost(lpre, lpost)
+            rtree = self.constructFromPrePost(rpre, rpost)
+            root.left, root.right = ltree, rtree
+        return root
 

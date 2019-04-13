@@ -59,7 +59,7 @@ class Solution:
             lt = root.left
             rt = root.right
             if lt and rt:
-                # find the largest leaf node (new_root) in the left sub-tree
+                # find the largest leaf node (new_root) in its left sub-tree
                 # copy its value to original root
                 # delete that node (new_root) from left sub-tree.
                 # it will keep the tree balanced

@@ -40,7 +40,7 @@ class Solution:
         if root1.val != root2.val:
             return False
 
-        # the cases when a flit is required.
+        # the cases when a flip is required.
         if root1.left and root2.left and root1.left.val != root2.left.val:
             root1.left, root1.right = root1.right, root1.left
         elif root1.left and not root2.left:

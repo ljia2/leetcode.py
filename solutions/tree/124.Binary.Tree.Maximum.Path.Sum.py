@@ -36,16 +36,19 @@ class Solution:
 
         :type root: TreeNode
         :rtype: int
+
+        dfs return the path ending with root.
+        Also use a single element list ot records the maximum path so far.
+
         """
 
         if not root:
             return None
-        elif not root.left and not root.right:
+        if not root.left and not root.right:
             return root.val
-        else:
-            max_sum_path = [0]
-            max_sum = self.dfs(root, max_sum_path)
-            return max(max_sum, max_sum_path[0])
+        max_sum_path = [0]
+        max_sum = self.dfs(root, max_sum_path)
+        return max(max_sum, max_sum_path[0])
 
     def dfs(self, node, max_sum_path):
         """"

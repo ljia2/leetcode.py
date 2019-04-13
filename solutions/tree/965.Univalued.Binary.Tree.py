@@ -5,6 +5,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
+
 class Solution:
     def isUnivalTree(self, root):
         """
@@ -34,9 +35,8 @@ class Solution:
         :type root: TreeNode
         :rtype: bool
 
-        dfs(root) return a tuple of (bool, val)
-        bool inddicates whether root is a unival tree
-        val is the unival of the tree if bool is true.
+        top to bottom checking whether left/right values == root's value.
+
         """
 
         if not root:
@@ -51,6 +51,7 @@ class Solution:
                 return False
 
         return self.isUnivalTree(root.left) and self.isUnivalTree(root.right)
+
 
 s = Solution()
 root = TreeNode(5)

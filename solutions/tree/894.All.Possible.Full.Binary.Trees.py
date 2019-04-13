@@ -25,6 +25,9 @@ class Solution:
 
         :type N: int
         :rtype: List[TreeNode]
+
+        see LC95.
+
         """
         if N % 2 == 0:
             return []

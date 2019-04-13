@@ -34,11 +34,14 @@ class Solution:
 
         :type n: int
         :rtype: List[TreeNode]
+
+        see LC894.
+
         """
 
         if n <= 0:
             return []
-        elif n == 1:
+        if n == 1:
             return [TreeNode(1)]
 
         results = []
@@ -58,16 +61,16 @@ class Solution:
     def dfs(self, start, end):
         if start > end:
             return [None]
-        elif start == end:
+        if start == end:
             return [TreeNode(start)]
-        else:
-            results = []
-            for r in range(start, end+1, 1):
-                left_trees = self.dfs(start, r-1)
-                right_trees = self.dfs(r+1, end)
-                for lt in left_trees:
-                    for rt in right_trees:
-                        root = TreeNode(r)
-                        root.left, root.right = lt, rt
-                        results.append(root)
-            return results
+
+        results = []
+        for r in range(start, end+1, 1):
+            left_trees = self.dfs(start, r-1)
+            right_trees = self.dfs(r+1, end)
+            for lt in left_trees:
+                for rt in right_trees:
+                    root = TreeNode(r)
+                    root.left, root.right = lt, rt
+                    results.append(root)
+        return results

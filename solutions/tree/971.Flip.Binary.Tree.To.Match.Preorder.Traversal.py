@@ -46,22 +46,29 @@ class Solution:
         ans = []
         # indicate which position of voyage it should compare.
         # initialize the start position of root.
-        pos = [0]
-        return ans if self.dfs(root, voyage, pos, ans) else [-1]
+        start = [0]
+        return ans if self.dfs(root, voyage, start, ans) else [-1]
 
     # return boolean whether root match voyage[start:] via flipping or not
-    def dfs(self, root, voyage, pos, ans):
+    def dfs(self, root, voyage, start, ans):
         if not root:
             return True
-        if root.val != voyage[pos[0]]:
+
+        if root.val != voyage[start[0]]:
             return False
 
-        pos[0] += 1
-        if root.left and root.left.val != voyage[pos[0]]:
+        # moving to the next position to check.
+        start[0] += 1
+
+        # checking whether left tree root.val match voyage[start[0]]
+        # if not, flip left and right; continue check left and right subtrees.
+        if root.left and root.left.val != voyage[start[0]]:
             ans.append(root.val)
             root.left, root.right = root.right, root.left
 
-        return self.dfs(root.left, voyage, pos, ans) and self.dfs(root.right, voyage, pos, ans)
+        # when finishing dfs over root.left, start pointing to the postion of voyage of root.right.root
+        return self.dfs(root.left, voyage, start, ans) and self.dfs(root.right, voyage, start, ans)
+
 
 s = Solution()
 root = TreeNode(1)
