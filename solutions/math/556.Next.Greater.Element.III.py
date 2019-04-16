@@ -41,6 +41,7 @@ class Solution:
                     return result if result <= 2**31-1 else -1
         return -1
 
+
 s = Solution()
 print(s.nextGreaterElement(3120))
 print(s.nextGreaterElement(230241))

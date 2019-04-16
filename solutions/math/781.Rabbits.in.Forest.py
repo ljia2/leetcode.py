@@ -4,7 +4,8 @@ import math
 class Solution(object):
     def numRabbits(self, answers):
         """
-        In a forest, each rabbit has some color. Some subset of rabbits (possibly all of them) tell you how many other rabbits have the same color as them.
+        In a forest, each rabbit has some color.
+        Some subset of rabbits (possibly all of them) tell you how many other rabbits have the same color as them.
         Those answers are placed in an array.
 
         Return the minimum number of rabbits that could be in the forest.
@@ -30,19 +31,33 @@ class Solution(object):
         Each answers[i] will be an integer in the range [0, 999].
         :type answers: List[int]
         :rtype: int
+
+        If x+1 rabbits have same color, then we get x+1 rabbits who all answer x.
+        now n rabbits answer x.
+        If n % (x + 1) == 0, we need n / (x + 1) groups of x + 1 rabbits.
+        If n % (x + 1) != 0, we need n / (x + 1) + 1 groups of x + 1 rabbits.
+
+
+
+
         """
         if not answers:
             return 0
         freq = collections.Counter(answers)
         ans = 0
         for k, v in freq.items():
+            # there are k + 1 rabbits with the same color.
             if k + 1 >= v:
                 ans += k + 1
             else:
-                ans += (k + 1) * int(math.ceil(v * 1.0 / (k + 1)))
+                # there are int(math.ceil(v * 1.0 / (k + 1))) {i.e. (v + k) / (k + 1) } colors, each of which has k + 1 rabbits
+                ans += (k + 1) * ((v + k) / (k + 1))
 
         return ans
 
+
 s = Solution()
+print(s.numRabbits([1,0,1,0,0]))
+print(s.numRabbits([1, 1, 2]))
 print(s.numRabbits([0, 0, 1, 1, 1]))
 print(s.numRabbits([1, 1, 1, 2]))

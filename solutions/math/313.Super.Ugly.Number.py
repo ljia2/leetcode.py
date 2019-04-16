@@ -28,16 +28,21 @@ class Solution:
         max_num = max(primes) ** n
         ugly = [0] * n
         ugly[0] = 1
-        for i in range(1, n, 1):
+        for i in range(1, n):
             next_ugly = max_num
+            # find the next ugly number
             for j in range(len(primes)):
                 if next_ugly > ugly[prime_index[j]] * primes[j]:
                     next_ugly = ugly[prime_index[j]] * primes[j]
+
+            # update the prime index
             for j in range(len(primes)):
                 if next_ugly == ugly[prime_index[j]] * primes[j]:
                     prime_index[j] += 1
+
             ugly[i] = next_ugly
         return ugly[n-1]
+
 
 s = Solution()
 print(s.nthSuperUglyNumber(12, [2,7,13,19]))

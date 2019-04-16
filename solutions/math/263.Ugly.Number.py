@@ -138,14 +138,14 @@ class Solution3:
         """
         if num <= 0:
             return False
+
+        if num < 4:
+            return True
+        elif num % 2 == 0 and self.isUgly(num/2):
+            return True
+        elif num % 3 == 0 and self.isUgly(num/3):
+            return True
+        elif num % 5 == 0 and self.isUgly(num/5):
+            return True
         else:
-            if num < 4:
-                return True
-            elif num % 2 == 0 and self.isUgly(num/2):
-                return True
-            elif num % 3 == 0 and self.isUgly(num/3):
-                return True
-            elif num % 5 == 0 and self.isUgly(num/5):
-                return True
-            else:
-                return False
+            return False
