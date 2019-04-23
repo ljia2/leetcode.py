@@ -1,130 +1,132 @@
-from collections import defaultdict
-
-class Solution:
-    def wordSquares(self, words):
-        """
-        Given a set of words (without duplicates), find all word squares you can build from them.
-
-        A sequence of words forms a valid word square if the kth row and column read the exact same string,
-        where 0 ≤ k < max(numRows, numColumns).
-
-        For example, the word sequence ["ball","area","lead","lady"] forms a word square
-        because each word reads the same both horizontally and vertically.
-
-        b a l l
-        a r e a
-        l e a d
-        l a d y
-
-        Note:
-
-        There are at least 1 and at most 1000 words.
-        All words will have the exact same length.
-        Word length is at least 1 and at most 5.
-        Each word contains only lowercase English alphabet a-z.
-
-        Example 1:
-
-        Input:
-        ["area","lead","wall","lady","ball"]
-
-        Output:
-        [
-          [ "wall",
-            "area",
-            "lead",
-            "lady"
-          ],
-          [ "ball",
-            "area",
-            "lead",
-            "lady"
-          ]
-        ]
-
-        Explanation:
-        The output consists of two word squares. The order of output does not matter (just the order of words in each word square matters).
-
-        Example 2:
-
-        Input:
-        ["abat","baba","atan","atal"]
-
-        Output:
-        [
-          [ "baba",
-            "abat",
-            "baba",
-            "atan"
-          ],
-          [ "baba",
-            "abat",
-            "baba",
-            "atal"
-          ]
-        ]
-
-        Explanation:
-        The output consists of two word squares. The order of output does not matter (just the order of words in each word square matters).
-
-        :type words: List[str]
-        :rtype: List[List[str]]
-
-        1) build a prefix dictionary where key is suffix and value is the list of words with the suffix
-        2) dfs over prefix dictionary with early pruning by suffix.
-
-        note that word square is symmetric.
-
-        """
-
-        if not words:
-            return []
-
-        prefix_dict = defaultdict(set)
-        for w in words:
-            for i in range(1, len(w)+1):
-                prefix = w[:i]
-                prefix_dict[prefix].add(w)
-
-        prefix_dict[""] = set(words)
-        word_length = len(words[0])
-        ans = []
-        word_square = []
-        self.dfs(0, word_length, prefix_dict, word_square, ans)
-
-        return ans
-
-    def dfs(self, level, target_level, prefix_dict, word_square, ans):
-        if level == target_level:
-            ans.append(word_square.copy())
-            return
-
-        # build up the prefix of the ith word in word_square
-        prefix = ""
-        for w in word_square:
-            prefix += w[level]
-
-        for w in prefix_dict[prefix]:
-            word_square.append(w)
-            self.dfs(level+1, target_level, prefix_dict, word_square, ans)
-            word_square.pop()
-        return
-
-
-
-
-s = Solution()
-print(s.wordSquares(["area","lead","wall","lady","ball"]))
-print(s.wordSquares(["abat","baba","atan","atal"]))
-
+# from collections import defaultdict
+#
+# class Solution:
+#     def wordSquares(self, words):
+#         """
+#         Given a set of words (without duplicates), find all word squares you can build from them.
+#
+#         A sequence of words forms a valid word square if the kth row and column read the exact same string,
+#         where 0 ≤ k < max(numRows, numColumns).
+#
+#         For example, the word sequence ["ball","area","lead","lady"] forms a word square
+#         because each word reads the same both horizontally and vertically.
+#
+#         b a l l
+#         a r e a
+#         l e a d
+#         l a d y
+#
+#         Note:
+#
+#         There are at least 1 and at most 1000 words.
+#         All words will have the exact same length.
+#         Word length is at least 1 and at most 5.
+#         Each word contains only lowercase English alphabet a-z.
+#
+#         Example 1:
+#
+#         Input:
+#         ["area","lead","wall","lady","ball"]
+#
+#         Output:
+#         [
+#           [ "wall",
+#             "area",
+#             "lead",
+#             "lady"
+#           ],
+#           [ "ball",
+#             "area",
+#             "lead",
+#             "lady"
+#           ]
+#         ]
+#
+#         Explanation:
+#         The output consists of two word squares. The order of output does not matter (just the order of words in each word square matters).
+#
+#         Example 2:
+#
+#         Input:
+#         ["abat","baba","atan","atal"]
+#
+#         Output:
+#         [
+#           [ "baba",
+#             "abat",
+#             "baba",
+#             "atan"
+#           ],
+#           [ "baba",
+#             "abat",
+#             "baba",
+#             "atal"
+#           ]
+#         ]
+#
+#         Explanation:
+#         The output consists of two word squares. The order of output does not matter (just the order of words in each word square matters).
+#
+#         :type words: List[str]
+#         :rtype: List[List[str]]
+#
+#         1) build a prefix dictionary where key is suffix and value is the list of words with the suffix
+#         2) dfs over prefix dictionary with early pruning by suffix.
+#
+#         note that word square is symmetric.
+#
+#         """
+#
+#         if not words:
+#             return []
+#
+#         prefix_dict = defaultdict(set)
+#         for w in words:
+#             for i in range(1, len(w)+1):
+#                 prefix = w[:i]
+#                 prefix_dict[prefix].add(w)
+#
+#         prefix_dict[""] = set(words)
+#         word_length = len(words[0])
+#         ans = []
+#         word_square = []
+#         self.dfs(0, word_length, prefix_dict, word_square, ans)
+#
+#         return ans
+#
+#     def dfs(self, level, target_level, prefix_dict, word_square, ans):
+#         if level == target_level:
+#             ans.append(word_square.copy())
+#             return
+#
+#         # build up the prefix of the ith word in word_square
+#         prefix = ""
+#         for w in word_square:
+#             prefix += w[level]
+#
+#         for w in prefix_dict[prefix]:
+#             word_square.append(w)
+#             self.dfs(level+1, target_level, prefix_dict, word_square, ans)
+#             word_square.pop()
+#         return
+#
+#
+#
+#
+# s = Solution()
+# print(s.wordSquares(["area","lead","wall","lady","ball"]))
+# print(s.wordSquares(["abat","baba","atan","atal"]))
+#
 
 #############
 import copy
+
 
 class Trie:
     def __init__(self):
         self.next = dict()
         self.word = None
+
 
 class TrieSolution:
     def wordSquares(self, words):
@@ -255,6 +257,7 @@ class TrieSolution:
         for c in root.next.keys():
             self.dfs(root.next[c], ans)
         return
+
 
 s = TrieSolution()
 print(s.wordSquares(["area","lead","wall","lady","ball"]))
