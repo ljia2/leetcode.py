@@ -54,6 +54,7 @@ class BFSSolution:
         wordDict = set(wordList)
         # during the expansion, records a word's parents.
         parents = defaultdict(list)
+
         # initialize queue and visited (set) for BFS.
         queue = [beginWord]
         visited = set()
@@ -112,6 +113,7 @@ class BFSSolution:
             p.reverse()
             ans.append(p)
             return
+
         parents = graph[start]
         for p in parents:
             path.append(p)

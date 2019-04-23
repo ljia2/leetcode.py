@@ -1,0 +1,53 @@
+5轮代码面试. 1point3acres
+第一个印度小哥，人还有点帅，口音也不重，貌似职位比较senior，说他很久没写代码了。
+题目是给一个pattern，比如‘AZBZ’，给一个string，比如‘BZA’，问要至少重复几遍这个string才能完全cover原来的pattern。很像蠡口76，但是pattern的顺序必须保证。比如这个例子就是要BZA+BZA+BZA才能cover pattern，输出3（copies of string）。
+一开始我想用蠡口76的办法解，小哥也同意先算出每个字母的counter的方向可行，但是然后就没想到怎么最优化copy的数目，最后只是把两个指针的暴力算的代码写出来了，小哥没有特别满意。-baidu 1point3acres
+
+第二个印度大哥（叫大哥的原因是因为发量。。），给一个string：-{a,b}{c,d}算cross product：[-ac, -ad, -bc, -bd]。
+一开始想的就是stack然后匹配括号，但后来大哥说括号里面没有括号，两个括号pair起跳，没有那么复杂，
+所以我就iterate这个string，存一个prefix，一个suffix，然后把括号里的部分存进list：[[a,b],[c,d]]，再倒着iterate这个list，每次pop两个，乘积再push回去。follow up 问如果两个括号中间还有怎么办，
+比如-{a,b}t{c,d}，我说就取消prefix和suffix，把它变成一个n+1的list，乘的时候跟着前面的list一起倒着pop。
+最后代码写出来了（但是我最后一分钟脑子不清楚写了个小bug？大哥指出来但是我好像还挺自信的就糊弄过去了？）
+
+第三个美国小哥，地里高频找公寓，就是一条街上有各种学校和店，找一个位置离最远的要求的店离的最近。当时本来有点高兴想着见过这题，然后就发现我并没有记住解法。。小哥说input的形式不确定，并不一定是list of list，我就说如果能有个dict存每个店的位置as sorted list：{店：[pos1, pos2,...]}，然后可以iterate这条街, 存一个dict={店：index of recent pos（starting from 0）}，对每个要求的店，只用比较公寓离当前range两端的距离，如果已经超过了当前的range就更新这个dict里的指针。意会吧。小哥表示他没见过这么做的，但是这么做是O(kn)好像也挺好的2333
+
+午饭是国人小哥，很腼腆，基本上是我一直在叨叨
+
+第四个是亚裔小姐姐，由于她不知道location换了一次，所以迟到了15分钟，我最后代码也没写完。
+第一题是判断list of integer里是不是每个数都出现了至少k次，我惊了（这么简单？）
+然后follow up问还是一串数要判断是不是顺子（5个连续数）组成的，每个数只能用一次，
+如果这组数还有顺子以外的东西就return false。我一开始总想着排序然后dfs，但是明显没有那么复杂。
+小姐姐提示我和第一题有关联，我还没反应过来，然后她无奈让我按照自己想法先把代码写出来，因为时间不够了。
+写着写着发现自己挺蠢，因为只是输出boolean，不需要真的找出左右顺子可能性。
+其实排除了edge case（总数不是5的倍数，uniq数字少于5等，连续的uniq数少于5等）以后，
+完全可以把数组扔进一个counter（第一题），之后按照数字从小到大，它的count也应该non-decreasing。
+比如2的count减去1的count就是从2开始的顺子，应该大于等于0。
+于是依次减下去，中间判断有没有负数出现，最后一组顺子的count应该完全相等。
+小姐姐表示这个approach是对的，可惜最后没写完
+
+第五个印度小哥，刚来了一年，题目是一个特别的二叉树，left child=2*parent, right child=2*parent+1，找一个value是不是存在。
+我就说倒着算这个value的parent直到1，然后iterate tree，如果有一个parent不存在就return false。
+O(log(value))。
+
+小哥又问如果这是个完全二叉树，让我算它的node个数（其实就是node最大值），我说还是用第一题的function，
+先2的倍数竖着找然后到叶子层横着binary search，O((logn)^2)。
+
+他问我如果dfs的话时间复杂度是多少，我说要iterate所有node所以是O(n)，他又问O(n)好还是O((logn)^2)好，
+我表示我不知道怎么判断平方，他还淡定的给我举例子如果n非常大2^100，logn才100所以肯定O((logn)^2)好。
+我给他点了个赞。最后没什么问的了还问我python的lambda函数怎么用来着。
+
+
+Coding第一轮是类似于Nested Integer那道题，要求自己定义一个class， 就是有时候是一个Int 有时候是一个list，之后根据level求和，做了DFS和BFS
+
+LC341
+
+另一道题是lowest common ancestor，树是一颗普通的树，不是BST，最开始有点卡，
+但是跟面试官确认有没有parent node, 答案是有。所以就先求出两个节点的depth，之后往上走就行了
+
+
+还有一道coding是Given two words as Strings, determine if they are isomorphic。
+字母需要挨个对应，LC应该有这道题。Followup是如果有3个字符串怎么比较，N个呢？
+
+一道OOD设计题，设计电梯，老题了，解法有很多，先跟面试官确认各个object，之后每个object负责的职能 function
+
+还有一道面试题是给两个字符串，一个长，一个短。在长字符串中找出所有短字符串的permutation。这个题用双指针 sliding window搞定

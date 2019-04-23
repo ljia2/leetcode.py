@@ -33,15 +33,21 @@ class Solution:
         :rtype: Node
         """
         # If the list is empty (i.e., given node is null),
-        # you should create a new single cyclic list and return the reference to that single node.
+        # you should create a new single cyclic list
+        # return the reference to that single node.
         if not head:
             node = Node(insertVal, head)
             node.next = node
             return node
 
+        if head.next == head:
+            node = Node(insertVal, head)
+            head.next = node
+            return head
+
         prev = head
         succ = head.next
-        small = big = None
+        tail = None
 
         # iterate over the circle link list.
         while True:
@@ -50,10 +56,13 @@ class Solution:
                 node = Node(insertVal, succ)
                 prev.next = node
                 return head
+
             # update the small and big node in the circle
-            if prev.val > succ.val:
-                small = succ
-                big = prev
+            if not tail:
+                tail = prev
+            # have to use >= to avoid there are multiple nodes with max values.
+            elif prev.val >= tail.val:
+                tail = prev
 
             prev = succ
             succ = succ.next
@@ -61,26 +70,23 @@ class Solution:
             # exit when revisit head
             if prev == head:
                 break
+
         # must be either smallest or biggest
-        if small and big:
-            node = Node(insertVal, small)
-            big.next = node
-        else:
-            # all nodes have the same values and insert before head.
-            node = Node(insertVal, head.next)
-            head.next = node
+        # or all nodes have the same values and insert before head.
+        node = Node(insertVal, tail.next)
+        tail.next = node
         return head
 
 
-n1 = Node(3, None)
-n2 = Node(3, None)
+n1 = Node(1, None)
+n2 = Node(2, None)
 n3 = Node(3, None)
-n3.next = n1
-n2.next = n3
 n1.next = n2
+n2.next = n3
+n3.next = n1
 
 s = Solution()
-print(s.insert(n1, 0))
+print(s.insert(n1, 4))
 
 
 

@@ -45,7 +45,7 @@ class Solution(object):
 
         # then partition nums[0:index+1] into k partitions
         subsets = [0] * k
-        # dfs/backtracking for each number starting 0 to
+        # dfs/backtracking for each number starting 0 to index
         return self.partition(subsets, nums, index, target)
 
     def partition(self, subsets, nums, end, target):
@@ -63,6 +63,7 @@ class Solution(object):
             subsets[i] -= nums[end]
 
         return False
+
 
 s = Solution()
 print(s.canPartitionKSubsets([4,3,2,3,5,2,1], 4))

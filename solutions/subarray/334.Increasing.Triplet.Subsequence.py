@@ -51,7 +51,8 @@ class Solution:
                 min2 = nums[i]
             elif nums[i] > min2:
                 return True
-            else: # other equal conditions, no updates
+            else:
+                # other equal conditions, no updates
                 continue
         return False
 

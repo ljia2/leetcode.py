@@ -54,12 +54,13 @@ class Solution:
         if lh == rh:
             return lh + 1, root
         # if left tree is deeper than the right tree,
-        # lopt must be the solution (the deepest subtree containing all the deepest nodes.
+        # lopt must be the solution (the deepest subtree containing all the deepest nodes).
         elif lh > rh:
             return lh + 1, lopt
         # otherwise, ropt must be the solution.
         elif lh < rh:
             return rh + 1, ropt
+
 
 s = Solution()
 root = TreeNode(3)

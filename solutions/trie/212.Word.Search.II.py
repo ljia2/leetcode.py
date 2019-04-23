@@ -63,12 +63,15 @@ class Solution(object):
         # out of bound
         if r < 0 or c < 0 or r >= len(board) or c >= len(board[0]):
             return
+
         # (r,c) location has been visited.
         if used[r][c]:
             return
+
         chr = board[r][c]
         if chr not in node.dic.keys():
             return
+
         node = node.dic[chr]
 
         # find a word matching.
@@ -76,6 +79,7 @@ class Solution(object):
             ans.append(node.word)
             # avoid duplication
             node.word = None
+
         # keep search guided by Trie
         # (r,c) at level
         used[r][c] = True
