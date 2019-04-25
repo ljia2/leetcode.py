@@ -29,14 +29,15 @@ class DFSSolution:
         if not s:
             return [""]
 
-        results = []
         l, r = self.countUnMatchParethesises(s)
         # from left to right scan, use start to define the substring s[start:]
+        results = []
         self.dfs(s, 0, l, r, results)
         return results
 
     # try all possible removals of a parenthesis and try whether it is valid for (l, r-1) first then (l-1, r)
     def dfs(self, s, start, l, r, results):
+        # exit of recursive dfs
         if l == 0 and r == 0:
             if self.isValid(s):
                 results.append(s)
@@ -47,6 +48,7 @@ class DFSSolution:
             # we only remove the first parenthesis if there are consecutive ones to avoid duplications.
             if i != start and s[i] == s[i-1]:
                 continue
+
             if s[i] == '(' or s[i] == ')':
                 # remove parenthesis at index i
                 newS = s[:i] + s[i+1:]
@@ -82,31 +84,6 @@ class DFSSolution:
             if count < 0:
                 return False
         return count == 0
-
-    # def countUnMatchParethesises(self, s):
-    #     r = 0
-    #     stack = []
-    #     for c in s:
-    #         if c == '(':
-    #             stack.append(c)
-    #         elif c == ')':
-    #             if stack:
-    #                 stack.pop()
-    #             else:
-    #                 r += 1
-    #     return len(stack), r
-
-    # def isValid(self, s):
-    #     stack = []
-    #     for c in s:
-    #         if c == '(':
-    #             stack.append(c)
-    #         elif c == ')':
-    #             if stack:
-    #                 stack.pop()
-    #             else:
-    #                 return False
-    #     return not stack
 
 
 s = DFSSolution()

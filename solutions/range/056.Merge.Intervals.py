@@ -26,19 +26,24 @@ class Solution:
         ans = []
         # use operator and sorted to sort class instances
         s_intervals = sorted(intervals, key=lambda x: x.start)
-        for i in s_intervals:
-            if s_intervals.index(i) == 0:
-                left = i.start
-                right = i.end
-            elif right >= i.start:
-                left = min(i.start, left)
-                right = max(i.end, right)
+        for i, interval in enumerate(s_intervals):
+            if i == 0:
+                left = interval.start
+                right = interval.end
+            # if it is overlap with the most recent "reference" interval (left, right) that may merge all overlap intervals before.
+            elif right >= interval.start:
+                left = min(interval.start, left)
+                right = max(interval.end, right)
+            # update results; reset the "reference" interval as current one.
             else:
                 ans.append(Interval(left, right))
-                left = i.start
-                right = i.end
+                left = interval.start
+                right = interval.end
+
         # Do not forget the last interval if it does not overlap with previous ones.
         ans.append(Interval(left, right))
+
+        return ans
 
 
 

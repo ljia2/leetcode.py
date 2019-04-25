@@ -1,5 +1,6 @@
 import queue as q
 
+
 class Solution:
     def findKthLargest(self, nums, k):
         """
@@ -20,6 +21,9 @@ class Solution:
         :type nums: List[int]
         :type k: int
         :rtype: int
+
+        T: O(nlogk)
+        S: O(k)
         """
         if nums is None or len(nums) == 0:
             return None
