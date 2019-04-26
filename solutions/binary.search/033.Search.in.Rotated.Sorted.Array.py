@@ -28,27 +28,27 @@ class Solution:
 
         if not nums:
             return -1
-        else:
-            return self.binarySearch(nums, target, 0, len(nums))
+
+        return self.binarySearch(nums, target, 0, len(nums)-1)
 
     # binarySearch where T = O(logn) and S = O(1)
-    # start: inclusive index and end: exclusive index
-    def binarySearch(self, nums, target, start, end):
-        while start < end:
-            mid = (end + start) // 2
-            if target == nums[mid]:
-                return mid
-            elif nums[start] <= nums[mid]:
-                if nums[start] <= target < nums[mid]:
-                    end = mid
+    def binarySearch(self, nums, target, l, r):
+        while l < r:
+            m = (l + r) // 2
+            if target == nums[m]:
+                return m
+            elif nums[l] <= nums[m]:
+                if nums[l] <= target < nums[m]:
+                    r = m
                 else:
-                    start = mid + 1
+                    l = m + 1
             else:
-                if nums[mid] < target <= nums[end-1]:
-                    start = mid + 1
+                if nums[m] < target <= nums[r]:
+                    l = m + 1
                 else:
-                    end = mid
+                    r = m
         return -1
+
 
 s = Solution()
 print(s.search([4,5,6,7,0,1,2], 0))
