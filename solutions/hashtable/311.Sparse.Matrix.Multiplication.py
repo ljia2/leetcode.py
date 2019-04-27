@@ -33,8 +33,9 @@ class Solution:
 
         """
         # result matrix
-        C = [[0] * len(B[0]) for i in range(len(A))]
+        ans = [[0] * len(B[0]) for i in range(len(A))]
 
+        # Note: use a tuple of (row, value) to represent a sparse matrix !!!! 
         sparseA = [[] for i in range(len(A))]
         for i in range(len(A)):
             for j in range(len(A[0])):
@@ -45,7 +46,7 @@ class Solution:
             sparse_row = sparseA[i]
             for (j, v) in sparse_row:
                 for k in range(len(B[j])):
-                    C[i][k] += v * B[j][k]
-        return C
+                    ans[i][k] += v * B[j][k]
+        return ans
 
 

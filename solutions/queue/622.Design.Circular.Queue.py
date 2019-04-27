@@ -75,7 +75,6 @@ class MyCircularQueue:
         else:
             return self.queue[self.read]
 
-
     def Rear(self):
         """
         Get the last item from the queue.

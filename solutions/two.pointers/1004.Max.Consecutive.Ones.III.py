@@ -64,6 +64,7 @@ class Solution(object):
                     start += 1
         return max_length
 
+
 s = Solution()
 print(s.longestOnes([0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], 3))
 print(s.longestOnes([0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], 0))
