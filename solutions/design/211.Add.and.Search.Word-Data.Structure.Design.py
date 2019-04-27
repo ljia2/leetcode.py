@@ -18,7 +18,15 @@ search("b..") -> true
 Note:
 You may assume that all words are consist of lowercase letters a-z.
 
+
+How about use Trie Tree.
+
 """
+
+class TrieNode:
+    def __init__(self):
+        self.next = dict()
+        self.word = None
 
 
 class WordDictionary(object):
@@ -27,7 +35,7 @@ class WordDictionary(object):
         """
         Initialize your data structure here.
         """
-
+        self.root = TrieNode()
 
     def addWord(self, word):
         """
@@ -35,7 +43,12 @@ class WordDictionary(object):
         :type word: str
         :rtype: None
         """
-
+        p = self.root
+        for c in word:
+            if c not in p.next.keys():
+                p.next[c] = TrieNode()
+            p = p.next[c]
+        p.word = True
 
     def search(self, word):
         """
@@ -43,6 +56,22 @@ class WordDictionary(object):
         :type word: str
         :rtype: bool
         """
+        return self.dfs(self.root, 0, word)
+
+    def dfs(self, root, level, word):
+        if level == len(word):
+            return root.word
+
+        c = word[level]
+        if c != ".":
+            if c not in root.next.keys():
+                return False
+            return self.dfs(root.next[c], level + 1, word)
+        else:
+            for d in root.next.keys():
+                if self.dfs(root.next[d], level + 1, word):
+                    return True
+            return False
 
 
 

@@ -32,7 +32,9 @@ class Solution:
         :type k: int
         :rtype: List[int]
 
-        use deque to store the decreasing sequence size at most k.
+        monotonic stack: store the sequence indices whose values are non-increasing.
+
+        store the index of max number in a sliding window of size k.
 
         """
 
@@ -43,10 +45,12 @@ class Solution:
         deq = deque()
         ans = []
 
-        # First traversing through K in the nums and only adding maximum value's index to the deque.
+        # Initialization of the sliding window of size K.
+        # First traversing through K in the nums and only adding the index of the maximum value to the deque.
         # Note: We are only storing the index and not the value.
         # Now, Comparing the new value in the nums with the last index value from deque,
-        # and if new value is less, we don't need it
+        #      1) if new value is bigger, we don't need any previous values in stack less than it.
+        #      2) if the new value is samller, we put it into stack to ensure the stack is decreasing. .
 
         for i in range(k):
             while deq:
@@ -54,7 +58,6 @@ class Solution:
                     deq.pop()
                 else:
                     break
-
             deq.append(i)
 
         # Here we will have deque with index of maximum element for the first subsequence of length k.
@@ -64,22 +67,27 @@ class Solution:
         # 3. Checking if right most indexed element in deque is less than the new element found, if yes we will remove it
         # 4. Append i at the end of the deque  (Not: 3rd and 4th steps are similar to previous for loop)
 
+
+        # moving the window
         for i in range(k, len(nums)):
+            # store the maxinum value of the current window.
             ans.append(nums[deq[0]])
 
+            # keep poping the maximum value in the monotonic stack if it is out of window.
+            # untill all numbers in the stack are relevant.
             if deq[0] < i - k + 1:
                 deq.popleft()
 
             while deq:
                 if nums[i] > nums[deq[-1]]:
-                    # nums[deq[-1]] cannot be the max of the window, because it is smaller than nums[i]
+                    # nums[deq[-1]] cannot be the max of the window, because it is smaller than nums[i]; pop it.
                     deq.pop()
                 else:
                     break
 
             deq.append(i)
 
-        # Adding the maximum for last subsequence
+        # Adding the maximum for last sliding window ending at last window.
         ans.append(nums[deq[0]])
 
         return ans

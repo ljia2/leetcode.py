@@ -105,10 +105,16 @@ class Solution2:
 
         use priority queue
 
+        T: O(k*n)
+
+        S: O(k)
+
         """
-        # curr points the node to insert its next value.
+        # head points to the merged list while curr points the tail to insert its next value.
         head = None
         curr = head
+
+        # initialize the pq with the head of k lists.
         pq = []
         for i in range(len(lists)):
             node_curr = lists[i]
@@ -120,6 +126,7 @@ class Solution2:
         while pq:
             # pop index of least value node from pq
             _, min_index = heappop(pq)
+
             if not head:
                 head = lists[min_index]
                 curr = head

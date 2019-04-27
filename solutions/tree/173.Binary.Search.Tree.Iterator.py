@@ -38,14 +38,8 @@ class BSTIterator(object):
 
         """
         self.node_stack = []
-        # Initialize stack
-        # Note that we recreate a "leaf" node valued as root.val.
-        if root:
-            if root.right:
-                self.node_stack.append(root.right)
-            self.node_stack.append(TreeNode(root.val))
-            if root.left:
-                self.node_stack.append(root.left)
+        # Initialize stack, push all the node on the leftmost path into stack.
+        self.pushAll(root)
 
     def hasNext(self):
         """
@@ -59,17 +53,13 @@ class BSTIterator(object):
         """
         while self.node_stack:
             node = self.node_stack.pop()
-            # if it is a leaf node.
-            if not node.left and not node.right:
-                return node.val
-            else:
-                if node.right:
-                    self.node_stack.append(node.right)
-                # recreate a leaf node valued as node.val.
-                self.node_stack.append(TreeNode(node.val))
-                if node.left:
-                    self.node_stack.append(node.left)
+            self.pushAll(node.right)
+            return node.val
 
+    def pushAll(self, node):
+        while node:
+            self.node_stack.append(node)
+            node = node.left
 
 
 # Your BSTIterator will be called like this:
