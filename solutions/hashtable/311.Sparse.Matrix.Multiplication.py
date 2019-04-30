@@ -35,7 +35,7 @@ class Solution:
         # result matrix
         ans = [[0] * len(B[0]) for i in range(len(A))]
 
-        # Note: use a tuple of (row, value) to represent a sparse matrix !!!! 
+        # Note: use a tuple of (row, value) to represent a sparse matrix !!!!
         sparseA = [[] for i in range(len(A))]
         for i in range(len(A)):
             for j in range(len(A[0])):
