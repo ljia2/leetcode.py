@@ -68,10 +68,10 @@ class DFSSolution:
             if c == '(':
                 l += 1
             elif c == ')':
-                if l == 0:
-                    r += 1
-                else:
+                if l > 0:
                     l -= 1
+                else:
+                    r += 1
         return l, r
 
     def isValid(self, s):
@@ -89,3 +89,66 @@ class DFSSolution:
 s = DFSSolution()
 print(s.removeInvalidParentheses(")d))"))
 print(s.removeInvalidParentheses(")()m)(((()((()(((("))
+
+######## What if only return one possible result.
+
+
+class VarationSolution:
+    def removeInvalidParentheses(self, s):
+        """
+
+        Remove the minimum number of invalid parentheses in order to make the input string valid.
+        Return ONE possible results.
+
+        Note: The input string may contain letters other than the parentheses ( and ).
+
+        Example 1:
+
+        Input: "()())()"
+        Output: ["()()()", "(())()"]
+        Example 2:
+
+        Input: "(a)())()"
+        Output: ["(a)()()", "(a())()"]
+        Example 3:
+
+        Input: ")("
+        Output: [""]
+
+        :type s: str
+        :rtype: s
+
+        one scan from left to right for unmatched ")" and one scan from right to left for unmatched "("
+        """
+        l = 0
+        removed = set()
+        for i, c in enumerate(s):
+            if c == '(':
+                l += 1
+            elif c == ')':
+                if l > 0:
+                    l -= 0
+                else:
+                    removed.add(i)
+            else:
+                continue
+        r = 0
+        for i in range(len(s)-1, -1, -1):
+            if i in removed or (s[i] != '(' and s[i] != ')'):
+                continue
+            if c == ')':
+                r += 1
+            elif c == '(':
+                if r > 0:
+                    r -= 1
+                else:
+                    removed.add(i)
+
+        res = ""
+        for i, c in enumerate(s):
+            if i not in removed:
+                res += c
+        return res
+
+vs = VarationSolution()
+print(vs.removeInvalidParentheses(")d))"))

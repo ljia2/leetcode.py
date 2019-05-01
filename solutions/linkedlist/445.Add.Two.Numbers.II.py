@@ -4,6 +4,7 @@ class ListNode:
         self.val = x
         self.next = None
 
+
 class Solution:
     def addTwoNumbers(self, l1, l2):
         """
@@ -25,6 +26,9 @@ class Solution:
         :type l1: ListNode
         :type l2: ListNode
         :rtype: ListNode
+
+        # either reverse the input or use stack to store values, then add them up.
+
         """
 
         nl1 = self.reverse(l1)
@@ -53,13 +57,15 @@ class Solution:
             ans_tail = ans_tail.next
             carry = numsum // 10
             nl1 = nl1.next
+
         while nl2:
             numsum = nl2.val + carry
             ans_tail.next = ListNode(numsum % 10)
             ans_tail = ans_tail.next
             carry = numsum // 10
             nl2 = nl2.next
-        # do not forget the ultimate carry !!!! 
+
+        # do not forget the ultimate carry !!!!
         if carry == 1:
             ans_tail.next = ListNode(1)
 

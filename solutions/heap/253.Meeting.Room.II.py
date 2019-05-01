@@ -12,7 +12,8 @@ class Interval:
 class Solution:
     def minMeetingRooms(self, intervals):
         """
-        Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.
+        Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei),
+        find the minimum number of conference rooms required.
 
         Example 1:
 
@@ -30,9 +31,9 @@ class Solution:
         if intervals is None or not intervals:
             return 0
         room_cnt = 0
-        intervals.sort(key=operator.attrgetter("start"))
+        intervals.sort(key=lambda x: x.start)
 
-        # hint: use list and heappop/heappush from heapq to mimic piroityQueue
+        # hint: use list and heappop/heappush from heapq to mimic priorityQueue
         conf_queue = []
         for interval in intervals:
             if not conf_queue:
@@ -40,8 +41,11 @@ class Solution:
                 heappush(conf_queue, interval.end)
             else:
                 while conf_queue:
+                    # the room with min ending time i
                     i = heappop(conf_queue)
-                    if interval.start < i: # interval is inclusive on end
+                    # interval is overlap with i, push i and break
+                    # otherwise, keep popping booked room that had ended before interval.start.
+                    if interval.start < i:
                         heappush(conf_queue, i)
                         break
                 heappush(conf_queue, interval.end)
