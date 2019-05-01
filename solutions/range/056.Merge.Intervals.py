@@ -30,7 +30,8 @@ class Solution:
             if i == 0:
                 left = interval.start
                 right = interval.end
-            # if it is overlap with the most recent "reference" interval (left, right) that may merge all overlap intervals before.
+            # if it is overlap with the most recent "reference" interval (left, right)
+            # that may merge all overlap intervals before.
             elif right >= interval.start:
                 left = min(interval.start, left)
                 right = max(interval.end, right)

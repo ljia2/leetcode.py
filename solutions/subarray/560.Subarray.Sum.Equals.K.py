@@ -152,3 +152,28 @@ class SolutionIV:
                 count += prefix_dict[target]
             prefix_dict[prefix_sum[j]] = prefix_dict.get(prefix_sum[j], 0) + 1
         return count
+
+
+###  What if all numbers are positive, we can use two pointer!!!
+
+class VarationSolution:
+    def subarraySum(self, nums, k):
+        if k < 0:
+            return 0
+        if not nums:
+            return 0
+
+        numsum = 0
+        i = 0
+        ans = 0
+        for num in nums:
+            numsum += num
+
+            while numsum > k:
+                numsum -= nums[i]
+                i += 1
+
+            if numsum == k:
+                ans += 1
+        return ans
+

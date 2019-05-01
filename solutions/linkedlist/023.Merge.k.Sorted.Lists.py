@@ -156,3 +156,9 @@ input3.next = ListNode(6)
 s = Solution2()
 results = s.mergeKLists([input1, input2, input3])
 print(results)
+
+
+## What is return a iterator???
+# How about intailize a pq of tuple (head.val, head).
+# hasNext not pq
+# next: 1) first pop v, head, if head.next: push(head.next.val, head.next); return v

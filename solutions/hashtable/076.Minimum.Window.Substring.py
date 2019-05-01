@@ -28,7 +28,7 @@ class BestSolution:
             dt[c] += 1
 
         res = ""
-        max_length = 2 ** 31
+        max_length = 2 ** 31 - 1
         j = 0
 
         for i, c in enumerate(s):

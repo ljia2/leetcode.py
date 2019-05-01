@@ -4,6 +4,7 @@ class ListNode:
         self.val = x
         self.next = None
 
+
 class Solution:
 
     def mergeTwoLists(self, l1, l2):
@@ -43,16 +44,15 @@ class Solution:
                     tail = head
                     l2 = l2.next
 
-        if l1:
-            while l1:
-                tail.next = l1
-                tail = l1
-                l1 = l1.next
-        elif l2:
-            while l2:
-                tail.next = l2
-                tail = l2
-                l2 = l2.next
+        while l1:
+            tail.next = l1
+            tail = l1
+            l1 = l1.next
+
+        while l2:
+            tail.next = l2
+            tail = l2
+            l2 = l2.next
 
         return head
 
