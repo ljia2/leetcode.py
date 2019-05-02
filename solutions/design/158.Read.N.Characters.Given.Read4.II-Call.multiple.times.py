@@ -16,7 +16,6 @@ read4(buf) # read4 returns 3. Now buf = ['i','j','k',...], fp points to end of f
 
 class Solution(object):
     def __init__(self):
-        self.file_buf = []
         self.file_end = False
 
     def read(self, buf, n):
@@ -25,6 +24,19 @@ class Solution(object):
         :type n: Number of characters to read (int)
         :rtype: The number of actual characters read (int)
         """
+        if self.file_end:
+            return 0
+        else:
+            count = 0
+            while count < 0:
+                lbuf = []
+                l = read4(lbuf)
+                buf += lbuf
+                count += l
+                if l < 4:
+                    self.file_end = True
+                    break
+            return count
 
 
 
