@@ -73,6 +73,57 @@ class WordDictionary(object):
                     return True
             return False
 
+######## What if you want search faster, treat "." as a node to insert; use dfs to generate all possible search.
+
+class WordDictionaryII(object):
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.root = TrieNode()
+
+    def dfs(self, original_word, level, word, ans):
+        if level == len(original_word):
+            ans.append(word)
+            return
+
+        c = original_word[level]
+        self.dfs(original_word, level + 1, word + c, ans)
+        self.dfs(original_word, level + 1, word + ".", ans)
+        return
+
+    def addWord(self, word):
+        """
+        Adds a word into the data structure.
+        :type word: str
+        :rtype: None
+        """
+        words = []
+        self.dfs(word, 0, "", words)
+
+        for w in words:
+            p = self.root
+            for c in w:
+                if c not in p.next.keys():
+                    p.next[c] = TrieNode()
+                p = p.next[c]
+            p.word = True
+
+    def search(self, word):
+        """
+        Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+        :type word: str
+        :rtype: bool
+        """
+        p = self.root
+        for c in word:
+            if c not in p.next.keys():
+                return False
+            p = p.next[c]
+        return p.word is not None
+
+
 
 
 # Your WordDictionary object will be instantiated and called as such:

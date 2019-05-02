@@ -28,38 +28,34 @@ class Solution:
 
         # in-place sorting by ascending order
         nums.sort()
+
         # output all 3-item tuples (a, b, c) summed to 0; the left as a and mid as b and right as c where a<=b<=c
-        ans = []
-        for left in range(len(nums)-2):
-            if left > 0 and nums[left] == nums[left-1]:
+        ans = set()
+        for i in range(len(nums)-2):
+            if i > 0 and nums[i] == nums[i-1]:
                 continue
 
             # two pointers of left + 1 and the last one.
-            mid, right = left+1, len(nums)-1
-            while mid < right:
-                ssum = nums[left] + nums[mid] + nums[right]
+            l, r = i+1, len(nums)-1
+            while l < r:
+                ssum = nums[i] + nums[l] + nums[r]
                 if ssum == 0:
-                    ans.append([nums[left], nums[mid], nums[right]])
+                    ans.add((nums[i], nums[l], nums[r]))
                     # after a qualified tuple, need to change b and c at the same time
-                    mid += 1
-                    while mid < right and nums[mid] == nums[mid-1]:
-                        mid += 1
-                    right -= 1
-                    while right > mid and nums[right] == nums[right+1]:
-                        right -= 1
-
+                    l += 1
+                    #while l < r and nums[l] == nums[l-1]:
+                    #     l += 1
+                    r -= 1
+                    #while l < r and nums[r] == nums[r+1]:
+                    #     r -= 1
                 elif ssum > 0:
                     # need to move right to left to shrink sum.
-                    right -= 1
-                    while right > mid and nums[right] == nums[right+1]:
-                        right -= 1
-
+                    r -= 1
                 elif ssum < 0:
                     # need to move mid to right to increase sum.
-                    mid += 1
-                    while mid < right and nums[mid] == nums[mid-1]:
-                        mid += 1
-        return ans
+                    l += 1
+
+        return list(map(list, ans))
 
 
 s = Solution()

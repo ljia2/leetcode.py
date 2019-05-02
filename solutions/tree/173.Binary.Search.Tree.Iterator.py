@@ -12,7 +12,7 @@ class BSTIterator(object):
         Implement an iterator over a binary search tree (BST).
         Your iterator will be initialized with the root node of a BST.
 
-        Calling next() will return the next smallest number in the BST.
+        Calling next() will return the next smallest 5 in the BST.
 
         Example:
 
@@ -96,3 +96,80 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+###### what if a node with parent and do not use stack.
+
+class ParentTreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+        self.parent = None
+
+
+class BSPTIterator(object):
+    def __init__(self, root):
+        """
+        Implement an iterator over a binary search tree (BST).
+        Your iterator will be initialized with the root node of a BST.
+
+        Calling next() will return the next smallest 5 in the BST.
+
+        Example:
+
+        BSTIterator iterator = new BSTIterator(root);
+        iterator.next();    // return 3
+        iterator.next();    // return 7
+        iterator.hasNext(); // return true
+        iterator.next();    // return 9
+        iterator.hasNext(); // return true
+        iterator.next();    // return 15
+        iterator.hasNext(); // return true
+        iterator.next();    // return 20
+        iterator.hasNext(); // return false
+
+        Note:
+
+        next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree.
+        You may assume that next() call will always be valid, that is, there will be at least a next smallest number in the BST when next() is called.
+
+        :type root: TreeNode
+
+        Trick InOrderTravel.
+
+        """
+        self.curr = root
+
+    def hasNext(self):
+        """
+        :rtype: bool
+        """
+        succ = self.findSuccessor(self.curr)
+        self.curr = succ
+        return succ is not None
+
+    def next(self):
+        """
+        :rtype: int
+        """
+        return self.curr.val
+
+    def findSuccssor(self, node):
+        if not node:
+            return None
+
+        if node.right:
+            tmp = node.right
+            while tmp and tmp.left:
+                tmp = tmp.left
+            return tmp
+
+        father = node.parent
+        child = node
+        while father and father.left != child:
+            child = father
+            father = father.parent
+        return father
+
+
+

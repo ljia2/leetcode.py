@@ -42,3 +42,25 @@ class Solution:
                 else:
                     q.heappush(hp, lnum)
         return hp.heappop()
+
+
+##### What if find the 3rd largest without using heap
+
+class Solution:
+    def findThirdLargest(self, nums):
+        if not nums or len(nums) < 3:
+            raise Exception("Invalid Input!")
+
+        fmin = smin = tmin = -2**31 - 1
+
+        for num in nums:
+            if num > fmin:
+                tmin = smin
+                smin = fmin
+                fmin = num
+            elif num > smin:
+                tmin = smin
+                smin = num
+            elif num > tmin:
+                tmin = num
+        return tmin
