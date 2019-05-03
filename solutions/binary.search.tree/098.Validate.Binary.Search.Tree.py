@@ -5,7 +5,8 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
-class DFSSolution(object):
+# post order check
+class PostOrderSolution(object):
     def isValidBST(self, root):
         """
         Given a binary tree, determine if it is a valid binary search tree (BST).
@@ -55,7 +56,54 @@ class DFSSolution(object):
         return lres and rres and lmax < root.val < rmin, min(lmin, root.val), max(root.val, rmax)
 
 
+class PreOrderSolution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+
+        if not root:
+            return True
+
+        return self.dfs(root, -2**31, 2**31-1)
+
+    # preorder use root.val to bound verification of left/right tree.
+    def dfs(self, root, minv, maxv):
+        if not root:
+            return True
+        if root.val >= maxv or root.val <= minv:
+            return False
+        return self.dfs(root.left, minv, root.val) and self.dfs(root.right, root.val, maxv)
+
+
 class InOrderSolution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root:
+            return True
+
+        return self.dfs(root, None)
+
+    # prev store the previous node of root; keep updating it when processing root.
+    def dfs(self, root, prev):
+        if not root:
+            return True
+        # check left
+        if not self.dfs(root.left, prev):
+            return False
+        # check root
+        if prev and prev.val > root.val:
+            return False
+        prev = root
+        # check right
+        return self.dfs(root.right, prev)
+
+
+class StackInOrderSolution(object):
     def isValidBST(self, root):
         """
         Given a binary tree, determine if it is a valid binary search tree (BST).
@@ -119,11 +167,7 @@ class InOrderSolution(object):
             if prev and root.val <= prev.val:
                 return False
             prev = root
-            # reset node to its right children. 
+
+            # reset node to its right children.
             root = root.right
         return True
-
-
-
-
-

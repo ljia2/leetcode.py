@@ -88,7 +88,7 @@ class NestedIterator(object):
         """
         :rtype: int
         """
-        # seek the top element of stack and its index
+        # seek the top tuple of nestedList and its index
         nestedList, i = self.stack[-1]
 
         # update the index of top nestedList
@@ -117,7 +117,8 @@ class NestedIterator(object):
                 if x.isInteger():
                     return True
                 # update index, and go to next level
-                # because when pop such an element, the element at i must be processed already; move to next element of nestedList.
+                # because when pop such an element,
+                # the element at i must be processed already; move to next element of nestedList.
                 s[-1][1] += 1
                 s.append((x.getList(), 0))
         return False

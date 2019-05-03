@@ -36,3 +36,35 @@ class Solution:
 
 s = Solution()
 print(s.productExceptSelf([1,2,3,4]))
+
+### What if we can use divide and neeed to consider 0
+
+class DivisionSolution:
+    def productExceptSelf(self, nums):
+        if not nums:
+            return []
+
+        zero = []
+        prod = 1
+        for i, num in enumerate(nums):
+            if num == 0:
+                zero.append(i)
+            else:
+                prod *= num
+
+        if zero:
+            if len(zero) > 1:
+                return [0] * len(nums)
+            else:
+                ans = []
+                for i in range(len(nums)):
+                    if i in zero:
+                        ans.append(prod)
+                    else:
+                        ans.append(0)
+                return ans
+        else:
+            ans = []
+            for num in nums:
+                ans.append(prod // num)
+            return ans

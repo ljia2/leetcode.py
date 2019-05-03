@@ -86,7 +86,7 @@ class Solution(object):
 
         if not root:
             return []
-
+        # nodes stores tuple of (x, y, order, value)
         nodes = []
         self.dfs(root, 0, 0, nodes)
 
@@ -107,6 +107,7 @@ class Solution(object):
                 else:
                     answer.append(v)
                 last_x = x
+
         # IMPORTANT!! DO NOT FORGET THE LAST ANSWER.
         answers.append(answer)
         return answers
@@ -114,6 +115,7 @@ class Solution(object):
     def dfs(self, root, x, y, nodes):
         if not root:
             return
+        # tuple of (coordinate, order of in the heap, val).
         nodes.append((x, y, len(nodes), root.val))
         self.dfs(root.left, x-1, y+1, nodes)
         self.dfs(root.right, x+1, y+1, nodes)

@@ -19,18 +19,9 @@ class Solution:
                 # 1.i)
                 for i in range(len(nums)-1, r-1, -1):
                     if nums[i] > nums[r-1]:
-                        temp = nums[i]
-                        nums[i] = nums[r-1]
-                        nums[r-1] = temp
-                        break
-                # 1.ii)
-                for i in range(r, len(nums)):
-                    for j in range(i+1, len(nums)):
-                        if nums[i] > nums[j]:
-                            temp = nums[j]
-                            nums[j] = nums[i]
-                            nums[i] = temp
-                return
+                        nums[i], nums[r-1] = nums[r-1], nums[i]
+                        nums[r:] = sorted(nums[r:])
+                        return
         # 2)
         nums.sort()
         return
