@@ -1,7 +1,6 @@
 class DPSolution:
     def numDecodings(self, s):
         """
-
         A message containing letters from A-Z is being encoded to numbers using the following mapping:
 
         'A' -> 1
@@ -27,9 +26,15 @@ class DPSolution:
         hint: counting ways means we need to use dynamic programming method
         ways[i] denotes the decoding ways by using the first i chars
 
+        the question can not encode a leading 0 and two adjacent 0
+
+
         """
 
         if not s:
+            return 0
+
+        if s[0] == '0' or s.find("00") > -1:
             return 0
 
         ways = [0] * (len(s) + 1)
@@ -61,4 +66,4 @@ print(s.numDecodings("226"))
 print(s.numDecodings("236"))
 print(s.numDecodings("0"))
 print(s.numDecodings("12"))
-
+print(s.numDecodings("00"))

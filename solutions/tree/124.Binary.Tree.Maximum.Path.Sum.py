@@ -61,7 +61,7 @@ class Solution:
         else:
             lsum = self.dfs(node.left, max_sum_path) if node.left else 0
             rsum = self.dfs(node.right, max_sum_path) if node.right else 0
-            # there are four possible sum.
+            # there are four possible sum, if node values are negative or positive. 
             node_sum = max([node.val, node.val + lsum, node.val + rsum, node.val + lsum + rsum])
             max_sum_path[0] = max(node_sum, max_sum_path[0])
             return node_sum

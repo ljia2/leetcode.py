@@ -101,7 +101,7 @@ class NestedIterator(object):
         """
         :rtype: bool
 
-        it always update the stack to insert the next integer at the top of stack.
+        when calling hasNext, it always update the stack to insert the next integer at the top of stack.
 
         """
         s = self.stack

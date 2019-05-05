@@ -64,7 +64,7 @@ class BinarySearchSolution:
         :type nums: List[int]
         :rtype: int
 
-        max_len[i] denotes the longest increaing subsequence ending with num[i-1]
+        max_len[i] denotes the longest increasing subsequence ending with num[i-1]
         """
 
         if not nums:

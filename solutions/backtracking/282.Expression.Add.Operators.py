@@ -169,8 +169,10 @@ class DFSSolution(object): # TLE
 
         for l in range(1, len(num) - pos + 1):
             str_n = num[pos:pos+l]
+
             if str_n[0] == "0" and len(str_n) > 1:
                 break
+
             n = int(str_n)
             if pos == 0:
                 self.dfs(num, target, pos + l, str_n, n, n, ans)

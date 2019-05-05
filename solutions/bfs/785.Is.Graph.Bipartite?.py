@@ -74,12 +74,14 @@ class Solution:
         set0 = set()
         set0.add(node)
         set1 = set()
+
         steps = 0
         while qe:
             size = len(qe)
             while size > 0:
                 n = qe.pop(0)
                 size -= 1
+
                 if steps % 2 == 0:
                     if n in set1:
                         return False
