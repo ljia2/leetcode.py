@@ -70,3 +70,41 @@ print(s.numIslands([['0', '1', '1', '0'], ['0', '0', '1', '0'], ['1', '0', '1', 
 print(s.numIslands([["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]))
 print(s.numIslands([["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]))
 print(s.numIslands([["1","0","1","1","1"],["1","0","1","0","1"],["1","1","1","0","1"]]))
+
+
+#### Follow up: what if to find the number of lakes.
+#### Similar idea but when search around the bound, the number of lakes - 1.
+
+class VarationSolution:
+    def numLakes(self, grid):
+
+        if not grid or not grid[0]:
+            return 0
+        ans = 0
+        rnum, cnum = len(grid), len(grid[0])
+        for r in range(rnum):
+            for c in range(cnum):
+                if grid[r][c] == '1':
+                    continue
+
+                if self.dfs(grid, r, c):
+                    ans += 1
+        return ans
+
+    def dfs(self, grid, r, c):
+        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
+            return False
+
+        if grid[r][c] == "1":
+            return True
+
+        ans = True
+        # mark it as visited
+        grid[r][c] = "1"
+        for nr, nc in [(r+1, c), (r-1, c), (r, c+1), (r, c-1)]:
+            ans = ans and self.dfs(grid, nr, nc)
+        return ans
+
+s = VarationSolution()
+print(s.numLakes([['0', '0', '1', '0'], ['0', '1', '0', '1'], ['0', '1', '0', '1'], ['0', '0', '1', '0']]))
+print(s.numLakes([['0', '0', '1', '0'], ['0', '1', '0', '1'], ['0', '1', '0', '1'], ['0', '0', '0', '1']]))
