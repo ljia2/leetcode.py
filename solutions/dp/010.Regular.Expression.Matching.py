@@ -105,3 +105,5 @@ class Solution:
 
 s = Solution()
 print(s.isMatch("aab", "c*d*aab"))
+
+### Follow up: what if not consider *

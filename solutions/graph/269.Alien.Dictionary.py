@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 class Solution(object):
     def alienOrder(self, words):
         """
@@ -50,3 +52,74 @@ class Solution(object):
         :type words: List[str]
         :rtype: str
         """
+
+        if not words:
+            return ""
+
+        if len(words) == 1:
+            return words[0][::-1]
+
+        indict = defaultdict(set)
+        outdict = defaultdict(set)
+        n = len(words)
+        for i in range(n-1):
+            s, d = words[i], words[i+1]
+            if not self.compare(s, d, indict, outdict):
+                return ""
+
+        vocab = set()
+        for word in words:
+            vocab = vocab.union(set(word))
+
+        return self.bfs_topological_sort(indict, outdict, vocab)
+
+    # word1 and word2 is a valid comparsion.
+    def compare(self, word1, word2, indict, outdict):
+        # invalid order.
+        if len(word1) > len(word2) and word1[:len(word2)] == word2:
+            return False
+
+        l = min(len(word1), len(word2))
+        for i in range(l):
+            a, b = word1[i], word2[i]
+            if a == b:
+                continue
+            outdict[a].add(b)
+            indict[b].add(a)
+            # only record the first pair of different chars.
+            break
+
+        return True
+
+    # bfs to sort graph
+    def bfs_topological_sort(self, indict, outdict, vocab):
+        q = []
+        # find all vertex without in-degree.
+        for c in vocab:
+            if not indict[c]:
+                q.append(c)
+
+        visited = 0
+        ans = []
+        while q:
+            size = len(q)
+            while size > 0:
+                n = q.pop(0)
+                size -= 1
+                ans.append(n)
+
+                if outdict[n]:
+                    adj = outdict[n]
+                    for m in adj:
+                        indict[m].remove(n)
+                        if not indict[m]:
+                            q.append(m)
+                visited += 1
+        if visited != len(vocab):
+            return ""
+        else:
+            return "".join(ans)
+
+s = Solution()
+#print(s.alienOrder(["wrt","wrf","er","ett","rftt"]))
+print(s.alienOrder(["za","zb","ca","cb"]))
