@@ -36,7 +36,6 @@ class Solution(object):
 
         dp[K][i][j] is probability of a knight moves the (i+1, j+1) in grid after K moves
 
-
         """
         # if no move, 100% staying on board.
         if K <= 0:
@@ -53,8 +52,10 @@ class Solution(object):
                         nx, ny = x + dx, y + dy
                         if nx < 0 or ny < 0 or nx >= N or ny >= N:
                             continue
+
                         # update the probability from last position (x, y) to (nx, ny)
                         dp[k][nx][ny] += dp[k-1][x][y] * 0.125
+
 
         ans = 0
         for x in range(N):

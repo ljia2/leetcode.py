@@ -42,6 +42,7 @@ class Solution(object):
             prefix_sum += weight*1.0/sum_w
             self.weight_internval.append(prefix_sum)
         self.rand = random
+
     def pickIndex(self):
         """
         :rtype: int
@@ -49,9 +50,6 @@ class Solution(object):
         rv = self.rand.random()
         return bisect.bisect_right(self.weight_internval, rv)
         
-
-
-
 
 # Your Solution object will be instantiated and called as such:
 # obj = Solution(w)

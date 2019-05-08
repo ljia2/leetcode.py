@@ -26,8 +26,9 @@ class Solution:
         :type grid: List[List[int]]
         :rtype: int
         """
-        if grid is None or len(grid) == 0 or len(grid[0]) == 0:
+        if not grid or not grid[0]:
             return 0
+
         ans = [0]
         for r in range(len(grid)):
             for c in range(len(grid[0])):
@@ -36,26 +37,16 @@ class Solution:
                 self.dfs(grid, r, c, ans)
         return ans[0]
 
-    def updatePerimeter(self, grid, r, c, ans):
-        if r == 0 or grid[r-1][c] == 0:
-            ans[0] += 1
-        if c == 0 or grid[r][c-1] == 0:
-            ans[0] += 1
-        if r == len(grid)-1 or grid[r+1][c] == 0:
-            ans[0] += 1
-        if c == len(grid[0])-1 or grid[r][c+1] == 0:
-            ans[0] += 1
-        return
-
     def dfs(self, grid, r, c, ans):
-        if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]):
+        if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]) or grid[r][c] == 0:
+            ans[0] += 1
             return
+        # if the grid is visited already.
         if grid[r][c] != 1:
             return
-        # encounter a land at (r, c); mark (r,c) as visited by -1,
-        # can not by 0 to avoid double counting perimeter
+
+        # encounter a land at (r, c); mark (r,c) as visited by -1 (can not by 0 to avoid double counting perimeter)
         grid[r][c] = -1
-        self.updatePerimeter(grid, r, c, ans)
         for nr, nc in [(r, c+1), (r, c-1), (r+1, c), (r-1, c)]:
             self.dfs(grid, nr, nc, ans)
         return

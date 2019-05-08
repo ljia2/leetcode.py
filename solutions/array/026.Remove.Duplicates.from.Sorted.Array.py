@@ -39,6 +39,9 @@ class Solution(object):
 
         :type nums: List[int]
         :rtype: int
+
+        In place!!!
+
         """
 
         if not nums:

@@ -138,6 +138,7 @@ class BiBFSSolution: # Best Solution
         visited2.add(endWord)
 
         while queue1 and queue2:
+
             # always expand from smaller queue.
             if len(queue1) > len(queue2):
                 qs, qb, visited = queue2, queue1, visited2
@@ -152,6 +153,7 @@ class BiBFSSolution: # Best Solution
                 # when a word in qs appear in qb, two side bfs expansion.
                 if w in qb:
                     return step + 1
+
                 # replace a char at i with different char.
                 for i in range(len(w)):
                     #for c in string.ascii_lowercase:
