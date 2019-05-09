@@ -1,4 +1,6 @@
 import collections
+
+
 class Solution:
     def threeSum(self, nums):
         """
@@ -21,9 +23,10 @@ class Solution:
         """
         if not nums or len(nums) < 3:
             return []
+        n = len(nums)
         num_freq = collections.Counter(nums)
         ans = set()
-        for i in range(len(nums)):
+        for i in range(n):
             num_freq[nums[i]] -= 1
             for j in range(i):
                 target = -nums[i]-nums[j]

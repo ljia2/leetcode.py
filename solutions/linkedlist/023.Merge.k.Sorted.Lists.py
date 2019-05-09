@@ -160,5 +160,5 @@ print(results)
 
 ## What is return a iterator???
 # How about intailize a pq of tuple (head.val, head).
-# hasNext not pq
-# next: 1) first pop v, head, if head.next: push(head.next.val, head.next); return v
+# hasNext: not pq
+# next: 1) first pop v, head, if head.hasNext: push(head.next.val, head.next); return v

@@ -1,4 +1,3 @@
-import operator
 from heapq import heappop, heappush
 
 
@@ -30,26 +29,26 @@ class Solution:
         """
         if intervals is None or not intervals:
             return 0
-        room_cnt = 0
+
         intervals.sort(key=lambda x: x.start)
 
         # hint: use list and heappop/heappush from heapq to mimic priorityQueue
-        conf_queue = []
-        for interval in intervals:
-            if not conf_queue:
-                room_cnt = 1
-                heappush(conf_queue, interval.end)
-            else:
-                while conf_queue:
-                    # the room with min ending time i
-                    i = heappop(conf_queue)
-                    # interval is overlap with i, push i and break
-                    # otherwise, keep popping booked room that had ended before interval.start.
-                    if interval.start < i:
-                        heappush(conf_queue, i)
-                        break
-                heappush(conf_queue, interval.end)
-                room_cnt = max(room_cnt, len(conf_queue))
+        conf_queue = [intervals[0]]
+        room_cnt = 1
+
+        for interval in intervals[1:]:
+            # keep poping conferences ending already.
+            while conf_queue:
+                # the room with min ending time i; interval is overlap with i, push i back and break
+                # otherwise, keep popping booked room that had ended before interval.start.
+                i = heappop(conf_queue)
+                if interval.start < i:
+                    heappush(conf_queue, i)
+                    break
+            heappush(conf_queue, interval.end)
+            # keep the max_num conference room so far.
+            room_cnt = max(room_cnt, len(conf_queue))
+
         return room_cnt
 
 

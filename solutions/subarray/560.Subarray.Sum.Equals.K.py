@@ -131,9 +131,7 @@ class SolutionIV:
         for each j of prefix_sum:
             <i, j> where prefix_sum[i] + k = prefix_sum[j] where i < j
 
-
         """
-
         prefix_sum = [0]
         psum = 0
         for i in range(len(nums)):
@@ -144,18 +142,18 @@ class SolutionIV:
         # key: prefix_sum;
         # value: the frequency of key before j (i.e. # of subarraies summing to key before j)
         prefix_dict = dict()
-        # use to track the subarrays starting with the first element summing to k
+        # Note: there is one empty subarray whose sum is zero.
         prefix_dict[0] = 1
         for j in range(1, len(prefix_sum)):
             target = prefix_sum[j] - k
             if target in prefix_dict.keys():
                 count += prefix_dict[target]
+            # update the frequency by 1
             prefix_dict[prefix_sum[j]] = prefix_dict.get(prefix_sum[j], 0) + 1
         return count
 
 
 ###  What if all numbers are positive, we can use two pointer!!!
-
 class VarationSolution:
     def subarraySum(self, nums, k):
         if k < 0:

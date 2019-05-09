@@ -44,22 +44,21 @@ class DFSSolution:
             return
 
         for i in range(start, len(s)):
-            # IMPORTANT!!!!!
-            # we only remove the first parenthesis if there are consecutive ones to avoid duplications.
+            # IMPORTANT!!!!! we only remove the first parenthesis if there are consecutive ones to avoid duplications.
             if i != start and s[i] == s[i-1]:
                 continue
 
             if s[i] == '(' or s[i] == ')':
                 # remove parenthesis at index i
-                newS = s[:i] + s[i+1:]
+                ns = s[:i] + s[i+1:]
 
-                # remove the unmatched right parenthesis first avoid )( situation.
                 if r > 0:
+                    # remove the unmatched right parenthesis first avoid )( situation.
                     # always try the (l, r-1) first with the new substring
-                    self.dfs(newS, i, l, r-1, results)
+                    self.dfs(ns, i, l, r-1, results)
                 elif l > 0:
                     # then try the (l-1, r) with the new substring
-                    self.dfs(newS, i, l-1, r, results)
+                    self.dfs(ns, i, l-1, r, results)
         return
 
     def countUnMatchParethesises(self, s):
@@ -91,8 +90,6 @@ print(s.removeInvalidParentheses(")d))"))
 print(s.removeInvalidParentheses(")()m)(((()((()(((("))
 
 ######## What if only return one possible result.
-
-
 class VarationSolution:
     def removeInvalidParentheses(self, s):
         """
@@ -132,6 +129,7 @@ class VarationSolution:
                     removed.add(i)
             else:
                 continue
+
         r = 0
         for i in range(len(s)-1, -1, -1):
             if i in removed or (s[i] != '(' and s[i] != ')'):

@@ -42,6 +42,7 @@ class Solution: # TLE
                 prev = sw[index-1]
             else:
                 prev = -float("inf")
+
             if index < len(sw):
                 succ = sw[index]
             else:
@@ -53,6 +54,7 @@ class Solution: # TLE
                 bisect.insort_left(sw, nums[i])
 
         return False
+
 s = Solution()
 #print(s.containsNearbyAlmostDuplicate([1,5,9,1,5,9], 2, 3))
 #print(s.containsNearbyAlmostDuplicate([1,0,1,1], 1, 2))

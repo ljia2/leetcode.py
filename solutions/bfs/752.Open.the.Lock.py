@@ -51,7 +51,7 @@ class Solution(object):
 
         typical usage of bfs or bibfs on lock
 
-        if the graph is given and calcuate the shortest path, bibfs is prefered.
+        if the graph is given and calculate the shortest path, bibfs is prefered.
 
         TLE on BFS
         OK for BiBFS

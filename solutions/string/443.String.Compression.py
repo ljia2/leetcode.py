@@ -69,6 +69,7 @@ class Solution:
             chars[write] = chars[read]
             read += 1
             write += 1
+            # there mut be multiple digits to represent frequency.
             if freq > 1:
                 for c in str(freq):
                     chars[write] = c

@@ -37,18 +37,17 @@ class Solution:
             m = (l + r) // 2
             if target == nums[m]:
                 return m
-            elif nums[l] <= nums[m]:
+            elif nums[l] < nums[m]:
                 if nums[l] <= target < nums[m]:
                     r = m
                 else:
                     l = m + 1
-            else:
+            else: # nums[l] > nums[m], because no dplicates.
                 if nums[m] < target <= nums[r]:
                     l = m + 1
                 else:
                     r = m
         return -1
-
 
 s = Solution()
 print(s.search([4,5,6,7,0,1,2], 0))

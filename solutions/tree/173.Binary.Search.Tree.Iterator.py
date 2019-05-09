@@ -45,7 +45,7 @@ class BSTIterator(object):
         """
         :rtype: bool
         """
-        return len(self.node_stack) > 0
+        return self.node_stack
 
     def next(self):
         """

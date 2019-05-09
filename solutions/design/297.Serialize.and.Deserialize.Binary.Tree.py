@@ -48,7 +48,6 @@ class TreeNode(object):
 """
 Recursive preorder encode/decode
 """
-
 class CodecII:
     def serialize(self, root):
         vals = []
@@ -65,16 +64,15 @@ class CodecII:
         return
 
     def deserialize(self, data):
-        vals = iter(data.split())
-        return self.decode(vals)
+        return self.decode(iter(data.split()))
 
-    def decode(self, vals):
-        val = next(vals)
+    def decode(self, val_iter):
+        val = next(val_iter)
         if val == '#':
             return None
         node = TreeNode(int(val))
-        node.left = self.decode(vals)
-        node.right = self.decode(vals)
+        node.left = self.decode(val_iter)
+        node.right = self.decode(val_iter)
         return node
 
 

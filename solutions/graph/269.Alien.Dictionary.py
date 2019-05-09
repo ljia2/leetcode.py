@@ -94,11 +94,12 @@ class Solution(object):
     # bfs to sort graph
     def bfs_topological_sort(self, indict, outdict, vocab):
         q = []
-        # find all vertex without in-degree.
+        # find all vertex with 0 indegree.
         for c in vocab:
             if not indict[c]:
                 q.append(c)
 
+        # track the number of visited nodes.
         visited = 0
         ans = []
         while q:
@@ -106,15 +107,22 @@ class Solution(object):
             while size > 0:
                 n = q.pop(0)
                 size -= 1
+
+                # record the topological order via bfs over graph.
                 ans.append(n)
 
+                # traverse to the neighbors
                 if outdict[n]:
-                    adj = outdict[n]
-                    for m in adj:
+                    for m in outdict[n]:
+                        # substract the in degree by 1
                         indict[m].remove(n)
+                        # its in-degree becomes 0, put m into the queue.
                         if not indict[m]:
                             q.append(m)
+
+                # records the number in ans.
                 visited += 1
+
         if visited != len(vocab):
             return ""
         else:

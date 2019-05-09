@@ -66,14 +66,16 @@ class PreOrderSolution(object):
         if not root:
             return True
 
-        return self.dfs(root, -2**31, 2**31-1)
+        return self.dfs(root, float("-inf"), float('inf'))
 
     # preorder use root.val to bound verification of left/right tree.
     def dfs(self, root, minv, maxv):
         if not root:
             return True
+
         if root.val >= maxv or root.val <= minv:
             return False
+
         return self.dfs(root.left, minv, root.val) and self.dfs(root.right, root.val, maxv)
 
 
@@ -92,18 +94,21 @@ class InOrderSolution(object):
     def dfs(self, root, prev):
         if not root:
             return True
+
         # check left
         if not self.dfs(root.left, prev):
             return False
+
         # check root
         if prev and prev.val > root.val:
             return False
         prev = root
+
         # check right
         return self.dfs(root.right, prev)
 
 
-class StackInOrderSolution(object):
+class IterativeInOrderSolution(object):
     def isValidBST(self, root):
         """
         Given a binary tree, determine if it is a valid binary search tree (BST).

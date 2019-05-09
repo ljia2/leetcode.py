@@ -25,11 +25,13 @@ class Solution:
         """
         ans = []
         # use operator and sorted to sort class instances
-        s_intervals = sorted(intervals, key=lambda x: x.start)
-        for i, interval in enumerate(s_intervals):
+        intervals.sort(key=lambda x: x.start)
+
+        for i, interval in enumerate(intervals):
             if i == 0:
                 left = interval.start
                 right = interval.end
+
             # if it is overlap with the most recent "reference" interval (left, right)
             # that may merge all overlap intervals before.
             elif right >= interval.start:
@@ -40,8 +42,7 @@ class Solution:
                 ans.append(Interval(left, right))
                 left = interval.start
                 right = interval.end
-
-        # Do not forget the last interval if it does not overlap with previous ones.
+        # NoteL Do not forget the last interval (left, right) !!!!
         ans.append(Interval(left, right))
 
         return ans

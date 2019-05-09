@@ -54,8 +54,9 @@ class Solution(object):
                 if A[end] == 0:
                     zero_quota -= 1
                 end += 1
-            # a window with at most two 0s is found; update the max length of the qualified window.
+            # a window with at most zero_quoto 0s is found; update the max length of the qualified window.
             max_length = max(max_length, end - start)
+
             if end < len(A):
                 # retreat start to find the start of another window with non-zero quota.
                 while start <= end and zero_quota == 0:

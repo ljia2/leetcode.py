@@ -61,6 +61,7 @@ class Solution:
         # initialize visited with start position and what keys collected.
         visited = set()
         visited.add((sr, sc, 0))
+
         moves = 0
         while qe:
             size = len(qe)

@@ -43,11 +43,7 @@ class Solution:
                     ans.add((nums[i], nums[l], nums[r]))
                     # after a qualified tuple, need to change b and c at the same time
                     l += 1
-                    #while l < r and nums[l] == nums[l-1]:
-                    #     l += 1
                     r -= 1
-                    #while l < r and nums[r] == nums[r+1]:
-                    #     r -= 1
                 elif ssum > 0:
                     # need to move right to left to shrink sum.
                     r -= 1

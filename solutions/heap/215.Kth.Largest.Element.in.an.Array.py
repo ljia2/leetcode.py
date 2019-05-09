@@ -51,8 +51,7 @@ class Solution:
         if not nums or len(nums) < 3:
             raise Exception("Invalid Input!")
 
-        fmin = smin = tmin = -2**31 - 1
-
+        fmin = smin = tmin = float("-inf")
         for num in nums:
             if num > fmin:
                 tmin = smin

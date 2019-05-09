@@ -44,8 +44,7 @@ class Solution(object):
                 elif yy == y:
                     hlines[(xx, yy)].append(x-xx) if x > xx else hlines[(x, y)].append(xx - x)
 
-        minArea = 10**32
-
+        minArea = float("inf")
         spoints = set(map(lambda x: (x[0], x[1]), points))
         ps = set(vlines.keys()).intersection(set(hlines.keys()))
         for p in ps:
@@ -54,7 +53,7 @@ class Solution(object):
                     x, y = p
                     if (x+hh, y+vh) in spoints:
                         minArea = min(vh*hh, minArea)
-        return minArea if minArea < 10**32 else 0
+        return minArea if minArea < float("inf") else 0
 
 s = Solution()
 print(s.minAreaRect([[1,1],[1,3],[3,1],[3,3],[2,2]]))

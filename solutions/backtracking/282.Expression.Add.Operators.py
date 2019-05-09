@@ -115,7 +115,6 @@
 #         return num_stack[0]
 
 
-
 class DFSSolution(object): # TLE
     def addOperators(self, num, target):
         """
@@ -175,8 +174,10 @@ class DFSSolution(object): # TLE
 
             n = int(str_n)
             if pos == 0:
+                # an expression must start with a number.
                 self.dfs(num, target, pos + l, str_n, n, n, ans)
             else:
+                # we can use an operator here.
                 self.dfs(num, target, pos + l, expression + "+" + str_n, n, curr_eval + n, ans)
                 self.dfs(num, target, pos + l, expression + "-" + str_n, -n, curr_eval - n, ans)
                 self.dfs(num, target, pos + l, expression + "*" + str_n, prev_eval*n, curr_eval - prev_eval + prev_eval*n, ans)

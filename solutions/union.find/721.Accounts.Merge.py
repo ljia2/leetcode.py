@@ -35,6 +35,9 @@ class UnionFindSolution:
 
         :type accounts: List[List[str]]
         :rtype: List[List[str]]
+
+        Union Find Algorithm.
+
         """
         num = len(accounts)
         parents = [i for i in range(num)]

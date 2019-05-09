@@ -103,8 +103,18 @@ class BestSolution(object):
             return 0
 
         # Actually at most two passes of people,
-        # 1) first pass to fill in non-celebrity;
+        # 1) first pass to find the candidate of celeberity;
         # 2) second pass to ensure all other people know the candidate or there is no celebrity.
+
+        """
+        It you have a hard time understanding this code, check out the other Java code using stack. 
+        It's a lot easier to understand, they used the same approache. 
+        First you assume everyone to be a candidate, then you just randomly pick two, check whether a knows b, 
+        if a knows b, we know for sure, a is not a cele, if a does not know b, we know for sure b is not cele. 
+        Either way, one person is gonna get eliminated. 
+        At the end, you have one person left that might be a cele. 
+        You confirm that by do a walk through again.
+        """
         candidate = 0
         for i in range(1, n):
             if knows(candidate, i):

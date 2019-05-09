@@ -1,6 +1,5 @@
 from collections import Counter
 
-
 class SolutionI(object):
     def intersection(self, nums1, nums2):
         """

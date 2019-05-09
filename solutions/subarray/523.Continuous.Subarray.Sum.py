@@ -1,4 +1,3 @@
-
 class Solution(object):
     def checkSubarraySum(self, nums, k):
         """
@@ -28,6 +27,7 @@ class Solution(object):
         :rtype: bool
 
         calculate prefix sum and use sum % k as key, value is the smallest index i s.t. sum(nums[:i+1]) % k == key;
+        special case: when k == 0, we are looking for subarray whose sum is 0
 
         """
         if not nums or len(nums) < 2 or k < 0:
@@ -37,8 +37,10 @@ class Solution(object):
         psum2pos = dict()
         psummod2pos = dict()
 
-        # initialize 0, meaning sum of no numbers.
+        # initialize 0, meaning zero sum of no numbers.
+        # key is the mod of psum % k, value is the smallest position
         psummod2pos[0] = 0
+        # key is the psum, value is the smallest position.
         psum2pos[0] = 0
 
         for i, num in enumerate(nums):

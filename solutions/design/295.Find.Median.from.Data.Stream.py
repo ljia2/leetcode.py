@@ -78,13 +78,6 @@ class MedianFinder:
         """
         return self.median
 
-
-
-
-
-
-
-
 # Your MedianFinder object will be instantiated and called as such:
 obj = MedianFinder()
 obj.addNum(1)

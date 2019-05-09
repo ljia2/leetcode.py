@@ -67,7 +67,6 @@ class Solution:
         # 3. Checking if right most indexed element in deque is less than the new element found, if yes we will remove it
         # 4. Append i at the end of the deque  (Not: 3rd and 4th steps are similar to previous for loop)
 
-
         # moving the window
         for i in range(k, len(nums)):
             # store the maxinum value of the current window.

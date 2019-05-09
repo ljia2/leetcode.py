@@ -99,6 +99,7 @@ class WordDictionaryII(object):
         :type word: str
         :rtype: None
         """
+        # use dfs to find all varations of word.
         words = []
         self.dfs(word, 0, "", words)
 
@@ -122,9 +123,6 @@ class WordDictionaryII(object):
                 return False
             p = p.next[c]
         return p.word is not None
-
-
-
 
 # Your WordDictionary object will be instantiated and called as such:
 # obj = WordDictionary()
