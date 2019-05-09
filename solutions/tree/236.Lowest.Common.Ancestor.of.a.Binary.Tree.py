@@ -23,12 +23,14 @@ class Solution(object):
         rroot = self.lowestCommonAncestor(root.right, p, q)
         return root if lroot and rroot else lroot or rroot
 
+
 s = Solution()
 root = TreeNode(1)
 root.left = TreeNode(5)
 root.left.left = TreeNode(6)
 root.right = TreeNode(3)
 print(s.lowestCommonAncestor(root, root.left, root.left.left))
+
 
 class SolutionII(object):
     def lowestCommonAncestor(self, root, p, q):
@@ -52,6 +54,7 @@ class SolutionII(object):
             return root
         else:
             return None
+
     # postorder dfs
     def dfs(self, root, p, q, ans):
         if not root:
@@ -59,11 +62,13 @@ class SolutionII(object):
         lnodes = self.dfs(root.left, p, q, ans)
         rnodes = self.dfs(root.right, p, q, ans)
 
-        nodes = lnodes.union(rnodes)
+        nodes = lnodes & rnodes
         nodes.add(root)
+
         if not ans:
             if p in nodes and q in nodes:
                 ans.append(root)
+
         return nodes
 
 s = SolutionII()

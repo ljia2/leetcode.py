@@ -8,6 +8,7 @@ class Solution:
             return []
         srow = scol = 0
         erow, ecol = len(matrix) - 1, len(matrix[0]) - 1
+
         ans = []
         while srow <= erow and scol <= ecol:
             # from left to right
@@ -25,6 +26,7 @@ class Solution:
                 for c in range(ecol, scol-1, -1):
                     ans.append(matrix[erow][c])
             erow -= 1
+
             if scol <= ecol:
                 # from bottom to top
                 for r in range(erow, srow-1, -1):

@@ -57,3 +57,39 @@ class Solution(object):
             ans = str(carry) + ans
 
         return ans
+
+### Follow up: optimizat by bid operation
+class BitSolution(object):
+    def addBinary(self, a, b):
+        """
+        Given two binary strings, return their sum (also a binary string).
+
+        The input strings are both non-empty and contains only characters 1 or 0.
+
+        Example 1:
+
+        Input: a = "11", b = "1"
+        Output: "100"
+        Example 2:
+
+        Input: a = "1010", b = "1011"
+        Output: "10101"
+
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
+        if a == "0":
+            return b
+        elif b == "0":
+            return a
+        ia, ib = int(a), int(b)
+
+        while b != 0:
+            carry = a & b
+            a = a ^ b
+            b = carry << 1
+        return str(a)
+
+s = BitSolution()
+print(s.addBinary(5, 6))

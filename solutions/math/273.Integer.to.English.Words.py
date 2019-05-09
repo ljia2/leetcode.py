@@ -36,6 +36,7 @@ class Solution(object):
 
         negative = False
         overflow = False
+        # negative convert to positie, avoid the overflow.
         if num < 0:
             negative = True
             if num == -2**31 - 1:
@@ -45,25 +46,28 @@ class Solution(object):
         ans = []
         count = -1
         while num > 0:
+            # take the last 3 digits
             hunds = num % 1000
+            # remove the last 3 digits
             num = num // 1000
             # indicate whether we care count hundred, thousand, million or billion
             count += 1
 
+            # no pronouncation
             if hunds == 0:
                 continue
 
-            # not the lowest three digits,
-            # add the proper unit, thousand, million or billion
+            # not the lowest three digits, add the proper unit, thousand, million or billion
             if count > 0:
                 ans.append(hundwords[count])
-
+            # process the digits of from low to high significance
             # process the lowest two digits
             tens = hunds % 100
             # if tens is between 1 and 19.
             if 0 < tens < 20:
                 ans.append(onewords[tens])
             else:
+                # like, 81 -> one eighty (will reverse later).
                 if tens % 10 > 0:
                     ans.append(onewords[tens % 10])
                 if tens // 10 > 0:

@@ -54,5 +54,6 @@ class Solution(object):
         else:
             return "".join(map(str, pos[start:]))
 
+
 s = Solution()
 print(s.multiply("123", "456"))
