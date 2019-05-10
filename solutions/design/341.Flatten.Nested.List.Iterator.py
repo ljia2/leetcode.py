@@ -88,15 +88,17 @@ class NestedIterator(object):
         """
         :rtype: int
         """
-        # seek the top tuple of nestedList and its index
-        nestedList, i = self.stack[-1]
-
-        # update the index of top nestedList
-        # because the integer at index i must be processed.
-        self.stack[-1][1] += 1
-        # return the integer by the index
-        return nestedList[i].getInteger()
-
+        if self.hasNext():
+            # seek the top tuple of nestedList and its index
+            nestedList, i = self.stack[-1]
+            # update the index of top nestedList
+            # because the integer at index i must be processed.
+            self.stack[-1][1] += 1
+            # return the integer by the index
+            return nestedList[i].getInteger()
+        else:
+            raise Exception("Empty Iterator! ")
+        
     def hasNext(self):
         """
         :rtype: bool
@@ -108,7 +110,6 @@ class NestedIterator(object):
         while s:
             # seek the top element
             nestedList, i = s[-1]
-
             # if all elements of the top nestedList is used; pop the top nestedList.
             if i == len(nestedList):
                 s.pop()
