@@ -98,7 +98,7 @@ class NestedIterator(object):
             return nestedList[i].getInteger()
         else:
             raise Exception("Empty Iterator! ")
-        
+
     def hasNext(self):
         """
         :rtype: bool

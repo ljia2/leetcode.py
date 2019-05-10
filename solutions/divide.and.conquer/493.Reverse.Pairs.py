@@ -22,7 +22,7 @@ class DCSolution:
 
         divide and conquer.
 
-        1) the sume of # of reverse pairs in the left and right
+        1) the sum of # of reverse pairs in the left and right
         2) sorted left and right half and use two pointers to find all possible reverse pairs.
 
         """
@@ -54,6 +54,7 @@ class DCSolution:
             else:
                 i += 1
         return ans
-s = Solution()
+
+s = DCSolution()
 print(s.reversePairs([1,3,2,3,1]))
 

@@ -25,6 +25,10 @@ class Solution:
 
         :type A: List[int]
         :rtype: int
+
+
+        binary search on A.
+
         """
         l = 0
         r = len(A) - 1

@@ -39,8 +39,9 @@ class DPSolution:
             padding_nums.extend(nums)
             padding_nums.append(1)
 
+            n = len(padding_nums)
             # dp is (n + 2) * (n + 2)
-            dp = [[0] * len(padding_nums) for i in range(len(padding_nums))]
+            dp = [[0] * n for _ in range(n)]
 
             # iterate over subsequence balloons with the length of l
             for l in range(1, len(nums)+1, 1):

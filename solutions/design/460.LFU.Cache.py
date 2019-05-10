@@ -3,8 +3,8 @@ from collections import defaultdict, OrderedDict
 Design and implement a data structure for Least Frequently Used (LFU) cache. It should support the following operations: get and put.
 
 get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
-put(key, value) - Set or insert the value if the key is not already present. When the cache reaches its capacity,
-it should invalidate the least frequently used item before inserting a new item.
+put(key, value) - Set or insert the value if the key is not already present. 
+When the cache reaches its capacity, it should invalidate the least frequently used item before inserting a new item.
 For the purpose of this problem, when there is a tie
 (i.e., two or more keys that have the same frequency), the least recently used key would be evicted.
 
@@ -40,7 +40,7 @@ class LFUCache:
         # key, ordereddict pair where ordereddict stores (key, value)
         self.freq2recency = defaultdict(OrderedDict)
         # indicate the minimum Frequency stored in cache
-        self.minFreq = 2**31
+        self.minFreq = int("inf")
 
     def get(self, key):
         """
@@ -50,33 +50,33 @@ class LFUCache:
         if self.capacity == 0:
             return -1
 
-        if key in self.key2freq.keys():
-            ofreq = self.key2freq[key]
-            nfreq = ofreq + 1
-
-            # update key2freq dictionary
-            self.key2freq[key] = nfreq
-
-            # del (key, value, ofreq) from freq2recency
-            odict = self.freq2recency[ofreq]
-            value = odict[key]
-            odict.pop(key)
-            # if key is the only element with ofreq, pop ofreq from freq2recency
-            if not odict:
-                self.freq2recency.pop(ofreq)
-
-            # put (key, value, nfreq) into freq2recency
-            odict = self.freq2recency.get(nfreq, OrderedDict())
-            odict[key] = value
-            self.freq2recency[nfreq] = odict
-
-            if self.minFreq == ofreq:
-                if ofreq not in self.freq2recency.keys():
-                    self.minFreq = nfreq
-            return value
-        else:
+        if key not in self.key2freq.keys():
             return -1
 
+        ofreq = self.key2freq[key]
+        nfreq = ofreq + 1
+
+        # update key2freq dictionary
+        self.key2freq[key] = nfreq
+
+        # del (key, value, ofreq) from freq2recency
+        odict = self.freq2recency[ofreq]
+        value = odict[key]
+        odict.pop(key)
+
+        # if key is the only element with ofreq, pop ofreq from freq2recency
+        if not odict:
+            self.freq2recency.pop(ofreq)
+
+        # put (key, value, nfreq) into freq2recency
+        odict = self.freq2recency.get(nfreq, OrderedDict())
+        odict[key] = value
+        self.freq2recency[nfreq] = odict
+
+        if self.minFreq == ofreq:
+            if ofreq not in self.freq2recency.keys():
+                self.minFreq = nfreq
+        return value
 
     def put(self, key, value):
         """
@@ -93,7 +93,7 @@ class LFUCache:
 
         # we need to pop first and then insert the new key into cache
         if len(self.key2freq) > self.capacity:
-            # pop the least recent item
+            # pop the least recent item, popitem(last=False) => FIFO
             k, v = self.freq2recency[self.minFreq].popitem(last=False)
             self.key2freq.pop(k)
 
@@ -105,9 +105,10 @@ class LFUCache:
         if ofreq in self.freq2recency.keys():
             odict = self.freq2recency[ofreq]
             odict.pop(key)
+
             if not odict:
                 self.freq2recency.pop(ofreq)
-                # if the key is the only existing with minimum frequency, update minimue frequency
+                # if the key is the only existing with minimum frequency, update min frequency
                 if self.minFreq == ofreq:
                     self.minFreq = nfreq
 
@@ -117,8 +118,6 @@ class LFUCache:
         self.freq2recency[nfreq] = odict
 
         return
-
-
 
 
 # Your LFUCache object will be instantiated and called as such:

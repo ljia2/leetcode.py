@@ -1,9 +1,11 @@
 from heapq import heappush, heappop
+
 class Solution:
     def kthSmallest(self, matrix, k):
         """
 
-        Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element in the matrix.
+        Given a n x n matrix where each of the rows and columns are sorted in ascending order,
+        find the kth smallest element in the matrix.
 
         Note that it is the kth smallest element in the sorted order, not the kth distinct element.
 
@@ -24,14 +26,16 @@ class Solution:
         :type k: int
         :rtype: int
 
-        given sorted matrix, use binary search between matrix[0][0] and matrix[-1][-1] to find the kth element.
 
         """
         if not matrix or not matrix[0] or k <= 0:
             return None
+
         hp = []
+        # push the first row into heap
         for c in range(len(matrix[0])):
             heappush(hp, (matrix[0][c], 0, c))
+
         ans = None
         while k > 0:
             v, r, c = heappop(hp)
@@ -39,6 +43,7 @@ class Solution:
             if k == 0:
                 ans = v
                 break
+            # push its next big value in column into heap.
             if r + 1 < len(matrix):
                 heappush(hp, (matrix[r+1][c], r+1, c))
         return ans

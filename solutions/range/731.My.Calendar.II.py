@@ -37,7 +37,8 @@ class MyCalendarTwo:
 
     def __init__(self):
         self.bookings = [(0, 0), (float("inf"), float("inf"))]
-        self.overlaps = [(0, 0), (float("inf"), float("inf"))]
+        # use a list of overlaps to identify double booking; triple booking overlaps with overlap
+        self.dbookings = [(0, 0), (float("inf"), float("inf"))]
 
     def book(self, start, end):
         """
@@ -46,17 +47,17 @@ class MyCalendarTwo:
         :rtype: bool
         """
         # return the index of insert (start, end)
-        dblot = bisect.bisect_left(self.overlaps, (start, end))
-        s1, e1 = self.overlaps[dblot-1]
-        s2, e2 = self.overlaps[dblot]
+        dblot = bisect.bisect_left(self.dbookings, (start, end))
+        s1, e1 = self.dbookings[dblot-1]
+        s2, e2 = self.dbookings[dblot]
         if self._is_overlap(s1, e1, start, end) or self._is_overlap(s2, e2, start, end):
             return False
         else:
-            # iterate all bookings to updat overlaps.
+            # iterate all bookings to update overlaps.
             for booking in self.bookings:
                 s, e = booking
                 if self._is_overlap(s, e, start, end):
-                    bisect.insort_left(self.overlaps, (max(s, start), min(e, end)))
+                    bisect.insort_left(self.dbookings, (max(s, start), min(e, end)))
             self.bookings.append((start, end))
             return True
 

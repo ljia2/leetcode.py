@@ -46,7 +46,7 @@ class UnionFindSolution:
             parents[ps] = pd
             ranks[pd] += ranks[ps]
 
-        # all nodes having a single parent
+        # all nodes having a single parent, it must be a tree.
         ans = set()
         for i in range(len(parents)):
             ans.add(self.find(parents, parents[i]))

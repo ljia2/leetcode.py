@@ -19,27 +19,33 @@ class Solution:
 
         :type s: str
         :rtype: int
+
+        dp[i][j] indicates whether substring s[i:j+1] is a palidromic
+
         """
 
         if not s:
             return 0
-        else:
-            dp = [[False] * (len(s) + 1) for i in range(len(s) + 1)]
 
-            for i in range(1, len(s)+1, 1):
-                dp[i][i] = True
-                if i < len(s) and s[i-1] == s[i]:
-                    dp[i][i+1] = True
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
 
-            for l in range(3, len(s)+1, 1):
-                for i in range(1, len(s)+1-l+1, 1):
-                    j = l + i - 1
-                    if s[i-1] == s[j-1]:
-                        dp[i][j] = dp[i+1][j-1] and True
+        # base case
+        for i in range(n):
+            dp[i][i] = True
+            if i + 1 < n and s[i] == s[i+1]:
+                dp[i][i+1] = True
 
-            count = 0
-            for i in range(1, len(s)+1, 1):
-                for j in range(1, len(s)+1, 1):
-                    if dp[i][j]:
-                        count += 1
-            return count
+        # transition
+        for l in range(3, n+1, 1):
+            for i in range(n-l+2):
+                j = l + i - 1
+                if s[i] == s[j]:
+                    dp[i][j] = dp[i+1][j-1] and True
+
+        count = 0
+        for i in range(n):
+            for j in range(n):
+                if dp[i][j]:
+                    count += 1
+        return count

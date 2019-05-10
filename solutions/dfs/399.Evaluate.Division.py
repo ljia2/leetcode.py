@@ -1,4 +1,5 @@
 from collections import defaultdict
+
 class DFSSolution:
     def calcEquation(self, equations, values, queries):
         """
@@ -38,7 +39,6 @@ class DFSSolution:
             w = values[index]
             graph[a].append[(b, w)]
             graph[b].append((a, 1.0/w))
-
 
         ans = []
         for q in queries:

@@ -88,11 +88,14 @@ class Solution:
         :type K: int
         :rtype: int
 
+        monotonic stack !!!!
+
         50000 hints for linear algorithm
 
 
         显然，我们会想到使用dp[i]记录sum(A[:i])，那么这道题就变成了，给定一个数组dp,找到一组i,j，使得dp[j]-dp[i]>=K，且j-i尽量小！
         数据长度达到50000，显然不能使用O(n^2)复杂度的方法，我们得想办法让i,j只走一遍
+
         用一个简单的示例来分析，设 A = [4,-1,2,3],，K = 5，那么dp = [0,4,3,5,8]，我们从dp数组的第2个数开始分析，（
         假设来了个-1，那么因为-1比0小，后面任意一个数val如若满足val-0>K,那么val+1也一定大于K，且-1所在的位置i显然能获得更优解，
         所以0这个位置就失去了意义），
@@ -104,7 +107,6 @@ class Solution:
         建立一个队列记录保留数字，初始为0
         依次对dp中的数进行分析，如果dp[i] - dp[Q[0]] >= K，则记录一次i,j
         如果dp[i] < dp[Q[-1]]，则舍弃Q[-1]
-
         """
         if max(A) >= K:
             return 1
@@ -117,18 +119,20 @@ class Solution:
             presums[i+1] = psum
 
         # 初始化队列
-        Q = deque([0])
+        mstack = deque([0])
         min_length = float("inf")
         for i in range(1, len(presums)):
             # keep retracting Q to find the smallest subarray (if exists) ending at i but >= K
-            while Q and presums[i] - presums[Q[0]] >= K:
+            while mstack and presums[i] - presums[Q[0]] >= K:
                 min_length = min(min_length, i - Q.popleft())
 
             # if a bigger presum is calculated, we can get rid of the latest psum > presum,
-            # because if psum is used to generated the subarray (sum >= K), presum must be used to generate a shorter subarray (sum >= K).
-            while Q and presums[i] < presums[Q[-1]]:
-                Q.pop()
-            Q.append(i)
+            # because if psum is used to generated the subarray (sum >= K),
+            # presum must be used to generate a shorter subarray (sum >= K).
+            while mstack and presums[i] < presums[Q[-1]]:
+                mstack.pop()
+
+            mstack.append(i)
         return min_length if min_length < float("inf") else -1
 
 s = Solution()
