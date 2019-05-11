@@ -20,7 +20,8 @@ class DFSSolution:
         equations = [ ["a", "b"], ["b", "c"] ],
         values = [2.0, 3.0],
         queries = [ ["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x", "x"] ].
-        The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.
+        The input is always valid. You may assume that evaluating the queries will result in no division by zero
+        and there is no contradiction.
 
 
         :type equations: List[List[str]]
@@ -48,30 +49,32 @@ class DFSSolution:
             elif src == dst:
                 ans.append(1.0)
             else:
-                explored = set()
-                ans.append(self.dfs(graph, src, dst, explored))
+                ans.append(self.dfs(graph, src, dst, set()))
         return ans
 
-    def dfs(self, graph, src, dst, explored):
+    def dfs(self, graph, src, dst, visited):
         if src == dst:
             return 1.0
 
         # avoid cycle
-        explored.add(src)
+        visited.add(src)
         for (node, w) in graph[src]:
-            if node in explored:
+            if node in visited:
                 continue
 
             if node == dst:
                 return w
             else:
-                res = self.dfs(graph, node, dst, explored)
+                res = self.dfs(graph, node, dst, visited)
+                # if res is -1.0, there is no path to dst.
                 if res >= 0.0:
                     return w * res
         return -1.0
 
 s = DFSSolution()
 print(s.calcEquation([["a","b"],["b","c"],["c", "e"],["c", "d"]], [2.0, 3.0, 1.0, 4.0], [["d", "a"], ["e", "d"]]))
+
+#### Union Find Solution
 
 class UnionFindSolution:
     def calcEquation(self, equations, values, queries):

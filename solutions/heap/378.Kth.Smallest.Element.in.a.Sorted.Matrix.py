@@ -25,8 +25,6 @@ class Solution:
         :type matrix: List[List[int]]
         :type k: int
         :rtype: int
-
-
         """
         if not matrix or not matrix[0] or k <= 0:
             return None
@@ -43,7 +41,8 @@ class Solution:
             if k == 0:
                 ans = v
                 break
-            # push its next big value in column into heap.
+
+            # push its next big value column-oriented into heap.
             if r + 1 < len(matrix):
                 heappush(hp, (matrix[r+1][c], r+1, c))
         return ans

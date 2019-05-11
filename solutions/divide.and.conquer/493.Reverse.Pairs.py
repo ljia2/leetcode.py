@@ -1,4 +1,4 @@
-class DCSolution:
+class DNCSolution:
     def reversePairs(self, nums):
         """
         Given an array nums, we call (i, j) an important reverse pair if i < j and nums[i] > 2*nums[j].
@@ -55,6 +55,6 @@ class DCSolution:
                 i += 1
         return ans
 
-s = DCSolution()
+s = DNCSolution()
 print(s.reversePairs([1,3,2,3,1]))
 
