@@ -43,9 +43,9 @@ class Solution(object):
             decode_dict[size] = s
             size += 1
 
-        T_code = self.encode(encode_dict, T)
-        T_code.sort()
-        return self.decode(decode_dict, T_code)
+        codet = self.encode(encode_dict, T)
+        codet.sort()
+        return self.decode(decode_dict, codet)
 
     def encode(self, edict, T):
         ans = []
