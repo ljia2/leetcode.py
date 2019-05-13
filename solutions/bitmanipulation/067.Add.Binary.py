@@ -78,13 +78,15 @@ class BitSolution(object):
         :type a: str
         :type b: str
         :rtype: str
+
+
+
         """
         if a == "0":
             return b
         elif b == "0":
             return a
         ia, ib = int(a), int(b)
-
         while b != 0:
             carry = a & b
             a = a ^ b

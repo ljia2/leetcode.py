@@ -5,6 +5,7 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
 # post order check
 class PostOrderSolution(object):
     def isValidBST(self, root):
@@ -166,13 +167,16 @@ class IterativeInOrderSolution(object):
             while root:
                 stack.append(root)
                 root = root.left
+
             # pop the node
             root = stack.pop()
 
             if prev and root.val <= prev.val:
                 return False
+
             prev = root
 
             # reset node to its right children.
             root = root.right
+
         return True

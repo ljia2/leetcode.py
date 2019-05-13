@@ -19,15 +19,13 @@ Note:
 You may assume that all words are consist of lowercase letters a-z.
 
 
-How about use Trie Tree.
+How about use Trie Tree?
 
 """
-
 class TrieNode:
     def __init__(self):
         self.next = dict()
         self.word = None
-
 
 class WordDictionary(object):
 
@@ -74,7 +72,6 @@ class WordDictionary(object):
             return False
 
 ######## What if you want search faster, treat "." as a node to insert; use dfs to generate all possible search.
-
 class WordDictionaryII(object):
 
     def __init__(self):

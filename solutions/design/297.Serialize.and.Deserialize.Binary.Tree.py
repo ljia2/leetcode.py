@@ -76,3 +76,5 @@ class CodecII:
         return node
 
 
+#### Follow up: How about N-ary Tree: LC428
+

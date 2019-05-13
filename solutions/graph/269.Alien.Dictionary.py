@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 class Solution(object):
     def alienOrder(self, words):
         """
@@ -91,10 +92,10 @@ class Solution(object):
 
         return True
 
-    # bfs to sort graph
+    # bfs based topological sorting to sort graph
     def bfs_topological_sort(self, indict, outdict, vocab):
+        # find all vertex with 0 in-degree.
         q = []
-        # find all vertex with 0 indegree.
         for c in vocab:
             if not indict[c]:
                 q.append(c)
@@ -114,7 +115,7 @@ class Solution(object):
                 # traverse to the neighbors
                 if outdict[n]:
                     for m in outdict[n]:
-                        # substract the in degree by 1
+                        # substract m's in-degree by 1
                         indict[m].remove(n)
                         # its in-degree becomes 0, put m into the queue.
                         if not indict[m]:
@@ -127,6 +128,7 @@ class Solution(object):
             return ""
         else:
             return "".join(ans)
+
 
 s = Solution()
 #print(s.alienOrder(["wrt","wrf","er","ett","rftt"]))

@@ -27,9 +27,10 @@ class Solution:
         :type intervals: List[Interval]
         :rtype: int
         """
-        if intervals is None or not intervals:
+        if not intervals:
             return 0
 
+        # sorting meetings by their start
         intervals.sort(key=lambda x: x.start)
 
         # hint: use list and heappop/heappush from heapq to mimic priorityQueue

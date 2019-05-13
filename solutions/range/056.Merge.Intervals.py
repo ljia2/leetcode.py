@@ -4,6 +4,7 @@ class Interval:
          self.start = s
          self.end = e
 
+
 class Solution:
     def merge(self, intervals):
         """
@@ -42,7 +43,8 @@ class Solution:
                 ans.append(Interval(left, right))
                 left = interval.start
                 right = interval.end
-        # NoteL Do not forget the last interval (left, right) !!!!
+
+        # Note! Do not forget the last interval (left, right) !!!!
         ans.append(Interval(left, right))
 
         return ans

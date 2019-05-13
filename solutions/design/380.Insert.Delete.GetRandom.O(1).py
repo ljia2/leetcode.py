@@ -31,6 +31,7 @@ randomSet.insert(2);
 randomSet.getRandom();
 """
 import random
+
 class RandomizedSet(object):
 
     def __init__(self):

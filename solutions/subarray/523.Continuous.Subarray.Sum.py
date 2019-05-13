@@ -63,3 +63,7 @@ class Solution(object):
 
 s = Solution()
 print(s.checkSubarraySum([1, 2, 3], 5))
+
+
+#### What if we have negative numbers? Same solution:
+# negative % positive = positive, negative % negative = negative, positive % negative = negatieve, positive % positive = positive.

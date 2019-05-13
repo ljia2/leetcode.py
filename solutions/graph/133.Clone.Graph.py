@@ -53,15 +53,19 @@ class DFSSolution(object):
 
         visited.add(node)
 
-        nodecopy = node2copy.get(node, Node(node.val, []))
-        node2copy[node] = nodecopy
+        if node not in node2copy.keys():
+            node2copy[node] = Node(node.val, [])
 
         for neighbor in node.neighbors:
-            neighborcopy = node2copy.get(neighbor, Node(neighbor.val, []))
-            node2copy[neighbor] = neighborcopy
-            nodecopy.neighbors.append(neighborcopy)
+            if neighbor not in node2copy.keys():
+                neighborcopy = node2copy[neighbor]
+            else:
+                neighborcopy = Node(neighbor.val, [])
+                node2copy[neighbor] = neighborcopy
+            node2copy[node].neighbors.append(neighborcopy)
             self.dfs(neighbor, visited, node2copy)
         return
+
 
 class BFSSolution(object):
     def cloneGraph(self, node):
