@@ -45,7 +45,6 @@ class Solution:
 
 
 ##### What if find the 3rd largest without using heap
-
 class Solution:
     def findThirdLargest(self, nums):
         if not nums or len(nums) < 3:

@@ -64,6 +64,5 @@ class Solution(object):
 s = Solution()
 print(s.checkSubarraySum([1, 2, 3], 5))
 
-
-#### What if we have negative numbers? Same solution:
+#### What if we have negative numbers? Same solution, we can use abs(k) as module.
 # negative % positive = positive, negative % negative = negative, positive % negative = negatieve, positive % positive = positive.

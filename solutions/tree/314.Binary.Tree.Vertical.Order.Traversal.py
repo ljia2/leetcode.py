@@ -8,7 +8,7 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class DFSSolution(object):
     def verticalOrder(self, root):
         """
         Given a binary tree, return the vertical order traversal of its nodes' values. (ie, from top to bottom, column by column).
@@ -82,6 +82,11 @@ class Solution(object):
         ]
         :type root: TreeNode
         :rtype: List[List[int]]
+
+        if root is (0, 0):
+            root.left is (-1, 1) and root.right is (1, 1)
+        use a heap to store a tuple of (x, y, priority, node).
+
         """
 
         if not root:

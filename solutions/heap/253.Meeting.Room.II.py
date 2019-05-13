@@ -1,13 +1,5 @@
 from heapq import heappop, heappush
 
-
-# Definition for an interval.
-class Interval:
-    def __init__(self, s=0, e=0):
-        self.start = s
-        self.end = e
-
-
 class Solution:
     def minMeetingRooms(self, intervals):
         """
@@ -24,34 +16,66 @@ class Solution:
         Output: 1
         NOTE: input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature.
 
-        :type intervals: List[Interval]
+        :type intervals: List[List[Int]]
         :rtype: int
         """
         if not intervals:
             return 0
 
         # sorting meetings by their start
-        intervals.sort(key=lambda x: x.start)
+        intervals.sort()
 
         # hint: use list and heappop/heappush from heapq to mimic priorityQueue
-        conf_queue = [intervals[0]]
-        room_cnt = 1
-
-        for interval in intervals[1:]:
-            # keep poping conferences ending already.
-            while conf_queue:
+        hp = [intervals[0][1]]
+        for start, end in intervals[1:]:
+            # peek the meeing with the earliest end time, if it ends before start, assign its room to new meeting
+            if hp and hp[0] <= start:
                 # the room with min ending time i; interval is overlap with i, push i back and break
                 # otherwise, keep popping booked room that had ended before interval.start.
-                i = heappop(conf_queue)
-                if interval.start < i:
-                    heappush(conf_queue, i)
-                    break
-            heappush(conf_queue, interval.end)
-            # keep the max_num conference room so far.
-            room_cnt = max(room_cnt, len(conf_queue))
-
-        return room_cnt
+                heappop(hp)
+            heappush(hp, end)
+        return len(hp)
 
 
 s = Solution()
-print(s.minMeetingRooms([Interval(0, 30), Interval(15, 20), Interval(5, 10)]))
+print(s.minMeetingRooms([[0, 30], [15, 20], [5, 10]]))
+
+# Scan the line
+# class SolutionII(object):
+#     def minMeetingRooms(self, intervals):
+#         """
+#         :type intervals: List[List[Int]
+#         :rtype: int
+#         """
+#
+#         # If there are no meetings, we don't need any rooms.
+#         if not intervals:
+#             return 0
+#
+#         used_rooms = 0
+#
+#         # Separate out the start and the end timings and sort them individually.
+#         start_timings = sorted([s for s, _ in intervals])
+#         end_timings = sorted(e for _, e in intervals)
+#         L = len(intervals)
+#
+#         # The two pointers in the algorithm: e_ptr and s_ptr.
+#         end_pointer = 0
+#         start_pointer = 0
+#
+#         # Until all the meetings have been processed
+#         while start_pointer < L:
+#
+#             # If there is a meeting that has ended by the time the meeting at `start_pointer` starts
+#             if start_timings[start_pointer] >= end_timings[end_pointer]:
+#                 # Free up a room and increment the end_pointer.
+#                 used_rooms -= 1
+#                 end_pointer += 1
+#
+#             # We do this irrespective of whether a room frees up or not.
+#             # If a room got free, then this used_rooms += 1 wouldn't have any effect. used_rooms would
+#             # remain the same in that case. If no room was free, then this would increase used_rooms
+#             used_rooms += 1
+#             start_pointer += 1
+#
+#         return used_rooms

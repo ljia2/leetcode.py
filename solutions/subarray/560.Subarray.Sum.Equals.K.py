@@ -103,7 +103,7 @@ from collections import defaultdict
 #         return count
 
 
-class SolutionIV:
+class Solution:
     def subarraySum(self, nums, k):
         """
 
@@ -139,12 +139,10 @@ class SolutionIV:
             prefix_sum.append(psum)
 
         count = 0
-        # key: prefix_sum;
-        # value: the frequency of key before j (i.e. # of subarraies summing to key before j)
+        # key: prefix_sum; value: the frequency of key before j (i.e. # of subarraies summing to key before j)
         prefix_dict = dict()
         # Note: there is one empty subarray whose sum is zero.
         prefix_dict[0] = 1
-
         for j in range(1, len(prefix_sum)):
             target = prefix_sum[j] - k
             if target in prefix_dict.keys():
@@ -152,7 +150,6 @@ class SolutionIV:
             # update the frequency by 1
             prefix_dict[prefix_sum[j]] = prefix_dict.get(prefix_sum[j], 0) + 1
         return count
-
 
 ###  What if all numbers are positive, we can use two pointer!!!
 class VarationSolution:

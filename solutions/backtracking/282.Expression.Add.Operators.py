@@ -166,6 +166,7 @@ class DFSSolution(object): # TLE
                 ans.append(expression)
             return
 
+        # the length of the number
         for l in range(1, len(num) - pos + 1):
             str_n = num[pos:pos+l]
 

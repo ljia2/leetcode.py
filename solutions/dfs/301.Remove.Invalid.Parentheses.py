@@ -91,7 +91,6 @@ print(s.removeInvalidParentheses(")()m)(((()((()(((("))
 
 
 ######## What if only return one possible result.
-
 class VarationSolution:
     def removeInvalidParentheses(self, s):
         """
@@ -136,6 +135,7 @@ class VarationSolution:
         for i in range(len(s)-1, -1, -1):
             if i in removed or (s[i] != '(' and s[i] != ')'):
                 continue
+
             if c == ')':
                 r += 1
             elif c == '(':
