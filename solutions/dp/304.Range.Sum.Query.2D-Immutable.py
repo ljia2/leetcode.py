@@ -10,6 +10,7 @@ class NumMatrix:
         row = len(matrix)
         column = len(matrix[0])
 
+        # trick: use row + 1 and column + 1 to initiliza sum matrix.
         # sum[i][j] records the sum of rectangle from (0, 0) to (i-1, j-1)
         self.sumMatrix = [[None] * (column + 1) for _ in range(row + 1)]
 

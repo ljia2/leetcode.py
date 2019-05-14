@@ -23,6 +23,7 @@ class UnionFindSolution:
 
         if n == 1:
             return True
+
         if not edges:
             return False
 
@@ -57,3 +58,7 @@ class UnionFindSolution:
             parents[s] = parents[parents[s]]
             s = parents[s]
         return s
+
+
+### Follow up: given a treenode, determine whether the tree is a valid tree (without circle).
+### How about BFS to verify whether a node is already contained in the set.

@@ -80,18 +80,17 @@ class BitSolution(object):
         :rtype: str
 
 
-
         """
         if a == "0":
             return b
         elif b == "0":
             return a
         ia, ib = int(a), int(b)
-        while b != 0:
-            carry = a & b
-            a = a ^ b
-            b = carry << 1
-        return str(a)
+        while ib != 0:
+            carry = ia & ib
+            ia = ia ^ ib
+            ib = carry << 1
+        return str(ia)
 
 s = BitSolution()
 print(s.addBinary(5, 6))

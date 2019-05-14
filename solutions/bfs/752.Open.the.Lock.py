@@ -56,6 +56,9 @@ class Solution(object):
         TLE on BFS
         OK for BiBFS
 
+
+        Payattention on how to find next state.
+
         """
 
         if not target:

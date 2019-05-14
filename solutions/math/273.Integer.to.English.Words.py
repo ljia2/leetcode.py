@@ -36,6 +36,8 @@ class Solution(object):
 
         negative = False
         overflow = False
+
+        # Trick !!!
         # negative convert to positie, avoid the overflow.
         if num < 0:
             negative = True
@@ -50,16 +52,18 @@ class Solution(object):
             hunds = num % 1000
             # remove the last 3 digits
             num = num // 1000
+
             # indicate whether we care count hundred, thousand, million or billion
             count += 1
 
-            # no pronouncation
+            # no words
             if hunds == 0:
                 continue
 
             # not the lowest three digits, add the proper unit, thousand, million or billion
             if count > 0:
                 ans.append(hundwords[count])
+
             # process the digits of from low to high significance
             # process the lowest two digits
             tens = hunds % 100

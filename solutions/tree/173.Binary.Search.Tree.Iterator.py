@@ -98,7 +98,6 @@ if __name__ == "__main__":
     main()
 
 ###### what if a node with parent and do not use stack.
-
 class ParentTreeNode(object):
     def __init__(self, x):
         self.val = x

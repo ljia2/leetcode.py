@@ -105,7 +105,7 @@ class Solution2:
 
         use priority queue
 
-        T: O(k*n)
+        T: O(log(k)*n)
 
         S: O(k)
 
