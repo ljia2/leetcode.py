@@ -2,6 +2,7 @@
 # @param version, an integer
 # @return a bool
 def isBadVersion(version):
+    return False
 
 class Solution(object):
 
@@ -41,3 +42,5 @@ class Solution(object):
             else:
                 l = m + 1
         return l
+
+### If there are multiple machines, we can do logN(N) search.

@@ -168,8 +168,10 @@ class DFSSolution(object): # TLE
 
         # the length of the number
         for l in range(1, len(num) - pos + 1):
+            # an interger with length l.
             str_n = num[pos:pos+l]
 
+            # we can not have an leading 0 on multiple-digit integer
             if str_n[0] == "0" and len(str_n) > 1:
                 break
 
@@ -187,3 +189,6 @@ class DFSSolution(object): # TLE
 s = DFSSolution()
 print(s.addOperators("123", 6))
 print(s.addOperators("123456789", 45))
+
+
+#### Follow up: What if only have +/-?

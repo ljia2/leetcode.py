@@ -1,13 +1,12 @@
-"""
 # Definition for a Node.
 class Node(object):
-    def __init__(self, val, left, right, next):
+    def __init__(self, val, ):
         self.val = val
-        self.left = left
-        self.right = right
-        self.next = next
-"""
-class Solution(object):
+        self.left = None
+        self.right = None
+        self.next = None
+
+class BFSSolution(object):
     def connect(self, root):
         """
         Given a binary tree
@@ -18,11 +17,11 @@ class Solution(object):
           Node *right;
           Node *next;
         }
-        Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+        Populate each next pointer to point to its next right node.
+        If there is no next right node, the next pointer should be set to NULL.
 
         Initially, all next pointers are set to NULL.
-
-
 
         Example:
 
@@ -42,4 +41,57 @@ class Solution(object):
 
         :type root: Node
         :rtype: Node
+
+        Clearly BFS is best. Can we leverage BFS with next?
+
         """
+        if not root:
+            return root
+
+        ptail = root
+        chead = ctail = None
+        while ptail:
+            if not ctail:
+                if ptail.left:
+                    chead = ptail.left
+                    ctail = chead
+                    if ptail.right:
+                        ctail.next = ptail.right
+                        ctail = ctail.next
+                elif ptail.right:
+                    chead = ptail.right
+                    ctail = chead
+            else:
+                if ptail.left:
+                    ctail.next = ptail.left
+                    ctail = ctail.next
+                    if ptail.right:
+                        ctail.next = ptail.right
+                        ctail = ctail.next
+                elif ptail.right:
+                    ctail.next = ptail.right
+                    ctail = ctail.next
+
+            ptail = ptail.next
+
+            # when one level is exhausted, phead points to chead; exit when there is no chead.
+            if not ptail:
+                ptail = chead
+                chead = ctail = None
+        return root
+
+
+
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.right = Node(6)
+root.right.right.right = Node(8)
+
+s = BFSSolution()
+print(s.connect(root))
+
+

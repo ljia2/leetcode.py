@@ -55,16 +55,17 @@ class Solution:
         :param node:
         :return: sum ending with node, max_sum within substree of node
         """
-        if not node.left and not node.right:
-            max_sum_path[0] = max(node.val, max_sum_path[0])
-            return node.val
-        else:
-            lsum = self.dfs(node.left, max_sum_path) if node.left else 0
-            rsum = self.dfs(node.right, max_sum_path) if node.right else 0
-            # there are four possible sum, if node values are negative or positive. 
-            node_sum = max([node.val, node.val + lsum, node.val + rsum, node.val + lsum + rsum])
-            max_sum_path[0] = max(node_sum, max_sum_path[0])
-            return node_sum
+        if not node:
+            return 0
+
+        lsum = self.dfs(node.left, max_sum_path)
+        rsum = self.dfs(node.right, max_sum_path)
+
+        # there are four possible sum, if node values are negative or positive.
+        node_sum = max([node.val, node.val + lsum, node.val + rsum, node.val + lsum + rsum])
+
+        max_sum_path[0] = max(node_sum, max_sum_path[0])
+        return node_sum
 
 
 s = Solution()
