@@ -1,7 +1,8 @@
 class Solution(object):
     def moveZeroes(self, nums):
         """
-        Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+        Given an array nums, write a function to move all 0's to the end of it
+        while maintaining the relative order of the non-zero elements.
 
         Example:
 
@@ -15,7 +16,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
 
-
+        only operate x times where x is non-zero numbers have 0 before.
 
         """
         if not nums or len(nums) == 1:
@@ -44,3 +45,4 @@ s = Solution()
 nums = [0,1,0,3,12]
 s.moveZeroes(nums)
 print(nums)
+

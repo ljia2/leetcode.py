@@ -60,9 +60,9 @@ class Solution(object):
         if len(words) == 1:
             return words[0][::-1]
 
+        n = len(words)
         indict = defaultdict(set)
         outdict = defaultdict(set)
-        n = len(words)
         for i in range(n-1):
             s, d = words[i], words[i+1]
             if not self.compare(s, d, indict, outdict):

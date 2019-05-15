@@ -33,9 +33,10 @@ class Solution(object):
         ans = -1
         while j < len(s):
             c = s[j]
-            # if an old char is encourtered, reset the start, i.
+            # if an old char is encourtered
             if c in window.keys():
-                # reset the start, window[c] may be out of current window.
+                # reset the start but window[c] may be out of current window.
+                # we use max.
                 i = max(i, window[c] + 1)
             window[c] = j
             ans = max(ans, j - i + 1)

@@ -82,12 +82,8 @@ class DPSolutionII(object):
         :type k: int
         :rtype: List[int]
 
-        dp[i][0] stores the biggest subarray up to i.
-
-        dp[i][1] stores the biggest subarray afterward until i.
-
-        then iterate over i find the biggest, dp[i-1][0] + sum(nums[i:i+k]) + dp[i+k][1]
-
+        dp1[i] =(max_sum, start) stores the maximum k-sized subarray up to i and its start.
+        dp2[i] =(max_sum, start) stores the maximum k-sized subarray before i and its start.
         """
 
         if not nums or k <= 0:
@@ -99,9 +95,11 @@ class DPSolutionII(object):
 
         dp1 = [(0, None)] * n
         dp2 = [(0, None)] * n
+
         # base case
         dp1[k-1] = (sum(nums[:k]), 0)
         dp2[n-k] = (sum(nums[n-k:n]), n-k)
+
         # transition
         for i in range(k, n):
             pmax_sum, _ = dp1[i-1]

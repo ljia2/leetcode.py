@@ -38,7 +38,6 @@ class Solution:
         return min_del[-1][-1]
 
 
-
 class DPSolution:
     def minDistance(self, word1, word2):
         """

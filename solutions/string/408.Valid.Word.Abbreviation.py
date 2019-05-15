@@ -43,8 +43,8 @@ class Solution(object):
                     i += 1
                 else:
                     return False
-        # Important!!!!
-        # only match if i == n and j == m
+
+        # Important!!!! only match if i == n and j == m
         return True if i == n and j == m else False
 
     def next_token(self, abbr, j):

@@ -19,6 +19,7 @@ class Solution(object):
         """
         if root in [None, p, q]:
             return root
+
         lroot = self.lowestCommonAncestor(root.left, p, q)
         rroot = self.lowestCommonAncestor(root.right, p, q)
         return root if lroot and rroot else lroot or rroot
@@ -59,6 +60,7 @@ class SolutionII(object):
     def dfs(self, root, p, q, ans):
         if not root:
             return set()
+
         lnodes = self.dfs(root.left, p, q, ans)
         rnodes = self.dfs(root.right, p, q, ans)
 
