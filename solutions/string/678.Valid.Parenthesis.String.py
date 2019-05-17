@@ -29,24 +29,32 @@ class Solution(object):
         if not s:
             return True
 
-        return self.dfs(s, 0, 0)
+        return self.dfs(s, 0, 0, set())
 
-    def dfs(self, s, start, count):
+    def dfs(self, s, start, count, mem):
         if start == len(s):
             return count == 0
 
-        for i in range(start, len(s)):
-            if s[i] == '(':
-                count += 1
-            elif s[i] == ')':
-                count -= 1
-                if count < 0:
-                    return False
-            else:
-                return self.dfs(s, i, count) or self.dfs(s, i, count + 1) or self.dfs(s, i, count - 1)
-        return count == 0
+        if (start, count) in mem:
+            return mem[(start, count)]
 
+        if count < 0:
+            mem[(start, count)] = False
+            return False
 
+        if s[start] == '(':
+            r = self.dfs(s, start, count + 1)
+            mem[(start, count)] = r
+        elif s[start] == ')':
+            r = self.dfs(s, start + 1, count - 1)
+            mem[(start, count)] = r
+        else:
+            r1 = self.dfs(s, start, count)
+            r2 = self.dfs(s, start, count + 1)
+            r3 = self.dfs(s, start, count - 1)
+            mem[(start, count)] = r1 or r2 or r3
+
+        return mem[(start, count)]
 
 
 class DPSolution(object):
@@ -109,8 +117,6 @@ class DPSolution(object):
 
 s = DPSolution()
 print(s.checkValidString("(*)"))
-
-
 
 class GreedySolution(object):
     def checkValidString(self, s):

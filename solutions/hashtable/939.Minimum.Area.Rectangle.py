@@ -78,15 +78,19 @@ class SolutionII(object):
         lastx = dict()
         ans = float('inf')
 
+        # iterate from left to right:
         for x in sorted(columns):
             column = columns[x]
             column.sort()
+            # for any pair of y1 and y2
             for j, y2 in enumerate(column):
                 for i in range(j):
                     y1 = column[i]
+                    # if (y1, y2) are seen before in lastx
                     if (y1, y2) in lastx:
                         ans = min(ans, (x - lastx[y1,y2]) * (y2 - y1))
-                    lastx[y1, y2] = x
+                    # record (y1, y2) to latest x ordinate.
+                    lastx[(y1, y2)] = x
         return ans if ans < float('inf') else 0
 
 

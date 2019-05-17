@@ -192,3 +192,34 @@ print(s.addOperators("123456789", 45))
 
 
 #### Follow up: What if only have +/-?
+class DFSSolution(object):
+    def addOperators(self, num, target):
+        if not num or target is None:
+            return []
+
+        if len(num) == 1 and num[0] != target:
+            return []
+
+        ans = []
+        self.dfs(num, target, 0, "", ans)
+        return ans
+
+    def dfs(self, num, target, start, expr, val, ans):
+        if start == len(num):
+            if val == target:
+                ans.append(expr)
+            return
+
+        for i in range(start+1, len(num)+1):
+            nnum = num[start:i]
+
+            # multi-digit number can not start with 0
+            if len(num[start:i]) > 1 and num[start] == 0:
+                continue
+
+            if start == 0:
+                self.dfs(num, target, i, nnum, int(nnum), ans)
+            else:
+                self.dfs(num, target, i, expr + "+" + nnum, val + nnum, ans)
+                self.dfs(num, target, i, expr + "-" + nnum, val - nnum, ans)
+        return

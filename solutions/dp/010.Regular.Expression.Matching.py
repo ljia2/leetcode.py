@@ -64,7 +64,7 @@ class Solution:
         2) if p[j] == "*" and p[j-1] != s[i]:
                 dp[i+1][j+1] = dp[i+1][j-1] # "a" vs "ab*", if p[2] == '*' and p[1] != s[0] (b != a):
                                             # set b* empty by dp[1][3] = dp[1][1] (check whether s[1] and p[1] match)
-        3) if p[j] == "*" and (p[j-1] == s[i] or p[i-1] == '.'):
+        3) if p[j] == "*" and (p[j-1] == s[i] or p[j-1] == '.'):
                dp[i+1][j+1] = dp[i+1][j] # in this case, a* count as a single a and * repeat zero times of a.
                dp[i+1][j+1] = dp[i][j+1] # in this case a* count as multiple a; for example "aaa" vs "a*" depends on whether "aa" matches "a*"
                dp[i+1][j+1] = dp[i+1][j-1] # in this case a* count as empty.
@@ -80,6 +80,7 @@ class Solution:
         # Initialization.
         # because two empty prefix substrings from s and p matches.
         dp[0][0] = True
+
         # preprocessing: in case "aab" vs c*d*aab
         for i in range(len(p)):
             if i > 0 and p[i] == "*" and dp[0][i-1]:
@@ -98,7 +99,7 @@ class Solution:
                     dp[i+1][j+1] = dp[i+1][j-1]
 
                 # a matches a* or a matches .* or a match aa*
-                if p[j] == "*" and (p[j-1] == s[i] or p[i-1] == '.'):
+                if p[j] == "*" and (p[j-1] == s[i] or p[j-1] == '.'):
                     dp[i+1][j+1] = dp[i+1][j] or dp[i][j+1] or dp[i+1][j-1]
 
         return dp[sl][pl]
@@ -106,4 +107,5 @@ class Solution:
 s = Solution()
 print(s.isMatch("aab", "c*d*aab"))
 
-### Follow up: what if not consider *
+### Follow up: what if only consider *
+

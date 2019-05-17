@@ -170,10 +170,10 @@ class IterativeInOrderSolution(object):
 
             # pop the node
             root = stack.pop()
-
+            # after pop a node, compare prev with node
             if prev and root.val <= prev.val:
                 return False
-
+            # update prev to node
             prev = root
 
             # reset node to its right children.

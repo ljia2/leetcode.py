@@ -84,6 +84,10 @@ class DPSolutionII(object):
 
         dp1[i] =(max_sum, start) stores the maximum k-sized subarray up to i and its start.
         dp2[i] =(max_sum, start) stores the maximum k-sized subarray before i and its start.
+
+        T: O(n)
+        S: O(n)
+
         """
 
         if not nums or k <= 0:
@@ -129,3 +133,6 @@ s = DPSolutionII()
 print(s.maxSumOfThreeSubarrays([1,2,1,2,6,7,5,1], 2))
 print(s.maxSumOfThreeSubarrays([7,13,20,19,19,2,10,1,1,19], 3))
 print(s.maxSumOfThreeSubarrays([4,5,10,6,11,17,4,11,1,3], 1))
+
+
+### Follow up: ask for the maxSum, we do not need store index.

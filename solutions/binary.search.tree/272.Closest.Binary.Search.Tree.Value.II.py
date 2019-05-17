@@ -57,7 +57,8 @@ class Solution(object):
             heapq.heappop(ans)
         return
 
-### Follow up: Assume that the BST is balanced, could you solve it in less than O(n) runtime (where n = total nodes)?
+### Follow up: Assume that the BST is balanced,
+### Could you solve it in less than O(n) runtime (where n = total nodes)?
 
 class Solution(object):
     def closestKValues(self, root, target, k):

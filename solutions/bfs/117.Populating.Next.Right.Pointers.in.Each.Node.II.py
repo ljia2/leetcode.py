@@ -48,39 +48,37 @@ class BFSSolution(object):
         if not root:
             return root
 
-        ptail = root
+        prunner = root
         chead = ctail = None
-        while ptail:
+        while prunner:
             if not ctail:
-                if ptail.left:
-                    chead = ptail.left
+                if prunner.left:
+                    chead = prunner.left
                     ctail = chead
-                    if ptail.right:
-                        ctail.next = ptail.right
+                    if prunner.right:
+                        ctail.next = prunner.right
                         ctail = ctail.next
-                elif ptail.right:
-                    chead = ptail.right
+                elif prunner.right:
+                    chead = prunner.right
                     ctail = chead
             else:
-                if ptail.left:
-                    ctail.next = ptail.left
+                if prunner.left:
+                    ctail.next = prunner.left
                     ctail = ctail.next
-                    if ptail.right:
-                        ctail.next = ptail.right
+                    if prunner.right:
+                        ctail.next = prunner.right
                         ctail = ctail.next
-                elif ptail.right:
-                    ctail.next = ptail.right
+                elif prunner.right:
+                    ctail.next = prunner.right
                     ctail = ctail.next
 
-            ptail = ptail.next
+            prunner = prunner.next
 
-            # when one level is exhausted, phead points to chead; exit when there is no chead.
-            if not ptail:
-                ptail = chead
+            # when one level is exhausted, prunner points to chead; exit when there is no chead.
+            if not prunner:
+                prunner = chead
                 chead = ctail = None
         return root
-
-
 
 
 root = Node(1)

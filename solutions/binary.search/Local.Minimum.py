@@ -31,6 +31,7 @@ class Solution(object):
         l = 0
         r = n-1
         while l < r:
+            # important !!!
             # int division floor -> m >=l, we need always l = m + 1
             m = (l + r) // 2
             # condition for local minimum

@@ -50,6 +50,7 @@ class Solution(object):
                 ans = max(l, ans)
         return ans
 
+    # top down dfs with memorization!!!!
     def dfs(self, matrix, r, c, m, n, dp):
         if dp[r][c] != 0:
             return dp[r][c]
@@ -60,6 +61,7 @@ class Solution(object):
                 continue
             l = 1 + self.dfs(matrix, nr, nc, m, n, dp)
             maxl = max(maxl, l)
+
         dp[r][c] = maxl
         return maxl
 

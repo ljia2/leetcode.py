@@ -16,24 +16,22 @@ class Solution:
         Note: Length of the array will not exceed 10,000 => O(n)
         :type nums: List[int]
         :rtype: int
-
-        similar to LC128.
         """
 
         if not nums:
             return 0
 
-        start = 0
+        i = 0
         max_length = 0
-        while start < len(nums):
+        while i < len(nums):
             length = 1
-            while start + 1 < len(nums) and nums[start+1] > nums[start]:
-                start += 1
+            while i + 1 < len(nums) and nums[i+1] > nums[i]:
+                i += 1
                 length += 1
-            if max_length < length:
-                max_length = length
-            start += 1
+            max_length = max(max_length, length)
+            i += 1
         return max_length
+
 
 #### Follow up: what if the first and the last number is different at most one
 class VarationSolution:
@@ -43,7 +41,7 @@ class VarationSolution:
         :type nums: List[int]
         :rtype: int
 
-        find the longest increasing subsequence where the adjaencet num indexes are apart at most one gap.
+        find the longest increasing subsequence where the num indexes are apart at most one gap.
         not necessary continous
 
         DP
@@ -88,18 +86,14 @@ class VarationSolutionII:
         find the longest increasing subsequence where the adjaencet num indexes are apart at most K gap.
         not necessary continous
 
-        dp[i] stores the longes increasing qualified subsequence ending at i.
+        dp[i] stores the longest increasing qualified subsequence ending at i.
 
         """
 
         if not nums:
             return 0
-
         n = len(nums)
-
-
         dp = [1] * n
-        
         for i in range(1, n):
             for j in range(i-k-1, i-1):
                 if nums[i] > nums[j]:

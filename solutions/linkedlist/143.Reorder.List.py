@@ -34,12 +34,15 @@ class Solution(object):
             slow = slow.next
             fast = fast.next.next
 
-        runner1 = head
+        runner1 = head # from head to slow
+
+        # from slow.next to tail
         runner2 = self.reverse(slow.next)
+
         # slow become the last node, set its next to None
         slow.next = None
 
-        # merge two linklists.
+        # merge two linkedlists.
         nhead = tail = None
         while runner1 and runner2:
             if not nhead:
@@ -52,6 +55,7 @@ class Solution(object):
             runner1 = tmp
             runner2 = runner2.next
 
+        # there might be an element more in runner.
         if runner1:
             tail.next = runner1
         return nhead
@@ -65,7 +69,6 @@ class Solution(object):
             prev = runner
             runner = tmp
         return prev
-
 
 
 

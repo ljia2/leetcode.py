@@ -30,22 +30,22 @@ class Solution:
 
         for i, interval in enumerate(intervals):
             if i == 0:
-                left = interval.start
-                right = interval.end
+                s = interval.start
+                e = interval.end
 
             # if it is overlap with the most recent "reference" interval (left, right)
             # that may merge all overlap intervals before.
-            elif right >= interval.start:
-                left = min(interval.start, left)
-                right = max(interval.end, right)
+            elif e >= interval.start:
+                s = min(interval.start, s)
+                e = max(interval.end, e)
             # update results; reset the "reference" interval as current one.
             else:
-                ans.append(Interval(left, right))
-                left = interval.start
-                right = interval.end
+                ans.append(Interval(s, e))
+                s = interval.start
+                e = interval.end
 
         # Note! Do not forget the last interval (left, right) !!!!
-        ans.append(Interval(left, right))
+        ans.append(Interval(s, e))
 
         return ans
 

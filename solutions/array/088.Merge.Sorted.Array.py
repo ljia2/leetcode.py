@@ -44,6 +44,7 @@ class Solution(object):
                 j -= 1
             k -= 1
 
+        # do not forget the remaining of nums2
         while j > -1:
             nums1[k] = nums2[j]
             j -= 1

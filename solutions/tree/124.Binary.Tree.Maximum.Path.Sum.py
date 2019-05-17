@@ -47,8 +47,8 @@ class Solution:
         if not root.left and not root.right:
             return root.val
         max_sum_path = [0]
-        max_sum = self.dfs(root, max_sum_path)
-        return max(max_sum, max_sum_path[0])
+        self.dfs(root, max_sum_path)
+        return max_sum_path[0]
 
     def dfs(self, node, max_sum_path):
         """"

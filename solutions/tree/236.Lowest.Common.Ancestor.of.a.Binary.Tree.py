@@ -41,7 +41,7 @@ class SolutionII(object):
         :type q: TreeNode
         :rtype: TreeNode
 
-        What if a node not in the tree?
+        What if a node not in the tree? we can use nodes to print path.
 
         """
         if not root:
@@ -79,3 +79,21 @@ root.left = TreeNode(5)
 root.left.left = TreeNode(6)
 root.right = TreeNode(3)
 print(s.lowestCommonAncestor(root, root.left.left, TreeNode(4)))
+
+### Follow up, what is we want to print the path?
+class SolutionIII(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+
+        how to print the path
+
+        """
+        if not root:
+            return root
+
+
+

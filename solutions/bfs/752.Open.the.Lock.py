@@ -57,7 +57,7 @@ class Solution(object):
         OK for BiBFS
 
 
-        Payattention on how to find next state.
+        Pay attention on how to find next state.
 
         """
 
@@ -120,7 +120,7 @@ class Solution(object):
                 states.append(state[:i] + "9" + state[i+1:])
             else:
                 states.append(state[:i] + str((int(d) + 1) % 10) + state[i+1:])
-                states.append(state[:i] + str((int(d) - 1) % 10) + state[i+1:])
+                states.append(state[:i] + str((int(d) - 1)) + state[i+1:])
         return states
 
 

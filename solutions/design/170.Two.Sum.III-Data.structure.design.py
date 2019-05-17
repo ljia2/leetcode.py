@@ -6,6 +6,7 @@ class TwoSum:
         """
         self.sum = set()
         self.nums = []
+
     # O(n^2)
     def add(self, number):
         """
@@ -66,7 +67,6 @@ class TwoSumII:
                 elif target == num and self.nums[num] > 1:
                     return True
             return False
-
 
 obj = TwoSumII()
 obj.add(0)

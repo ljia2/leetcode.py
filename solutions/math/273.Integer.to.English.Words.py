@@ -23,7 +23,7 @@ class Solution(object):
         :type num: int
         :rtype: str
 
-        We should parse from low to hight every 3 digits.
+        We should parse from low to high every 3 digits.
 
         """
 
@@ -38,7 +38,7 @@ class Solution(object):
         overflow = False
 
         # Trick !!!
-        # negative convert to positie, avoid the overflow.
+        # negative convert to positive, avoid the overflow.
         if num < 0:
             negative = True
             if num == -2**31 - 1:
@@ -60,11 +60,12 @@ class Solution(object):
             if hunds == 0:
                 continue
 
-            # not the lowest three digits, add the proper unit, thousand, million or billion
+            # not the lowest three digits, add the proper unit for the 3 digits, thousand, million or billion
             if count > 0:
                 ans.append(hundwords[count])
 
             # process the digits of from low to high significance
+
             # process the lowest two digits
             tens = hunds % 100
             # if tens is between 1 and 19.
@@ -84,6 +85,7 @@ class Solution(object):
 
         if negative:
             ans.append("Negative")
+
         ans.reverse()
 
         if overflow:

@@ -91,6 +91,7 @@ class IterativeSolution(object):
         queue = [(root,root)]
         while queue:
             node1, node2 = queue.pop(0)
+
             # skip None
             if not node1 and not node2:
                 continue

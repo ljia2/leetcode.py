@@ -41,7 +41,7 @@ class Solution:
         if not nums or k < 1 or len(nums) < k:
             return []
 
-        # Defining Deque and result list
+        # Defining Deque (sliding window) and result list
         deq = deque()
         ans = []
 
@@ -69,14 +69,14 @@ class Solution:
 
         # moving the window
         for i in range(k, len(nums)):
-            # store the maxinum value of the current window.
+            # store the maximum value of the current window.
             ans.append(nums[deq[0]])
 
             # keep poping the maximum value in the monotonic stack if it is out of window.
             # untill all numbers in the stack are relevant.
             if deq[0] < i - k + 1:
                 deq.popleft()
-
+            # all number in deq are relevant.
             while deq:
                 if nums[i] > nums[deq[-1]]:
                     # nums[deq[-1]] cannot be the max of the window, because it is smaller than nums[i]; pop it.

@@ -58,12 +58,14 @@ class SolutionII(object):
         """
         if not head:
             return head
+
         # insert node copy immediately after the original node.
         runner = head
         while runner:
             nnode = Node(runner.next)
             runner.next, nnode.next = nnode, runner.next
             runner = nnode.next
+
         # copy over the random pointer if any
         runner = head
         while runner and runner.next:
@@ -72,9 +74,10 @@ class SolutionII(object):
                 runner.next.random = rnode.next
             runner = runner.next.next
 
-        # separate original and copy linklist.
+        # separate original from copy linklist.
         duphead = head.next
         runner = head
+        # make runner points to runner.next.next, iteratively.
         while runner and runner.next:
             tmp = runner.next
             runner.next = runner.next.next

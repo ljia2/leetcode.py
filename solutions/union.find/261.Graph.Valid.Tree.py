@@ -59,6 +59,10 @@ class UnionFindSolution:
             s = parents[s]
         return s
 
-
 ### Follow up: given a treenode, determine whether the tree is a valid tree (without circle).
-### How about BFS to verify whether a node is already contained in the set.
+### How about BFS to verify whether a node is already contained in the set, not right!!!!
+ #     1
+ #   /   \
+ #   2    5
+ #  / \  / \
+ # 3    4   6

@@ -28,7 +28,7 @@ class DFSSolution:
         """
         if not s:
             return [""]
-
+        # find # of open left/right parenthesis
         l, r = self.countUnMatchParethesises(s)
         # from left to right scan, use start to define the substring s[start:]
         results = []
@@ -44,12 +44,13 @@ class DFSSolution:
             return
 
         for i in range(start, len(s)):
-            # IMPORTANT!!!!! we only remove the first parenthesis if there are consecutive ones to avoid duplications.
-            if i != start and s[i] == s[i-1]:
+            # IMPORTANT!!!!!
+            # we only remove the first parenthesis if there are consecutive ones to avoid duplications.
+            if i + 1 < len(s) and s[i+1] == s[i]:
                 continue
-
+            # try to remove parenthesis at index i
             if s[i] == '(' or s[i] == ')':
-                # remove parenthesis at index i
+                # remove parenthesis at index i to form the new string
                 ns = s[:i] + s[i+1:]
 
                 if r > 0:

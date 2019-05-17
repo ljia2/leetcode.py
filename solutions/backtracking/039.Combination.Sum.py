@@ -104,21 +104,21 @@ class DFSSolution(object):
             # hint, we must append a deep copy of combination, otherwise combination will change.
             ans.append(combination.copy())
             return
-        else:
-            # only considering the numbers starting at s
-            for i in range(start, len(candidates)):
-                if candidates[i] > target:
-                    break
 
-                # considering the combination only using candidates[i:];
-                # if use candidates[i], update target = target - candidates[i]
-                # since duplication is allowed, we set start unchanged.
+        # only considering the numbers starting at s
+        for i in range(start, len(candidates)):
+            if candidates[i] > target:
+                break
 
-                combination.append(candidates[i])
-                self.dfs(candidates, target - candidates[i], i, combination, ans)
-                combination.pop()
+            # considering the combination only using candidates[i:];
+            # if use candidates[i], update target = target - candidates[i]
+            # since duplication is allowed, we set start unchanged.
 
-            return
+            combination.append(candidates[i])
+            self.dfs(candidates, target - candidates[i], i, combination, ans)
+            combination.pop()
+
+        return
 
 s = DFSSolution()
 print(s.combinationSum([2,3,6,7], 7))

@@ -1,5 +1,3 @@
-import math
-
 class Solution(object):
     def divide(self, dividend, divisor):
         """
@@ -48,15 +46,19 @@ class Solution(object):
         else:
             r = - abs(dividend)
 
+        # binary search over float space, abs(l-r) < 1
         while abs(l - r) > 1:
             m = (l + r) // 2
             if abs(m * divisor) == abs(dividend):
                 return m
+            # must be strict >
             elif abs(m * divisor) > abs(dividend):
                 r = m
             else:
+                # float space, l = m, instead of l = m + 1
                 l = m
-        # return l because always truncate towards to 0
+
+        # return l because always truncate towards to 0; otherwise may return r if r < 0.
         return l
 
 
