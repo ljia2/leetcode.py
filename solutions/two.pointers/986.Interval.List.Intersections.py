@@ -61,6 +61,7 @@ class Solution(object):
                     a += 1
                     b += 1
             else:
+                # when no overlap, only move ONE pointer.
                 if A[a].end < B[b].end:
                     a += 1
                 else:

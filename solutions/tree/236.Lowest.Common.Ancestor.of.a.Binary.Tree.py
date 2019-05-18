@@ -80,20 +80,51 @@ root.left.left = TreeNode(6)
 root.right = TreeNode(3)
 print(s.lowestCommonAncestor(root, root.left.left, TreeNode(4)))
 
-### Follow up, what is we want to print the path?
-class SolutionIII(object):
+### Follow up, what is we want to print the path from root to that LCA?
+import copy
+
+class Solution(object):
     def lowestCommonAncestor(self, root, p, q):
         """
         :type root: TreeNode
         :type p: TreeNode
         :type q: TreeNode
-        :rtype: TreeNode
+        :rtype: List[Int]
 
-        how to print the path
+        print path from root to LCA
 
         """
         if not root:
-            return root
+            return
 
+        pathes = []
+        self.dfs(root, p, q, [], pathes)
+
+        if len(pathes) != 2:
+            raise Exception("Invalid Input! No LCA")
+        else:
+            i = 0
+            while i < len(pathes[0]) and j < len(pathes[1]) and pathes[0][i] == pathes[1][j]:
+                i += 1
+                j += 1
+            return pathes[0][:i]
+
+    def dfs(self, node, p, q, path, pathes):
+        if node in [p, q]:
+            # store a path from root to p/q.
+            pathes.append(copy.copy(path))
+            return
+
+        # backtracking
+        if node.left:
+            path.append(node.left.val)
+            self.dfs(node.left, p, q, path, pathes)
+            path.pop()
+
+        if node.right:
+            path.append(node.right.val)
+            self.dfs(node.right, p, q, path, pathes)
+            path.pop()
+        return
 
 

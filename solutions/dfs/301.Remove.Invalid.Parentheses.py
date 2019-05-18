@@ -128,6 +128,7 @@ class VarationSolution:
                 if l > 0:
                     l -= 0
                 else:
+                    # record the locations of unmatched )
                     removed.add(i)
             else:
                 continue
@@ -136,7 +137,6 @@ class VarationSolution:
         for i in range(len(s)-1, -1, -1):
             if i in removed or (s[i] != '(' and s[i] != ')'):
                 continue
-
             if c == ')':
                 r += 1
             elif c == '(':

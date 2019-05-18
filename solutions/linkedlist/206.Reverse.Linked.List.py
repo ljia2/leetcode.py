@@ -110,3 +110,50 @@ l.next = ListNode(2)
 l.next.next = ListNode(3)
 s = IterativeSolution()
 print(s.reverseList(l))
+
+### Follow up: use doubly linked list
+
+class DoublyListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.prev = None
+        self.next = None
+
+class IterativeSolutionII(object):
+    def reverseList(self, head):
+        """
+        Reverse a singly linked list.
+
+        Example:
+
+        Input: 1->2->3->4->5->NULL
+        Output: 5->4->3->2->1->NULL
+        Follow up:
+
+        A linked list can be reversed either iteratively or recursively. Could you implement both?
+
+
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        prev = None
+        runner = head
+
+        while runner:
+            tmp = runner.next
+            if prev:
+                prev.prev = runner
+            runner.next = prev
+            runner.prev = None
+            prev, runner = runner, tmp
+        return prev
+
+
+
+head = DoublyListNode(1)
+head.next = DoublyListNode(2)
+head.next.prev = head
+head.next.next = DoublyListNode(3)
+head.next.next.prev = head.next.next
+s = IterativeSolutionII()
+print(s.reverseList(head))

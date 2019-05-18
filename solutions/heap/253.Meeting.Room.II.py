@@ -79,3 +79,34 @@ print(s.minMeetingRooms([[0, 30], [15, 20], [5, 10]]))
 #             start_pointer += 1
 #
 #         return used_rooms
+
+
+# Follow up: What if the times are given as 10AM - 11:30AM or 11:00AM to 1PM
+class Interval(object):
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+
+
+class Soltion(object):
+    def translate(self, times):
+        ans = []
+        for time in times:
+            ts = time.lower().trim().split("-")
+            start = self.convert(ts[0])
+            end = self.convert(ts[1])
+            ans.append(Interval(start, end))
+        return ans
+
+    def convert(self, ts):
+        i = ts.find("am")
+        base = 0 if i > 0 else 12
+
+        ts = ts[:i]
+        hm = ts.split(":")
+        h = int(hm[0]) + base
+        m = int(hm[1])
+        return h * 60 + m
+
+
+

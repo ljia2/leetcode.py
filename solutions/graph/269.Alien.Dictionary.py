@@ -61,22 +61,22 @@ class Solution(object):
             return words[0][::-1]
 
         n = len(words)
-        indict = defaultdict(set)
-        outdict = defaultdict(set)
+        indegree = defaultdict(set)
+        graph = defaultdict(list)
         for i in range(n-1):
             s, d = words[i], words[i+1]
-            if not self.compare(s, d, indict, outdict):
+            if not self.compare(s, d, indegree, graph):
                 return ""
 
         vocab = set()
         for word in words:
-            vocab = vocab.union(set(word))
+            vocab = vocab | set(word)
 
-        return self.bfs_topological_sort(indict, outdict, vocab)
+        return self.bfs_topological_sort(indegree, graph, vocab)
 
     # word1 and word2 is a valid comparsion.
-    def compare(self, word1, word2, indict, outdict):
-        # invalid order.
+    def compare(self, word1, word2, indegree, graph):
+        # invalid order, there is NO ORDER!
         if len(word1) > len(word2) and word1[:len(word2)] == word2:
             return False
 
@@ -85,19 +85,20 @@ class Solution(object):
             a, b = word1[i], word2[i]
             if a == b:
                 continue
-            outdict[a].add(b)
-            indict[b].add(a)
-            # only record the first pair of different chars.
+            graph[a].append(b)
+            indegree[b].add(a)
+
+            # only record the first pair of different chars
             break
 
         return True
 
     # bfs based topological sorting to sort graph
-    def bfs_topological_sort(self, indict, outdict, vocab):
+    def bfs_topological_sort(self, indegree, graph, vocab):
         # find all vertex with 0 in-degree.
         q = []
         for c in vocab:
-            if not indict[c]:
+            if not indegree[c]:
                 q.append(c)
 
         # track the number of visited nodes.
@@ -108,17 +109,15 @@ class Solution(object):
             while size > 0:
                 n = q.pop(0)
                 size -= 1
-
                 # record the topological order via bfs over graph.
                 ans.append(n)
-
                 # traverse to the neighbors
-                if outdict[n]:
-                    for m in outdict[n]:
+                if graph[n]:
+                    for m in graph[n]:
                         # substract m's in-degree by 1
-                        indict[m].remove(n)
+                        indegree[m].remove(n)
                         # its in-degree becomes 0, put m into the queue.
-                        if not indict[m]:
+                        if not indegree[m]:
                             q.append(m)
 
                 # records the number in ans.

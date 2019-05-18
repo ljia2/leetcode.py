@@ -31,7 +31,7 @@ class Solution(object):
         :type matrix: List[List[int]]
         :rtype: int
 
-
+        dfs + memorization
 
         """
         if not matrix or not matrix[0]:
@@ -62,6 +62,7 @@ class Solution(object):
             l = 1 + self.dfs(matrix, nr, nc, m, n, dp)
             maxl = max(maxl, l)
 
+        # record the memory of (r, c)
         dp[r][c] = maxl
         return maxl
 

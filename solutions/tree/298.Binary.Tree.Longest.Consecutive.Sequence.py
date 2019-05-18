@@ -54,13 +54,13 @@ class Solution(object):
         if not root:
             # edge case of None/invalid inputs
             return 0
-        if not root.left and not root.right:
+        elif not root.left and not root.right:
             # leaf node return 1 because it is a sequence of 1
             return 1
 
         return self.dfs(root, 1)
         
-    # simply a restricted tree dfs, return the
+    # simply a restricted tree dfs, return the level
     def dfs(self, node, level):
         if not node:
             return level

@@ -175,7 +175,7 @@ class GreedySolution(object):
 
         if not s:
             return True
-        # the smallest and largest possible open left parethesis.
+        # the smallest and largest possible open left parenthesis.
         l = h = 0
         for c in s:
             if c == '(':
@@ -192,9 +192,10 @@ class GreedySolution(object):
                     l -= 1
                 # if c == '('
                 h += 1
+
             # the current prefix can't be made valid no matter how * is used.
             if h < 0:
                 return False
 
-        # the samllest open left parenthsis must be 0
+        # the samllest open left parenthesis must be 0, a possible valid explanation!
         return l == 0
