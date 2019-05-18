@@ -22,8 +22,6 @@ class Solution(object):
 
         :rtype: None Do not return anything, modify nums1 in-place instead.
 
-
-
         """
         if not nums2:
             return nums1
@@ -49,5 +47,6 @@ class Solution(object):
             nums1[k] = nums2[j]
             j -= 1
             k -= 1
+
         return
 

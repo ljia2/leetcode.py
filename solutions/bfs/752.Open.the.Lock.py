@@ -115,12 +115,14 @@ class Solution(object):
     def next_states(self, state):
         states = []
         for i, d in enumerate(state):
-            if int(d) == 0:
-                states.append(state[:i] + "1" + state[i+1:])
-                states.append(state[:i] + "9" + state[i+1:])
-            else:
-                states.append(state[:i] + str((int(d) + 1) % 10) + state[i+1:])
-                states.append(state[:i] + str((int(d) - 1)) + state[i+1:])
+            # if int(d) == 0:
+            #     states.append(state[:i] + "1" + state[i+1:])
+            #     states.append(state[:i] + "9" + state[i+1:])
+            # else:
+            #     states.append(state[:i] + str((int(d) + 1) % 10) + state[i+1:])
+            #     states.append(state[:i] + str((int(d) - 1) % 10) + state[i+1:])
+            states.append(state[:i] + str((int(d) + 1) % 10) + state[i+1:])
+            states.append(state[:i] + str((int(d) - 1) % 10) + state[i+1:])
         return states
 
 

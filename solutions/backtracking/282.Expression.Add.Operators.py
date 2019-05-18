@@ -160,7 +160,7 @@ class DFSSolution(object): # TLE
         self.dfs(num, target, 0, "", 0, 0, ans)
         return ans
 
-    def dfs(self, num, target, pos, expression, prev_eval, curr_eval, ans):
+    def dfs(self, num, target, pos, expression, prev_number, curr_eval, ans):
         if pos == len(num):
             if curr_eval == target:
                 ans.append(expression)
@@ -168,7 +168,7 @@ class DFSSolution(object): # TLE
 
         # the length of the number
         for l in range(1, len(num) - pos + 1):
-            # an interger with length l.
+            # an integer with length l.
             str_n = num[pos:pos+l]
 
             # we can not have an leading 0 on multiple-digit integer
@@ -183,7 +183,7 @@ class DFSSolution(object): # TLE
                 # we can use an operator here.
                 self.dfs(num, target, pos + l, expression + "+" + str_n, n, curr_eval + n, ans)
                 self.dfs(num, target, pos + l, expression + "-" + str_n, -n, curr_eval - n, ans)
-                self.dfs(num, target, pos + l, expression + "*" + str_n, prev_eval*n, curr_eval - prev_eval + prev_eval*n, ans)
+                self.dfs(num, target, pos + l, expression + "*" + str_n, prev_number*n, curr_eval - prev_number + prev_number*n, ans)
         return
 
 s = DFSSolution()

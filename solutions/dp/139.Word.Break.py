@@ -52,9 +52,7 @@ class DPSolution:
         return checked[n]
 
 
-
 class DFSolution:
-    # DP Solution
     def wordBreak(self, s, wordDict):
         """
 
@@ -177,6 +175,7 @@ class DPSolution:
         for i in range(1, len(s)+1):
             # calculate its prefix from 0 to j (inclusive) and segment from j to i (inclusive)
             for j in range(0, i):
-                if s[j:i] in wordDict:
+                # dp[j] convers s[:j] already.
+                if dp[j] > 0 and s[j:i] in wordDict:
                     dp[i] = min(dp[j] + 1, dp[i])
         return dp[n]

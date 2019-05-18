@@ -20,13 +20,14 @@
 #     return localMinUtil(arr, mid + 1, high, n)
 
 
-# Note that, binary search can only find local minima.
+# Note that, binary search can only find local minimum.
 class Solution(object):
     def localMin(self, nums):
         if not nums:
             return None
         elif len(nums) == 1:
             return nums[0]
+
         n = len(nums)
         l = 0
         r = n-1

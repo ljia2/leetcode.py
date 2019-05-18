@@ -151,7 +151,8 @@ class HeapSolution:
         solution = []
         while hq:
             tmp_task = []
-            # for each slot, arrange only one job per kind
+            # for each batch of n+1 slots, arrange only one job per kind
+            # filling it by jobs from hq.
             for i in range(n+1):
                 ans += 1
                 if hq:
@@ -159,6 +160,7 @@ class HeapSolution:
                     solution.append(task)
                     if freq + 1 < 0:
                         tmp_task.append((freq + 1, task))
+                    # no remaining jobs in tmp_task.
                     if not hq and not tmp_task:
                         break
                 else:
