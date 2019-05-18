@@ -40,19 +40,14 @@ class Solution(object):
 
         if count < 0:
             mem[(start, count)] = False
-            return False
+            return mem[(start, count)]
 
         if s[start] == '(':
-            r = self.dfs(s, start, count + 1)
-            mem[(start, count)] = r
+            mem[(start, count)] = self.dfs(s, start, count + 1)
         elif s[start] == ')':
-            r = self.dfs(s, start + 1, count - 1)
-            mem[(start, count)] = r
-        else:
-            r1 = self.dfs(s, start, count)
-            r2 = self.dfs(s, start, count + 1)
-            r3 = self.dfs(s, start, count - 1)
-            mem[(start, count)] = r1 or r2 or r3
+            mem[(start, count)] = self.dfs(s, start + 1, count - 1)
+        else: # s[start] = "*"
+            mem[(start, count)] = self.dfs(s, start, count) or self.dfs(s, start, count + 1) or self.dfs(s, start, count - 1)
 
         return mem[(start, count)]
 
@@ -118,7 +113,8 @@ class DPSolution(object):
 s = DPSolution()
 print(s.checkValidString("(*)"))
 
-class GreedySolution(object):
+
+class LinearSolution(object):
     def checkValidString(self, s):
         """
         Given a string containing only three types of characters: '(', ')' and '*', write a function to check whether this string is valid. We define the validity of a string by these rules:

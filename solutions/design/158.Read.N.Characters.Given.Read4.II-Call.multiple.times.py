@@ -14,6 +14,7 @@ read4(buf) # read4 returns 3. Now buf = ['i','j','k',...], fp points to end of f
 """
 import copy
 
+
 class Solution(object):
     def __init__(self):
         self.buff = []
@@ -31,7 +32,6 @@ class Solution(object):
         else:
             count = n - len(self.buff)
             while count > 0:
-
                 l = read4(self.buff4)
                 if l == 4:
                     self.buff += copy.copy(self.buff4)
@@ -42,7 +42,7 @@ class Solution(object):
                     count -= l
                     break
             # 1) count > 0 -> reaching end already.
-            # 2) count == 0 -> get n characters exampley
+            # 2) count == 0 -> get n characters exactly
             if count >= 0:
                 buf = copy.copy(self.buff)
                 self.buff = []

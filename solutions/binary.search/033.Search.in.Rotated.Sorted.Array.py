@@ -42,8 +42,9 @@ class Solution:
                     r = m
                 else:
                     l = m + 1
-            else: # nums[l] > nums[m], because no dplicates.
-                if nums[m] < target <= nums[r]:
+            else:
+                # nums[l] > nums[m], because no duplicates.
+                if nums[m] < target < nums[r]:
                     l = m + 1
                 else:
                     r = m
