@@ -1,3 +1,4 @@
+from collections import Counter
 class BestSolution:
     def minWindow(self, s, t):
         """
@@ -23,16 +24,15 @@ class BestSolution:
             return ""
 
         # a neat way of initialize a dictionary key of t with value 0
-        dt, ds = dict.fromkeys(t, 0), {}
-        for c in t:
-            dt[c] += 1
+        ds = dict()
+        dt = Counter(t)
 
         res = ""
         max_length = float("inf")
         j = 0
 
         for i, c in enumerate(s):
-            # given the left boundary i,  moving right boundary until form a valid substring
+            # given the left boundary i, moving right boundary until form a valid substring
             while not self.valid(dt, ds) and j < len(s):
                 ds[s[j]] = ds.get(s[j], 0) + 1
                 j += 1

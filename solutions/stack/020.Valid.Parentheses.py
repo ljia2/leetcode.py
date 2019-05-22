@@ -43,3 +43,5 @@ class Solution(object):
                     return False
 
         return not stack
+
+### Follow up: only have ( and ), we just record the unmatched open parethesis by a number via one pass.

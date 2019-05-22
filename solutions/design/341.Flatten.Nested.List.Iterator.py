@@ -117,8 +117,7 @@ class NestedIterator(object):
                 x = nestedList[i]
                 if x.isInteger():
                     return True
-                # update index, and go to next level
-                # because when pop such an element,
+                # update index, and go to next level, because when pop such an element,
                 # the element at i must be processed already; move to next element of nestedList.
                 s[-1][1] += 1
                 s.append((x.getList(), 0))

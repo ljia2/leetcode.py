@@ -55,14 +55,15 @@ class Solution:
         while qe:
             size = len(qe)
             while size > 0:
-                if moves == K:
-                    return list(map(lambda x:x.val, qe))
-
                 node = qe.pop(0)
                 size -= 1
 
+                if moves == K:
+                    return list(map(lambda x:x.val, qe))
+
                 if node not in graph.keys():
                     continue
+
                 for dst in graph[node]:
                     if dst in visited:
                         continue

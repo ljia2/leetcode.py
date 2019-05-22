@@ -48,6 +48,7 @@ class DFSSolution:
             # we only remove the first parenthesis if there are consecutive ones to avoid duplications.
             if i + 1 < len(s) and s[i+1] == s[i]:
                 continue
+
             # try to remove parenthesis at index i
             if s[i] == '(' or s[i] == ')':
                 # remove parenthesis at index i to form the new string
@@ -128,7 +129,7 @@ class VarationSolution:
                 if l > 0:
                     l -= 0
                 else:
-                    # record the locations of unmatched )
+                    # record the locations of unmatched ) in prefix
                     removed.add(i)
             else:
                 continue
@@ -143,6 +144,7 @@ class VarationSolution:
                 if r > 0:
                     r -= 1
                 else:
+                    # record the location of unmatched ( in suffix
                     removed.add(i)
 
         res = ""

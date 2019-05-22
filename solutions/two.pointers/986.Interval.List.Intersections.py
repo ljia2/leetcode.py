@@ -50,11 +50,11 @@ class Solution(object):
             if self.overlap(A[a], B[b]):
                 ans.append(Interval(max(A[a].start, B[b].start), min(A[a].end, B[b].end)))
                 if A[a].end < B[b].end:
-                    # replace the first interval of B.
+                    # replace the first interval of B, it might intersect with next of A.
                     B[b] = Interval(A[a].end+1, B[b].end)
                     a += 1
                 elif A[a].end > B[b].end:
-                    # replace the first interval of B.
+                    # replace the first interval of A, it may intersect with next of B.
                     A[a] = Interval(B[b].end+1, A[a].end)
                     b += 1
                 else:

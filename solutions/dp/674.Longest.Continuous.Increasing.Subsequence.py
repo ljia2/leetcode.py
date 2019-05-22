@@ -14,6 +14,7 @@ class Solution:
         Output: 1
         Explanation: The longest continuous increasing subsequence is [2], its length is 1.
         Note: Length of the array will not exceed 10,000 => O(n)
+
         :type nums: List[int]
         :rtype: int
         """
@@ -44,8 +45,6 @@ class VarationSolution:
         find the longest increasing subsequence where the num indexes are apart at most one gap.
         not necessary continous
 
-        DP
-
         """
 
         if not nums:
@@ -55,12 +54,11 @@ class VarationSolution:
         if n == 1:
             return 1
 
-        # the longest increasing subsequence with at most one gap ending at previous previous index
+        # the longest increasing subsequence with at most one gap ending at the index before previous index
         pprev = 1
         # the longest increasing subsequence with at most one gap ending at previous index
         prev = 2 if nums[0] < nums[1] else 1
         ans = prev
-
         for i in range(2, n):
             tmp = 1
             if nums[i-2] < nums[i] and pprev + 1 > tmp:
@@ -87,7 +85,6 @@ class VarationSolutionII:
         not necessary continous
 
         dp[i] stores the longest increasing qualified subsequence ending at i.
-
         """
 
         if not nums:
@@ -95,6 +92,7 @@ class VarationSolutionII:
         n = len(nums)
         dp = [1] * n
         for i in range(1, n):
+            # start from i-k-1 to i-1 to ensure the gap K.
             for j in range(i-k-1, i-1):
                 if nums[i] > nums[j]:
                     dp[i] = max(dp[i], dp[j] + 1)

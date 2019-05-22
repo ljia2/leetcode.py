@@ -80,6 +80,7 @@ print(s.minMeetingRooms([[0, 30], [15, 20], [5, 10]]))
 #
 #         return used_rooms
 
+import re
 
 # Follow up: What if the times are given as 10AM - 11:30AM or 11:00AM to 1PM
 class Interval(object):
@@ -88,11 +89,12 @@ class Interval(object):
         self.end = end
 
 
-class Soltion(object):
+class Solution(object):
     def translate(self, times):
         ans = []
         for time in times:
-            ts = time.lower().trim().split("-")
+            ts = re.split(r"-", time.trim().lower().replace("to", "-"))
+            #ts = time.lower().trim().split("-")
             start = self.convert(ts[0])
             end = self.convert(ts[1])
             ans.append(Interval(start, end))

@@ -61,7 +61,9 @@ class Solution(object):
             return words[0][::-1]
 
         n = len(words)
+        # store incoming edges
         indegree = defaultdict(set)
+        # store outcoming edges
         graph = defaultdict(list)
         for i in range(n-1):
             s, d = words[i], words[i+1]
@@ -87,7 +89,6 @@ class Solution(object):
                 continue
             graph[a].append(b)
             indegree[b].add(a)
-
             # only record the first pair of different chars
             break
 
@@ -109,8 +110,10 @@ class Solution(object):
             while size > 0:
                 n = q.pop(0)
                 size -= 1
+
                 # record the topological order via bfs over graph.
                 ans.append(n)
+
                 # traverse to the neighbors
                 if graph[n]:
                     for m in graph[n]:

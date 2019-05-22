@@ -14,7 +14,6 @@ read4(buf) # read4 returns 3. Now buf = ['i','j','k',...], fp points to end of f
 """
 import copy
 
-
 class Solution(object):
     def __init__(self):
         self.buff = []
@@ -51,6 +50,8 @@ class Solution(object):
                 buf = copy.copy(self.buff[:n])
                 self.buff = self.buff[n:]
         return len(buf)
+
+
 
 
 

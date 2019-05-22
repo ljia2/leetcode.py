@@ -54,6 +54,7 @@ class Solution:
                     sr, sc = r, c
                 elif 'a' <= grid[r][c] <= 'z':
                     key_count |= 1 << (ord(grid[r][c]) - ord('a'))
+
         # auxiliary array for directional search
         dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]
         # initialize queue of state of bfs for shortest path
@@ -89,7 +90,8 @@ class Solution:
                         if collected_keys & (1 << (ord(key) - ord('a'))) == 0:
                             continue
 
-                    # early pruning for visited cell
+                    # IMPORTANT !!!!
+                    # early pruning for visited cell, we use tuple of (cordinate + collected_keys) in visited.
                     if (nr, nc, collected_keys) in visited:
                         continue
 

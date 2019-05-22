@@ -35,7 +35,7 @@ class DPSolution:
         The sum of all elements at most 20000.
 
         when the sum is small, which hints a 2D dp problem.
-        dp[i][j] whether we can use a subset of the first i element whose sum if j.
+        dp[i][j] whether we can use a subset of the first i element whose sum is j.
 
         base case:
         dp[0][0] = True

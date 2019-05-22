@@ -43,7 +43,6 @@ class DPSolution:
 
         T: O(n)
         S: O(n) -> O(1) since i only depends on i-1
-
         """
         if not prices:
             return 0
@@ -52,14 +51,13 @@ class DPSolution:
         mp = [0] * len(prices)
         # store the lowest prices up to day i
         lp = [0] * len(prices)
-        for i in range(len(prices)):
-            if i == 0:
-                mp[i] = 0
-                lp[i] = prices[i]
-            else:
-                mp, lp = mp[i-1], lp[i-1]
-                mp[i] = max(mp[i-1], prices[i] - lp[i-1])
-                lp[i] = min(prices[i], lp[i-1])
+
+        mp[0] = 0
+        lp[0] = prices[0]
+        for i in range(1, len(prices)):
+            mp, lp = mp[i-1], lp[i-1]
+            mp[i] = max(mp[i-1], prices[i] - lp[i-1])
+            lp[i] = min(prices[i], lp[i-1])
         return mp[-1]
 
 
@@ -67,7 +65,6 @@ class DPSolution:
 class DPSolution2:
     def maxProfit(self, prices):
         """
-
         Say you have an array for which the ith element is the price of a given stock on day i.
 
         If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock),
@@ -114,6 +111,7 @@ class DPSolution2:
         gains = [0]
         for i in range(1, len(prices)):
             gains.append(prices[i] - prices[i-1])
+
         mp = [0] * len(prices)
         for i in range(len(prices)):
             mp[i] = max(mp[i-1] + gains[i], gains[i])

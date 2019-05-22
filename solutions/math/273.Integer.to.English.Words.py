@@ -26,19 +26,17 @@ class Solution(object):
         We should parse from low to high every 3 digits.
 
         """
-
+        # How to Initialize the hundreds, tens and ones.
         hundwords = ["Hundred", "Thousand", "Million", "Billion"]
-        tenwords = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
-        onewords = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
+        tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
+        ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
 
         if num == 0:
             return "Zero"
 
         negative = False
         overflow = False
-
-        # Trick !!!
-        # negative convert to positive, avoid the overflow.
+        # Trick: negative convert to positive, avoid the overflow.
         if num < 0:
             negative = True
             if num == -2**31 - 1:
@@ -65,23 +63,23 @@ class Solution(object):
                 ans.append(hundwords[count])
 
             # process the digits of from low to high significance
-
             # process the lowest two digits
             tens = hunds % 100
             # if tens is between 1 and 19.
             if 0 < tens < 20:
-                ans.append(onewords[tens])
+                ans.append(ones[tens])
             else:
                 # like, 81 -> one eighty (will reverse later).
                 if tens % 10 > 0:
-                    ans.append(onewords[tens % 10])
+                    ans.append(ones[tens % 10])
                 if tens // 10 > 0:
-                    ans.append(tenwords[tens // 10])
+                    ans.append(tens[tens // 10])
 
             # process the higher of the three digits, if it is bigger than 100.
             if hunds // 100 > 0:
+                # always use hundred if hunds > 100.
                 ans.append(hundwords[0])
-                ans.append(onewords[hunds // 100])
+                ans.append(ones[hunds // 100])
 
         if negative:
             ans.append("Negative")
@@ -93,6 +91,7 @@ class Solution(object):
             ans.append("Eight")
 
         return " ".join(ans)
+
 
 s = Solution()
 print(s.numberToWords(1234567891))

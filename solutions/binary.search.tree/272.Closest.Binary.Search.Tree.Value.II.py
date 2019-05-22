@@ -4,6 +4,7 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
+
 import heapq
 class Solution(object):
     def closestKValues(self, root, target, k):
@@ -94,7 +95,7 @@ class Solution(object):
         if not root or k <= 0:
             return None
 
-        # store all node whose values smaller than target
+        # store all node whose values smaller target target
         pred = []
         # store all nodes whose values bigger than target
         succ = []

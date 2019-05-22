@@ -48,6 +48,7 @@ class PostOrderSolution(object):
         return lres and rres and lmax < root.val < rmin
 
     def dfs(self, root):
+        # note how to handle leaf node.
         if not root:
             return True, float('inf'), float('-inf')
 

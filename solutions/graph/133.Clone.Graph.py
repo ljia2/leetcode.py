@@ -42,8 +42,7 @@ class DFSSolution(object):
             return None
 
         node2copy = dict()
-        visited = set()
-        self.dfs(node, visited, node2copy)
+        self.dfs(node, set(), node2copy)
 
         return node2copy[node]
 

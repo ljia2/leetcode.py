@@ -38,6 +38,7 @@ class Solution(object):
         :rtype: bool
         """
         s = s.strip()
+
         numbersSeen = False
         pointSeen = False
         eSeen = False

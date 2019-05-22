@@ -29,9 +29,8 @@ class Solution: # TLE
         ans = set()
         for i in range(n):
 
-            if (i + 1 < n and nums[i] == nums[i+1]) or num_freq[nums[i]] == 0:
+            if num_freq[nums[i]] == 0:
                 continue
-
 
             # nums[i]'s frequency minus 1
             num_freq[nums[i]] -= 1
@@ -39,9 +38,6 @@ class Solution: # TLE
                 num_freq.pop(nums[i])
 
             for j in range(i+1, n):
-                if j + 1 < i and nums[j] == nums[j+1]:
-                    continue
-
                 # nums[j] must be an different instance of nums[i]
                 target = -nums[i]-nums[j]
                 if target in num_freq.keys():

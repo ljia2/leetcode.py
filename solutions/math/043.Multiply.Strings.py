@@ -43,8 +43,10 @@ class Solution(object):
                 a, b = int(num1[i]), int(num2[j])
                 pos[i+j+1] += a*b
                 pos[i+j] += pos[i+j+1] // 10
+
                 pos[i+j+1] = pos[i+j+1] % 10
 
+        # checking leading zero.
         start = 0
         while start < len(pos) and pos[start] == 0:
             start += 1

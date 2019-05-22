@@ -3,11 +3,10 @@ class Solution(object):
         """
         An array is monotonic if it is either monotone increasing or monotone decreasing.
 
-        An array A is monotone increasing if for all i <= j, A[i] <= A[j].  An array A is monotone decreasing if for all i <= j, A[i] >= A[j].
+        An array A is monotone increasing if for all i <= j, A[i] <= A[j].
+        An array A is monotone decreasing if for all i <= j, A[i] >= A[j].
 
         Return true if and only if the given array A is monotonic.
-
-
 
         Example 1:
 
@@ -30,7 +29,6 @@ class Solution(object):
         Input: [1,1,1]
         Output: true
 
-
         Note:
 
         1 <= A.length <= 50000
@@ -44,10 +42,9 @@ class Solution(object):
             return True
 
         less = more = False
-
         for i in range(1, len(A)):
             if less and more:
-                return False
+                break
 
             if A[i-1] < A[i]:
                 less = True

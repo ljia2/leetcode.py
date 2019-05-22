@@ -47,4 +47,3 @@ class Solution(object):
 ###### Follow up: if inset/del/swap is one operation, ask the minimum ops to make s a palindrome.
 ###### DP dp[i][j] stores the minimum ops to make s[i to j] palindrome
 ###### Base case length 1 and 2.
-###### Transition Function 1) if

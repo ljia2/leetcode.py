@@ -62,3 +62,17 @@ class Solution(object):
         :type nestedList: List[NestedInteger]
         :rtype: int
         """
+
+        if not nestedList:
+            return 0
+
+        return self.dfs(nestedList, 1)
+
+    def dfs(self, nl, level):
+        ans = 0
+        for l in nl:
+            if l.isInteger():
+                ans += l.getInteger() * level
+            else:
+                ans += self.dfs(l.getList(), level+1)
+        return ans

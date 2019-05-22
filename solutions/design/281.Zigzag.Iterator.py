@@ -36,6 +36,7 @@ class ZigzagIterator(object):
                 return False
 
 
+
 class KZigzagIterator(object):
 
     def __init__(self, lists):
@@ -48,7 +49,6 @@ class KZigzagIterator(object):
         self.list_index = [0] * self.K
         self.next_list_index = 0
         self.lists = lists
-
 
     def next(self):
         """

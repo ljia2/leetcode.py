@@ -160,14 +160,13 @@ class VarationSolution:
             return 0
 
         numsum = 0
-        i = 0
+        start = 0
         ans = 0
         for num in nums:
             numsum += num
-
             while numsum > k:
-                numsum -= nums[i]
-                i += 1
+                numsum -= nums[start]
+                start += 1
 
             if numsum == k:
                 ans += 1

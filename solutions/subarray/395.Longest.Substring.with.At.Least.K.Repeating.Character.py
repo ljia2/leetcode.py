@@ -1,3 +1,5 @@
+import collections
+
 class Solution(object):
     def longestSubstring(self, s, k):
         """
@@ -34,5 +36,17 @@ class Solution(object):
         a qualified window is when numLessThan is zero.
 
         """
+        if not s or len(s) < k:
+            return 0
+
+        n = len(s)
+        start = 0
+        ssdict = dict()
+        for end, c in enumerate(s):
+            # given the left boundary i, moving right boundary until form a valid substring
+            while not self.valid(ssdict) and j < len(s):
+                ssdict[c] = ssdict.get(c, 0) + 1
+                j += 1
+
 
 

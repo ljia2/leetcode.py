@@ -54,6 +54,7 @@ class Solution:
                 sparse_col = sparseB[j]
                 ans[i][j] = self.vectorDot(sparse_row, sparse_col)
 
+
         return ans
     # two pointer or event binary search if one long one short.
     # how to determine which is better: len(row) + len(col) < min(len(row)*log(len(col), len(col)*log(len(row))
@@ -78,6 +79,8 @@ class Solution:
                     while j < len(col) and col[j][0] < cj:
                         j += 1
         return ans
+
+
 
 s = Solution()
 print(s.multiply([[ 1, 0, 0],[-1, 0, 3]], [[ 7, 0, 0 ],[ 0, 0, 0 ],[ 0, 0, 1]]))

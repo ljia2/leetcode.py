@@ -38,7 +38,8 @@ class BSTIterator(object):
 
         """
         self.node_stack = []
-        # Initialize stack, push all the node on the leftmost path into stack.
+        # Initialize stack
+        # push all the node on the leftmost branch into stack.
         self.pushAll(root)
 
     def hasNext(self):
@@ -143,9 +144,8 @@ class BSPTIterator(object):
         """
         :rtype: bool
         """
-        succ = self.findSuccessor(self.curr)
-        self.curr = succ
-        return succ is not None
+        self.curr = self.findSuccessor(self.curr)
+        return self.curr is not None
 
     def next(self):
         """
@@ -157,12 +157,15 @@ class BSPTIterator(object):
         if not node:
             return None
 
+        # if there is an right subtree, keep searching nextSuccessor in its left branch.
         if node.right:
-            tmp = node.right
-            while tmp and tmp.left:
-                tmp = tmp.left
-            return tmp
+            node = node.right
+            while node and node.left:
+                node = node.left
+            return node
 
+        # otherwise, keeping search up until encoutering a parent node from its left substree
+        # then return that parent ndoe.
         father = node.parent
         child = node
         while father and father.left != child:

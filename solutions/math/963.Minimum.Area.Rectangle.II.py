@@ -54,6 +54,7 @@ class Solution(object):
         x4 = x3 + (x2 - x1)
         y4 = y3 + (y2 - y1)
         If p4 in points, calculate area.
+
         """
         if not points or len(points) < 4:
             return 0

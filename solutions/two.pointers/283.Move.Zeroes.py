@@ -1,4 +1,4 @@
-class Solution(object):
+class OptimalSolution(object):
     def moveZeroes(self, nums):
         """
         Given an array nums, write a function to move all 0's to the end of it
@@ -15,33 +15,25 @@ class Solution(object):
 
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
-
-        only operate x times where x is non-zero numbers have 0 before.
-
         """
         if not nums or len(nums) == 1:
             return
-        n = len(nums)
-        i = 0
-        while i < n:
-            # find the first index of zero
-            while i < n and nums[i] != 0:
-                i += 1
-            # find the first index of non-zero after i.
-            j = i + 1
-            while j < n and nums[j] == 0:
-                j += 1
-
-            if i < j < n:
-                # if there is a non-zero after i, swap numbers at i and j
-                nums[i], nums[j] = nums[j], nums[i]
-            else:
-                break
-
+        # from 0 to j - 1 are non-zero while j is the next position for non-zero
+        # for j to i-1 are all zeros
+        # for i to end are mixed.
+        # always swap i if nums[1] != j with j.
+        i = j = 0
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                if i == j:
+                    j += 1
+                else:
+                    nums[i], nums[j] = nums[j], nums[i]
+                    j += 1
         return
 
 
-s = Solution()
+s = OptimalSolution()
 nums = [0,1,0,3,12]
 s.moveZeroes(nums)
 print(nums)

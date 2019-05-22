@@ -37,8 +37,10 @@ class Solution:
         # we need to always keep the head of ans for reference and a pointer of the tail of ans for insertion.
         ans_head = ans_tail = None
         carry = 0
-        while nl1 and nl2:
-            numsum = nl1.val + nl2.val + carry
+        while nl1 or nl2:
+            v1 = nl1.val if nl1 else 0
+            v2 = nl2.val if nl2 else 0
+            numsum = v1 + v2 + carry
             if not ans_head:
                 ans_head = ListNode(numsum % 10)
                 ans_tail = ans_head
@@ -51,20 +53,6 @@ class Solution:
             nl1 = nl1.next
             nl2 = nl2.next
 
-        while nl1:
-            numsum = nl1.val + carry
-            ans_tail.next = ListNode(numsum % 10)
-            ans_tail = ans_tail.next
-            carry = numsum // 10
-            nl1 = nl1.next
-
-        while nl2:
-            numsum = nl2.val + carry
-            ans_tail.next = ListNode(numsum % 10)
-            ans_tail = ans_tail.next
-            carry = numsum // 10
-            nl2 = nl2.next
-
         # do not forget the ultimate carry !!!!
         if carry == 1:
             ans_tail.next = ListNode(1)
@@ -73,16 +61,14 @@ class Solution:
         return rev_ans
 
     def reverse(self, head):
-        prev = head
-        succ = head.next
-        prev.next = None
+        prev = None
+        succ = head
         while succ:
-            newsucc = succ.next
+            tmp = succ.next
             succ.next = prev
             prev = succ
-            succ = newsucc
+            succ = tmp
         return prev
-
 
 l1 = ListNode(7)
 l1.next = ListNode(2)

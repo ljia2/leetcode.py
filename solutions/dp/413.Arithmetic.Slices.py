@@ -68,7 +68,6 @@ class BestSolution:
 
         The function should return the number of arithmetic slices in the array A.
 
-
         Example:
 
         A = [1, 2, 3, 4]
@@ -85,6 +84,7 @@ class BestSolution:
             dp = [0] * len(A)
             if A[1] - A[0] == A[2] - A[1]:
                 dp[2] = 1
+
             result = dp[2]
             for i in range(3, len(A)):
                 if A[i] - A[i-1] == A[i-1]-A[i-2]:

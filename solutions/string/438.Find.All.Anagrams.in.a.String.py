@@ -35,6 +35,9 @@ class Solution(object):
         :type s: str
         :type p: str
         :rtype: List[int]
+
+        sliding window of size len(p).
+
         """
         if not p:
             return []
@@ -44,19 +47,24 @@ class Solution(object):
             return []
 
         pcounter = collections.Counter(p)
+        # set a window of size len(p).
         start = 0
         end = len(p) - 1
+
         scounter = collections.Counter(s[start:end + 1])
         ans = []
         while end < len(s):
+
             if self.isAnagrams(scounter, pcounter):
                 ans.append(start)
 
             scounter[s[start]] -= 1
             if scounter[s[start]] == 0:
-                del scounter[s[start]]
+                scounter.pop[s[start]]
+
             start += 1
             end += 1
+
             # make sure end < len(s), since operate s[end] after end += 1
             if end < len(s):
                 scounter[s[end]] = scounter.get(s[end], 0) + 1

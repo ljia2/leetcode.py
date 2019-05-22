@@ -38,7 +38,7 @@ class Solution:
             if target == nums[m]:
                 return m
             elif nums[l] < nums[m]:
-                if nums[l] <= target < nums[m]:
+                if nums[l] < target < nums[m]:
                     r = m
                 else:
                     l = m + 1

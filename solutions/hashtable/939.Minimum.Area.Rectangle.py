@@ -93,7 +93,6 @@ class SolutionII(object):
                     lastx[(y1, y2)] = x
         return ans if ans < float('inf') else 0
 
-
 ### Follow up  toe see all rectangles with minimum areas.
 import collections
 class VartionSolution(object):

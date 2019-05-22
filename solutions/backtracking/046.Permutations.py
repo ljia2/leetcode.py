@@ -17,9 +17,8 @@ class Solution:
             return []
 
         used = [False] * len(nums)
-        p = []
         ans = []
-        self.dfs(nums, 0, len(nums), used, p, ans)
+        self.dfs(nums, 0, len(nums), used, [], ans)
         return ans
 
     def dfs(self, nums, level, target_level, used, permutation, ans):
@@ -34,6 +33,7 @@ class Solution:
                 if used[i]:
                     continue
                 # assuming using nums[i] at level (i.e. position) and put nums[i] to current permutation
+
                 used[i] = True
                 permutation.append(nums[i])
                 self.dfs(nums, level+1, target_level, used, permutation, ans)

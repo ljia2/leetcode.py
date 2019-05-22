@@ -113,7 +113,7 @@ class DFSSolution(object):
                     answer.append(v)
                 last_x = x
 
-        # IMPORTANT!! DO NOT FORGET THE LAST ANSWER.
+        # IMPORTANT!! DO NOT FORGET THE LAST ANSWER itsef as a list.
         answers.append(answer)
         return answers
 

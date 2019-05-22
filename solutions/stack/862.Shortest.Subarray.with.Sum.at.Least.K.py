@@ -122,14 +122,14 @@ class Solution:
         mstack = deque([0])
         min_length = float("inf")
         for i in range(1, len(presums)):
-            # keep retracting Q to find the smallest subarray (if exists) ending at i but >= K
-            while mstack and presums[i] - presums[Q[0]] >= K:
-                min_length = min(min_length, i - Q.popleft())
+            # keep retracting mstack to find the smallest subarray (if exists) ending at i but >= K
+            while mstack and presums[i] - presums[mstack[0]] >= K:
+                min_length = min(min_length, i - mstack.popleft())
 
-            # if a bigger presum is calculated, we can get rid of the latest psum > presum,
+            # if a smaller presum is calculated, we can get rid of the psum in stack > presum,
             # because if psum is used to generated the subarray (sum >= K),
             # presum must be used to generate a shorter subarray (sum >= K).
-            while mstack and presums[i] < presums[Q[-1]]:
+            while mstack and presums[i] < presums[mstack[-1]]:
                 mstack.pop()
 
             mstack.append(i)

@@ -1,4 +1,4 @@
-import queue as q
+import heapq as q
 
 
 class Solution:
@@ -36,11 +36,8 @@ class Solution:
             if len(hp) < k:
                 q.heappush(hp, num)
             else:
-                lnum = q.heappop()
-                if lnum < num:
-                    q.heappush(hp, num)
-                else:
-                    q.heappush(hp, lnum)
+                if q[0] < num:
+                    q.heappushpop(hp, num)
         return hp.heappop()
 
 

@@ -42,21 +42,20 @@ class Solution(object):
         psummod2pos[0] = 0
         # key is the psum, value is the smallest position.
         psum2pos[0] = 0
-
-        for i, num in enumerate(nums):
-            i = i + 1
-            psum += num
+        for i in range(len(nums)):
+            pos = i + 1
+            psum += nums[i]
 
             if k == 0:
                 if psum not in psum2pos.keys():
                     psum2pos[psum] = i
-                elif i - psum2pos[psum] >= 2:
+                elif pos - psum2pos[psum] >= 2:
                     return True
             else:
                 r = psum % k
                 if r not in psummod2pos.keys():
                     psummod2pos[r] = i
-                elif i - psummod2pos[r] >= 2:
+                elif pos - psummod2pos[r] >= 2:
                     return True
 
         return False

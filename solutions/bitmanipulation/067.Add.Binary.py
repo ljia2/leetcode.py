@@ -31,32 +31,16 @@ class Solution(object):
         bi = bl - 1
         carry = 0
         ans = ""
-        while ai > -1 and bi > -1:
-            ca, cb = int(a[ai]), int(b[bi])
+        while ai > -1 or bi > -1:
+            ca = int(a[ai]) if ai > -1 else 0
+            cb = int(b[bi]) if bi > -1 else 0
             cc = (ca + cb + carry) % 2
             carry = (ca + cb + carry) // 2
             ans = str(cc) + ans
             ai -= 1
             bi -= 1
 
-        while ai > -1:
-            ca = int(a[ai])
-            cc = (ca + carry) % 2
-            carry = (ca + carry) // 2
-            ans = str(cc) + ans
-            ai -= 1
-
-        while bi > -1:
-            cb = int(b[bi])
-            cc = (cb + carry) % 2
-            carry = (cb + carry) // 2
-            ans = str(cc) + ans
-            bi -= 1
-
-        if carry == 1:
-            ans = str(carry) + ans
-
-        return ans
+        return str(carry) + ans if carry else ans
 
 ### Follow up: optimizat by bid operation
 class BitSolution(object):
@@ -75,22 +59,22 @@ class BitSolution(object):
         Input: a = "1010", b = "1011"
         Output: "10101"
 
-        :type a: str
-        :type b: str
-        :rtype: str
+        :type a: int
+        :type b: int
+        :rtype: int
 
+        we can directly operates bid ops on binary strings.
 
         """
-        if a == "0":
+        if a == 0:
             return b
-        elif b == "0":
+        elif b == 0:
             return a
-        ia, ib = int(a), int(b)
-        while ib != 0:
-            carry = ia & ib
-            ia = ia ^ ib
-            ib = carry << 1
-        return str(ia)
+
+        while b != 0:
+            carry = a & b
+            a, b = a ^ b, carry << 1
+        return a
 
 s = BitSolution()
 print(s.addBinary(5, 6))

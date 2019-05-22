@@ -25,6 +25,7 @@ class BinarySearchSolution:
         if not nums:
             return 0
         parent = [-1] * len(nums)
+        # monotonic stack
         # lis[i] stores the index of the prefix of potentially longest subsequence so far
         lis = [0]
         max_length = 1
@@ -40,7 +41,8 @@ class BinarySearchSolution:
                 # Example 2, given 1, 5, 7, 2, 8, 9, lis = [1, 5, 7] and nums[i] = 2
                 # we need to replace the first element bigger than nums[i] with nums[i],
                 # i.e. replace 5 with 2 but keep 7 (see examples above)
-                # because 1, 2 is potentially the length 2 prefix of the longest subsequence (For example 1, if 7 might be replace later) than that of 1, 5.
+                # because 1, 2 is potentially the length 2 prefix of the longest subsequence
+                # (For example 1, if 7 might be replace later) than that of 1, 5.
                 ri = bisect.bisect_right(lis, nums[i])
                 lindex = lis[ri]
                 # record the parent of nums[i]

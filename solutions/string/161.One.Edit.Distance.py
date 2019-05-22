@@ -72,6 +72,7 @@ class SolutionII:
         nt = len(t)
         if abs(ns-nt) >= 2:
             return False
+
         l = min(ns, nt)
         for i in range(l):
             if s[i] != t[i]:

@@ -74,6 +74,7 @@ class CodecII:
         return node
 
 
-#### Follow up: How about N-ary Tree: LC428 ???
+#### Follow up: How about N-ary Tree: LC428
+#### use val|size-of-children to denote node and DFS.
 
 

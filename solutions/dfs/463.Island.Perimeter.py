@@ -45,7 +45,8 @@ class Solution:
         if grid[r][c] != 1:
             return
 
-        # encounter a land at (r, c); mark (r,c) as visited by -1 (can not by 0 to avoid double counting perimeter)
+        # encounter a land at (r, c); mark (r,c) as visited by -1
+        # (can not by 0 to avoid double counting perimeter)
         grid[r][c] = -1
         for nr, nc in [(r, c+1), (r, c-1), (r+1, c), (r-1, c)]:
             self.dfs(grid, nr, nc, ans)

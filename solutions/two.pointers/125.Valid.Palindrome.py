@@ -25,7 +25,7 @@ class Solution(object):
         l = 0
         r = len(s)-1
         while l < r:
-
+            # skip non alphanumeric chars
             while l < r and not s[l].isalnum():
                 l += 1
             while l < r and not s[r].isalnum():
