@@ -26,20 +26,59 @@ class Solution:
         :type newInterval: Interval
         :rtype: List[Interval]
 
-
         """
+        if not newInterval:
+            return intervals
+
         ans = []
-        insert = False
-        s, e = newInterval.start, newInterval.end
         for interval in intervals:
-            if interval.start > e and not insert:
-                ans.append(Interval(s, e))
-                insert = True
-            if interval.end < s or interval.start > e:
+            # if 1) newInterval has been merged; or 2) interval is not overlapping with newInterval, add it into answer.
+            if not newInterval or interval.end < newInterval.start or interval.start > newInterval.end:
                 ans.append(interval)
+            # if interval is after newInterval, insert newInterval first and then interval into answer
+            elif interval.start > newInterval.end:
+                ans.append(newInterval)
+                ans.append(interval)
+                newInterval = None
             else:
-                s = min(s, interval.start)
-                e = max(e, interval.end)
-        if not insert:
-            ans.append(Interval(s, e))
+                # interval overlap with newInterval, merge interval with newInterval
+                newInterval = Interval(min(s, interval.start), max(e, interval.end))
+
+        # if newInterval is not inserted yet.
+        if newInterval:
+            ans.append(newInterval)
         return ans
+
+#### Follow up: given a list of intervals and a target interval,
+# return the mininum number of intervals from the list to merge to cover the target interver
+# For example, [[-1, 9], [1, 10], [0, 3], [9, 10], [3, 14], [2, 9], [10, 16]] and [2, 15]
+# there are several ways to conver [2, 15]
+# 1: [-1, 9], [9, 10], [10, 16]
+# 2: [1, 10], [10, 16]
+# return 2.
+
+class GreedySolution(object):
+    def minimumIntervals(self, intervals, target):
+        if not intervals or not target:
+            return -1
+
+        intervals.sort()
+        n = len(intervals)
+        start = target[0]
+        ans = 0
+        for i in range(n):
+            cur = self.greedyHelper(intervals, i, start)
+            ans += 1
+            if intervals[cur][1] >= target[1]:
+                return ans
+
+            # the target has been partially covered until intervals[cur][1], update start to denote the remaining interval.
+            start = intervals[cur][1]
+
+        return ans
+
+    # find the interval
+    def greedyHelper(self, intervals, start, target):
+        ans = None
+        for i in range(start, len(intervals))
+

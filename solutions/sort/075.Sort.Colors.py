@@ -51,9 +51,5 @@ class Solution:
                     w += 1
         return
 
-def main():
-    s = Solution()
-    print(s.sortColors([2,0,2,1,1,0]))
-
-if __name__ == "__main__":
-    main()
+s = Solution()
+print(s.sortColors([2,0,2,1,1,0]))

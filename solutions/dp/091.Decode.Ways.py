@@ -37,6 +37,7 @@ class DPSolution:
         # have leading "0" or have two 0 in a row
         if s[0] == '0' or s.find("00") > -1:
             return 0
+
         n = len(s)
         ways = [0] * (n+1)
         # base cases: there is only 1 way to decode empty string

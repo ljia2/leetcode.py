@@ -26,18 +26,19 @@ class Solution:
             # Note: append a copy of permutation
             ans.append(permutation.copy())
             return
-        else:
-            # PERMUTATION: always iterate over all numbers
-            # COMBINATION: always start an number afterwards
-            for i in range(len(nums)):
-                if used[i]:
-                    continue
-                # assuming using nums[i] at level (i.e. position) and put nums[i] to current permutation
 
-                used[i] = True
-                permutation.append(nums[i])
-                self.dfs(nums, level+1, target_level, used, permutation, ans)
-                # change back permutation for backtracking
-                permutation.pop()
-                used[i] = False
+        # PERMUTATION: always iterate over all numbers
+        # COMBINATION: always start an number afterwards
+        for i in range(len(nums)):
+            if used[i]:
+                continue
+
+            # assuming using nums[i] at level (i.e. position) and put nums[i] to current permutation
+            used[i] = True
+            permutation.append(nums[i])
+            self.dfs(nums, level+1, target_level, used, permutation, ans)
+            # change back permutation for backtracking
+            permutation.pop()
+            used[i] = False
+            return
 

@@ -24,6 +24,7 @@ class Solution:
         ans = []
         used = [False] * len(nums)
         permutation = []
+        nums.sort()
         self.dfs(nums, 0, len(nums), used, permutation, ans)
         return ans
 
@@ -32,17 +33,16 @@ class Solution:
             ans.append(permutation.copy())
             return
         else:
-            # there are duplicated numbers, if a number has already handled on level,
-            # we do not need handle the same number at the same level.
-            handled = set()
             for i in range(len(nums)):
                 if used[i]:
                     continue
-                if nums[i] in handled:
+                # there are duplicated numbers, if a number has already handled on level,
+                # we do not need handle the same number at the same level.
+                if i + 1 < len(nums) and nums[i] == nums[i+1]:
                     continue
+
                 used[i] = True
                 permutation.append(nums[i])
-                handled.add(nums[i])
                 self.dfs(nums, level+1, target_level, used, permutation, ans)
                 used[i] = False
                 permutation.pop()

@@ -40,7 +40,7 @@ class Solution:
         while start < len(pron):
             c = pron[start]
             freq = 1
-            while start < len(pron) - 1 and pron[start+1] == pron[start]:
+            while start + 1 < len(pron) and pron[start+1] == pron[start]:
                 freq += 1
                 start += 1
             count += str(freq) + c

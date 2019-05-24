@@ -26,6 +26,7 @@ class Solution:
                 even.append(A[i])
             else:
                 odd.append(A[i])
+
         ans = [0] * len(A)
         for i in range(len(even)):
             ans[2*i] = even[i]

@@ -31,20 +31,19 @@ class Solution(object):
             self.dfs(nums, 0, l, 0, [], ans)
         return ans
 
-    def dfs(self, nums, level, target, start, subset, ans):
-        if level == target:
+    def dfs(self, nums, level, target_level, start, subset, ans):
+        if level == target_level:
             ans.append(copy.copy(subset))
             return
 
-        # record whether a number is handled already on the level.
-        handled = set()
+        # record whether a number is handled already on this level.
         for i in range(start, len(nums)):
-            if nums[i] in handled:
+            # if there are duplicates, we only use one at this level.
+            if i + 1 < len(nums) and nums[i] == nums[i+1]:
                 continue
-            handled.add(nums[i])
 
             subset.append(nums[i])
-            self.dfs(nums, level + 1, target, i+1, subset, ans)
+            self.dfs(nums, level + 1, target_level, i+1, subset, ans)
             subset.pop()
         return
 

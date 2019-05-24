@@ -41,6 +41,54 @@ s = Solution()
 print(s.minMeetingRooms([[0, 30], [15, 20], [5, 10]]))
 
 # Scan the line
+class LinearSolution:
+    def minMeetingRooms(self, intervals):
+        """
+        Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei),
+        find the minimum number of conference rooms required.
+
+        Example 1:
+
+        Input: [[0, 30],[5, 10],[15, 20]]
+        Output: 2
+        Example 2:
+
+        Input: [[7,10],[2,4]]
+        Output: 1
+        NOTE: input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature.
+
+        :type intervals: List[List[Int]]
+        :rtype: int
+        """
+        if not intervals:
+            return 0
+
+        maxEnd = max(map(lambda x:x[1], intervals))
+        space = [0] * maxEnd
+
+        # sorting meetings by their start
+        intervals.sort()
+
+        for start, end in intervals:
+            space[start] += 1
+            space[end] -= 1
+
+        # interate over each vertical space
+        # sum indicates the # of intervals covering it. 
+        icnt = 0
+        ans = 0
+        for i in range(len(space)):
+            icnt += space[i]
+            # the vertical line at position i is covered by sum intervals.
+            ans = max(ans, icnt)
+        return ans
+
+
+s = LinearSolution()
+print(s.minMeetingRooms([[0, 30], [15, 20], [5, 10]]))
+
+
+# No priority Queue
 # class SolutionII(object):
 #     def minMeetingRooms(self, intervals):
 #         """
@@ -80,9 +128,9 @@ print(s.minMeetingRooms([[0, 30], [15, 20], [5, 10]]))
 #
 #         return used_rooms
 
+# Follow up: What if the times are given as 10AM - 11:30AM or 11:00AM to 1PM
 import re
 
-# Follow up: What if the times are given as 10AM - 11:30AM or 11:00AM to 1PM
 class Interval(object):
     def __init__(self, start, end):
         self.start = start
@@ -94,7 +142,6 @@ class Solution(object):
         ans = []
         for time in times:
             ts = re.split(r"-", time.trim().lower().replace("to", "-"))
-            #ts = time.lower().trim().split("-")
             start = self.convert(ts[0])
             end = self.convert(ts[1])
             ans.append(Interval(start, end))
