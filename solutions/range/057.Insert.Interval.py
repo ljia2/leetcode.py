@@ -57,28 +57,33 @@ class Solution:
 # 2: [1, 10], [10, 16]
 # return 2.
 
+
 class GreedySolution(object):
-    def minimumIntervals(self, intervals, target):
-        if not intervals or not target:
-            return -1
-
+    def least_intervals(self, intervals, target):
+        # sort intervals by the starting of the interval
         intervals.sort()
-        n = len(intervals)
-        start = target[0]
-        ans = 0
-        for i in range(n):
-            cur = self.greedyHelper(intervals, i, start)
-            ans += 1
-            if intervals[cur][1] >= target[1]:
-                return ans
+        ans = self.minimum_interval_finder(intervals, target)
+        return ans if ans < float("inf") else 0
 
-            # the target has been partially covered until intervals[cur][1], update start to denote the remaining interval.
-            start = intervals[cur][1]
+    def minimum_interval_finder(self, intervals, target):
+        ans = float("inf")
+        for i, interval in enumerate(intervals):
+            # interval is before target interval
+            if interval[1] < target[0]:
+                continue
 
+            # find one interval covering target
+            if interval[0] <= target[0] and interval[1] >= target[1]:
+                return 1
+
+            # interval after target interval
+            if interval[0] > target[0]:
+                break
+
+            # intervals[i] is overlapping with target;
+            # from intervals[i+1:] to find minimum intervals covering a new target [interval[1], target[1]]
+            ans = min(ans, 1 + self.minimum_interval_finder(intervals[i+1:], [interval[1], target[1]]))
         return ans
 
-    # find the interval
-    def greedyHelper(self, intervals, start, target):
-        ans = None
-        for i in range(start, len(intervals))
-
+s = GreedySolution()
+print(s.least_intervals([[-1, 9], [1, 10], [0, 3], [9, 10], [3, 14], [2, 9], [10, 16]], [2, 15]))
