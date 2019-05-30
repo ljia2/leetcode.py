@@ -11,6 +11,7 @@ class Solution:
             return
         if l < r:
             return
+
         # must l > r
         self.dfs(l+1, r, n, cur_str + "(", ans)
         self.dfs(l, r+1, n, cur_str + ")", ans)

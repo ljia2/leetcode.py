@@ -7,8 +7,8 @@ class Solution(object):
         if digits:
             if digits[-1] < 9:
                 digits[-1] += 1
-
             else:
+                # recursively call plusOne on all elements but the last one.
                 digits = self.plusOne(digits[:-1])
                 digits.append(0)
             return digits

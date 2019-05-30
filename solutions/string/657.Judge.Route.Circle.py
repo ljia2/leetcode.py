@@ -3,7 +3,9 @@ class Solution:
         """
         :type moves: str
         :rtype: bool
+
         Note that: circle means the robot returns to the original at the last step.
+
         """
         if moves is None or moves == "":
             return True

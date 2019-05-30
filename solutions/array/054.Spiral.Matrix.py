@@ -6,6 +6,7 @@ class Solution:
         """
         if matrix is None or len(matrix) == 0 or len(matrix[0]) == 0:
             return []
+
         srow = scol = 0
         erow, ecol = len(matrix) - 1, len(matrix[0]) - 1
 

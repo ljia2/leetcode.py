@@ -83,12 +83,10 @@
 #
 
 class Solution:
-    """
-
-    """
     def wordsTyping(self, sentence, rows, cols):
         """
-        Given a rows x cols screen and a sentence represented by a list of non-empty words, find how many times the given sentence can be fitted on the screen.
+        Given a rows x cols screen and a sentence represented by a list of non-empty words,
+        find how many times the given sentence can be fitted on the screen.
 
         Note:
 
@@ -97,6 +95,7 @@ class Solution:
         Two consecutive words in a line must be separated by a single space.
         Total words in the sentence won't exceed 100.
         Length of each word is greater than 0 and won't exceed 10.
+
         1 ≤ rows, cols ≤ 20,000.
         Example 1:
 
@@ -170,20 +169,23 @@ class Solution:
         """
         sent = " ".join(sentence) + " "
         size = len(sent)
+        # count indicate the position of sent having been fit into screen
         count = 0
         # for each row, try to write all columns to see where next writing position ends.
         for r in range(rows):
+            # fit the whole col
             count += cols
+
             # next writing position is space, SUCCESS for all columns in that row.
             if sent[count % size] == ' ':
-                count += 1 # count += 1 to seek next word for next row
+                # count += 1 to seek next word for next row
+                count += 1
             elif sent[count % size] != ' ':
                 # column writing ends within a word. Retreat until encounter a space.
                 while count > 0 and sent[(count - 1) % size] != ' ':
                     count -= 1
+
         return count // size
-
-
 
 s = Solution()
 print(s.wordsTyping(["hello", "world"], 2, 8))

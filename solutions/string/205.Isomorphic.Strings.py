@@ -39,22 +39,20 @@ class Solution(object):
             raise Exception("Invalid Input!")
 
         # to ensure the mapping is one to one.
-        maping = dict()
-        # to avoid two characters to one character
-        values = set()
+        a2b = dict()
         for i in range(len(s)):
             a, b = s[i], t[i]
-            # a new mapping from a to b;
-            if a not in maping.keys():
-                if b not in values:
-                    maping[a] = b
-                    values.add(b)
+            if a not in a2b.keys():
+                if b not in a2b.values():
+                    # a new mapping from a to b;
+                    a2b[a] = b
                 else:
+                    # b is already used.
                     return False
             # there is a mapping involving a and/or b;
             else:
                 # there must be an existing mapping from a to b.
-                if maping[a] == b:
+                if a2b[a] == b:
                     continue
                 else:
                     return False

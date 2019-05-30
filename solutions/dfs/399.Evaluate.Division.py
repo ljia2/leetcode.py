@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 class DFSSolution:
     def calcEquation(self, equations, values, queries):
         """
@@ -75,7 +76,6 @@ s = DFSSolution()
 print(s.calcEquation([["a","b"],["b","c"],["c", "e"],["c", "d"]], [2.0, 3.0, 1.0, 4.0], [["d", "a"], ["e", "d"]]))
 
 #### Union Find Solution
-
 class UnionFindSolution:
     def calcEquation(self, equations, values, queries):
         """
@@ -114,10 +114,11 @@ class UnionFindSolution:
         def divide(x, y):
             rx, vx = find(x)
             ry, vy = find(y)
-            if rx != ry: return -1.0
+            if rx != ry:
+                return -1.0
             return vx / vy
 
-        parents = {}
+        parents = dict()
         for (x, y), v in zip(equations, values):
             if x not in parents and y not in parents:
                 # x = y * v

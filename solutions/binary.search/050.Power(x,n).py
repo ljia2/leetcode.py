@@ -31,7 +31,8 @@ class Solution:
             return x
         elif n == -1:
             return 1.0 / x
-        elif n % 2 == 0:
+
+        if n % 2 == 0:
             half = self.myPow(x, n//2)
             return half * half
         else:
@@ -44,7 +45,6 @@ class Solution:
 
 s = Solution()
 print(s.myPow(34.00515, -3))
-
 
 ###### Follow up, what if iteratively
 

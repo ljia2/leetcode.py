@@ -6,9 +6,9 @@ class Solution:
         Grid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water,
         and there is exactly one island (i.e., one or more connected land cells).
 
-        The island doesn't have "lakes" (water inside that isn't connected to the water around the island). One cell is a square with side length 1. The grid is rectangular, width and height don't exceed 100. Determine the perimeter of the island.
-
-
+        The island doesn't have "lakes" (water inside that isn't connected to the water around the island).
+        One cell is a square with side length 1. The grid is rectangular, width and height don't exceed 100.
+        Determine the perimeter of the island.
 
         Example:
 
@@ -38,6 +38,7 @@ class Solution:
         return ans[0]
 
     def dfs(self, grid, r, c, ans):
+        # whenever out of box or meet water, Perimeter += 1
         if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]) or grid[r][c] == 0:
             ans[0] += 1
             return
@@ -52,11 +53,5 @@ class Solution:
             self.dfs(grid, nr, nc, ans)
         return
 
-
-def main():
-    s = Solution()
-    print(s.islandPerimeter([[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]))
-
-
-if __name__ == "__main__":
-    main()
+s = Solution()
+print(s.islandPerimeter([[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]))

@@ -35,27 +35,26 @@ class DPSolution:
         """
         if not wordDict or s is None or s == "":
             return False
-        n = len(s)
+        n = len(s) + 1
+
         # checked[i] is True means the prefix of first i chars can be represented by dict
-        checked = [False] * (n + 1)
+        dp = [False] * n
         # Assuming empty string can be dict-represented
-        checked[0] = True
+        dp[0] = True
         # checking prefix ending at i
-        for i in range(1, n+1):
+        for i in range(1, n):
             # set the start index i
             for j in range(i):
-                # checked[j] represents s[:j] can be represented by dict
+                # dp[j] represents s[:j] can be represented by dict
                 # s[j:i] in wordDict
-                if checked[j] and s[j:i] in wordDict:
-                    checked[i] = True
+                if dp[j] and s[j:i] in wordDict:
+                    dp[i] = True
                     break
-        return checked[n]
-
+        return dp[n]
 
 class DFSolution:
     def wordBreak(self, s, wordDict):
         """
-
         Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
 
         Note:
@@ -104,27 +103,21 @@ class DFSolution:
             if word in wordDict and self.dfs(s, start + l, wordDict, mem):
                 mem[start] = True
                 return True
+
         mem[start] = False
         return False
 
 
+s = DPSolution()
+print(s.wordBreak("leetcode", ["leet", "code"]))
+print(s.wordBreak("a", ["a"]))
 
-def main():
-    s = DPSolution()
-    print(s.wordBreak("leetcode", ["leet", "code"]))
-    print(s.wordBreak("a", ["a"]))
-
-    s1 = DFSolution()
-    print(s1.wordBreak("leetcode", ["leet", "code"]))
-    print(s1.wordBreak("a", ["a"]))
-
-
-if __name__ == "__main__":
-    main()
+s1 = DFSolution()
+print(s1.wordBreak("leetcode", ["leet", "code"]))
+print(s1.wordBreak("a", ["a"]))
 
 
 ## Follow up: what is asking for the minimum number of segments in the dictionary.
-
 class DPSolution:
     # DP Solution
     def wordBreak(self, s, wordDict):
@@ -164,18 +157,15 @@ class DPSolution:
             return False
 
         n = len(s) + 1
-
         # dp[i] is means the prefix from 0 to i (inclusive) can be represented by dict
         dp = [n] * n
-
         # Assuming empty string can be dict-represented
         dp[0] = 0
-
         # for each position in checked starting 1
         for i in range(1, len(s)+1):
             # calculate its prefix from 0 to j (inclusive) and segment from j to i (inclusive)
             for j in range(0, i):
-                # dp[j] convers s[:j] already.
+                # dp[j] covers s[:j] already.
                 if dp[j] > 0 and s[j:i] in wordDict:
                     dp[i] = min(dp[j] + 1, dp[i])
         return dp[n]

@@ -105,6 +105,7 @@ class VarationSolution:
             ans = ans and self.dfs(grid, nr, nc)
         return ans
 
+
 s = VarationSolution()
 print(s.numLakes([['0', '0', '1', '0'], ['0', '1', '0', '1'], ['0', '1', '0', '1'], ['0', '0', '1', '0']]))
 print(s.numLakes([['0', '0', '1', '0'], ['0', '1', '0', '1'], ['0', '1', '0', '1'], ['0', '0', '0', '1']]))

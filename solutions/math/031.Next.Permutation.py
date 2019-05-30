@@ -24,6 +24,7 @@ class Solution:
             ii) sort nums[i+1:len(nums)] in ascending order to make the final number smaller possible,  
         2) otherwise, continue with the second most right digits
         """
+
         for r in range(len(nums)-1, -1, -1):
             # 1)
             if nums[r-1] < nums[r]:

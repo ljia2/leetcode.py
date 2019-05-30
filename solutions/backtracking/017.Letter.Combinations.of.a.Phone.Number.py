@@ -66,23 +66,21 @@ class DFSSolution:
         if not digits:
             return []
         ans = []
-        self.dfs(digits, ans)
+        self.dfs(digits, 0, "", ans)
         return ans
 
     # recursive function must first write base cases
-    def dfs(self, digits, ans):
-        if len(digits) == 1:
-            for c in self.digit2chars[digits[0]]:
-                ans.append(c)
+    def dfs(self, digits, start, comb, ans):
+        if start == len(digits):
+            ans.append(comb)
             return
 
-        self.dfs(digits[1:], ans)
-        for c in self.digit2chars[digits[0]]:
-            for rs in ans:
-                # put c in front of results. The answer is generated from rear to front.
-                ans.append(c + rs)
+        if digits[start] == "0" or digits[start] == "1":
+            self.dfs(digits, start + 1, comb, ans)
+        else:
+            for c in self.digit2chars[digits[start]]:
+                self.dfs(digits, start + 1, comb + c, ans)
         return
-
 
 s = DFSSolution()
 print(s.letterCombinations("223"))

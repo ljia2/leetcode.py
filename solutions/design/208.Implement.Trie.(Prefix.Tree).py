@@ -27,8 +27,6 @@ class Trie:
         # Directly use 26 children's index to indicate the value.
         # For example, if search children[0], assuming the first char of word is 'a'.
         self.children = [None] * 26
-        #self.val = None
-
         # indicate whether this node is a finish of an word
         self.finish = False
 
