@@ -89,7 +89,7 @@ class NestedIterator(object):
         :rtype: int
         """
         if self.hasNext():
-            # seek the top tuple of nestedList and its index
+            # peek the top tuple of nestedList and its index
             nestedList, i = self.stack[-1]
             # update the index of top nestedList
             # because the integer at index i must be processed.

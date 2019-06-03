@@ -63,7 +63,7 @@ class LinearSolution:
         if not intervals:
             return 0
 
-        maxEnd = max(map(lambda x:x[1], intervals))
+        maxEnd = max(map(lambda x: x[1], intervals))
         space = [0] * maxEnd
 
         # sorting meetings by their start
@@ -73,7 +73,7 @@ class LinearSolution:
             space[start] += 1
             space[end] -= 1
 
-        # interate over each vertical space
+        # iterate over each vertical space
         # sum indicates the # of intervals covering it. 
         icnt = 0
         ans = 0

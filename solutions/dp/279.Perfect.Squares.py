@@ -54,13 +54,13 @@ class StaticDPSolution:
         :rtype: int
 
         """
-        dp = [0]
-        while len(dp) < n + 1:
-            m = len(dp)
+        # base case: 0 has zero perfect square
+        dp = [0] * (n + 1)
+        for i in range(1, n+1):
             min_val = n
-            for j in range(1, int(m**0.5)+1):
-                min_val = min(min_val, dp[m-j*j] + 1)
-            dp.append(min_val)
+            for j in range(1, int(i**0.5)+1):
+                min_val = min(min_val, dp[i-j*j] + 1)
+            dp[i] = min_val
         return dp[n]
 
 s = StaticDPSolution()

@@ -34,6 +34,7 @@ class Solution:
         Follow up:
 
         Could you solve it in-place?
+
         Remember that the board needs to be updated at the same time:
         You cannot update some cells first and then use their updated values to update other cells.
         In this question, we represent the board using a 2D array.
@@ -42,7 +43,6 @@ class Solution:
 
         :type board: List[List[int]]
         :rtype: void Do not return anything, modify board in-place instead.
-
 
         if a live cell to dead, mark it with 2 in place; do not mess up the future calculation.
         if a dead cell to live, mark it with -2 in place; do not mess up the future calculation.
@@ -92,6 +92,7 @@ class Solution:
         elif board[r][c] == 0 and live_cnt == 3:
             return True
         return board[r][c] == 1
+
 
 s = Solution()
 board = [[0,1,0],
