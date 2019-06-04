@@ -41,8 +41,10 @@ class Solution(object):
                 A[i][l], A[i][r] = A[i][r] ^ 1, A[i][l] ^ 1
                 l += 1
                 r -= 1
+            # odd number of columns
             if l == r:
                 A[i][l] ^= 1
+
         return A
 
 s = Solution()

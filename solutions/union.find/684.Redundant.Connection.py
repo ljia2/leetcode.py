@@ -136,9 +136,6 @@ class UnionFindSolution:
         1) if two nodes are pointing to the same parent, return that edge as the unique Redundant edge.
         2) Otherwise, find their parent (path compression in find) and union by ranks.
 
-
-
-
         """
         # assuming n edges are not connected
         # note initialize n + 1 for convenience, directly use node (int) as index

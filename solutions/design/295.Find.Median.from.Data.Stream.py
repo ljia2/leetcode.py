@@ -32,15 +32,14 @@ If 99% of all integer numbers from the stream are between 0 and 100, how would y
 """
 from heapq import heappop, heappush
 
-
 class MedianFinder:
 
     def __init__(self):
         """
         initialize your data structure here.
         """
-        self.small = []
-        self.big = []
+        self.small = [] # pop biggest
+        self.big = [] # pop smallest
         self.median = None
 
     def addNum(self, num):
@@ -59,6 +58,7 @@ class MedianFinder:
         # small at most one element more than big
         while len(self.small) > len(self.big) + 1:
             heappush(self.big, -heappop(self.small))
+
         # big must at most the same number of elements as small
         while len(self.big) > len(self.small):
             heappush(self.small, -heappop(self.big))

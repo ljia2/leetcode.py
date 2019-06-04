@@ -24,7 +24,8 @@ class DPSolution:
 
         Note that n <= 500 implies O(n^3)
 
-        dp[i][j] denotes the max sum by bursting balloons from i to j
+        dp[i][j] denotes the max sum by bursting balloons from i to j (inclusive and i <= j)
+        dp[i][j] = 0 where i > j.
 
         transition functions:
         dp[i][j] = max{dp[i][k-1] + nums[i-1]*nums[k]*nums[j+1] + dp[k+1][j] | i <= k <= j}
@@ -35,22 +36,22 @@ class DPSolution:
             return 0
         else:
             # padding with 1 at the beginning and the end
-            padding_nums = [1]
-            padding_nums.extend(nums)
-            padding_nums.append(1)
-
+            padding_nums = [1] + nums + [1]
             n = len(padding_nums)
+
             # dp is (n + 2) * (n + 2)
             dp = [[0] * n for _ in range(n)]
 
             # iterate over subsequence balloons with the length of l
-            for l in range(1, len(nums)+1, 1):
+            for l in range(1, n-1):
                 # start the first balloon to the last balloon that can form a length of l
-                for i in range(1, len(nums)-l+2, 1):
+                for i in range(1, n-l):
                     j = i + l - 1
-                    for k in range(i, j+1, 1):
+                    # iterate from i to j (inclusive)
+                    for k in range(i, j+1):
                         dp[i][j] = max(dp[i][j], dp[i][k-1] + padding_nums[i-1]*padding_nums[k]*padding_nums[j+1] + dp[k+1][j])
-            return dp[1][len(nums)]
+            return dp[1][n-1]
+
 
 s = DPSolution()
 print(s.maxCoins([2,3,7,9,1,8,2]))
