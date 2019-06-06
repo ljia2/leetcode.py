@@ -36,17 +36,17 @@ class Solution:
         :type input: str
         :rtype: int
         """
-        dirstack = []
-        maxlength = 0
         if input == "":
             return 0
+        dirstack = []
+        maxlength = 0
         fields = input.split('\n')
         for field in fields:
             if self.isDir(field):
                 dl, dn = self.levelName(field)
                 # stack is not empty
                 while dirstack:
-                    (ldn, ldl) = dirstack[-1]
+                    ldn, ldl = dirstack[-1]
                     if ldl >= dl:
                         dirstack.pop()
                     else:
@@ -55,13 +55,12 @@ class Solution:
             elif self.isFile(field):
                 fl, fn = self.levelName(field)
                 while dirstack:
-                    (dn, dl) = dirstack[-1]
+                    dn, dl = dirstack[-1]
                     if dl >= fl:
                         dirstack.pop()
                     else:
                         break
                 fullpath = self.composeFullpath(dirstack, fn)
-                print(fullpath)
                 if len(fullpath) > maxlength:
                     maxlength = len(fullpath)
         return maxlength
@@ -80,19 +79,12 @@ class Solution:
         return -1 < input.rindex(".") < len(input)-1
 
     def composeFullpath(self, dirstack, fn):
-        fullpath = ""
-        for (d, l) in dirstack:
-            fullpath += d + "/"
-        return fullpath + fn
+        return "/".join(dirstack) + "/" + fn
 
 
 
-def main():
-    s = Solution()
-    results = s.lengthLongestPath("dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext")
-    print(results)
-    results = s.lengthLongestPath("dir\n    file.txt")
-    print(results)
-
-if __name__ == "__main__":
-    main()
+s = Solution()
+results = s.lengthLongestPath("dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext")
+print(results)
+results = s.lengthLongestPath("dir\n    file.txt")
+print(results)

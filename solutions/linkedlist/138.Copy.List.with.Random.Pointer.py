@@ -36,7 +36,6 @@ class Solution(object):
         return node_dict.get(head, None)
 
 
-
 class SolutionII(object):
     def copyRandomList(self, head):
         """
