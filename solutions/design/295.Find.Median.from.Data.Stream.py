@@ -33,7 +33,6 @@ If 99% of all integer numbers from the stream are between 0 and 100, how would y
 from heapq import heappop, heappush
 
 class MedianFinder:
-
     def __init__(self):
         """
         initialize your data structure here.
@@ -63,11 +62,9 @@ class MedianFinder:
         while len(self.big) > len(self.small):
             heappush(self.small, -heappop(self.big))
 
-        num1 = -heappop(self.small)
-        heappush(self.small, -num1)
+        num1 = -self.small[0]
         if len(self.small) == len(self.big):
-            num2 = heappop(self.big)
-            heappush(self.big, num2)
+            num2 = self.bid[0]
             self.median = (num1 + num2) * 0.5
         else:
             self.median = num1
@@ -77,6 +74,7 @@ class MedianFinder:
         :rtype: float
         """
         return self.median
+
 
 # Your MedianFinder object will be instantiated and called as such:
 obj = MedianFinder()

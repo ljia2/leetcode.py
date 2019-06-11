@@ -3,7 +3,8 @@ class Solution(object):
         """
         N cars are going to the same destination along a one lane road.  The destination is target miles away.
 
-        Each car i has a constant speed speed[i] (in miles per hour), and initial position position[i] miles towards the target along the road.
+        Each car i has a constant speed speed[i] (in miles per hour),
+        and initial position position[i] miles towards the target along the road.
 
         A car can never pass another car ahead of it, but it can catch up to it, and drive bumper to bumper at the same speed.
 
@@ -42,5 +43,20 @@ class Solution(object):
         :rtype: int
 
 
-        
+
         """
+        cars = sorted(zip(position, speed))
+        times = [(target-p)*1.0/s for p, s in cars]
+        ans = 0
+        while len(times) > 1:
+            lead = times.pop()
+            # lead car will arrive target first, a car fleet passing target
+            if lead < times[-1]:
+                ans += 1
+            else:
+                # the second lead car forms a fleet with the lead car.
+                # they will arrive target by lead's time.
+                times[-1] = lead
+
+        # remaining car is fleet (if it exists)
+        return ans + 1 if times else ans

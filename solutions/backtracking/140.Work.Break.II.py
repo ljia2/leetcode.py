@@ -70,7 +70,7 @@ class DFSSolution(object): # DFS + Memorization
             if s_right not in wordDict:
                 continue
 
-            lans = self.wordBreak(s_left, wordDict)
+            lans = self.dfs(s_left, wordDict)
             lans = map(lambda x: x + " " + s_right, lans)
             ans.extend(lans)
 
