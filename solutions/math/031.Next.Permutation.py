@@ -19,8 +19,7 @@ class Solution:
             return
         """
         1) From the right most position to find the first ADJACENT num[i-1] < nums[i] (greedy algorithm),
-            i) swap nums[i-1] and with the lowest positioned from nums[i:len(nums)] that is higher than nums[i-1] to guarantee
-            the least amount of increase,
+            i) swap nums[i-1] and with the lowest positioned from nums[i:len(nums)] that is higher than nums[i-1] to guarantee the least amount of increase,
             ii) sort nums[i+1:len(nums)] in ascending order to make the final number smaller possible,  
         2) otherwise, continue with the second most right digits
         """
@@ -34,6 +33,7 @@ class Solution:
                         nums[i], nums[r-1] = nums[r-1], nums[i]
                         nums[r:] = sorted(nums[r:])
                         return
+
         # 2)
         nums.sort()
         return

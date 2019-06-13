@@ -33,7 +33,6 @@ class Solution:
             right_prod = right_prod * nums[i]
         return output
 
-
 s = Solution()
 print(s.productExceptSelf([1,2,3,4]))
 
@@ -68,6 +67,3 @@ class DivisionSolution:
             for num in nums:
                 ans.append(prod // num)
             return ans
-
-
-### What if we can use divide and need to consider 0

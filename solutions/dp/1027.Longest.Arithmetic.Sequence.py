@@ -41,7 +41,6 @@ class Solution(object):
         dp[diff][index] + 1 equals to the length of arithmetic sequence ending at index with difference diff
 
         """
-
         dp = collections.defaultdict(int)
         for i in range(len(A)):
             for j in range(i + 1, len(A)):

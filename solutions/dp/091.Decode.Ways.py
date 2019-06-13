@@ -25,7 +25,7 @@ class DPSolution:
 
         hint: counting ways means we need to use dynamic programming method
 
-        ways[i] denotes the decoding ways by using the first i chars
+        dp[i] denotes the decoding ways by using the first i chars
 
         the question can not encode a leading 0 and two adjacent 0
 
@@ -39,23 +39,23 @@ class DPSolution:
             return 0
 
         n = len(s)
-        ways = [0] * (n+1)
+        dp = [0] * (n+1)
         # base cases: there is only 1 way to decode empty string
-        ways[0] = 1
-        ways[1] = 1 if int(s[0]) > 0 else 0
+        dp[0] = 1
+        dp[1] = 1 if int(s[0]) > 0 else 0
 
         for i in range(2, n + 1):
             code1 = int(s[i-1])
             code2 = int(s[i-2:i])
             if code1 > 0 and 10 <= code2 <= 26:
-                ways[i] = ways[i-1] + ways[i-2]
+                dp[i] = dp[i-1] + dp[i-2]
             elif code1 > 0:
-                ways[i] = ways[i-1]
+                dp[i] = dp[i-1]
             elif 10 <= code2 <= 26:
-                ways[i] = ways[i-2]
+                dp[i] = dp[i-2]
             else:
-                ways[i] = 0
-        return ways[n]
+                dp[i] = 0
+        return dp[n]
 
 
 s = DPSolution()
