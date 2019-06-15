@@ -13,46 +13,20 @@ class Solution:
         :type l2: ListNode
         :rtype: ListNode
         """
-        if not l1 and not l2:
-            return None
-        if not l1:
-            return l2
-        if not l2:
-            return l1
 
-        # use head to represent linklist
-        # use tail for insertion
-        head = tail = None
+        # maintain an unchanging reference to node ahead of the return node.
+        prehead = ListNode(-1)
+        tail = prehead
         while l1 and l2:
             if l1.val < l2.val:
-                if head:
-                    # head is not empty, expand tail
-                    tail.next = l1
-                    tail = l1
-                    l1 = l1.next
-                else:
-                    head = l1
-                    tail = head
-                    l1 = l1.next
+                tail.next = l1
+                tail = l1
+                l1 = l1.next
             else:
-                if head:
-                    tail.next = l2
-                    tail = l2
-                    l2 = l2.next
-                else:
-                    head = l2
-                    tail = head
-                    l2 = l2.next
+                tail.next = l2
+                tail = l2
+                l2 = l2.next
 
-        while l1:
-            tail.next = l1
-            tail = l1
-            l1 = l1.next
-
-        while l2:
-            tail.next = l2
-            tail = l2
-            l2 = l2.next
-
-        return head
+        tail.next = l1 if l1 else l2
+        return prehead.next
 

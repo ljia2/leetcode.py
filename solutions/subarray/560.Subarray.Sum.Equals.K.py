@@ -143,6 +143,7 @@ class Solution:
         prefix_dict = dict()
         # Note: there is one empty subarray whose sum is zero.
         prefix_dict[0] = 1
+
         for j in range(1, len(prefix_sum)):
             target = prefix_sum[j] - k
             if target in prefix_dict.keys():

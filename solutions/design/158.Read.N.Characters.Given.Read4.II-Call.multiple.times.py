@@ -12,11 +12,11 @@ read4(buf) # read4 returns 4. Now buf = ['a','b','c','d'], fp points to 'e'
 read4(buf) # read4 returns 4. Now buf = ['e','f','g','h'], fp points to 'i'
 read4(buf) # read4 returns 3. Now buf = ['i','j','k',...], fp points to end of file
 """
-import copy
-
 class Solution(object):
     def __init__(self):
-        self.buff = []
+        # if self.buff4_idx > 0, then we have unread chars in self.buff4.
+        self.buff4_idx = 0
+        self.buff4_len = 0
         self.buff4 = [""] * 4
 
     def read(self, buf, n):
@@ -25,31 +25,25 @@ class Solution(object):
         :type n: Number of characters to read (int)
         :rtype: The number of actual characters read (int)
         """
-        if n < len(self.buff):
-            buf = copy.copy(self.buff[:n])
-            self.buff = self.buff[n:]
-        else:
-            count = n - len(self.buff)
-            while count > 0:
-                l = read4(self.buff4)
-                if l == 4:
-                    self.buff += copy.copy(self.buff4)
-                    count -= 4
-                else:
-                    if l > 0:
-                        self.buff += copy.copy(self.buff4[:l])
-                    count -= l
-                    break
-            # 1) count > 0 -> reaching end already.
-            # 2) count == 0 -> get n characters exactly
-            if count >= 0:
-                buf = copy.copy(self.buff)
-                self.buff = []
-            else:
-                # get more than n characters, use the first n
-                buf = copy.copy(self.buff[:n])
-                self.buff = self.buff[n:]
-        return len(buf)
+        idx = 0
+        while idx < n:
+            if self.buff4_idx == 0:
+                self.buff4_len = read4(self.buff4)
+
+            if self.buff4_len == 0:
+                break
+            # copy char by char from self.buff4[self.buff4_idx:self.buff4_len] to buf
+            while idx < n and self.buff4_idx < self.buff4_len:
+                buf[idx] = self.buff4[self.buff4_idx]
+                idx += 1
+                self.buff4_idx += 1
+
+            # when exhaust self.buff4, reset self.buff4_idex = 0.
+            # otherwise self.buff4_idx points the index of char in self.buff4 for next call.
+            if self.buff4_idx >= self.buff4_len:
+                self.buff4_idx = 0
+
+        return idx
 
 
 

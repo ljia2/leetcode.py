@@ -5,7 +5,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
-class Solution:
+class BFSSolution:
     def rightSideView(self, root):
         """
 
@@ -52,7 +52,7 @@ class Solution:
         return view
 
 
-s = Solution()
+s = BFSSolution()
 root = TreeNode(1)
 n2 = TreeNode(2)
 n3 = TreeNode(3)
@@ -62,3 +62,53 @@ n5 = TreeNode(5)
 n2.right = n5
 n3.right = n4
 print(s.rightSideView(root))
+
+## Follow up: how to reduce space complexity? Use DFS
+class DFSSolution:
+    def rightSideView(self, root):
+        """
+
+        Given a binary tree, imagine yourself standing on the right side of it,
+        return the values of the nodes you can see ordered from top to bottom.
+
+        Example:
+
+        Input: [1,2,3,null,5,null,4]
+        Output: [1, 3, 4]
+        Explanation:
+
+           1            <---
+         /   \
+        2     3         <---
+         \     \
+          5     4       <---
+        :type root: TreeNode
+        :rtype: List[int]
+
+        Tree BFS via queue.
+
+        """
+        if not root:
+            return []
+
+        viewdict = dict
+        # mimic queue to execute BFS
+        stack = [(root, 0)]
+        max_depth = -1
+        while stack:
+            node, depth = stack.pop()
+            max_depth = max(max_depth, depth)
+
+            if depth not in viewdict.keys():
+                viewdict[depth] = node.val
+
+            if node.left:
+                stack.append((node.left, depth + 1))
+
+            if node.right:
+                stack.append((node.right, depth + 1))
+
+        return [viewdict[k] for k in range(max_depth+1)]
+
+
+

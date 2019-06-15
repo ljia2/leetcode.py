@@ -5,7 +5,8 @@ class BFSSolution:
     def findLadders(self, beginWord, endWord, wordList):
         """
 
-        Given two words (beginWord and endWord), and a dictionary's word list, find all shortest transformation sequence(s) from beginWord to endWord, such that:
+        Given two words (beginWord and endWord), and a dictionary's word list,
+        find all shortest transformation sequence(s) from beginWord to endWord, such that:
 
         Only one letter can be changed at a time
         Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
@@ -49,8 +50,9 @@ class BFSSolution:
 
         """
 
-        if endWord not in wordList or not wordList:
+        if not wordList or endWord not in wordList:
             return []
+
         wordDict = set(wordList)
         # during the expansion, records a word's parents.
         parents = defaultdict(list)
@@ -86,8 +88,7 @@ class BFSSolution:
 
                         # if new_word has been used before
                         if new_word in steps.keys():
-                            # new_word has been used by some other path before.
-                            # with the same number of steps.
+                            # new_word has been used by some other path before with the same number of steps.
                             # word is a new parent of new_step.
                             if step < steps[new_word]:
                                 parents[new_word].append(word)
