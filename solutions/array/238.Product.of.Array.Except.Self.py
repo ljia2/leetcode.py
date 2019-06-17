@@ -37,7 +37,6 @@ s = Solution()
 print(s.productExceptSelf([1,2,3,4]))
 
 ### What if we can use divide and need to consider 0
-
 class DivisionSolution:
     def productExceptSelf(self, nums):
         if not nums:

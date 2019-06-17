@@ -44,8 +44,6 @@ class Solution(object):
         ans = 1
         for r in range(m):
             for c in range(n):
-                if r == 2 and c == 2:
-                    print("debug here")
                 l = self.dfs(matrix, r, c, m, n, dp)
                 ans = max(l, ans)
         return ans

@@ -22,6 +22,7 @@ class Trie(object):
         self.cdict = dict()
         self.word = None
 
+
 class MagicDictionary(object):
 
     def __init__(self):

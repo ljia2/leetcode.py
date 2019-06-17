@@ -17,9 +17,7 @@ solution.pick(3);
 solution.pick(1);
 
 
-Reservoir Sampling: Samping from Stream.
-
-
+Reservoir Sampling: Sampling from Stream.
 """
 
 import random

@@ -133,5 +133,5 @@ class Solution(object):
 
 
 s = Solution()
-#print(s.alienOrder(["wrt","wrf","er","ett","rftt"]))
+print(s.alienOrder(["wrt","wrf","er","ett","rftt"]))
 print(s.alienOrder(["za","zb","ca","cb"]))

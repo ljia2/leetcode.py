@@ -37,7 +37,7 @@ class Solution:
             prev = slow
             slow = slow.next
             fast = fast.next.next
-
+        # break into two lists, head (h1) and slow (h2) by setting prev.next = None.
         h1 = head
         h2 = slow
         prev.next = None

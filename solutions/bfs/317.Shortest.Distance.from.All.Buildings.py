@@ -44,8 +44,10 @@ class Solution(object):
         for r in range(rnum):
             for c in range(cnum):
                 if grid[r][c] == 1:
-                    self.bfs(grid, r, c, visitedtimes, dist, -buildnum)
                     buildnum += 1
+                    # use negative buildnum to tag the grid visited by this building already
+                    self.bfs(grid, r, c, visitedtimes, dist, -buildnum)
+
 
         ans = -1
         for r in range(rnum):
@@ -57,8 +59,7 @@ class Solution(object):
                         ans = dist[r][c]
         return ans
 
-    ### Follow up: can you speed up a little bid
-    ### only search the grid accessable by previous build.
+    ### Follow up: can you speed up a little bid, only search the grid accessable by previous build.
     def bfs(self, grid, r, c, visittimes, dist, target):
         q = [(r, c)]
         visited = set()
@@ -73,8 +74,9 @@ class Solution(object):
                 for nr, nc in [(r, c-1), (r, c+1), (r-1, c), (r+1, c)]:
                     if nr < 0 or nc < 0 or nr >= len(grid) or nc >= len(grid[0]) or grid[nr][nc] != target or (nr, nc) in visited:
                         continue
-                    # use target mark the cells accessbile by abs(target-1) building already.
-                    grid[nr][nc] = target - 1
+
+                    # use target mark the cells accessible by abs(target-1) building already.
+                    grid[nr][nc] = target
 
                     visited.add((nr, nc))
                     q.append((nr, nc))

@@ -1,4 +1,5 @@
 from collections import Counter
+
 class BestSolution:
     def minWindow(self, s, t):
         """
@@ -32,6 +33,7 @@ class BestSolution:
         j = 0
 
         for i, c in enumerate(s):
+
             # given the left boundary i, moving right boundary until form a valid substring
             while not self.valid(dt, ds) and j < len(s):
                 ds[s[j]] = ds.get(s[j], 0) + 1
