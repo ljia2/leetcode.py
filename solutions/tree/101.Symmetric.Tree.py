@@ -88,7 +88,7 @@ class IterativeSolution(object):
         if not root.left and not root.right:
             return True
 
-        queue = [(root,root)]
+        queue = [(root, root)]
         while queue:
             node1, node2 = queue.pop(0)
 

@@ -36,22 +36,22 @@ class Solution:
                 c = b + 1
                 d = len(nums)-1
                 while c < d:
-                    sum = nums[a] + nums[b] + nums[c] + nums[d]
-                    if sum == target:
+                    nsum = nums[a] + nums[b] + nums[c] + nums[d]
+                    if nsum == target:
                         ans.append([nums[a], nums[b], nums[c], nums[d]])
 
                         c += 1
                         while c < d and nums[c] == nums[c-1]:
                             c += 1
+
                         d -= 1
                         while c < d and nums[d] == nums[d+1]:
                             d -= 1
 
-                    elif sum < target:
+                    elif nsum < target:
                         c += 1
                         while c < d and nums[c] == nums[c-1]:
                             c += 1
-
                     else:
                         d -= 1
                         while c < d and nums[d] == nums[d+1]:

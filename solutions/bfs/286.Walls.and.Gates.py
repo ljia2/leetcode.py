@@ -39,6 +39,7 @@ class Solution(object):
                 if rooms[r][c] == 0:
                     queue.append((r, c))
                     visited.add((r, c))
+                    
         step = 0
         while queue:
             size = len(queue)

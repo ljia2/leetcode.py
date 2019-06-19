@@ -88,13 +88,13 @@ class Solution:
 
         for i in range(sl):
             for j in range(pl):
-                # update dp[i+1][j+1]
 
+                # update dp[i+1][j+1] by comparing s[i] and p[j]
                 # "aa" match "a."
                 if p[j] == s[i] or p[j] == '.':
                     dp[i+1][j+1] = dp[i][j]
 
-                # "a" matches "ab*"
+                # "a" matches "ab*",
                 if p[j] == "*" and p[j-1] != s[i]:
                     dp[i+1][j+1] = dp[i+1][j-1]
 

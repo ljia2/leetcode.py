@@ -1,5 +1,6 @@
 import collections
 
+
 class Solution(object):
     def longestArithSeqLength(self, A):
         """
@@ -47,7 +48,6 @@ class Solution(object):
                 a, b = A[i], A[j]
                 dp[b - a, j] = max(dp[b - a, j], dp[b - a, i] + 1)
         return max(dp.values()) + 1
-
 
 s = Solution()
 print(s.longestArithSeqLength([3,6,9,12]))

@@ -53,9 +53,8 @@ class Solution:
                 sparse_row = sparseA[i]
                 sparse_col = sparseB[j]
                 ans[i][j] = self.vectorDot(sparse_row, sparse_col)
-
-
         return ans
+
     # two pointer or event binary search if one long one short.
     # how to determine which is better: len(row) + len(col) < min(len(row)*log(len(col), len(col)*log(len(row))
     def vectorDot(self, row, col):

@@ -6,14 +6,12 @@ class ListNode:
 
 
 class Solution:
-
     def mergeTwoLists(self, l1, l2):
         """
         :type l1: ListNode
         :type l2: ListNode
         :rtype: ListNode
         """
-
         # maintain an unchanging reference to node ahead of the return node.
         prehead = ListNode(-1)
         tail = prehead

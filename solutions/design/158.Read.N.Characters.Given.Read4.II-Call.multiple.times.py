@@ -12,10 +12,11 @@ read4(buf) # read4 returns 4. Now buf = ['a','b','c','d'], fp points to 'e'
 read4(buf) # read4 returns 4. Now buf = ['e','f','g','h'], fp points to 'i'
 read4(buf) # read4 returns 3. Now buf = ['i','j','k',...], fp points to end of file
 """
+
 class Solution(object):
     def __init__(self):
-        # if self.buff4_idx > 0, then we have unread chars in self.buff4.
-        self.buff4_idx = 0
+        # if self.buff4_idx < 4, then we have unread chars in self.buff4.
+        self.buff4_idx = 4
         self.buff4_len = 0
         self.buff4 = [""] * 4
 
@@ -27,22 +28,22 @@ class Solution(object):
         """
         idx = 0
         while idx < n:
-            if self.buff4_idx == 0:
+            if self.buff4_idx == 4:
                 self.buff4_len = read4(self.buff4)
+                self.buff4_idx = 0
 
             if self.buff4_len == 0:
                 break
+
             # copy char by char from self.buff4[self.buff4_idx:self.buff4_len] to buf
             while idx < n and self.buff4_idx < self.buff4_len:
                 buf[idx] = self.buff4[self.buff4_idx]
                 idx += 1
                 self.buff4_idx += 1
 
-            # when exhaust self.buff4, reset self.buff4_idex = 0.
-            # otherwise self.buff4_idx points the index of char in self.buff4 for next call.
+            # exhaust the buff4 and set the buff4_idx to 4
             if self.buff4_idx >= self.buff4_len:
-                self.buff4_idx = 0
-
+                self.buff4_idx = 4
         return idx
 
 

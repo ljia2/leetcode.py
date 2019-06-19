@@ -59,7 +59,8 @@ class Solution(object):
                         ans = dist[r][c]
         return ans
 
-    ### Follow up: can you speed up a little bid, only search the grid accessable by previous build.
+    ### Follow up: can you speed up a little bid,
+    ### Only search the grid accessable by previous build.
     def bfs(self, grid, r, c, visittimes, dist, target):
         q = [(r, c)]
         visited = set()

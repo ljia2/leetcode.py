@@ -34,7 +34,7 @@ class Solution:
                         nums[r:] = sorted(nums[r:])
                         return
 
-        # 2)
+        # 2) if all numbers are in non-ascending order, sort them reversely.
         nums.sort()
         return
 
@@ -62,3 +62,25 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+### Follow up: find next largest number that is smaller than current one.
+class VarationSolution:
+    def prevPermutation(self, nums):
+        if not nums:
+            return []
+
+        n = len(nums)
+        for i in range(n-1, 0, -1):
+            if nums[i] < nums[i-1]:
+                # flip nums[i] and nums[i-1] to guarantee the least increase.
+                nums[i-1], nums[i] = nums[i], nums[i-1]
+                # sort nums[i:] in descending order to guarantee next.
+                nums[i:] = sorted(nums[i:], reverse=True)
+                return nums
+
+        nums.reverse()
+        return nums
+
+s = VarationSolution()
+print(s.prevPermutation([2,1,4,2,5]))
+

@@ -41,20 +41,17 @@ class Solution(object):
             return None
 
         n = len(nums)
-        max_index = None
-        for i in range(n):
-            # not zero is True!!!!
-            if max_index is None:
-                max_index = i
-            elif nums[i] > nums[max_index]:
+        max_index = 0
+        for i in range(1, n):
+            if nums[i] > nums[max_index]:
                 max_index = i
 
         lroot = self.constructMaximumBinaryTree(nums[:max_index])
+        # nums[max_index+1:] has to be valid,
         rroot = self.constructMaximumBinaryTree(nums[max_index+1:]) if max_index + 1 < n else None
 
         root = TreeNode(nums[max_index])
         root.left, root.right = lroot, rroot
-
         return root
 
 s = Solution()

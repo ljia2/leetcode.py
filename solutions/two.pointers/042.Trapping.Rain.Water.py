@@ -1,4 +1,4 @@
-class Solution:
+class DPSolution:
     def trap(self, height):
         """
         :type height: List[int]
@@ -37,7 +37,7 @@ class Solution:
         return ans
 
 
-s2 = Solution()
+s2 = DPSolution()
 results = s2.trap([0, 3, 1, 0, 3, 1, 0, 1])
 print(results)
 results = s2.trap([0, 3, 1, 0, 0, 1, 0, 0])
@@ -57,6 +57,12 @@ class TwoPointerSolution:
         T:O(n)
         S:O(1)
 
+
+        最后我们来看一种只需要遍历一次即可的解法，这个算法需要left和right两个指针分别指向数组的首尾位置，从两边向中间扫描，
+        在当前两指针确定的范围内，先比较两头找出较小值，如果较小值是left指向的值，则从左向右扫描，
+        如果较小值是right指向的值，则从右向左扫描，
+        若遇到的值比当较小值小，则将差值存入结果，
+        如遇到的值大，则重新确定新的窗口范围，以此类推直至left和right指针重合
         """
         if not height:
             return 0
@@ -66,10 +72,15 @@ class TwoPointerSolution:
         ans = 0
         while l < r:
             if height[l] < height[r]:
+                # amount of water at position l must depends on height[l], instead of height[r]
+                # compare height[l] with lmax
                 if height[l] > lmax:
+                    # no water on position l and update lmax.
                     lmax = height[l]
                 else:
+                    # if height[l] <= lmax, there are lmax - height[l] water on position l.
                     ans += lmax - height[l]
+
                 l += 1
             else:
                 if height[r] > rmax:

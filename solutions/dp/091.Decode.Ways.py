@@ -35,25 +35,32 @@ class DPSolution:
             return 0
 
         # have leading "0" or have two 0 in a row
-        if s[0] == '0' or s.find("00") > -1:
+        if s[0] == '0' or s.index("00") > -1:
             return 0
 
         n = len(s)
         dp = [0] * (n+1)
-        # base cases: there is only 1 way to decode empty string
+        # base cases: there is only 1 way to decode an empty string
         dp[0] = 1
+        # base cases: there is only 1 way to decode a single digit (not zero).
         dp[1] = 1 if int(s[0]) > 0 else 0
 
         for i in range(2, n + 1):
+            # only use the ith digit, s[i-1]
             code1 = int(s[i-1])
+            # use both the i-1 and ith digits, s[i-2:i]
             code2 = int(s[i-2:i])
+            # both situations are valid
             if code1 > 0 and 10 <= code2 <= 26:
                 dp[i] = dp[i-1] + dp[i-2]
+            # only the first situation is valid:
             elif code1 > 0:
                 dp[i] = dp[i-1]
+            # only the second situation is valid.
             elif 10 <= code2 <= 26:
                 dp[i] = dp[i-2]
             else:
+                # neither situation is valid.
                 dp[i] = 0
         return dp[n]
 

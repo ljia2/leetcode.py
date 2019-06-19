@@ -4,7 +4,7 @@ class NumMatrix:
         """
         :type matrix: List[List[int]]
         """
-        if matrix is None or len(matrix) == 0 or len(matrix[0]) == 0:
+        if not matrix or len(matrix[0]) == 0:
             self.sum = [[]]
 
         row = len(matrix)

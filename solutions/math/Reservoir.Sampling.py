@@ -6,7 +6,7 @@ import random
 # to print an array
 def printArray(stream,n):
     for i in range(n):
-        print(stream[i],end=" ");
+        print(stream[i], end=" ");
     print();
 
 # A function to randomly select
@@ -19,7 +19,8 @@ def selectKItems(stream, n, k):
     # reservoir[] is the output
     # array. Initialize it with
     # first k elements from stream[]
-    reservoir = [0]*k;
+
+    reservoir = [0]*k
     for i in range(k):
         reservoir[i] = stream[i]
 

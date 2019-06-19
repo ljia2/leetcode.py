@@ -66,7 +66,3 @@ class Solution(object):
 
 
 
-s = Solution()
-
-
-

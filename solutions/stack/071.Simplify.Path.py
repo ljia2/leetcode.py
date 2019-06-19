@@ -55,6 +55,7 @@ class Solution(object):
         implment next_dir function.
 
         """
+        # list of dirs without ""
         dirs = [d for d in path.split("/") if d]
         dstack = []
         for dir in dirs:

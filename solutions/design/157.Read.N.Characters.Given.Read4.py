@@ -95,9 +95,11 @@ class Solution(object):
             # must declare a buff of 4.
             buf4 = [""] * 4
             l = read4(buf4)
+
             # reaching the end of file.
             if l == 0:
                 return idx
+
             # must make a copy
             for i in range(min(l, n)):
                 buf[idx] = buf4[i]

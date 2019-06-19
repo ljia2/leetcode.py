@@ -157,8 +157,6 @@ class BiBFSSolution: # Best Solution
                 # replace a char at i with different char.
                 for i in range(len(w)):
                     for c in string.ascii_lowercase:
-                    # for j in range(32, 58):
-                    #     c = ord(j)
                         if c == w[i]:
                             continue
                         new_w = w[:i] + c + w[i+1:]
