@@ -76,7 +76,7 @@ class Solution(object):
                     if nr < 0 or nc < 0 or nr >= len(grid) or nc >= len(grid[0]) or grid[nr][nc] != target or (nr, nc) in visited:
                         continue
 
-                    # use target mark the cells accessible by abs(target-1) building already.
+                    # trick!!!! use target mark the cells accessible by abs(target-1) building already.
                     grid[nr][nc] = target
 
                     visited.add((nr, nc))

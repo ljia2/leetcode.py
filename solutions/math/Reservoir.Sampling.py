@@ -6,8 +6,8 @@ import random
 # to print an array
 def printArray(stream,n):
     for i in range(n):
-        print(stream[i], end=" ");
-    print();
+        print(stream[i], end=" ")
+    print()
 
 # A function to randomly select
 # k items from stream[0..n-1].

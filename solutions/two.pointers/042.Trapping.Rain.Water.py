@@ -75,12 +75,11 @@ class TwoPointerSolution:
                 # amount of water at position l must depends on height[l], instead of height[r]
                 # compare height[l] with lmax
                 if height[l] > lmax:
-                    # no water on position l and update lmax.
+                    # no water on position l, since height[l] > lmax and thus update lmax.
                     lmax = height[l]
                 else:
                     # if height[l] <= lmax, there are lmax - height[l] water on position l.
                     ans += lmax - height[l]
-
                 l += 1
             else:
                 if height[r] > rmax:

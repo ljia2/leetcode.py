@@ -35,11 +35,13 @@ class DPSolution:
             return 0
 
         # have leading "0" or have two 0 in a row
+        # special case.
         if s[0] == '0' or s.index("00") > -1:
             return 0
 
         n = len(s)
         dp = [0] * (n+1)
+
         # base cases: there is only 1 way to decode an empty string
         dp[0] = 1
         # base cases: there is only 1 way to decode a single digit (not zero).

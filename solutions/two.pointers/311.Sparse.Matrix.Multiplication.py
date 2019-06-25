@@ -33,7 +33,7 @@ class Solution:
 
         """
         # result matrix
-        ans = [[0] * len(B[0]) for i in range(len(A))]
+        ans = [[0] * len(B[0]) for _ in range(len(A))]
 
         # Note: use a tuple of (row, value) to represent a sparse matrix !!!!
         sparseA = [[] for _ in range(len(A))]
@@ -58,8 +58,7 @@ class Solution:
     # two pointer or event binary search if one long one short.
     # how to determine which is better: len(row) + len(col) < min(len(row)*log(len(col), len(col)*log(len(row))
     def vectorDot(self, row, col):
-        i = 0
-        j = 0
+        i = j = 0
         ans = 0
         while i < len(row) and j < len(col):
             ci, m = row[i]

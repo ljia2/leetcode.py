@@ -54,7 +54,6 @@ class Solution(object):
         ans.append(self.median(sorted_sw, k))
         return ans
 
-
     def update(self, nums, sw, sorted_sw, i):
         pi = sw.pop(0)
         di = bisect.bisect_left(sorted_sw, nums[pi])

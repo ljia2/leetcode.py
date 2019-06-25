@@ -62,6 +62,7 @@ class Solution(object):
             else:
                 ans.appendleft(self.f(nums[j], a, b, c))
                 j -= 1
+        # do not forget the last one.
         ans.appendleft(self.f(nums[i], a, b, c))
         return ans
 

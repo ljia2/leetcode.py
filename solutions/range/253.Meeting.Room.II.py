@@ -23,7 +23,7 @@ class Solution:
             return 0
 
         # sorting meetings by their start
-        intervals.sort()
+        intervals.sort(key=lambda x:x[0])
 
         # hint: use list and heappop/heappush from heapq to mimic priorityQueue
         hp = [intervals[0][1]]
@@ -35,7 +35,6 @@ class Solution:
                 heappop(hp)
             heappush(hp, end)
         return len(hp)
-
 
 s = Solution()
 print(s.minMeetingRooms([[0, 30], [15, 20], [5, 10]]))
@@ -74,7 +73,7 @@ class LinearSolution:
             space[end] -= 1
 
         # iterate over each vertical space
-        # sum indicates the # of intervals covering it. 
+        # icnt indicates the # of intervals covering it.
         icnt = 0
         ans = 0
         for i in range(len(space)):
@@ -103,8 +102,10 @@ print(s.minMeetingRooms([[0, 30], [15, 20], [5, 10]]))
 #         used_rooms = 0
 #
 #         # Separate out the start and the end timings and sort them individually.
+#
 #         start_timings = sorted([s for s, _ in intervals])
 #         end_timings = sorted(e for _, e in intervals)
+#
 #         L = len(intervals)
 #
 #         # The two pointers in the algorithm: e_ptr and s_ptr.

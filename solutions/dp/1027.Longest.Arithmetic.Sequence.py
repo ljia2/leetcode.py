@@ -1,7 +1,7 @@
 import collections
 
 
-class Solution(object):
+class DPSolution(object):
     def longestArithSeqLength(self, A):
         """
         Given an array A of integers, return the length of the longest arithmetic subsequence in A.
@@ -49,6 +49,6 @@ class Solution(object):
                 dp[b - a, j] = max(dp[b - a, j], dp[b - a, i] + 1)
         return max(dp.values()) + 1
 
-s = Solution()
+s = DPSolution()
 print(s.longestArithSeqLength([3,6,9,12]))
 print(s.longestArithSeqLength([9,4,7,2,10]))

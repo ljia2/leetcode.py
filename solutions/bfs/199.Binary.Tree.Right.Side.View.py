@@ -85,18 +85,36 @@ class DFSSolution:
         :type root: TreeNode
         :rtype: List[int]
 
-        Tree BFS via queue.
+        Complexity Analysis
+
+        Time complexity : O(n).
+
+        Because a binary tree with only child pointers is directed acyclic graph with only one source node,
+        a traversal of the tree from the root will visit each node exactly once
+        (plus a sublinear amount of leaves, represented as None). Each visitation requires only O(1) work,
+        so the while loop runs in linear time.
+
+        Finally, building the array of rightmost values is O(O(height of the tree) = O(n))=O(n)
+        because it is not possible for a right-hand view of the tree to contain more nodes than the tree itself.
+
+        Space complexity : O(n).
+
+        At worst, our stack will contain a number of nodes close to the height of the tree.
+        Because we are exploring the tree in a depth-first order, there are never two nodes from different subtrees of the same parent node on the stack at once.
+        Said another way, the entire right subtree of a node will be visited before any nodes of the left subtree are pushed onto the stack.
+        If this logic is applied recursively down the tree, it follows that the stack will be largest when we have reached the end of the tree's longest path (the height of the tree). However, because we know nothing about the tree's topography, the height of the tree may be equivalent to nn, causing the space complexity to degrade to O(n)O(n)
 
         """
         if not root:
             return []
 
-        viewdict = dict
+        viewdict = dict()
         # mimic queue to execute BFS
         stack = [(root, 0)]
         max_depth = -1
         while stack:
             node, depth = stack.pop()
+            # maintain the level of tree.
             max_depth = max(max_depth, depth)
 
             if depth not in viewdict.keys():

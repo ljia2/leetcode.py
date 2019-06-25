@@ -64,6 +64,7 @@ class SolutionII(object):
         lnodes = self.dfs(root.left, p, q, ans)
         rnodes = self.dfs(root.right, p, q, ans)
 
+        # union nodes from left and right substress
         nodes = lnodes & rnodes
         nodes.add(root)
 
@@ -97,34 +98,79 @@ class Solution(object):
         if not root:
             return
 
-        pathes = []
-        self.dfs(root, p, q, [], pathes)
+        paths = []
+        self.dfs(root, p, q, [], paths)
 
-        if len(pathes) != 2:
+        if len(paths) != 2:
             raise Exception("Invalid Input! No LCA")
         else:
             i = 0
-            while i < len(pathes[0]) and j < len(pathes[1]) and pathes[0][i] == pathes[1][j]:
+            while i < len(paths[0]) and j < len(paths[1]) and paths[0][i] == paths[1][j]:
                 i += 1
                 j += 1
-            return pathes[0][:i]
+            return paths[0][:i]
 
-    def dfs(self, node, p, q, path, pathes):
+    def dfs(self, node, p, q, path, paths):
         if node in [p, q]:
             # store a path from root to p/q.
-            pathes.append(copy.copy(path))
+            paths.append(copy.copy(path))
             return
 
         # backtracking
         if node.left:
             path.append(node.left.val)
-            self.dfs(node.left, p, q, path, pathes)
+            self.dfs(node.left, p, q, path, paths)
             path.pop()
 
         if node.right:
             path.append(node.right.val)
-            self.dfs(node.right, p, q, path, pathes)
+            self.dfs(node.right, p, q, path, paths)
             path.pop()
         return
 
 
+## Follow up: can we use iteratively?
+
+class IterativeSolution:
+
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+
+        # Stack for tree traversal
+        stack = [root]
+
+        # Dictionary for parent pointers
+        parent = {root: None}
+
+        # Iterate until we find both the nodes p and q
+        while p not in parent or q not in parent:
+
+            node = stack.pop()
+
+            # While traversing the tree, keep saving the parent pointers.
+            if node.left:
+                parent[node.left] = node
+                stack.append(node.left)
+
+            if node.right:
+                parent[node.right] = node
+                stack.append(node.right)
+
+        # Ancestors set() for node p.
+        ancestors = set()
+
+        # Process all ancestors for node p using parent pointers.
+        while p:
+            ancestors.add(p)
+            p = parent[p]
+
+        # The first ancestor of q which appears in
+        # p's ancestor set() is their lowest common ancestor.
+        while q not in ancestors:
+            q = parent[q]
+        return q

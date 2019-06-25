@@ -47,6 +47,7 @@ class Solution(object):
                 max_index = i
 
         lroot = self.constructMaximumBinaryTree(nums[:max_index])
+
         # nums[max_index+1:] has to be valid,
         rroot = self.constructMaximumBinaryTree(nums[max_index+1:]) if max_index + 1 < n else None
 
@@ -104,6 +105,7 @@ class LinearSolution(object):
         """
         if not nums:
             return None
+
         if len(nums) == 1:
             return TreeNode(nums[0])
 

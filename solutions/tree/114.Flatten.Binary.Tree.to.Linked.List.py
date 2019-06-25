@@ -47,12 +47,12 @@ class Solution(object):
             return root, root
 
         if not root.left:
-            rhead, rtail = self.flatten(root.right)
+            rhead, rtail = self.tree2linkedlist(root.right)
             root.left = None
             root.right = rhead
             return root, rtail
         elif not root.right:
-            lhead, ltail = self.flatten(root.left)
+            lhead, ltail = self.tree2linkedlist(root.left)
             root.left = None
             root.right = lhead
             return root, ltail

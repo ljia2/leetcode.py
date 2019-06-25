@@ -15,7 +15,7 @@ class Solution:
         :type nums: List[int]
         :rtype: void Do not return anything, modify nums in-place instead.
         """
-        if nums is None or len(nums) == 0:
+        if not nums:
             return
         """
         1) From the right most position to find the first ADJACENT num[i-1] < nums[i] (greedy algorithm),
@@ -35,7 +35,7 @@ class Solution:
                         return
 
         # 2) if all numbers are in non-ascending order, sort them reversely.
-        nums.sort()
+        nums.reverse()
         return
 
 

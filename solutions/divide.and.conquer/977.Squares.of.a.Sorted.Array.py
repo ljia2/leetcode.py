@@ -41,7 +41,7 @@ class Solution(object):
                 ans.append(a*a)
             ans.reverse()
         else:
-            # A[0] < 0 and A[-1= > 0
+            # A[0] < 0 and A[-1]= > 0
             zidx = bisect.bisect_right(A, 0)
             lans = self.sortedSquares(A[:zidx])
             rans = self.sortedSquares(A[zidx:])
@@ -55,10 +55,7 @@ class Solution(object):
                     ans.append(rans[r])
                     r += 1
             # do not forget the remaining (either) array
-            if l < len(lans):
-                ans += lans[l:]
-            elif r < len(rans):
-                ans += rans[r:]
+            ans += lans[l:] if l < len(lans) else rans[r:]
 
         return ans
 

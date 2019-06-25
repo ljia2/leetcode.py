@@ -24,34 +24,51 @@ class BestSolution:
         if not s or not t or len(s) < len(t) or len(s) * len(t) == 0:
             return ""
 
-        # a neat way of initialize a dictionary key of t with value 0
-        ds = dict()
         dt = Counter(t)
-
-        res = ""
-        max_length = float("inf")
-        j = 0
-
+        ns = []
         for i, c in enumerate(s):
+            if c in dt.keys():
+                ns.append((i, c))
 
-            # given the left boundary i, moving right boundary until form a valid substring
-            while not self.valid(dt, ds) and j < len(s):
-                ds[s[j]] = ds.get(s[j], 0) + 1
-                j += 1
+        # a neat way of initialize a dictionary key of t with value 0
+        swindow = dict()
+        # use a tuple to store the answer
+        ans = float("inf"), None, None
+        l = r = 0
+        uct = len(dt)
+        ucs = 0
+        for r in range(len(ns)):
+            end_index, c = ns[r]
+            # expanding the ds of the sliding window
+            swindow[c] = swindow.get(c, 0) + 1
 
-            if self.valid(dt, ds) and max_length > j - i:
-                max_length = j - i
-                res = s[i:j]
+            # if a char in the sliding window first meet the frequency in t.
+            if swindow[c] == dt[c]:
+                ucs += 1
 
-            # retreat the left boundary i of sliding window to right
-            ds[c] -= 1
-        return res
+            # when a valid window is formed, start retreating the left of the window
+            while l <= r and ucs == uct:
+                start_index, d = ns[l]
 
-    def valid(self, dt, ds):
-        for k in dt:
-            if k not in ds or ds[k] < dt[k]:
-                return False
-        return True
+                if end_index - start_index + 1 < ans[0]:
+                    ans = end_index - start_index + 1, start_index, end_index
+
+                # retreat the left of window
+                # if the window is no longer valid (ucs != uct), stop retreating the left
+                swindow[d] -= 1
+                if swindow[d] < dt[d]:
+                    ucs -= 1
+                l += 1
+            r += 1
+
+        # unpack the answer
+        return None if ans[1] == float("inf") else s[ans[1]:ans[2]+1]
+
+    # def valid(self, dt, ds):
+    #     for k in dt:
+    #         if k not in ds or ds[k] < dt[k]:
+    #             return False
+    #     return True
 
 
 s = BestSolution()

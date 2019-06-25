@@ -83,6 +83,7 @@ class BFSSolution:
                     for c in string.ascii_lowercase:
                         if c == word[i]:
                             continue
+
                         # find the first char != word[i]
                         new_word = word[:i] + c + word[i+1:]
 

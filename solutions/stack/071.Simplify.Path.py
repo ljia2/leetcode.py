@@ -50,13 +50,14 @@ class Solution(object):
         :type path: str
         :rtype: str
 
-        use stack to store the directiories.
+        use stack to store the directories.
 
         implment next_dir function.
 
         """
         # list of dirs without ""
         dirs = [d for d in path.split("/") if d]
+
         dstack = []
         for dir in dirs:
             if dir == "..":

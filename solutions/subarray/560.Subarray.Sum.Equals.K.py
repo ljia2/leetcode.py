@@ -173,3 +173,24 @@ class VarationSolution:
                 ans += 1
         return ans
 
+
+class VarationSolutionII:
+    def subarraySum(self, nums, k):
+        if k < 0:
+            return 0
+        if not nums:
+            return 0
+        n = len(nums)
+        numsum = 0
+        l = r = 0
+        ans = 0
+        for r in range(n):
+            numsum += nums[r]
+
+            while numsum > k:
+                numsum -= nums[l]
+                l += 1
+
+            if numsum == k:
+                ans += 1
+        return ans
