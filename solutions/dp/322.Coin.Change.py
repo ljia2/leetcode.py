@@ -132,8 +132,9 @@ class DPSolution:
 
         if amount < 0 or not coins:
             return -1
-        # dp[i]: the minimum coins to represent amount i; initimize the max possible value.
+        # dp[i]: the minimum coins to represent amount i; initialize the max possible value.
         dp = [float("inf")] * (amount + 1)
+
         # base case: needs zero coins to represent zero.
         dp[0] = 0
 

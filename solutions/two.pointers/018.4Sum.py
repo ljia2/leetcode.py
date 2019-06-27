@@ -25,18 +25,25 @@ class Solution:
         :rtype: List[List[int]]
         """
         nums.sort()
+        n = len(nums)
         ans = []
-        for a in range(len(nums)-3):
+        for a in range(n-3):
+            # skip duplicate
             if a > 0 and nums[a] == nums[a-1]:
                 continue
-            for b in range(a+1, len(nums)-2, 1):
+
+            for b in range(a+1, n-2):
+                # skip duplicate
                 if b > a+1 and nums[b] == nums[b-1]:
                     continue
+
                 # two pointers starting with b + 1 and last num.
                 c = b + 1
-                d = len(nums)-1
+                d = n - 1
                 while c < d:
+
                     nsum = nums[a] + nums[b] + nums[c] + nums[d]
+
                     if nsum == target:
                         ans.append([nums[a], nums[b], nums[c], nums[d]])
 

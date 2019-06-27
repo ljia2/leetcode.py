@@ -36,7 +36,9 @@ class Solution(object):
 
         if len(freq1.keys()) > len(freq2.keys()):
             freq1, freq2 = freq2, freq1
+
         ans = []
+        # iterate over short one.
         for k, v in freq1.items():
             if k in freq2.keys():
                 ans += [k] * min(v, freq2[k])

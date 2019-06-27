@@ -5,15 +5,15 @@ class Solution(object):
 
         ls, lt = len(s), len(t)
 
-        # s <= t
-        if ls < lt and s == t[:ls]:
-            return -1
-        # s >= t
-        if ls > lt and s[:lt] == t:
-            return 1
-        # s == t
-        if ls == lt and s == t:
-            return 0
+        # # s <= t
+        # if ls < lt and s == t[:ls]:
+        #     return -1
+        # # s >= t
+        # if ls > lt and s[:lt] == t:
+        #     return 1
+        # # s == t
+        # if ls == lt and s == t:
+        #     return 0
 
         i = j = 0
         while i < ls and j < lt:
@@ -44,14 +44,14 @@ class Solution(object):
         else:
             return 1
 
-    def nextToken(self, s, i):
-        if s[i].isnumeric():
-            k = i
-            while k + 1 < len(s) and s[k+1].isnumeric():
-                k += 1
-            return s[i:k+1], k + 1
+    def nextToken(self, s, start):
+        if s[start].isnumeric():
+            end = start
+            while end + 1 < len(s) and s[end+1].isnumeric():
+                end += 1
+            return s[start:end+1], end + 1
         else:
-            return s[i], i + 1
+            return s[start], start + 1
 
 s = Solution()
 print(s.stringComparsion("aa99bb", "aa100cc"))

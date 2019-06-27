@@ -56,13 +56,14 @@ class Solution(object):
         lt = self.trimBST(root.left, L, R)
         rt = self.trimBST(root.right, L, R)
 
-        if L <= root.val <= R:
+        if root.val < L:
+            return rt
+        elif root.val > R:
+            return lt
+        else:
+            # L <= root.val <= R:
             root.left, root.right = lt, rt
             return root
-        elif root.val < L:
-            return rt
-        else:
-            return lt
 
 root = TreeNode(3)
 root.left = TreeNode(1)

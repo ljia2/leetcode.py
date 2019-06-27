@@ -82,18 +82,18 @@ class SolutionII(object):
         for x in sorted(columns):
             column = columns[x]
             column.sort()
-            # for any pair of y1 and y2
+            # for any pair of y1 and y2 in a column
             for j, y2 in enumerate(column):
                 for i in range(j):
                     y1 = column[i]
                     # if (y1, y2) are seen before in lastx
-                    if (y1, y2) in lastx:
+                    if (y1, y2) in lastx.keys():
                         ans = min(ans, (x - lastx[y1,y2]) * (y2 - y1))
                     # record (y1, y2) to latest x ordinate.
                     lastx[(y1, y2)] = x
         return ans if ans < float('inf') else 0
 
-### Follow up  toe see all rectangles with minimum areas.
+### Follow up  to see all rectangles with minimum areas.
 import collections
 class VartionSolution(object):
     def minAreaRect(self, points):

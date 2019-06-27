@@ -104,6 +104,7 @@ class InOrderSolution(object):
         # check root
         if prev and prev.val > root.val:
             return False
+
         prev = root
 
         # check right
@@ -161,23 +162,28 @@ class IterativeInOrderSolution(object):
 
         if not root:
             return True
-        stack = []
-        prev = None
-        while root or stack:
-            # push root and all left children into stack
-            while root:
-                stack.append(root)
-                root = root.left
 
-            # pop the node
-            root = stack.pop()
+        # initialize stack for inorder by push root and all left children into stack
+        stack = []
+        while root:
+            stack.append(root)
+            root = root.left
+
+        prev = None
+        while stack:
+            node = stack.pop()
+
             # after pop a node, compare prev with node
-            if prev and root.val <= prev.val:
+            if prev and node.val <= prev.val:
                 return False
+
             # update prev to node
-            prev = root
+            prev = node
 
             # reset node to its right children.
-            root = root.right
-
+            node = node.right
+            # push all left children into stack
+            while node:
+                stack.append(node)
+                node = node.left
         return True

@@ -1,4 +1,4 @@
-class Solution(object):
+class DFSSolution(object):
     def longestIncreasingPath(self, matrix):
         """
         Given an integer matrix, find the length of the longest increasing path.
@@ -39,7 +39,8 @@ class Solution(object):
             return 0
 
         m, n = len(matrix), len(matrix[0])
-        # dp[i][j] stores the longest increasing path start (i, j)
+
+        # dp[i][j] stores the longest increasing path in matrix but starting (i, j)
         dp = [[0] * n for _ in range(m)]
 
         ans = 1
@@ -51,6 +52,7 @@ class Solution(object):
 
     # top down dfs with memorization!!!!
     def dfs(self, matrix, r, c, m, n, dp):
+        # already calculated, direct return
         if dp[r][c] != 0:
             return dp[r][c]
 
@@ -58,6 +60,7 @@ class Solution(object):
         for nr, nc in [(r, c-1), (r, c+1), (r-1, c), (r+1, c)]:
             if nr < 0 or nc < 0 or nr >= m or nc >= n or matrix[r][c] >= matrix[nr][nc]:
                 continue
+
             l = 1 + self.dfs(matrix, nr, nc, m, n, dp)
             maxl = max(maxl, l)
 
@@ -65,5 +68,5 @@ class Solution(object):
         dp[r][c] = maxl
         return maxl
 
-s = Solution()
+s = DFSSolution()
 print(s.longestIncreasingPath([[9,9,4],[6,6,8],[2,1,1]]))

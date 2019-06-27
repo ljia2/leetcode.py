@@ -33,6 +33,7 @@ class Solution:
             parent = head
             head = head.next
 
+
         # head is None ad parent pointing to the last node
         # reassign head and parent
         head = parent
@@ -51,6 +52,7 @@ class Solution:
                 carry = 1
                 parent = head
                 head = node2parent[head]
+
 
         if carry == 0:
             return parent

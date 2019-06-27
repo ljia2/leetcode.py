@@ -41,9 +41,10 @@ class Solution(object):
                 idx += 1
                 self.buff4_idx += 1
 
-            # exhaust the buff4 and set the buff4_idx to 4
-            if self.buff4_idx >= self.buff4_len:
+            # exhaust the buff4 and set the buff4_idx to 4, for next call we can exit while loop.
+            if self.buff4_idx == self.buff4_len:
                 self.buff4_idx = 4
+
         return idx
 
 

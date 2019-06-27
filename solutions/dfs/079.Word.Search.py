@@ -33,22 +33,21 @@ class DFSSolution:
         if not board or not board[0] or not word:
             return False
 
-        visited = [[False] * len(board[0]) for _ in range(len(board))]
         ans = [False]
         for r in range(len(board)):
             for c in range(len(board[0])):
-                self.dfs(board, word, 0, r, c, visited, ans)
+                self.dfs(board, word, 0, r, c, ans)
                 if ans[0]:
                     return ans[0]
         return False
 
-    def dfs(self, board, word, level, r, c, visited, ans):
+    def dfs(self, board, word, level, r, c, ans):
         # out of bound
         if r < 0 or c < 0 or r >= len(board) or c >= len(board[0]):
             return
 
         # avoid visited cell
-        if visited[r][c]:
+        if board[r][c] == "#":
             return
 
         # exceed word length
@@ -64,12 +63,15 @@ class DFSSolution:
             ans[0] = True
             return
 
-        # start the standard dfs search.
-        visited[r][c] = True
-        for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
-            self.dfs(board, word, level + 1, r + dr, c + dc, visited, ans)
+        # start the standard backtracking via dfs search.
+        # mark visit to avoid circle
+        tmp = board[r][c]
+        board[r][c] = "#"
+        for nr, nc in [(r, c+1), (r, c-1), (r+1, c), (r-1, c)]:
+            self.dfs(board, word, level + 1, nr, nc, ans)
             if ans[0]:
                 return
-        visited[r][c] = False
+        board[r][c] = tmp
+
         return
 

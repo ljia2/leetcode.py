@@ -22,25 +22,14 @@ class Solution:
         :rtype: int
         """
 
-        if needle == "":
+        if not needle:
             return 0
-        elif len(haystack) < len(needle):
+
+        if len(haystack) < len(needle):
             return -1
 
         for i in range(len(haystack) - len(needle) + 1):
             subhaystack = haystack[i:i+len(needle)]
             if subhaystack == needle:
                 return i
-            #hi = i
-            #bi = 0
-            # while hi < len(haystack) and bi < len(needle):
-            #     if haystack[i + bi] != needle[bi]:
-            #         break
-            #     else:
-            #         hi += 1
-            #         bi += 1
-            # if bi == len(needle):
-            #     return i
-            # elif hi == len(haystack):
-            #     return -1
         return -1

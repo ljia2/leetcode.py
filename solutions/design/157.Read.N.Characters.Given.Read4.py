@@ -99,7 +99,6 @@ class Solution(object):
             # reaching the end of file.
             if l == 0:
                 return idx
-
             # must make a copy
             for i in range(min(l, n)):
                 buf[idx] = buf4[i]

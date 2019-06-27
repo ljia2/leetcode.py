@@ -15,7 +15,6 @@ class Solution(object):
         begin to intersect at node c1.
 
 
-
         Example 1:
 
 
@@ -54,16 +53,8 @@ class Solution(object):
         if not headA or not headB:
             return None
 
-        lenA = lenB = 0
-        runner = headA
-        while runner:
-            lenA += 1
-            runner = runner.next
-
-        runner = headB
-        while runner:
-            lenB += 1
-            runner = runner.next
+        lenA = self.get_length(headA)
+        lenB = self.get_length(headB)
 
         # adjust to ensure A is longer than B;
         # swap both headA/B and lenA/B
@@ -71,19 +62,14 @@ class Solution(object):
             headA, headB = headB, headA
             lenA, lenB = lenB, lenA
 
-
         stepA = 0
         runnerA = headA
         while stepA + lenB < lenA and runnerA:
             stepA += 1
             runnerA = runnerA.next
 
-        stepB = 0
         runnerB = headB
-
         while runnerA and runnerB and runnerA != runnerB:
-            stepA += 1
-            stepB += 1
             runnerA = runnerA.next
             runnerB = runnerB.next
 
@@ -92,6 +78,10 @@ class Solution(object):
         else:
             return runnerA
 
-
-
-        
+    def get_length(self, head):
+        length = 0
+        runner = head
+        while runner:
+            length += 1
+            runner = runner.next
+        return length

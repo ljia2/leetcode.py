@@ -107,9 +107,6 @@ class SolutionII(object):
         return ans
 
     def compare(self, w1, w2, vocdict):
-        if len(w1) > len(w2) and w1[:len(w2)] == w2:
-            return False
-
         l = min(len(w1), len(w2))
         for i in range(l):
             c, d = w1[i], w2[i]

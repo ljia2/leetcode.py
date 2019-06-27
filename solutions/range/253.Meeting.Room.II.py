@@ -23,12 +23,12 @@ class Solution:
             return 0
 
         # sorting meetings by their start
-        intervals.sort(key=lambda x:x[0])
+        intervals.sort(key=lambda x: x[0])
 
         # hint: use list and heappop/heappush from heapq to mimic priorityQueue
         hp = [intervals[0][1]]
         for start, end in intervals[1:]:
-            # peek the meeing with the earliest end time, if it ends before start, assign its room to new meeting
+            # peek the meeting with the earliest end time, if it ends before start, assign its room to new meeting
             if hp and hp[0] <= start:
                 # the room with min ending time i; interval is overlap with i, push i back and break
                 # otherwise, keep popping booked room that had ended before interval.start.
@@ -85,8 +85,6 @@ class LinearSolution:
 
 s = LinearSolution()
 print(s.minMeetingRooms([[0, 30], [15, 20], [5, 10]]))
-
-
 # No priority Queue
 # class SolutionII(object):
 #     def minMeetingRooms(self, intervals):

@@ -51,7 +51,7 @@ class Vector2D(object):
             else:
                 if type(v[i]) == list:
                     self.stack[-1][1] += 1
-                    self.stack.append([v[i], 0])
+                    self.stack.append([v[i+1], 0])
                 else:
                     return True
         return bool(self.stack)

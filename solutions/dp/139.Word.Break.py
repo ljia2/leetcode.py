@@ -88,19 +88,19 @@ class DFSolution:
             return False
         n = len(s)
         mem = [None] * n
-        self.dfs(s, 0, wordDict, mem)
+        self.dfs(s, 0, n, wordDict, mem)
         return mem[0]
 
-    def dfs(self, s, start, wordDict, mem):
-        if start == len(s):
+    def dfs(self, s, start, target, wordDict, mem):
+        if start == target:
             return True
 
         if mem[start] is not None:
             return mem[start]
 
-        for l in range(1, len(s) + 1):
+        for l in range(1, target - start + 1):
             word = s[start:start + l]
-            if word in wordDict and self.dfs(s, start + l, wordDict, mem):
+            if word in wordDict and self.dfs(s, start + l, target, wordDict, mem):
                 mem[start] = True
                 return True
 
@@ -123,7 +123,8 @@ class DPSolution:
     def wordBreak(self, s, wordDict):
         """
 
-        Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
+        Given a non-empty string s and a dictionary wordDict containing a list of non-empty words,
+        determine if s can be segmented into a space-separated sequence of one or more dictionary words.
 
         Note:
 
@@ -153,19 +154,20 @@ class DPSolution:
         S: O(n^2)
 
         """
-        if not wordDict or s is None or s == "":
+        if not wordDict or not s:
             return False
 
         n = len(s) + 1
         # dp[i] is means the prefix from 0 to i (inclusive) can be represented by dict
-        dp = [n] * n
+        # initialize -1 for not match.
+        dp = [-1] * n
         # Assuming empty string can be dict-represented
         dp[0] = 0
         # for each position in checked starting 1
-        for i in range(1, len(s)+1):
+        for i in range(1, n):
             # calculate its prefix from 0 to j (inclusive) and segment from j to i (inclusive)
             for j in range(0, i):
                 # dp[j] covers s[:j] already.
-                if dp[j] > 0 and s[j:i] in wordDict:
+                if dp[j] >= 0 and s[j:i] in wordDict:
                     dp[i] = min(dp[j] + 1, dp[i])
         return dp[n]

@@ -46,7 +46,8 @@ class Solution(object):
             if b < 0:
                 ans.reverse()
             return ans
-        elif a < 0:
+
+        if a < 0:
             ans = self.sortTransformedArray(nums, -a, -b, -c)
             ans.reverse()
             return list(map(lambda x: -x, ans))
@@ -62,12 +63,15 @@ class Solution(object):
             else:
                 ans.appendleft(self.f(nums[j], a, b, c))
                 j -= 1
-        # do not forget the last one.
+
+        # do not forget the last one when l == r.
         ans.appendleft(self.f(nums[i], a, b, c))
+
         return ans
 
     def f(self, x, a, b, c):
         return a*x*x + b*x + c
+
 
 s = Solution()
 print(s.sortTransformedArray([-4,-2,2,4], -1, 3, 5))

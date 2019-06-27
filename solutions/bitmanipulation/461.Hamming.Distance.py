@@ -30,6 +30,7 @@ class Solution(object):
             raise Exception("Invalid Input")
         return self.oneBit(x^y)
 
+    # count how many 1 bit of number n.
     def oneBit(self, n):
         count = 0
         while n != 0:

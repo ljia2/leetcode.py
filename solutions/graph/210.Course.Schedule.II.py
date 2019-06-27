@@ -36,8 +36,7 @@ class Solution(object):
         :type prerequisites: List[List[int]]
         :rtype: List[int]
 
-        typical toplogical sorting
-
+        typical topological sorting
         """
 
         if not numCourses:
@@ -59,7 +58,6 @@ class Solution(object):
                 size -= 1
 
                 if c in ans:
-                    circle = True
                     break
 
                 ans.append(c)
@@ -74,6 +72,8 @@ class Solution(object):
                     if indict[d] == 0:
                         queue.append(d)
                         indict.pop(d)
+
+        # there is a circle.
         if len(ans) != numCourses:
             return []
         else:

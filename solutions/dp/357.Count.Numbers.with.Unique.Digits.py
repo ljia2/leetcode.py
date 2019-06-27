@@ -33,6 +33,7 @@ class Solution:
                 dp[i] = dp[i-1]
         return dp[n]
 
+
 s = Solution()
 for p in range(12):
     print(p, s.countNumbersWithUniqueDigits(p))

@@ -136,17 +136,16 @@ class IterativeSolutionII(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        prev = None
+        prev = ListNode(-1)
         runner = head
 
         while runner:
             tmp = runner.next
-            if prev:
-                prev.prev = runner
+            prev.prev = runner
             runner.next = prev
             runner.prev = None
             prev, runner = runner, tmp
-        return prev
+        return prev.next
 
 
 

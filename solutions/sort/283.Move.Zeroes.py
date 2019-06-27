@@ -18,10 +18,10 @@ class OptimalSolution(object):
         """
         if not nums or len(nums) == 1:
             return
-        # from 0 to j - 1 are non-zero while j is the next position for non-zero
+        # from 0 to j-1 are non-zero while j is the next position for non-zero
         # for j to i-1 are all zeros
         # for i to end are mixed.
-        # always swap i if nums[1] != j with j.
+        # always swap nums[i] and nums[j] if nums[i] != 0.
         i = j = 0
         for i in range(len(nums)):
             if nums[i] != 0:

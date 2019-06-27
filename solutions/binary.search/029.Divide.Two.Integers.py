@@ -40,6 +40,7 @@ class Solution(object):
         if divisor == -1:
             return -dividend
 
+
         l = 0
         if (dividend > 0 and divisor > 0) or (dividend < 0 and divisor < 0):
             r = abs(dividend)
@@ -51,6 +52,7 @@ class Solution(object):
             m = (l + r) // 2
             if abs(m * divisor) == abs(dividend):
                 return m
+
             # must be strict >
             elif abs(m * divisor) > abs(dividend):
                 r = m

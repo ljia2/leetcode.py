@@ -54,7 +54,7 @@ class Solution(object):
         if not root:
             # edge case of None/invalid inputs
             return 0
-        elif not root.left and not root.right:
+        if not root.left and not root.right:
             # leaf node return 1 because it is a sequence of 1
             return 1
 
@@ -74,4 +74,5 @@ class Solution(object):
             right_rs = self.dfs(node.right, level+1)
         else:
             right_rs = max(level, self.dfs(node.right, 1))
+
         return max(left_rs, right_rs)

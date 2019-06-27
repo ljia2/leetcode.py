@@ -60,11 +60,9 @@ class Solution(object):
         Pay attention on how to find next state.
 
         """
-
-        if not target:
+        if not target or target == "0000":
             return 0
-        start = "0000"
-        return self.bibfs(start, target, deadends)
+        return self.bibfs("0000", target, deadends)
 
     def bibfs(self, start, target, deadends):
         p = [start]
@@ -74,6 +72,7 @@ class Solution(object):
         while p and q:
             if len(p) < len(q):
                 p, q = q, p
+
             size = len(q)
             while size > 0:
                 state = q.pop(0)
@@ -87,40 +86,35 @@ class Solution(object):
 
                 visited.add(state)
                 q += self.next_states(state)
-            step += 1
-        return -1
-
-    def bfs(self, start, target, deadends):
-        q = [start]
-        visited = set()
-        step = 0
-        while q:
-            size = len(q)
-            while size > 0:
-                state = q.pop(0)
-                size -= 1
-
-                if state == target:
-                    return step
-
-                if state in deadends or state in visited:
-                    continue
-
-                visited.add(state)
-                q += self.next_states(state)
 
             step += 1
         return -1
+
+    # def bfs(self, start, target, deadends):
+    #     q = [start]
+    #     visited = set()
+    #     step = 0
+    #     while q:
+    #         size = len(q)
+    #         while size > 0:
+    #             state = q.pop(0)
+    #             size -= 1
+    #
+    #             if state == target:
+    #                 return step
+    #
+    #             if state in deadends or state in visited:
+    #                 continue
+    #
+    #             visited.add(state)
+    #             q += self.next_states(state)
+    #
+    #         step += 1
+    #     return -1
 
     def next_states(self, state):
         states = []
         for i, d in enumerate(state):
-            # if int(d) == 0:
-            #     states.append(state[:i] + "1" + state[i+1:])
-            #     states.append(state[:i] + "9" + state[i+1:])
-            # else:
-            #     states.append(state[:i] + str((int(d) + 1) % 10) + state[i+1:])
-            #     states.append(state[:i] + str((int(d) - 1) % 10) + state[i+1:])
             states.append(state[:i] + str((int(d) + 1) % 10) + state[i+1:])
             states.append(state[:i] + str((int(d) - 1) % 10) + state[i+1:])
         return states

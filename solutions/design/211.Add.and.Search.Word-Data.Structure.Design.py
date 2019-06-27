@@ -96,7 +96,7 @@ class WordDictionaryII(object):
         :type word: str
         :rtype: None
         """
-        # use dfs to find all varations of word.
+        # use dfs to find all variation of word.
         words = []
         self.dfs(word, 0, "", words)
 

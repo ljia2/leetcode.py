@@ -42,15 +42,16 @@ class Solution(object):
         numbersSeen = False
         pointSeen = False
         eSeen = False
-        # set numberAfterE is initialized to True
-        # When E is encourtered, set numberAfterE = False
+        # set numberAfterE is initialized to True, When E is encourtered, set numberAfterE = False
         # when numbers are encourtered after "e", reset numberAfterE = True
         numberAfterE = True
+
         n = len(s)
         for i in range(n):
             if '0' <= s[i] <= '9':
                 numbersSeen = True
                 numberAfterE = True
+
             elif s[i] == '.':
                 # there must be only one point and before "e" if any
                 # if there are e before or multiple point, return False invalid.
@@ -58,18 +59,22 @@ class Solution(object):
                     return False
                 else:
                     pointSeen = True
+
             elif s[i] == 'e':
                 # there must be only one "e"
                 # if there are multiple "e" or no numbers before e, return False (invalid)
                 if eSeen or not numbersSeen:
                     return False
-                # set this false, and reset to True when a number after E is encourtered.
+
+                # set this false, and reset to True when a number after E is met.
                 numberAfterE = False
                 eSeen = True
+
             elif s[i] == '+' or s[i] == '-':
                 # must be sign or sign after "e"
                 if i != 0 or s[i-1] != 'e':
                     return False
+
             else:
                 return False
 

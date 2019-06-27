@@ -76,8 +76,10 @@ class DFSSolution(object):
         """
         if n is None or n == 0:
             return []
+
         if k == 0 or k > n:
             return []
+
         if k == 1:
             return [[i+1] for i in range(n)]
 

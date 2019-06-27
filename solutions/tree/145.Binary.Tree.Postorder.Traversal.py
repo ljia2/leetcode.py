@@ -42,22 +42,18 @@ class Solution:
             return []
 
         # initialize the stack with root
-        stack = [root]
+        stack = []
         ans = []
-        while stack:
-            node = stack.pop()
-            # if it is a leaf node, record its value
-            if not node.left and not node.right:
-                ans.append(node.val)
-            else:
-                # else push stack: a leaf node valued as root.val, root.right and root.left in order.
-                stack.append(TreeNode(node.val))
-                if node.right:
-                    stack.append(node.right)
-                if node.left:
-                    stack.append(node.left)
+        while root or stack:
+            while root:
+                stack.append(root)
+                root = root.right
 
+            root = stack.pop()
+            ans.append(root.val)
+            root = root.left
         return ans
+
 
 root = TreeNode(1)
 root.right = TreeNode(2)

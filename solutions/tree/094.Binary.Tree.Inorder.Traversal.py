@@ -27,14 +27,19 @@ class Solution(object):
         :rtype: List[int]
         """
         ans = []
+        # initialize the stack; keep pushing all node in the left most branch into stack
         stack = []
-        while root or stack:
-            # keep pushing all node in the left most branch into stack
-            while root:
-                stack.append(root)
-                root = root.left
+        while root:
+            stack.append(root)
+            root = root.left
 
+        while stack:
             node = stack.pop()
             ans.append(node.val)
-            root = node.right
+
+            if node.right:
+                node = node.right
+                while node:
+                    stack.append(node)
+                    node = node.left
         return ans

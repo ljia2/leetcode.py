@@ -53,7 +53,6 @@ class Solution(object):
         :type words: List[str]
         :rtype: str
         """
-
         if not words:
             return ""
 

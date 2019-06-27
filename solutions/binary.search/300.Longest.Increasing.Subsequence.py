@@ -26,13 +26,14 @@ class BinarySearchSolution:
             return 0
         parent = [-1] * len(nums)
         # monotonic stack
-        # lis[i] stores the index of the prefix of potentially longest subsequence so far
-        lis = [0]
+        lis = [nums[0]] # lis[i] stores the index of the prefix of potentially longest subsequences so far
+        lisnums = [nums[0]]
         max_length = 1
         for i in range(1, len(nums)):
             lindex = lis[-1]
             if nums[i] > nums[lindex]:
                 lis.append(i)
+                lisnums.append(nums[i])
                 parent[i] = lindex
                 max_length += 1
             else:
@@ -43,11 +44,12 @@ class BinarySearchSolution:
                 # i.e. replace 5 with 2 but keep 7 (see examples above)
                 # because 1, 2 is potentially the length 2 prefix of the longest subsequence
                 # (For example 1, if 7 might be replace later) than that of 1, 5.
-                ri = bisect.bisect_right(lis, nums[i])
+                ri = bisect.bisect_right(lisnums, nums[i])
                 lindex = lis[ri]
+                lis[ri] = i
+                lisnums[ri] = nums[i]
                 # record the parent of nums[i]
                 parent[i] = parent[lindex]
-                lis[ri] = i
         return max_length
 
 s = BinarySearchSolution()
@@ -55,7 +57,7 @@ print(s.lengthOfLIS([1, 5, 7, 2, 3, 4]))
 
 
 # Follow up: what if we want to return the number of longest subsequences.
-class Solution: # Time Limit Exceeded O(n^2)
+class VarationSolution:
     def lengthOfLIS(self, nums):
         """
         Given an unsorted array of integers, find the length of longest increasing subsequence.
@@ -74,7 +76,7 @@ class Solution: # Time Limit Exceeded O(n^2)
         :type nums: List[int]
         :rtype: int
 
-        max_len[i] denotes (the # of longest increaing subsequence ending with num[i] and the lengh)
+        max_len[i] denotes (the # of longest increasing subsequence ending with num[i] and the lengh)
         """
         if not nums:
             return 0
@@ -86,11 +88,14 @@ class Solution: # Time Limit Exceeded O(n^2)
                     if dp[j][1] + 1 > ml:
                         dp[i] = (dp[j][0], dp[j][1] + 1)
                         ml = max(ml, dp[j][1] + 1)
-        ml = -1
-        for _, l in dp:
-            ml = max(ml, l)
+
+        ml = max(map(lambda x: x[1], dp))
+
         ans = 0
         for c, l in dp:
             if l == ml:
                 ans += c
         return ans
+
+s = VarationSolution()
+print(s.lengthOfLIS([1, 5, 7, 2, 3, 4]))

@@ -23,6 +23,7 @@ class Solution(object):
                      the point (1,2) is an ideal empty land to build a house, as the total
                      travel distance of 3+3+1=7 is minimal. So return 7.
         Note:
+
         There will be at least one building.
         If it is not possible to build such house according to the above rules, return -1.
 
@@ -38,16 +39,18 @@ class Solution(object):
             raise Exception("Invalid Input")
 
         rnum, cnum = len(grid), len(grid[0])
+        # record the number of builds it can reach
         visitedtimes = [[0] * cnum for _ in range(rnum)]
+        # record the sum of the shortest distance to builds it can reach
         dist = [[0] * cnum for _ in range(rnum)]
+
         buildnum = 0
         for r in range(rnum):
             for c in range(cnum):
                 if grid[r][c] == 1:
                     buildnum += 1
-                    # use negative buildnum to tag the grid visited by this building already
+                    # use negative buildnum to tag the grid visited by the building already
                     self.bfs(grid, r, c, visitedtimes, dist, -buildnum)
-
 
         ans = -1
         for r in range(rnum):
@@ -62,9 +65,12 @@ class Solution(object):
     ### Follow up: can you speed up a little bid,
     ### Only search the grid accessable by previous build.
     def bfs(self, grid, r, c, visittimes, dist, target):
+
+        # initialize queue and visited set.
         q = [(r, c)]
         visited = set()
         visited.add((r, c))
+
         step = 1
         while q:
             size = len(q)
@@ -73,10 +79,13 @@ class Solution(object):
                 size -= 1
 
                 for nr, nc in [(r, c-1), (r, c+1), (r-1, c), (r+1, c)]:
-                    if nr < 0 or nc < 0 or nr >= len(grid) or nc >= len(grid[0]) or grid[nr][nc] != target or (nr, nc) in visited:
+                    if nr < 0 or nc < 0 or nr >= len(grid) or nc >= len(grid[0]) or (nr, nc) in visited:
+                        continue
+                    # trick!!!! use target mark the cells accessible by abs(target-1) building already.
+                    # if such a grid is not visited by previous build already, skip it.
+                    if grid[nr][nc] != target:
                         continue
 
-                    # trick!!!! use target mark the cells accessible by abs(target-1) building already.
                     grid[nr][nc] = target
 
                     visited.add((nr, nc))

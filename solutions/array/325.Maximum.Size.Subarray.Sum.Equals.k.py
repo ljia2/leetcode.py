@@ -35,6 +35,7 @@ class Solution(object):
             return 0
         n = len(nums)
 
+        # key presum and value is index.
         # base case: empty string sum == 0; -1 is convenient for length
         psums = {0: -1}
         psum = 0
@@ -44,6 +45,7 @@ class Solution(object):
             target = psum - k
             if target in psums.keys():
                 ans = max(ans, i - psums[target])
+
             # record the first index of prefix_sum
             if psum not in psums.keys():
                 psums[psum] = i

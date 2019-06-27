@@ -107,7 +107,8 @@ class Solution:
     def subarraySum(self, nums, k):
         """
 
-        Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.
+        Given an array of integers and an integer k,
+        you need to find the total number of continuous subarrays whose sum equals to k.
 
         Example 1:
         Input:nums = [1,1,1], k = 2
@@ -132,65 +133,68 @@ class Solution:
             <i, j> where prefix_sum[i] + k = prefix_sum[j] where i < j
 
         """
-        prefix_sum = [0]
-        psum = 0
-        for i in range(len(nums)):
-            psum += nums[i]
-            prefix_sum.append(psum)
 
-        count = 0
+
+        # Note: there is one empty subarray whose sum is zero.
         # key: prefix_sum; value: the frequency of key before j (i.e. # of subarraies summing to key before j)
         prefix_dict = dict()
-        # Note: there is one empty subarray whose sum is zero.
         prefix_dict[0] = 1
-
-        for j in range(1, len(prefix_sum)):
-            target = prefix_sum[j] - k
-            if target in prefix_dict.keys():
-                count += prefix_dict[target]
-            # update the frequency by 1
-            prefix_dict[prefix_sum[j]] = prefix_dict.get(prefix_sum[j], 0) + 1
-        return count
-
-###  What if all numbers are positive, we can use two pointer!!!
-class VarationSolution:
-    def subarraySum(self, nums, k):
-        if k < 0:
-            return 0
-        if not nums:
-            return 0
-
-        numsum = 0
-        start = 0
+        presum = 0
+        n = len(nums)
         ans = 0
-        for num in nums:
-            numsum += num
-            while numsum > k:
-                numsum -= nums[start]
-                start += 1
+        for i in range(n):
+            presum += nums[i]
+            target = presum - k
+            if target in prefix_dict.keys():
+                ans += prefix_dict[target]
 
-            if numsum == k:
-                ans += 1
+            # update the frequency by 1
+            prefix_dict[presum] = prefix_dict.get(presum, 0) + 1
         return ans
 
+###  What if all numbers are positive, we can use two pointer!!!
+# class VarationSolution:
+#     def subarraySum(self, nums, k):
+#         if k < 0:
+#             return 0
+#         if not nums:
+#             return 0
+#
+#         numsum = 0
+#         start = 0
+#         ans = 0
+#         for num in nums:
+#             numsum += num
+#             while numsum > k:
+#                 numsum -= nums[start]
+#                 start += 1
+#
+#             if numsum == k:
+#                 ans += 1
+#         return ans
 
 class VarationSolutionII:
     def subarraySum(self, nums, k):
         if k < 0:
             return 0
+
         if not nums:
             return 0
+
         n = len(nums)
         numsum = 0
+
         l = r = 0
         ans = 0
-        for r in range(n):
+        while r < n:
             numsum += nums[r]
 
-            while numsum > k:
+            while l <= r and numsum > k:
                 numsum -= nums[l]
                 l += 1
 
             if numsum == k:
                 ans += 1
+
+            r += 1
         return ans

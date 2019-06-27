@@ -18,7 +18,6 @@ class Solution(object):
 
         T: O(n)
         S: O(n)
-
         """
         cur = head
         node_dict = dict()

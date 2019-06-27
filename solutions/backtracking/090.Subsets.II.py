@@ -26,6 +26,7 @@ class Solution(object):
         if not nums:
             return []
         nums.sort()
+
         ans = [[]]
         for l in range(1, len(nums)+1):
             self.dfs(nums, 0, l, 0, [], ans)
@@ -38,7 +39,8 @@ class Solution(object):
 
         # record whether a number is handled already on this level.
         for i in range(start, len(nums)):
-            # if there are duplicates, we only use one at this level.
+
+            # if there are duplicates, we only use an unique number once at this level.
             if i + 1 < len(nums) and nums[i] == nums[i+1]:
                 continue
 

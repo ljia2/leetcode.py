@@ -61,12 +61,12 @@ class Solution(object):
 
         """
         left = right = 0
-        for i in S:
+        for c in S:
             # unmatched ")"
-            if left == 0 and i == ')':
+            if left == 0 and c == ')':
                 right += 1
             else:
                 # unmatched "("
-                left += 1 if i == '(' else -1
+                left += (1 if c == '(' else -1)
 
         return left + right

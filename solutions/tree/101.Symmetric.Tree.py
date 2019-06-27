@@ -37,15 +37,13 @@ class RecursiveSolution(object):
         if not root:
             return True
 
-        if not root.left and not root.right:
-            return True
-
         return self.isMirrored(root.left, root.right)
 
     def isMirrored(self, root1, root2):
         if not root1 and not root2:
             return True
-        elif not root1 or not root2:
+
+        if not root1 or not root2:
             return False
 
         return root1.val == root2.val \
@@ -96,11 +94,13 @@ class IterativeSolution(object):
             if not node1 and not node2:
                 continue
 
+            # not mirror
             if not node1 or not node2 or node1.val != node2.val:
                 return False
 
             queue.append((node1.left, node2.right))
             queue.append((node1.right, node2.left))
+
         return True
 
 

@@ -45,6 +45,8 @@ class TreeNode(object):
 
 """
 Recursive preorder encode/decode
+
+space O(2n+1) where n is # of nodes. 
 """
 class CodecII:
     def serialize(self, root):

@@ -1,8 +1,8 @@
 # Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 class Solution(object):
     def reorderList(self, head):
@@ -42,13 +42,10 @@ class Solution(object):
         # slow become the last node, set its next to None
         slow.next = None
 
-        # merge two linkedlists.
-        nhead = tail = None
+        # merge two linkedlists; declare a dummy node
+        nhead = tail = ListNode(-1)
         while runner1 and runner2:
-            if not nhead:
-                nhead = runner1
-            else:
-                tail.next = runner1
+            tail.next = runner1
             tmp = runner1.next
             runner1.next = runner2
             tail = runner2
@@ -56,10 +53,11 @@ class Solution(object):
             runner2 = runner2.next
 
         # there might be an element more in runner.
-        if runner1:
-            tail.next = runner1
-        return nhead
+        tail.next = runner1 if runner1 else runner2
+        # skip dummy node.
+        return nhead.next
 
+    # in-place reverse
     def reverse(self, head):
         prev = None
         runner = head

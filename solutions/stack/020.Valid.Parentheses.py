@@ -26,22 +26,21 @@ class Solution(object):
         :rtype: bool
         """
         stack = []
-        for c in [s[i] for i in range(len(s))]:
+        pdict = {"(": ")", "{": "}", "[":"]"}
+        for c in s:
             if c == '(' or c == '{' or c == '[':
                 stack.append(c)
             elif c in [")", "}", "]"]:
-                if c == ')':
-                    cmatch = '('
-                elif c == '}':
-                    cmatch = '{'
-                else:
-                    cmatch = '['
                 if stack:
-                    if stack.pop() != cmatch:
+                    if stack[-1] != pdict[c]:
                         return False
+                    stack.pop()
                 else:
                     return False
 
         return not stack
+
+s = Solution()
+print(s.isValid("()[]{}"))
 
 ### Follow up: only have ( and ), we just record the unmatched open parethesis by a number via one pass.

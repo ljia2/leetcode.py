@@ -26,6 +26,7 @@ class Solution:
         2) sort each halves
         3) merge to sorted linked list.
 
+        Divide and Conquer
         """
         if not head or not head.next:
             return head
@@ -48,31 +49,20 @@ class Solution:
         return self.merge(sl1, sl2)
 
     def merge(self, h1, h2):
-        # generate a linked list use head pointing to the first node and curr pointing the last node.
-        head = curr = None
+        # generate a linked list use head pointing to the first dummy node and curr pointing the last node.
+        head = curr = ListNode(-1)
         while h1 and h2:
             if h1.val < h2.val:
-                if curr:
-                    curr.next = h1
-                    curr = curr.next
-                else:
-                    head = curr = h1
-
+                curr.next = h1
+                curr = curr.next
                 h1 = h1.next
             else:
-                if curr:
-                    curr.next = h2
-                    curr = curr.next
-                else:
-                    head = curr = h2
+                curr.next = h2
+                curr = curr.next
                 h2 = h2.next
 
-        if h1:
-            curr.next = h1
-        if h2:
-            curr.next = h2
-
-        return head
+        curr.next = h1 if h1 else h2
+        return head.next
 
 # [4, 1, 2, 3]
 s = Solution()

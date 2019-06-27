@@ -1,7 +1,8 @@
 class Solution:
     def maxProduct(self, nums):
         """
-        Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.
+        Given an integer array nums, find the contiguous subarray within an array (containing at least one number)
+        which has the largest product.
 
         Example 1:
 
@@ -17,7 +18,7 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
-        # dp[i] stores the max/min product of any subarray of nums[:i+1] but must using nums[i]
+        # dp[i] stores the max/min product of any subarray of nums[:i+1] using nums[i]
         dp = [(0, 0)] * len(nums)
         dp[0] = (nums[0], nums[0])
         for i in range(1, len(nums), 1):
@@ -26,6 +27,7 @@ class Solution:
             cmin = min(min(pre_min * nums[i], nums[i]), pre_max * nums[i])
             dp[i] = (cmax, cmin)
         return max(map(lambda x: x[0], dp))
+
 
 s = Solution()
 print(s.maxProduct([-2,-1,0]))

@@ -4,7 +4,7 @@ class NumMatrix:
         """
         :type matrix: List[List[int]]
         """
-        if not matrix or len(matrix[0]) == 0:
+        if not matrix or not matrix[0]:
             self.sum = [[]]
 
         row = len(matrix)
@@ -16,7 +16,7 @@ class NumMatrix:
 
         for r in range(row):
             for c in range(column):
-                self.sumMatrix[r+1][c+1] = self.sumMatrix[r][c+1] + self.sumMatrix[r+1][c] + matrix[r+1][c+1] - self.sumMatrix[r][c]
+                self.sumMatrix[r+1][c+1] = self.sumMatrix[r][c+1] + self.sumMatrix[r+1][c] + matrix[r][c] - self.sumMatrix[r][c]
 
     def sumRegion(self, row1, col1, row2, col2):
         """

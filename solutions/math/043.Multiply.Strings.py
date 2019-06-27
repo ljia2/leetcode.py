@@ -35,7 +35,7 @@ class Solution(object):
             raise Exception("Invalid Input!")
 
         m, n = len(num1), len(num2)
-
+        # m + n - 1 is the least significant position
         pos = [0] * (n + m)
 
         for i in range(m-1, -1, -1):
@@ -43,7 +43,6 @@ class Solution(object):
                 a, b = int(num1[i]), int(num2[j])
                 pos[i+j+1] += a*b
                 pos[i+j] += pos[i+j+1] // 10
-
                 pos[i+j+1] = pos[i+j+1] % 10
 
         # checking leading zero.

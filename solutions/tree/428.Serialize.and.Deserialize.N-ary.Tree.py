@@ -28,10 +28,13 @@ class Node(object):
 class Codec:
 
     def serialize(self, root):
-        """Encodes a tree to a single string.
-
+        """
+        Encodes a tree to a single string.
         :type root: Node
         :rtype: str
+
+        Preorder Encoding.
+
         """
         vals = []
         self.encode(root, vals)
@@ -51,7 +54,6 @@ class Codec:
 
     def deserialize(self, data):
         """Decodes your encoded data to tree.
-
         :type data: str
         :rtype: Node
         """
@@ -82,4 +84,4 @@ code = codec.serialize(root)
 print(code)
 root2 = codec.deserialize(code)
 print(codec.serialize(root2))
-print = codec.serialize(None)
+print(codec.serialize(None))

@@ -5,7 +5,8 @@ class Solution(object):
 
         -1 - A wall or an obstacle.
         0 - A gate.
-        INF - Infinity means an empty room. We use the value 2^31 - 1 = 2147483647 to represent INF as you may assume that the distance to a gate is less than 2147483647.
+        INF - Infinity means an empty room.
+        We use the value 2^31 - 1 = 2147483647 to represent INF as you may assume that the distance to a gate is less than 2147483647.
         Fill each empty room with the distance to its nearest gate. If it is impossible to reach a gate, it should be filled with INF.
 
         Example:
@@ -25,13 +26,14 @@ class Solution(object):
         :type rooms: List[List[int]]
         :rtype: None Do not return anything, modify rooms in-place instead.
 
-        bfs from gates.
+        nearest gate -> bfs from gates.
         """
         if not rooms or not rooms[0]:
             return
 
         row, col = len(rooms), len(rooms[0])
 
+        # initialize with all the gates
         queue = []
         visited = set()
         for r in range(row):
@@ -39,7 +41,7 @@ class Solution(object):
                 if rooms[r][c] == 0:
                     queue.append((r, c))
                     visited.add((r, c))
-                    
+        # bfs from all rooms.
         step = 0
         while queue:
             size = len(queue)
@@ -56,6 +58,7 @@ class Solution(object):
                     visited.add((nr, nc))
             step += 1
         return
+
 
 s = Solution()
 rooms = [[2147483647,-1,0,2147483647],[2147483647,2147483647,2147483647,-1],[2147483647,-1,2147483647,-1],[0,-1,2147483647,2147483647]]

@@ -33,7 +33,7 @@ class BFSSolution:
             return []
 
         view = []
-        # mimic queue to execute BFS
+        # mimic queue to execute BFS level by level traverse
         q = [(0, root)]
         while q:
             size = len(q)
@@ -41,7 +41,7 @@ class BFSSolution:
                 l, node = q.pop(0)
                 size -= 1
 
-                # a right node is encountered.
+                # when exhaust a level, a right node is encountered.
                 if size == 0:
                     view.append(node.val)
 
@@ -49,6 +49,7 @@ class BFSSolution:
                     q.append(node.left)
                 if node.right:
                     q.append(node.right)
+
         return view
 
 
@@ -109,11 +110,12 @@ class DFSSolution:
             return []
 
         viewdict = dict()
-        # mimic queue to execute BFS
+        # use stack to preorder traverse of tree.
         stack = [(root, 0)]
         max_depth = -1
         while stack:
             node, depth = stack.pop()
+
             # maintain the level of tree.
             max_depth = max(max_depth, depth)
 
@@ -122,7 +124,7 @@ class DFSSolution:
 
             if node.left:
                 stack.append((node.left, depth + 1))
-
+            # stack LIFO, append right node last
             if node.right:
                 stack.append((node.right, depth + 1))
 

@@ -34,9 +34,12 @@ class BestSolution:
         swindow = dict()
         # use a tuple to store the answer
         ans = float("inf"), None, None
+
         l = r = 0
+
         uct = len(dt)
         ucs = 0
+
         for r in range(len(ns)):
             end_index, c = ns[r]
             # expanding the ds of the sliding window
@@ -63,12 +66,6 @@ class BestSolution:
 
         # unpack the answer
         return None if ans[1] == float("inf") else s[ans[1]:ans[2]+1]
-
-    # def valid(self, dt, ds):
-    #     for k in dt:
-    #         if k not in ds or ds[k] < dt[k]:
-    #             return False
-    #     return True
 
 
 s = BestSolution()

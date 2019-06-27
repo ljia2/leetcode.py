@@ -1,4 +1,4 @@
-# Definition for a  binary tree node
+# Definition for a binary tree node
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
@@ -164,7 +164,7 @@ class BSPTIterator(object):
                 node = node.left
             return node
 
-        # otherwise, keeping search up until encoutering a parent node from its left substree
+        # otherwise, keeping search up until meet a parent node from its left substree
         # then return that parent ndoe.
         father = node.parent
         child = node

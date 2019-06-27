@@ -70,7 +70,10 @@ class BitSolution(object):
             return b
         elif b == 0:
             return a
-
+        # simulate a + b bit operations
+        # first take xor -> a
+        # second carry is take and ans << 1 -> b
+        # repeat first and second until b == 0
         while b != 0:
             carry = a & b
             a, b = a ^ b, carry << 1

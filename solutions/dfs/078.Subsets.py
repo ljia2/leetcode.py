@@ -12,6 +12,7 @@ class DFSSolution(object):
 
         ans = []
         n = len(nums)
+        # for subset of size l
         for l in range(n+1):
             self.dfs(nums, 0, l, 0, [], ans)
         return ans
@@ -20,7 +21,7 @@ class DFSSolution(object):
         if level == target:
             ans.append(copy.copy(subset))
             return
-
+        # combination from start to len(nums)
         for i in range(start, len(nums)):
             subset.append(nums[i])
             self.dfs(nums, level+1, target, i + 1, subset, ans)
@@ -43,7 +44,7 @@ class IterativeSolution(object):
 
         Next considering 3, if not use it, we still have [ [ ], [1], [2], [1,2] ], if use 3, just add 3 to each previous subset, we have [ [3], [1,3], [2,3], [1,2,3] ]
         Combine them, now we have [ [ ], [1], [2], [1,2], [3], [1,3], [2,3], [1,2,3] ]
-                """
+        """
 
         if not nums:
             return []

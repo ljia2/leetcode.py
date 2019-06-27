@@ -69,7 +69,6 @@ class SolutionII(object):
 
 ### Follow up: If two arrays are sorted and one long and one short?
 import bisect
-
 class VarationSolution(object):
     def intersection(self, nums1, nums2):
         """

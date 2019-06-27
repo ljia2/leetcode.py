@@ -56,6 +56,7 @@ def selectKItems(stream, n, k):
         while(i < n):
             # Pick a random index
             # from 0 to i.
+
             j = random.randrange(i+1);
 
             # If the randomly picked

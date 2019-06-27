@@ -32,6 +32,9 @@ class Solution:
         :type matrix: List[List[int]]
         :type target: int
         :rtype: bool
+
+        idea if similar to LC250 follow up 3.
+
         """
         if not matrix or not matrix[0]:
             return False
@@ -47,8 +50,8 @@ class Solution:
 
         for r in range(low_row_index, upper_row_index):
             row = matrix[r]
-            index = bisect.bisect_right(row, target)
-            if index > 0 and row[index-1] == target:
+            index = bisect.bisect_left(row, target)
+            if index < max_col and row[index] == target:
                 return True
         return False
 

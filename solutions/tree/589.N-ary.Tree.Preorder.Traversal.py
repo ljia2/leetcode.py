@@ -17,6 +17,7 @@ class Solution(object):
         Note:
 
         Recursive solution is trivial, could you do it iteratively?
+
         :type root: Node
         :rtype: List[int]
         """
@@ -28,11 +29,13 @@ class Solution(object):
         ans = []
         while stack:
             node = stack.pop()
-            if not node.children:
-                ans.append(node.val)
-            else:
-                ans.append(Node(node.val))
-                for i in range(len(node.children)-1, -1, -1):
+            # preorder: add the value first
+            ans.append(node.val)
+            # put the children from right to left into stack.
+            if node.children:
+                n = len(node.children)
+                for i in range(n-1, -1, -1):
                     stack.append(node.children[i])
         return ans
+
 

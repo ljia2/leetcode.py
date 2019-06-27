@@ -47,6 +47,7 @@ class UnionFindSolution:
             parents[ps] = pd
             ranks[pd] += ranks[ps]
 
+
         # all nodes having a single parent, it must be a tree.
         ans = set()
         for i in range(len(parents)):
@@ -60,7 +61,8 @@ class UnionFindSolution:
         return s
 
 ### Follow up: given a treenode, determine whether the tree is a valid tree (without circle).
-### How about BFS to verify whether a node is already contained in the set, not right!!!!
+### Build Graph by DFS and Union Find.
+
  #     1
  #   /   \
  #   2    5

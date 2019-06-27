@@ -25,6 +25,8 @@ class Solution(object):
         ]
         :type root: TreeNode
         :rtype: List[List[int]]
+
+        BFS; odd level reverse.
         """
 
         if not root:
@@ -35,22 +37,23 @@ class Solution(object):
         level = 0
         while queue:
             size = len(queue)
-            lans = []
+            level_ans = []
             while size > 0:
                 node = queue.pop(0)
                 size -= 1
 
-                lans.append(node.val)
+                level_ans.append(node.val)
 
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
+
             if level % 2 == 0:
-                ans.append(lans)
+                ans.append(level_ans)
             else:
-                lans.reverse()
-                ans.append(lans)
+                level_ans.reverse()
+                ans.append(level_ans)
             level += 1
         return ans
 

@@ -19,16 +19,14 @@ class DPSolution:
         left_max = [0] * len(height)
         m = 0
         for index in range(len(height)):
-            if height[index] > m:
-                m = height[index]
+            m = max(height[index], m)
             left_max[index] = m
 
-        m = 0
-        # store the max height after i.
+        # store the max height after position i.
         right_max = [0] * len(height)
+        m = 0
         for index in range(len(height)-1, 0, -1):
-            if height[index] > m:
-                m = height[index]
+            m = max(height[index], m)
             right_max[index] = m
 
         ans = 0
@@ -47,7 +45,7 @@ print(results)
 results = s2.trap([9,6,8,8,5,6,3])
 print(results)
 
-### Two Pointer Solution
+### Two Pointer Solution; One Pass.
 class TwoPointerSolution:
     def trap(self, height):
         """

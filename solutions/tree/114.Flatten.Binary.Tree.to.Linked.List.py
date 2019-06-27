@@ -40,13 +40,10 @@ class Solution(object):
         return ans
 
     def tree2linkedlist(self, root):
-        if not root:
-            return None, None
 
         if not root.left and not root.right:
             return root, root
-
-        if not root.left:
+        elif not root.left:
             rhead, rtail = self.tree2linkedlist(root.right)
             root.left = None
             root.right = rhead

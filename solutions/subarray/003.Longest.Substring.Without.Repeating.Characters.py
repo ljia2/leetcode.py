@@ -29,18 +29,23 @@ class Solution(object):
             return len(s)
 
         window = dict()
-        i = j = 0
+
+        l = r = 0
         ans = -1
-        while j < len(s):
-            c = s[j]
-            # if an old char is encourtered
+        while r < len(s):
+            c = s[r]
+
+            # if an old char is met already
             if c in window.keys():
                 # reset the start but window[c] may be out of current window.
                 # we use max.
-                i = max(i, window[c] + 1)
-            window[c] = j
-            ans = max(ans, j - i + 1)
-            j += 1
+                l = max(l, window[c] + 1)
+
+            window[c] = c
+
+            ans = max(ans, r - l + 1)
+            r += 1
+
         return ans
 
 s = Solution()

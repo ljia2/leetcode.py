@@ -24,6 +24,8 @@ class Solution(object):
         A is sorted in non-decreasing order.
         :type A: List[int]
         :rtype: List[int]
+
+        divide and conquer.
         """
 
         if not A:
@@ -45,6 +47,7 @@ class Solution(object):
             zidx = bisect.bisect_right(A, 0)
             lans = self.sortedSquares(A[:zidx])
             rans = self.sortedSquares(A[zidx:])
+
             # merge two squared arrays.
             l = r = 0
             while l < len(lans) and r < len(rans):
@@ -54,7 +57,8 @@ class Solution(object):
                 else:
                     ans.append(rans[r])
                     r += 1
-            # do not forget the remaining (either) array
+
+            # NOTE!!! do not forget the remaining (either) array
             ans += lans[l:] if l < len(lans) else rans[r:]
 
         return ans

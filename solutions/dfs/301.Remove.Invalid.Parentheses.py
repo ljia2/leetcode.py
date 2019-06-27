@@ -44,8 +44,7 @@ class DFSSolution:
             return
 
         for i in range(start, len(s)):
-            # IMPORTANT!!!!!
-            # we only remove the first parenthesis if there are consecutive ones to avoid duplications.
+            # IMPORTANT!!!!! we only remove the first parenthesis if there are consecutive ones to avoid duplications.
             if i + 1 < len(s) and s[i+1] == s[i]:
                 continue
 
@@ -90,7 +89,6 @@ class DFSSolution:
 s = DFSSolution()
 print(s.removeInvalidParentheses(")d))"))
 print(s.removeInvalidParentheses(")()m)(((()((()(((("))
-
 
 ######## What if only return one possible result.
 class VarationSolution:
@@ -152,6 +150,7 @@ class VarationSolution:
             if i not in removed:
                 res += c
         return res
+
 
 vs = VarationSolution()
 print(vs.removeInvalidParentheses(")d))"))

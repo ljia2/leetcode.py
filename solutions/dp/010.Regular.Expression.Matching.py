@@ -82,19 +82,20 @@ class Solution:
         dp[0][0] = True
 
         # preprocessing: in case "aab" vs c*d*aab
-        for i in range(len(p)):
-            if i > 0 and p[i] == "*" and dp[0][i-1]:
-                dp[0][i+1] = True
+        for j in range(len(p)):
+            # p[j] (*) cancel p[j-1] , so directly dp[0][j] = dp[0][j-1] if dp[0][j-1]
+            if j > 0 and p[j] == "*" and dp[0][j-1]:
+                dp[0][j+1] = True
 
         for i in range(sl):
             for j in range(pl):
-
                 # update dp[i+1][j+1] by comparing s[i] and p[j]
+
                 # "aa" match "a."
                 if p[j] == s[i] or p[j] == '.':
                     dp[i+1][j+1] = dp[i][j]
 
-                # "a" matches "ab*",
+                # "a" matches "ab*", "b*" -> null
                 if p[j] == "*" and p[j-1] != s[i]:
                     dp[i+1][j+1] = dp[i+1][j-1]
 
@@ -106,6 +107,5 @@ class Solution:
 
 s = Solution()
 print(s.isMatch("aab", "c*d*aab"))
-
 ### Follow up: what if only consider *
 

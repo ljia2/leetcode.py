@@ -39,7 +39,7 @@ class DPSolution(object):
 
         state if the difference, we need to difference as another dimension!!!!
 
-        dp[diff][index] + 1 equals to the length of arithmetic sequence ending at index with difference diff
+        dp[d, index] + 1 equals to the length of arithmetic sequence ending at index with difference of diff
 
         """
         dp = collections.defaultdict(int)
@@ -48,6 +48,7 @@ class DPSolution(object):
                 a, b = A[i], A[j]
                 dp[b - a, j] = max(dp[b - a, j], dp[b - a, i] + 1)
         return max(dp.values()) + 1
+
 
 s = DPSolution()
 print(s.longestArithSeqLength([3,6,9,12]))

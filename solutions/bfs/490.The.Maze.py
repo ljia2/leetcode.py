@@ -74,6 +74,7 @@ class Solution(object):
             while size > 0:
                 cr, cc = queue.pop(0)
                 size -= 1
+
                 if destination[0] == cr and destination[1] == cc:
                     return True
 
@@ -81,6 +82,7 @@ class Solution(object):
                     nr, nc = cr + dr, cc + dc
                     while 0 <= nr < r and 0 <= nc < c and maze[nr][nc] == 0:
                         nr, nc = nr + dr, nc + dc
+
                     # (nr, nc) hits a wall and stop at (nr-dr, nc-dc).
                     if (nr-dr, nc-dc) not in visited:
                         visited.add((nr-dr, nc-dc))

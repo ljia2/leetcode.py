@@ -34,28 +34,25 @@ class Solution(object):
             return False
 
         psum = 0
-        psum2pos = dict()
-        psummod2pos = dict()
+        psumdict = dict()
 
         # initialize 0, meaning zero sum of no numbers.
         # key is the mod of psum % k, value is the smallest position
-        psummod2pos[0] = 0
-        # key is the psum, value is the smallest position.
-        psum2pos[0] = 0
+        psumdict[0] = 0
         for i in range(len(nums)):
             pos = i + 1
             psum += nums[i]
 
             if k == 0:
-                if psum not in psum2pos.keys():
-                    psum2pos[psum] = i
-                elif pos - psum2pos[psum] >= 2:
+                if psum not in psumdict.keys():
+                    psumdict[psum] = i
+                elif pos - psumdict[psum] >= 2:
                     return True
             else:
                 r = psum % k
-                if r not in psummod2pos.keys():
-                    psummod2pos[r] = i
-                elif pos - psummod2pos[r] >= 2:
+                if r not in psumdict.keys():
+                    psumdict[r] = i
+                elif pos - psumdict[r] >= 2:
                     return True
 
         return False
@@ -63,5 +60,5 @@ class Solution(object):
 s = Solution()
 print(s.checkSubarraySum([1, 2, 3], 5))
 
-#### What if we have negative numbers? Same solution, we can use abs(k) as module.
+#### What if we have negative numbers in array or k is negative? Same solution.
 # negative % positive = positive, negative % negative = negative, positive % negative = negatieve, positive % positive = positive.

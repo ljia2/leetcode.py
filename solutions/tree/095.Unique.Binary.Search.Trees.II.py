@@ -61,6 +61,7 @@ class Solution:
     def dfs(self, start, end):
         if start > end:
             return [None]
+
         if start == end:
             return [TreeNode(start)]
 

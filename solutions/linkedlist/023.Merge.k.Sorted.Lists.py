@@ -111,7 +111,7 @@ class Solution2:
 
         """
         # head points to the merged list while curr points the tail to insert its next value.
-        head = None
+        head = ListNode(-1)
         curr = head
 
         # initialize the pq with the head of k lists.
@@ -127,19 +127,16 @@ class Solution2:
             # pop index of least value node from pq
             _, min_index = heappop(pq)
 
-            if not head:
-                head = lists[min_index]
-                curr = head
-            else:
-                # update curr.next points to that least-valued node
-                curr.next = lists[min_index]
-                curr = curr.next
+            # update curr.next points to that least-valued node
+            curr.next = lists[min_index]
+            curr = curr.next
 
             if lists[min_index].next:
                 heappush(pq, (lists[min_index].next.val, min_index))
                 # move the point of min_index forward
                 lists[min_index] = lists[min_index].next
-        return head
+
+        return head.next
 
 
 input1 = ListNode(1)
@@ -159,6 +156,6 @@ print(results)
 
 
 ## What is return a iterator???
-# How about intailize a pq of tuple (head.val, head).
+# How about initialize a pq of tuple (head.val, head).
 # hasNext: not pq
 # next: 1) first pop v, head, if head.hasNext: push(head.next.val, head.next); return v

@@ -41,6 +41,7 @@ class Solution(object):
         for i, num in enumerate(self.nums):
             if num != target:
                 continue
+
             count += 1
             # random pick from [0, count]
             if self.rand.randint(0, count) == 0:

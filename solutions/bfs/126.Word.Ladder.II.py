@@ -49,7 +49,7 @@ class BFSSolution:
         Backtracking the graph to generated all transformations.
 
         """
-
+        # special case
         if not wordList or endWord not in wordList:
             return []
 
@@ -122,6 +122,7 @@ class BFSSolution:
             self.getPaths(graph, p, end, path, ans)
             path.pop()
         return
+
 
 s = BFSSolution()
 print(s.findLadders("hit", "cog", ["hot","dot","dog","lot","log","cog"]))

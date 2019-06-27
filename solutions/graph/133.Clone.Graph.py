@@ -120,6 +120,7 @@ class BFSSolution(object):
 
                 # get or generate the copy of node
                 node2copy[n] = Node(n.val, [])
+
                 visited.add(n)
                 # populate the neighbors of nn according to that of n.
                 for neighbor in n.neighbors:

@@ -32,11 +32,11 @@ class Solution(object):
         """
         if not root:
             return 0
-        else:
-            if not root.left and not root.right:
-                return 1
-            else:
-                lh = self.maxDepth(root.left) if root.left else 0
-                rh = self.maxDepth(root.right) if root.right else 0
-                return max(lh, rh) + 1
+
+        if not root.left and not root.right:
+            return 1
+
+        lh = self.maxDepth(root.left) if root.left else 0
+        rh = self.maxDepth(root.right) if root.right else 0
+        return max(lh, rh) + 1
 

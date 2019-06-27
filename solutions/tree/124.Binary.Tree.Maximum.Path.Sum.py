@@ -44,8 +44,10 @@ class Solution:
 
         if not root:
             return None
+
         if not root.left and not root.right:
             return root.val
+
         max_sum_path = [0]
         self.dfs(root, max_sum_path)
         return max_sum_path[0]
