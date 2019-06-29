@@ -1,5 +1,6 @@
 import collections
 
+
 class Solution:
     def firstUniqChar(self, s):
         """
@@ -17,9 +18,11 @@ class Solution:
         :type s: str
         :rtype: int
         """
+
         if not s:
             return -1
         cfreq = collections.Counter(s)
+
         for i in range(len(s)):
             if cfreq[s[i]] == 1:
                 return i

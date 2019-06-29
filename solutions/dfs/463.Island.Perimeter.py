@@ -42,6 +42,7 @@ class Solution:
         if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]) or grid[r][c] == 0:
             ans[0] += 1
             return
+
         # if the grid is visited already.
         if grid[r][c] != 1:
             return
@@ -52,6 +53,7 @@ class Solution:
         for nr, nc in [(r, c+1), (r, c-1), (r+1, c), (r-1, c)]:
             self.dfs(grid, nr, nc, ans)
         return
+
 
 s = Solution()
 print(s.islandPerimeter([[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]))

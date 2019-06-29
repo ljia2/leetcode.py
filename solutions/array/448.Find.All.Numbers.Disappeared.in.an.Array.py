@@ -27,12 +27,14 @@ class Solution(object):
         for numbers in [1, n] whose indexes should be 0 .. n - 1.
 
         """
-
-        for i in range(len(nums)):
+        n = len(n)
+        for i in range(n):
             index = abs(nums[i]) - 1
             nums[index] = - abs(nums[index])
 
-        return [i + 1 for i in range(len(nums)) if nums[i] > 0]
+        # if the number at position i is positve, i+1 must be missing.
+        return [i + 1 for i in range(n) if nums[i] > 0]
+
 
 s = Solution()
 print(s.findDisappearedNumbers([4,3,2,7,8,2,3,1]))

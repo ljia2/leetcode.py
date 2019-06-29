@@ -28,12 +28,9 @@ class Solution:
             while end < len(nums)-1 and nums[end + 1] == nums[end] + 1:
                 end += 1
 
-            if end < len(nums) - 1:
-                # a new range is found
-                results.append((nums[start], nums[end]))
-                # reset the start
-                start = end + 1
-            else:
-                results.append((nums[start], nums[end]))
-                break
+            # a new range is found
+            results.append((nums[start], nums[end]))
+            # reset the start
+            start = end + 1
+
         return list(map(lambda x: str(x[0]) + "->" + str(x[1]) if x[0] < x[1] else str(x[0]), results))

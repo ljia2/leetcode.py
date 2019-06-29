@@ -57,7 +57,6 @@ class UnionFindSolution: # TLE
 
         parents = [i for i in range(rownum * colnum)]
         sizes = [1] * rownum * colnum
-        dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         for r in range(rownum):
             for c in range(colnum):
                 if final_grid[r][c] == 0:

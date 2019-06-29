@@ -36,11 +36,13 @@ class Solution:
         :type input: str
         :rtype: int
         """
+
         if input == "":
             return 0
         dirstack = []
         maxlength = 0
         fields = input.split('\n')
+
         for field in fields:
             if self.isDir(field):
                 dl, dn = self.levelName(field)
@@ -52,6 +54,7 @@ class Solution:
                     else:
                         break
                 dirstack.append((dn, dl))
+
             elif self.isFile(field):
                 fl, fn = self.levelName(field)
                 while dirstack:
@@ -60,9 +63,11 @@ class Solution:
                         dirstack.pop()
                     else:
                         break
+
                 fullpath = self.composeFullpath(dirstack, fn)
                 if len(fullpath) > maxlength:
                     maxlength = len(fullpath)
+
         return maxlength
 
     def levelName(self, input):

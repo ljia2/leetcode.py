@@ -26,13 +26,11 @@ Note:
 1 <= N <= 10^9
 ExamRoom.seat() and ExamRoom.leave() will be called at most 10^4 times across all test cases.
 Calls to ExamRoom.leave(p) are guaranteed to have a student currently sitting in seat number p.
-
-
-
-
-
 """
+
 import bisect
+
+
 class ExamRoom(object):
 
     def __init__(self, N):
@@ -83,8 +81,6 @@ class ExamRoom(object):
         i = bisect.bisect_left(self.seats, p)
         self.seats.pop(i)
         return
-
-
 
 # Your ExamRoom object will be instantiated and called as such:
 obj = ExamRoom(10)

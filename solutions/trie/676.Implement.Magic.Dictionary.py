@@ -17,6 +17,7 @@ For contest purpose, the test data is rather small by now. You could think about
 Please remember to RESET your class variables declared in class MagicDictionary, as static/class variables are persisted across multiple test cases. Please see here for more details.
 """
 
+
 class Trie(object):
     def __init__(self):
         self.cdict = dict()
@@ -63,11 +64,12 @@ class MagicDictionary(object):
             if c not in node.cdict.keys():
                 return False
             return self.dfs(node.cdict[c], word, isChanged, level + 1)
-
-        for d in node.cdict.keys():
-            if self.dfs(node.cdict[d], word, c != d, level + 1):
-                return True
+        else:
+            for d in node.cdict.keys():
+                if self.dfs(node.cdict[d], word, c != d, level + 1):
+                    return True
         return False
+
 
 obj = MagicDictionary()
 obj.buildDict(["hello", "hallo", "leetcode"])
