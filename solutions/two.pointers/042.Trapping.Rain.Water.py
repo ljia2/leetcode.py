@@ -35,14 +35,14 @@ class DPSolution:
         return ans
 
 
-s2 = DPSolution()
-results = s2.trap([0, 3, 1, 0, 3, 1, 0, 1])
+s = DPSolution()
+results = s.trap([0, 3, 1, 0, 3, 1, 0, 1])
 print(results)
-results = s2.trap([0, 3, 1, 0, 0, 1, 0, 0])
+results = s.trap([0, 3, 1, 0, 0, 1, 0, 0])
 print(results)
-results = s2.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])
+results = s.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])
 print(results)
-results = s2.trap([9,6,8,8,5,6,3])
+results = s.trap([9,6,8,8,5,6,3])
 print(results)
 
 ### Two Pointer Solution; One Pass.
@@ -86,3 +86,39 @@ class TwoPointerSolution:
                     ans += rmax - height[r]
                 r -= 1
         return ans
+s2 = TwoPointerSolution()
+print(s2.trap([0, 3, 1, 0, 3, 1, 0, 1]))
+
+## Follow up: what if there are some "-inf" to leaking
+class VarationSolution:
+    def trap(self, height):
+        if not height:
+             return 0
+
+        l, r = 0, len(height) - 1
+        lmax = rmax = 0
+        ans = 0
+        while l < r:
+            if height[l] < height[r]:
+                if height[l] > lmax:
+                    lmax = height[l]
+                else:
+                    if height[l] < 0:
+                        lmax = 0
+                    else:
+                        ans += lmax - height[l]
+                l += 1
+            else:
+                if height[r] > rmax:
+                    rmax = height[r]
+                else:
+                    if height[r] < 0:
+                        rmax = 0
+                    else:
+                        ans += rmax - height[r]
+                r -= 1
+
+        return ans
+
+s3 = VarationSolution()
+print(s3.trap([0, 3, 1, -1, 3, 1, 0, 1]))
